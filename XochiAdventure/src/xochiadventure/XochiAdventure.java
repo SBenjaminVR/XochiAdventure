@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xoxhiadventure;
+package xochiadventure;
 
 /**
  *
  * @author betin
  */
-public class XoxhiAdventure {
+public class XochiAdventure {
 
     /**
      * @param args the command line arguments
