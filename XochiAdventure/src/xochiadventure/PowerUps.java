@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package breakingBad;
+package xochiadventure;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -139,11 +139,11 @@ public class PowerUps extends Item{
 
     @Override
     public void render(Graphics g) {
-        if (type == 1) {
-            g.drawImage(Assets.blueFlask, getX(), getY(), getWidth(), getHeight(), null);
-        } else {
-            g.drawImage(Assets.pollos, getX(), getY(), getWidth(), getHeight(), null);
-        }
+//        if (type == 1) {
+//            g.drawImage(Assets.blueFlask, getX(), getY(), getWidth(), getHeight(), null);
+//        } else {
+//            g.drawImage(Assets.pollos, getX(), getY(), getWidth(), getHeight(), null);
+//        }
         
     }
     
