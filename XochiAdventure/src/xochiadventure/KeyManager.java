@@ -26,6 +26,8 @@ public class KeyManager implements KeyListener {
     public boolean lastRestart; // flag to know the state of the restart on the previous tick
     public boolean fireShot;    // flag to shoot
     
+    public boolean enter;
+    
     private boolean keys[];  // to store all the flags for every key
 
     public KeyManager() {
@@ -87,5 +89,6 @@ public class KeyManager implements KeyListener {
         right = keys[KeyEvent.VK_RIGHT];
         lastRestart = keys[KeyEvent.VK_R];
         fireShot = keys[KeyEvent.VK_SPACE];
+        enter = keys[KeyEvent.VK_ENTER];
     }
 }

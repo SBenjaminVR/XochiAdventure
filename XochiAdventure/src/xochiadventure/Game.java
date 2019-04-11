@@ -22,6 +22,20 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+enum Option {
+    TITLESCREEN,
+    MENU,
+    OPTIONS,
+    RECIPIES,
+    LEVEL
+}
+
+enum MenuOpt {
+    ONE,
+    TWO,
+    THREE
+}
+
 /**
  *
  * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández
@@ -48,6 +62,11 @@ public class Game implements Runnable {
     private Font texto;                                     // to change the font of string drawn in the screen
     private LinkedList<Bomb> bombs;
     private Shot shot;                              //to have a missile to shoot
+    
+    
+    
+    private Option option;
+    private MenuOpt menOpt;
 
     /**
      * to create title, width, height, keyManager, bricks,
@@ -69,6 +88,7 @@ public class Game implements Runnable {
         nombreArchivo = "src/space/inavders/archivo.sf";
         texto = new Font("Font", 2, 32);
         bombs = new LinkedList<Bomb>();
+        option = Option.TITLESCREEN;
     }
 
     /**
@@ -247,148 +267,166 @@ public class Game implements Runnable {
     private void tick() {
         // ticks key manager
         keyManager.tick();
+        
+        switch(option) {
+            case TITLESCREEN:
+                if (keyManager.enter) {
+                    option = Option.MENU;
+                }
+                break;
+            case MENU:
+                
+                break;
+            case OPTIONS:
+                break;
+            case RECIPIES:
+                break;
+            case LEVEL:
+                
+                break;
+        }
 
         // ckecks flags for pausing, saving, and loading
-        if (getKeyManager().pause) {
-            pauseGame = !pauseGame;
-        }
-        if (getKeyManager().save) {
-            try {
-                grabarArchivo();
-            } catch (IOException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        if (getKeyManager().load) {
-            try {
-                leeArchivo();
-            } catch (IOException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        if (getKeyManager().pause) {
+//            pauseGame = !pauseGame;
+//        }
+//        if (getKeyManager().save) {
+//            try {
+//                grabarArchivo();
+//            } catch (IOException ex) {
+//                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        if (getKeyManager().load) {
+//            try {
+//                leeArchivo();
+//            } catch (IOException ex) {
+//                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
 
         // checks flag for restarting and if that the game has ended
-        if (getKeyManager().restart) {
-
-            // resets the player position
-            player.setX(getWidth() / 2);
-            player.setY(getHeight() - player.getHeight());
-            
-            // reset shot
-            shot.setX(player.getX() + player.getWidth() / 2);
-            shot.setY(player.getY());
-            shot.setFired(false);
-
-            aliens.clear();
-            bombs.clear();
-
-            // set up the initial position for the aliens
-            int iPosX = 0;
-            int iPosY = 10;
-            for (int i = 1; i <= 24; i++) {
-
-                iPosX += 60;
-                aliens.add(new Enemy(iPosX, iPosY, 50, 50, 1, this));
-                bombs.add(new Bomb(iPosX, iPosY, 10, 20, this));
-
-                // create 6 aliens every row
-                if (i % 6 == 0) {
-                    iPosY += 60;
-                    iPosX = 0;
-                }
-            }
-
-            // setting up the game variables
-            score = 0;
-            cantAliens = aliens.size();
-            endGame = false;
-            pauseGame = false;
-        }
-
-        if (!endGame && !pauseGame) {
-            
-            // ticks the player
-            player.tick();
-
-            //initializes shot and moves it
-            if (keyManager.fireShot && !shot.isFired()) {
-                shot.setFired(true);
-                Assets.laser.play();
-            }
-
-            //ticks shot
-            if (shot.isFired()) {
-                shot.tick();
-            } else {
-                shot.setX(player.getX() + player.getWidth() / 2);
-                shot.setY(player.getY());
-            }
-            if (shot.getY() <= 0) {
-                shot.setX(player.getX() + player.getWidth() / 2);
-                shot.setY(player.getY());
-                shot.setFired(false);
-
-            }
-
-
-            //movement controler for aliens
-            //ticking all aliens
-            for (int i = 0; i < aliens.size(); i++) {
-                Enemy alien = aliens.get(i);
-                alien.tick();
-                //alien movement
-                if ((aliens.get(0).getX() + (50 * 6) + (10 * 5) >= getWidth())) {
-                    aliens.get(i).setDirection(-1);
-                    aliens.get(i).setY(alien.getY() + 40);
-                }
-                if ((aliens.get(23).getX() - (50 * 6) - (10) <= 0)) {
-                    aliens.get(i).setDirection(1);
-                    aliens.get(i).setY(alien.getY() + 40);
-                }
-                if (aliens.get(i).getY() >= getHeight() - 50) {
-                    endGame = true;
-                }
-                // collision with bricks
-
-                if (!alien.isDestroyed()) {
-                    if (shot.intersectaAlien(alien)) {
-                        if (!alien.isDestroyed()) {
-                            if (shot.intersectaAlien(alien)) {
-                                shot.setFired(false);
-                                shot.setX(player.getX() + player.getWidth() / 2);
-                                shot.setY(player.getY());
-                                alien.setDestroyed(true);
-                                cantAliens--;
-                                score += 10;
-                            }
-                        }
-                    }
-                }
-            }
-            for (int i = 0; i < bombs.size(); i++) {
-                Bomb bomb = bombs.get(i);
-                int rand = (int) (Math.random() * 5000);
-                if (rand < 2) {
-                    bomb.setFired(true);
-                    bomb.setX(aliens.get(i).getX() + aliens.get(i).getWidth() / 2);
-                }
-                if (bomb.isFired()) {
-                    bomb.tick();
-                    if (bomb.isFired() && bomb.intersectaJugador(player)) {
-                        endGame = true;
-                        bomb.setFired(false);
-                        Enemy enem = aliens.get(i);
-                        bomb.setX(enem.getX() + enem.getWidth() / 2);
-                        bomb.setY(enem.getY() + enem.getHeight());
-                    }
-
-                    // if all aliens are destroyed the game is ended
-                    if (cantAliens == 0) {
-                        endGame = true;
-                    }
-                }
-            }
-        }
+//        if (getKeyManager().restart) {
+//
+//            // resets the player position
+//            player.setX(getWidth() / 2);
+//            player.setY(getHeight() - player.getHeight());
+//            
+//            // reset shot
+//            shot.setX(player.getX() + player.getWidth() / 2);
+//            shot.setY(player.getY());
+//            shot.setFired(false);
+//
+//            aliens.clear();
+//            bombs.clear();
+//
+//            // set up the initial position for the aliens
+//            int iPosX = 0;
+//            int iPosY = 10;
+//            for (int i = 1; i <= 24; i++) {
+//
+//                iPosX += 60;
+//                aliens.add(new Enemy(iPosX, iPosY, 50, 50, 1, this));
+//                bombs.add(new Bomb(iPosX, iPosY, 10, 20, this));
+//
+//                // create 6 aliens every row
+//                if (i % 6 == 0) {
+//                    iPosY += 60;
+//                    iPosX = 0;
+//                }
+//            }
+//
+//            // setting up the game variables
+//            score = 0;
+//            cantAliens = aliens.size();
+//            endGame = false;
+//            pauseGame = false;
+//        }
+//
+//        if (!endGame && !pauseGame) {
+//            
+//            // ticks the player
+//            player.tick();
+//
+//            //initializes shot and moves it
+//            if (keyManager.fireShot && !shot.isFired()) {
+//                shot.setFired(true);
+//                Assets.laser.play();
+//            }
+//
+//            //ticks shot
+//            if (shot.isFired()) {
+//                shot.tick();
+//            } else {
+//                shot.setX(player.getX() + player.getWidth() / 2);
+//                shot.setY(player.getY());
+//            }
+//            if (shot.getY() <= 0) {
+//                shot.setX(player.getX() + player.getWidth() / 2);
+//                shot.setY(player.getY());
+//                shot.setFired(false);
+//
+//            }
+//
+//
+//            //movement controler for aliens
+//            //ticking all aliens
+//            for (int i = 0; i < aliens.size(); i++) {
+//                Enemy alien = aliens.get(i);
+//                alien.tick();
+//                //alien movement
+//                if ((aliens.get(0).getX() + (50 * 6) + (10 * 5) >= getWidth())) {
+//                    aliens.get(i).setDirection(-1);
+//                    aliens.get(i).setY(alien.getY() + 40);
+//                }
+//                if ((aliens.get(23).getX() - (50 * 6) - (10) <= 0)) {
+//                    aliens.get(i).setDirection(1);
+//                    aliens.get(i).setY(alien.getY() + 40);
+//                }
+//                if (aliens.get(i).getY() >= getHeight() - 50) {
+//                    endGame = true;
+//                }
+//                // collision with bricks
+//
+//                if (!alien.isDestroyed()) {
+//                    if (shot.intersectaAlien(alien)) {
+//                        if (!alien.isDestroyed()) {
+//                            if (shot.intersectaAlien(alien)) {
+//                                shot.setFired(false);
+//                                shot.setX(player.getX() + player.getWidth() / 2);
+//                                shot.setY(player.getY());
+//                                alien.setDestroyed(true);
+//                                cantAliens--;
+//                                score += 10;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            for (int i = 0; i < bombs.size(); i++) {
+//                Bomb bomb = bombs.get(i);
+//                int rand = (int) (Math.random() * 5000);
+//                if (rand < 2) {
+//                    bomb.setFired(true);
+//                    bomb.setX(aliens.get(i).getX() + aliens.get(i).getWidth() / 2);
+//                }
+//                if (bomb.isFired()) {
+//                    bomb.tick();
+//                    if (bomb.isFired() && bomb.intersectaJugador(player)) {
+//                        endGame = true;
+//                        bomb.setFired(false);
+//                        Enemy enem = aliens.get(i);
+//                        bomb.setX(enem.getX() + enem.getWidth() / 2);
+//                        bomb.setY(enem.getY() + enem.getHeight());
+//                    }
+//
+//                    // if all aliens are destroyed the game is ended
+//                    if (cantAliens == 0) {
+//                        endGame = true;
+//                    }
+//                }
+//            }
+//        }
     }
 
     private void render() {
@@ -404,45 +442,61 @@ public class Game implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
-            g.setFont(texto);
-            g.drawImage(Assets.background, 0, 0, width, height, null);
-            if (pauseGame) {
-                g.drawString("PAUSA", getWidth() / 2 - 60, getHeight() / 2);
+            switch(option) {
+                case TITLESCREEN:
+                    g.drawImage(Assets.titleScreen, 0, 0, 1920, 1080, null);
+                    break;
+                case MENU:
+                    g.drawImage(Assets.menu, 0, 0, 1920, 1080, null);
+                    break;
+                case OPTIONS:
+                    break;
+                case RECIPIES:
+                    break;
+                case LEVEL:
+                    
+                    break;
             }
-            if (endGame) {
-                //g.drawImage(Assets.endGame, getWidth() / 2 - 131, getHeight() / 2 - 30, 262, 60, null);
-                // we draw a string saying game over and another string giving instructions to the player on how to restart the game
-                g.drawString("Game Over", getWidth() / 2 - 80, getHeight() / 2);
-                g.drawString("Press 'r' to restart", getWidth() / 2 - 120, getHeight() / 2 + 30);
-            } else {
-
-                // rendering the ball and player
-                if (shot.isFired()) {
-                    shot.render(g);
-                }
-                player.render(g);
-                //ball.render(g);
-
-                //rendering all bricks
-                for (int i = 0; i < aliens.size(); i++) {
-                    Enemy alien = aliens.get(i);
-                    if (!alien.isDestroyed()) {
-                        alien.render(g);
-
-                    }
-
-                }
-                // rendering all bombs
-                for (int i = 0; i < bombs.size(); i++) {
-                    Bomb bomb = bombs.get(i);
-                    if (bomb.isFired()) {
-                        bomb.render(g);
-                    }
-                }
-
-            }
-            // draw score
-            g.drawString("Score: " + score, 5, getHeight() - 20);
+            
+//            g.setFont(texto);
+//            g.drawImage(Assets.background, 0, 0, width, height, null);
+//            if (pauseGame) {
+//                g.drawString("PAUSA", getWidth() / 2 - 60, getHeight() / 2);
+//            }
+//            if (endGame) {
+//                //g.drawImage(Assets.endGame, getWidth() / 2 - 131, getHeight() / 2 - 30, 262, 60, null);
+//                // we draw a string saying game over and another string giving instructions to the player on how to restart the game
+//                g.drawString("Game Over", getWidth() / 2 - 80, getHeight() / 2);
+//                g.drawString("Press 'r' to restart", getWidth() / 2 - 120, getHeight() / 2 + 30);
+//            } else {
+//
+//                // rendering the ball and player
+//                if (shot.isFired()) {
+//                    shot.render(g);
+//                }
+//                player.render(g);
+//                //ball.render(g);
+//
+//                //rendering all bricks
+//                for (int i = 0; i < aliens.size(); i++) {
+//                    Enemy alien = aliens.get(i);
+//                    if (!alien.isDestroyed()) {
+//                        alien.render(g);
+//
+//                    }
+//
+//                }
+//                // rendering all bombs
+//                for (int i = 0; i < bombs.size(); i++) {
+//                    Bomb bomb = bombs.get(i);
+//                    if (bomb.isFired()) {
+//                        bomb.render(g);
+//                    }
+//                }
+//
+//            }
+//            // draw score
+//            g.drawString("Score: " + score, 5, getHeight() - 20);
 
             bs.show();
             g.dispose();
