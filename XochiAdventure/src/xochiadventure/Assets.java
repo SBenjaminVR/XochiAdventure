@@ -26,6 +26,7 @@ public class Assets {
     public static BufferedImage options;
     public static BufferedImage controls;
     public static BufferedImage rec;
+    public static BufferedImage recipies;
     
     // Sounds
     public static SoundClip laser;
@@ -45,6 +46,7 @@ public class Assets {
         options = ImageLoader.loadImage("/images/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/controles.jpg");
         rec = ImageLoader.loadImage("/images/red_rectangle.png");
+        recipies = ImageLoader.loadImage("/images/Recetario.png");
 //        laser = new SoundClip("/sounds/laser.wav");
     }
     

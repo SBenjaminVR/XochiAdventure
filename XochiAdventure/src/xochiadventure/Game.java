@@ -281,6 +281,7 @@ public class Game implements Runnable {
         // ticks key manager
         keyManager.tick();
         
+        // checks in which screen you are
         switch(option) {
             case TITLESCREEN:
                 if (keyManager.enter) {
@@ -290,35 +291,48 @@ public class Game implements Runnable {
                 }
                 break;
             case MENU:
+                // prevents you from going directly from the menu screen into the options screen coming from the title screen
                 if (!canChangeScreen && !keyManager.enter) {
                     canChangeScreen = true;
                 }
-                if (sideOfMenu && keyManager.down) {
-                    switch(menOpt){
-                        case OPTIONS:
-                            menOpt = MenuOpt.RECIPIES;
-                            break;
-                        case RECIPIES:
-                            menOpt = MenuOpt.CONTROLS;
-                            break;
-                        case CONTROLS:
-                            menOpt = MenuOpt.OPTIONS;
-                            break;
+                // Checks if you are on the right or left column of the options
+                if (sideOfMenu) {
+                    // checks if the down arrow key is pressed
+                    if (keyManager.down) {
+                        // checks to where you are navigating in the menu
+                        switch(menOpt){
+                            case OPTIONS:
+                                menOpt = MenuOpt.RECIPIES;
+                                break;
+                            case RECIPIES:
+                                menOpt = MenuOpt.CONTROLS;
+                                break;
+                            case CONTROLS:
+                                menOpt = MenuOpt.OPTIONS;
+                                break;
+                        }
+                    }
+                    //Checks if the up arrow key is pressed
+                    if (keyManager.up) {
+                        // checks to where you are navigating in the menu
+                        switch(menOpt){
+                            case OPTIONS:
+                                menOpt = MenuOpt.CONTROLS;
+                                break;
+                            case RECIPIES:
+                                menOpt = MenuOpt.OPTIONS;
+                                break;
+                            case CONTROLS:
+                                menOpt = MenuOpt.RECIPIES;
+                                break;
+                        }
                     }
                 }
-                if (sideOfMenu && keyManager.up) {
-                    switch(menOpt){
-                        case OPTIONS:
-                            menOpt = MenuOpt.CONTROLS;
-                            break;
-                        case RECIPIES:
-                            menOpt = MenuOpt.OPTIONS;
-                            break;
-                        case CONTROLS:
-                            menOpt = MenuOpt.RECIPIES;
-                            break;
-                    }
+                if (!sideOfMenu) {
+                    
                 }
+                
+                // Checks to which screen you are moving to
                 if (keyManager.enter && canChangeScreen) {
                     switch(menOpt) {
                         case OPTIONS:
@@ -365,148 +379,6 @@ public class Game implements Runnable {
                 
                 break;
         }
-
-        // ckecks flags for pausing, saving, and loading
-//        if (getKeyManager().pause) {
-//            pauseGame = !pauseGame;
-//        }
-//        if (getKeyManager().save) {
-//            try {
-//                grabarArchivo();
-//            } catch (IOException ex) {
-//                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        if (getKeyManager().load) {
-//            try {
-//                leeArchivo();
-//            } catch (IOException ex) {
-//                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-
-        // checks flag for restarting and if that the game has ended
-//        if (getKeyManager().restart) {
-//
-//            // resets the player position
-//            player.setX(getWidth() / 2);
-//            player.setY(getHeight() - player.getHeight());
-//            
-//            // reset shot
-//            shot.setX(player.getX() + player.getWidth() / 2);
-//            shot.setY(player.getY());
-//            shot.setFired(false);
-//
-//            aliens.clear();
-//            bombs.clear();
-//
-//            // set up the initial position for the aliens
-//            int iPosX = 0;
-//            int iPosY = 10;
-//            for (int i = 1; i <= 24; i++) {
-//
-//                iPosX += 60;
-//                aliens.add(new Enemy(iPosX, iPosY, 50, 50, 1, this));
-//                bombs.add(new Bomb(iPosX, iPosY, 10, 20, this));
-//
-//                // create 6 aliens every row
-//                if (i % 6 == 0) {
-//                    iPosY += 60;
-//                    iPosX = 0;
-//                }
-//            }
-//
-//            // setting up the game variables
-//            score = 0;
-//            cantAliens = aliens.size();
-//            endGame = false;
-//            pauseGame = false;
-//        }
-//
-//        if (!endGame && !pauseGame) {
-//            
-//            // ticks the player
-//            player.tick();
-//
-//            //initializes shot and moves it
-//            if (keyManager.fireShot && !shot.isFired()) {
-//                shot.setFired(true);
-//                Assets.laser.play();
-//            }
-//
-//            //ticks shot
-//            if (shot.isFired()) {
-//                shot.tick();
-//            } else {
-//                shot.setX(player.getX() + player.getWidth() / 2);
-//                shot.setY(player.getY());
-//            }
-//            if (shot.getY() <= 0) {
-//                shot.setX(player.getX() + player.getWidth() / 2);
-//                shot.setY(player.getY());
-//                shot.setFired(false);
-//
-//            }
-//
-//
-//            //movement controler for aliens
-//            //ticking all aliens
-//            for (int i = 0; i < aliens.size(); i++) {
-//                Enemy alien = aliens.get(i);
-//                alien.tick();
-//                //alien movement
-//                if ((aliens.get(0).getX() + (50 * 6) + (10 * 5) >= getWidth())) {
-//                    aliens.get(i).setDirection(-1);
-//                    aliens.get(i).setY(alien.getY() + 40);
-//                }
-//                if ((aliens.get(23).getX() - (50 * 6) - (10) <= 0)) {
-//                    aliens.get(i).setDirection(1);
-//                    aliens.get(i).setY(alien.getY() + 40);
-//                }
-//                if (aliens.get(i).getY() >= getHeight() - 50) {
-//                    endGame = true;
-//                }
-//                // collision with bricks
-//
-//                if (!alien.isDestroyed()) {
-//                    if (shot.intersectaAlien(alien)) {
-//                        if (!alien.isDestroyed()) {
-//                            if (shot.intersectaAlien(alien)) {
-//                                shot.setFired(false);
-//                                shot.setX(player.getX() + player.getWidth() / 2);
-//                                shot.setY(player.getY());
-//                                alien.setDestroyed(true);
-//                                cantAliens--;
-//                                score += 10;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            for (int i = 0; i < bombs.size(); i++) {
-//                Bomb bomb = bombs.get(i);
-//                int rand = (int) (Math.random() * 5000);
-//                if (rand < 2) {
-//                    bomb.setFired(true);
-//                    bomb.setX(aliens.get(i).getX() + aliens.get(i).getWidth() / 2);
-//                }
-//                if (bomb.isFired()) {
-//                    bomb.tick();
-//                    if (bomb.isFired() && bomb.intersectaJugador(player)) {
-//                        endGame = true;
-//                        bomb.setFired(false);
-//                        Enemy enem = aliens.get(i);
-//                        bomb.setX(enem.getX() + enem.getWidth() / 2);
-//                        bomb.setY(enem.getY() + enem.getHeight());
-//                    }
-//
-//                    // if all aliens are destroyed the game is ended
-//                    if (cantAliens == 0) {
-//                        endGame = true;
-//                    }
-//                }
-//            }
-//        }
     }
 
     private void render() {
@@ -522,12 +394,14 @@ public class Game implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
+            // Checks which screen to render
             switch(option) {
                 case TITLESCREEN:
                     g.drawImage(Assets.titleScreen, 0, 0, 1920, 1080, null);
                     break;
                 case MENU:
                     g.drawImage(Assets.menu, 0, 0, 1920, 1080, null);
+                    // Checks where to draw the rectangle that shows which option of the menu you are selecting
                     switch(menOpt) {
                         case OPTIONS:
                             g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
@@ -550,15 +424,13 @@ public class Game implements Runnable {
                             //carga nivel3
                             option = Option.LEVEL;
                                 break;
-                        
                     }
-                    
                     break;
                 case OPTIONS:
                     g.drawImage(Assets.options, 0, 0, 1920, 1080, null);
                     break;
                 case RECIPIES:
-                    g.drawImage(Assets.controls, 0, 0, 1920, 1080, null);
+                    g.drawImage(Assets.recipies, 0, 0, 1920, 1080, null);
                     break;
                 case CONTROLS:
                     g.drawImage(Assets.controls, 0, 0, 1920, 1080, null);
@@ -569,42 +441,6 @@ public class Game implements Runnable {
             }
             
 //            g.setFont(texto);
-//            g.drawImage(Assets.background, 0, 0, width, height, null);
-//            if (pauseGame) {
-//                g.drawString("PAUSA", getWidth() / 2 - 60, getHeight() / 2);
-//            }
-//            if (endGame) {
-//                //g.drawImage(Assets.endGame, getWidth() / 2 - 131, getHeight() / 2 - 30, 262, 60, null);
-//                // we draw a string saying game over and another string giving instructions to the player on how to restart the game
-//                g.drawString("Game Over", getWidth() / 2 - 80, getHeight() / 2);
-//                g.drawString("Press 'r' to restart", getWidth() / 2 - 120, getHeight() / 2 + 30);
-//            } else {
-//
-//                // rendering the ball and player
-//                if (shot.isFired()) {
-//                    shot.render(g);
-//                }
-//                player.render(g);
-//                //ball.render(g);
-//
-//                //rendering all bricks
-//                for (int i = 0; i < aliens.size(); i++) {
-//                    Enemy alien = aliens.get(i);
-//                    if (!alien.isDestroyed()) {
-//                        alien.render(g);
-//
-//                    }
-//
-//                }
-//                // rendering all bombs
-//                for (int i = 0; i < bombs.size(); i++) {
-//                    Bomb bomb = bombs.get(i);
-//                    if (bomb.isFired()) {
-//                        bomb.render(g);
-//                    }
-//                }
-//
-//            }
 //            // draw score
 //            g.drawString("Score: " + score, 5, getHeight() - 20);
 
@@ -657,10 +493,10 @@ public class Game implements Runnable {
      * @param datos to set all the variables
      */
     public void loadFromString(String[] datos) {
-        this.score = Integer.parseInt(datos[0]);
-        this.cantAliens = Integer.parseInt(datos[1]);
-        this.endGame = (Integer.parseInt(datos[2]) == 1 ? true : false);
-        this.pauseGame = (Integer.parseInt(datos[3]) == 1 ? true : false);
+//        this.score = Integer.parseInt(datos[0]);
+//        this.cantAliens = Integer.parseInt(datos[1]);
+//        this.endGame = (Integer.parseInt(datos[2]) == 1 ? true : false);
+//        this.pauseGame = (Integer.parseInt(datos[3]) == 1 ? true : false);
     }
 
     /**
@@ -669,18 +505,18 @@ public class Game implements Runnable {
      * @throws IOException when file not found
      */
     public void grabarArchivo() throws IOException {
-        PrintWriter fileOut = new PrintWriter(new FileWriter(nombreArchivo));
-        fileOut.println(this.toString());
-        fileOut.println(player.toString());
-        fileOut.println(shot.toString());
-        for(Enemy alien : aliens){
-            fileOut.println(alien.toString());
-        }
-        for (Bomb bomb : bombs) {
-            fileOut.println(bomb.toString());
-        }
-
-        fileOut.close();
+//        PrintWriter fileOut = new PrintWriter(new FileWriter(nombreArchivo));
+//        fileOut.println(this.toString());
+//        fileOut.println(player.toString());
+//        fileOut.println(shot.toString());
+//        for(Enemy alien : aliens){
+//            fileOut.println(alien.toString());
+//        }
+//        for (Bomb bomb : bombs) {
+//            fileOut.println(bomb.toString());
+//        }
+//
+//        fileOut.close();
     }
 
     /**
@@ -689,28 +525,28 @@ public class Game implements Runnable {
      * @throws IOException when file not found
      */
     public void leeArchivo() throws IOException {
-
-        BufferedReader fileIn;
-        try {
-            fileIn = new BufferedReader(new FileReader(nombreArchivo));
-        } catch (FileNotFoundException e) {
-            File archivo = new File(nombreArchivo);
-            PrintWriter fileOut = new PrintWriter(archivo);
-            fileOut.println("100,demo");
-            fileOut.close();
-            fileIn = new BufferedReader(new FileReader(nombreArchivo));
-        }
-        loadFromString(fileIn.readLine().split("\\s+"));
-        this.player.loadFromString(fileIn.readLine().split("\\s+"));
-        shot.loadFromString(fileIn.readLine().split("\\s+"));
-        for(Enemy alien : aliens){
-            alien.loadFromString(fileIn.readLine().split("\\s+"));
-        }
-        for (Bomb bomb : bombs) {
-            bomb.loadFromString(fileIn.readLine().split("\\s+"));
-        }
-
-        fileIn.close();
+//
+//        BufferedReader fileIn;
+//        try {
+//            fileIn = new BufferedReader(new FileReader(nombreArchivo));
+//        } catch (FileNotFoundException e) {
+//            File archivo = new File(nombreArchivo);
+//            PrintWriter fileOut = new PrintWriter(archivo);
+//            fileOut.println("100,demo");
+//            fileOut.close();
+//            fileIn = new BufferedReader(new FileReader(nombreArchivo));
+//        }
+//        loadFromString(fileIn.readLine().split("\\s+"));
+//        this.player.loadFromString(fileIn.readLine().split("\\s+"));
+//        shot.loadFromString(fileIn.readLine().split("\\s+"));
+//        for(Enemy alien : aliens){
+//            alien.loadFromString(fileIn.readLine().split("\\s+"));
+//        }
+//        for (Bomb bomb : bombs) {
+//            bomb.loadFromString(fileIn.readLine().split("\\s+"));
+//        }
+//
+//        fileIn.close();
     }
 
     String getLives() {
