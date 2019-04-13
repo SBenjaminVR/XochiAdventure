@@ -21,12 +21,12 @@ public class Assets {
     public static BufferedImage asteroid;
     public static BufferedImage heart;
     
-    public static BufferedImage titleScreen;
-    public static BufferedImage menu;
-    public static BufferedImage options;
-    public static BufferedImage controls;
-    public static BufferedImage rec;
-    public static BufferedImage recipies;
+    public static BufferedImage titleScreen;        // to store the title screen
+    public static BufferedImage menu;               // to store the menu image
+    public static BufferedImage options;            // to store the options screen image
+    public static BufferedImage controls;           // to store the instructions screen image
+    public static BufferedImage rec;                // to store the red rectangleimage
+    public static BufferedImage recipies;       // to store the recipies screen image
     
     // Sounds
     public static SoundClip laser;

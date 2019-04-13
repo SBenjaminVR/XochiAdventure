@@ -68,11 +68,11 @@ public class Game implements Runnable {
     private LinkedList<Bomb> bombs;
     private Shot shot;                              //to have a missile to shoot
     
-    private Option option;
-    private MenuOpt menOpt;
-    private MouseManager mouseManager;
-    private boolean canChangeScreen;
-    private boolean sideOfMenu;
+    private Option option;                  // to store in which screen you are
+    private MenuOpt menOpt;             // to store in which option in the menu you are
+    private MouseManager mouseManager;          // to manage the mouse
+    private boolean canChangeScreen;            // to know if you can change the screen
+    private boolean sideOfMenu;                 // flag to know in which column of the menu are you
 
     /**
      * to create title, width, height, keyManager, bricks,
