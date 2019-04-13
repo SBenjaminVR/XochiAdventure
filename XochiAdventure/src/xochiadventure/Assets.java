@@ -24,7 +24,8 @@ public class Assets {
     public static BufferedImage titleScreen;
     public static BufferedImage menu;
     public static BufferedImage options;
-    public static BufferedImage instructions;
+    public static BufferedImage controls;
+    public static BufferedImage rec;
     
     // Sounds
     public static SoundClip laser;
@@ -42,7 +43,8 @@ public class Assets {
         titleScreen = ImageLoader.loadImage("/images/Title Screen.jpg");
         menu = ImageLoader.loadImage("/images/mainMenu.jpg");
         options = ImageLoader.loadImage("/images/MenuOpciones.jpg");
-        instructions = ImageLoader.loadImage("/images/controles.jpg");
+        controls = ImageLoader.loadImage("/images/controles.jpg");
+        rec = ImageLoader.loadImage("/images/red_rectangle.png");
 //        laser = new SoundClip("/sounds/laser.wav");
     }
     

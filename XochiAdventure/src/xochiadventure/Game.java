@@ -8,6 +8,7 @@ package xochiadventure;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,13 +28,17 @@ enum Option {
     MENU,
     OPTIONS,
     RECIPIES,
-    LEVEL
+    LEVEL,
+    CONTROLS
 }
 
 enum MenuOpt {
     ONE,
     TWO,
-    THREE
+    THREE, 
+    OPTIONS,
+    CONTROLS,
+    RECIPIES,
 }
 
 /**
@@ -63,10 +68,11 @@ public class Game implements Runnable {
     private LinkedList<Bomb> bombs;
     private Shot shot;                              //to have a missile to shoot
     
-    
-    
     private Option option;
     private MenuOpt menOpt;
+    private MouseManager mouseManager;
+    private boolean canChangeScreen;
+    private boolean sideOfMenu;
 
     /**
      * to create title, width, height, keyManager, bricks,
@@ -82,13 +88,14 @@ public class Game implements Runnable {
         this.height = height;
         running = false;
         keyManager = new KeyManager();
-        aliens = new LinkedList<Enemy>();
+//        aliens = new LinkedList<Enemy>();
         //powerUps = new LinkedList<PowerUps>();
-        //pollos = new LinkedList<PowerUps>();
-        nombreArchivo = "src/space/inavders/archivo.sf";
-        texto = new Font("Font", 2, 32);
-        bombs = new LinkedList<Bomb>();
+//        //pollos = new LinkedList<PowerUps>();
+//        nombreArchivo = "src/space/inavders/archivo.sf";
+//        texto = new Font("Font", 2, 32);
+//        bombs = new LinkedList<Bomb>();
         option = Option.TITLESCREEN;
+        mouseManager = new MouseManager();
     }
 
     /**
@@ -204,33 +211,39 @@ public class Game implements Runnable {
         Assets.init();
 
         //creating the player and the shot
-        player = new Player(getWidth() / 2, getHeight() - 100, 1, 100, 80, this);
-        shot = new Shot(player.getX() + player.getWidth() / 2, player.getY() - player.getHeight(), 5, 5, this) {
-        };
-
-        // set up the initial position for the aliens
-        int iPosX = 0;
-        int iPosY = 10;
-        for (int i = 1; i <= 24; i++) {
-            //aliens.add(new Enemy(iPosX, iPosY, 50, 50, this));
-            iPosX += 60;
-            aliens.add(new Enemy(iPosX, iPosY, 50, 50, 1, this));
-            bombs.add(new Bomb(iPosX, iPosY, 10, 20, this));
-
-            // create 6 aliens every row
-            if (i % 6 == 0) {
-                iPosY += 60;
-                iPosX = 0;
-            }
-
-        }
-
-        // setting up the game variables
-        score = 0;
-        cantAliens = aliens.size();
+//        player = new Player(getWidth() / 2, getHeight() - 100, 1, 100, 80, this);
+//        shot = new Shot(player.getX() + player.getWidth() / 2, player.getY() - player.getHeight(), 5, 5, this) {
+//        };
+//
+//        // set up the initial position for the aliens
+//        int iPosX = 0;
+//        int iPosY = 10;
+//        for (int i = 1; i <= 24; i++) {
+//            //aliens.add(new Enemy(iPosX, iPosY, 50, 50, this));
+//            iPosX += 60;
+//            aliens.add(new Enemy(iPosX, iPosY, 50, 50, 1, this));
+//            bombs.add(new Bomb(iPosX, iPosY, 10, 20, this));
+//
+//            // create 6 aliens every row
+//            if (i % 6 == 0) {
+//                iPosY += 60;
+//                iPosX = 0;
+//            }
+//
+//        }
+//
+//        // setting up the game variables
+//        score = 0;
+//        cantAliens = aliens.size();
         endGame = false;
         display.getJframe().addKeyListener(keyManager);
+        display.getJframe().addMouseListener(mouseManager);
+        display.getJframe().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
         pauseGame = false;
+        canChangeScreen = true;
+        sideOfMenu = true;
     }
 
     @Override
@@ -272,14 +285,81 @@ public class Game implements Runnable {
             case TITLESCREEN:
                 if (keyManager.enter) {
                     option = Option.MENU;
+                    menOpt = MenuOpt.OPTIONS;
+                    canChangeScreen = false;
                 }
                 break;
             case MENU:
+                if (!canChangeScreen && !keyManager.enter) {
+                    canChangeScreen = true;
+                }
+                if (sideOfMenu && keyManager.down) {
+                    switch(menOpt){
+                        case OPTIONS:
+                            menOpt = MenuOpt.RECIPIES;
+                            break;
+                        case RECIPIES:
+                            menOpt = MenuOpt.CONTROLS;
+                            break;
+                        case CONTROLS:
+                            menOpt = MenuOpt.OPTIONS;
+                            break;
+                    }
+                }
+                if (sideOfMenu && keyManager.up) {
+                    switch(menOpt){
+                        case OPTIONS:
+                            menOpt = MenuOpt.CONTROLS;
+                            break;
+                        case RECIPIES:
+                            menOpt = MenuOpt.OPTIONS;
+                            break;
+                        case CONTROLS:
+                            menOpt = MenuOpt.RECIPIES;
+                            break;
+                    }
+                }
+                if (keyManager.enter && canChangeScreen) {
+                    switch(menOpt) {
+                        case OPTIONS:
+                            option = Option.OPTIONS;
+                            break;
+                        case ONE:
+                            //carga nivel 1
+                            option = Option.LEVEL;
+                                break;
+                        case TWO:
+                            //carga nivel2
+                            option = Option.LEVEL;
+                                break;
+                        case THREE:
+                            //carga nivel3
+                            option = Option.LEVEL;
+                                break;
+                        case RECIPIES:
+                            option = Option.RECIPIES;
+                                break;
+                       case CONTROLS:
+                           option = Option.CONTROLS;
+                                break;
+                    }
+                }
                 
                 break;
             case OPTIONS:
+                if (keyManager.back) {
+                    option = Option.MENU;
+                }
                 break;
             case RECIPIES:
+                if (keyManager.back) {
+                    option = Option.MENU;
+                }
+                break;
+            case CONTROLS:
+                if (keyManager.back) {
+                    option = Option.MENU;
+                }
                 break;
             case LEVEL:
                 
@@ -448,13 +528,43 @@ public class Game implements Runnable {
                     break;
                 case MENU:
                     g.drawImage(Assets.menu, 0, 0, 1920, 1080, null);
+                    switch(menOpt) {
+                        case OPTIONS:
+                            g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
+                            break;
+                        case RECIPIES:
+                            g.drawImage(Assets.rec, 1340, 200, 400, 100, null);
+                            break;
+                       case CONTROLS:
+                           g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
+                                break;
+                        case ONE:
+                            //carga nivel 1
+                            option = Option.LEVEL;
+                                break;
+                        case TWO:
+                            //carga nivel2
+                            option = Option.LEVEL;
+                                break;
+                        case THREE:
+                            //carga nivel3
+                            option = Option.LEVEL;
+                                break;
+                        
+                    }
+                    
                     break;
                 case OPTIONS:
+                    g.drawImage(Assets.options, 0, 0, 1920, 1080, null);
                     break;
                 case RECIPIES:
+                    g.drawImage(Assets.controls, 0, 0, 1920, 1080, null);
+                    break;
+                case CONTROLS:
+                    g.drawImage(Assets.controls, 0, 0, 1920, 1080, null);
                     break;
                 case LEVEL:
-                    
+                    g.drawImage(Assets.menu, 0, 0, 1920, 1080, null);
                     break;
             }
             
