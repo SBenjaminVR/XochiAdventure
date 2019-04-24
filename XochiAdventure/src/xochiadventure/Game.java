@@ -23,7 +23,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-enum Option {
+enum Screen {
     TITLESCREEN,
     MENU,
     OPTIONS,
@@ -68,7 +68,7 @@ public class Game implements Runnable {
     private LinkedList<Bomb> bombs;
     private Shot shot;                              //to have a missile to shoot
     
-    private Option option;                  // to store in which screen you are
+    private Screen screen;                  // to store in which screen you are
     private MenuOpt menOpt;             // to store in which option in the menu you are
     private MouseManager mouseManager;          // to manage the mouse
     private boolean canChangeScreen;            // to know if you can change the screen
@@ -94,7 +94,7 @@ public class Game implements Runnable {
 //        nombreArchivo = "src/space/inavders/archivo.sf";
 //        texto = new Font("Font", 2, 32);
 //        bombs = new LinkedList<Bomb>();
-        option = Option.TITLESCREEN;
+        screen = Screen.TITLESCREEN;
         mouseManager = new MouseManager();
     }
 
@@ -282,10 +282,10 @@ public class Game implements Runnable {
         keyManager.tick();
         
         // checks in which screen you are
-        switch(option) {
+        switch(screen) {
             case TITLESCREEN:
                 if (keyManager.enter) {
-                    option = Option.MENU;
+                    screen = Screen.MENU;
                     menOpt = MenuOpt.OPTIONS;
                     canChangeScreen = false;
                 }
@@ -336,25 +336,25 @@ public class Game implements Runnable {
                 if (keyManager.enter && canChangeScreen) {
                     switch(menOpt) {
                         case OPTIONS:
-                            option = Option.OPTIONS;
+                            screen = Screen.OPTIONS;
                             break;
                         case ONE:
                             //carga nivel 1
-                            option = Option.LEVEL;
+                            screen = Screen.LEVEL;
                                 break;
                         case TWO:
                             //carga nivel2
-                            option = Option.LEVEL;
+                            screen = Screen.LEVEL;
                                 break;
                         case THREE:
                             //carga nivel3
-                            option = Option.LEVEL;
+                            screen = Screen.LEVEL;
                                 break;
                         case RECIPIES:
-                            option = Option.RECIPIES;
+                            screen = Screen.RECIPIES;
                                 break;
                        case CONTROLS:
-                           option = Option.CONTROLS;
+                           screen = Screen.CONTROLS;
                                 break;
                     }
                 }
@@ -362,17 +362,17 @@ public class Game implements Runnable {
                 break;
             case OPTIONS:
                 if (keyManager.back) {
-                    option = Option.MENU;
+                    screen = Screen.MENU;
                 }
                 break;
             case RECIPIES:
                 if (keyManager.back) {
-                    option = Option.MENU;
+                    screen = Screen.MENU;
                 }
                 break;
             case CONTROLS:
                 if (keyManager.back) {
-                    option = Option.MENU;
+                    screen = Screen.MENU;
                 }
                 break;
             case LEVEL:
@@ -395,7 +395,7 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             // Checks which screen to render
-            switch(option) {
+            switch(screen) {
                 case TITLESCREEN:
                     g.drawImage(Assets.titleScreen, 0, 0, 1920, 1080, null);
                     break;
@@ -413,16 +413,14 @@ public class Game implements Runnable {
                            g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
                                 break;
                         case ONE:
+                            g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
                             //carga nivel 1
-                            option = Option.LEVEL;
                                 break;
                         case TWO:
                             //carga nivel2
-                            option = Option.LEVEL;
                                 break;
                         case THREE:
                             //carga nivel3
-                            option = Option.LEVEL;
                                 break;
                     }
                     break;

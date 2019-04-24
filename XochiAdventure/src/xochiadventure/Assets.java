@@ -9,7 +9,11 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández A01410921
+ * @authors 
+ *      - Alberto García Viegas A00822649
+ *      - Melba Geraldine Consuelos Fernández A01410921
+ *      - Humberto
+ *      - Benjamin
  */
 public class Assets {
     // Images
@@ -25,7 +29,7 @@ public class Assets {
     public static BufferedImage menu;               // to store the menu image
     public static BufferedImage options;            // to store the options screen image
     public static BufferedImage controls;           // to store the instructions screen image
-    public static BufferedImage rec;                // to store the red rectangleimage
+    public static BufferedImage rec;                // to store the red rectangle image
     public static BufferedImage recipies;       // to store the recipies screen image
     
     // Sounds
