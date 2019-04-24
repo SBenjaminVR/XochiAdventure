@@ -397,23 +397,29 @@ public class Game implements Runnable {
             // Checks which screen to render
             switch(screen) {
                 case TITLESCREEN:
-                    g.drawImage(Assets.titleScreen, 0, 0, 1920, 1080, null);
+//                    g.drawImage(Assets.titleScreen, 0, 0, 1920, 1080, null);
+                    g.drawImage(Assets.titleScreen, 0, 0, 1080, 720, null);
                     break;
                 case MENU:
-                    g.drawImage(Assets.menu, 0, 0, 1920, 1080, null);
+//                    g.drawImage(Assets.menu, 0, 0, 1920, 1080, null);
+                    g.drawImage(Assets.menu, 0, 0, 1080, 720, null);
                     // Checks where to draw the rectangle that shows which option of the menu you are selecting
                     switch(menOpt) {
                         case OPTIONS:
-                            g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
+//                            g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
+                            g.drawImage(Assets.rec, 800, 80, 200, 100, null);
                             break;
                         case RECIPIES:
-                            g.drawImage(Assets.rec, 1340, 200, 400, 100, null);
+//                            g.drawImage(Assets.rec, 1340, 200, 400, 100, null);
+                            g.drawImage(Assets.rec, 800, 120, 200, 100, null);
                             break;
                        case CONTROLS:
-                           g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
+//                           g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
+                           g.drawImage(Assets.rec, 800, 180, 200, 100, null);
                                 break;
                         case ONE:
-                            g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
+//                            g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
+                            g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
                             //carga nivel 1
                                 break;
                         case TWO:
@@ -425,16 +431,18 @@ public class Game implements Runnable {
                     }
                     break;
                 case OPTIONS:
-                    g.drawImage(Assets.options, 0, 0, 1920, 1080, null);
+//                    g.drawImage(Assets.options, 0, 0, 1920, 1080, null);
+                    g.drawImage(Assets.options, 0, 0, 1080, 720, null);
+
                     break;
                 case RECIPIES:
-                    g.drawImage(Assets.recipies, 0, 0, 1920, 1080, null);
+                    g.drawImage(Assets.recipies, 0, 0, 1080, 720, null);
                     break;
                 case CONTROLS:
-                    g.drawImage(Assets.controls, 0, 0, 1920, 1080, null);
+                    g.drawImage(Assets.controls, 0, 0, 1080, 720, null);
                     break;
                 case LEVEL:
-                    g.drawImage(Assets.menu, 0, 0, 1920, 1080, null);
+                    g.drawImage(Assets.menu, 0, 0, 1080, 720, null);
                     break;
             }
             

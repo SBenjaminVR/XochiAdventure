@@ -16,7 +16,7 @@ public class XochiAdventure {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Game g = new Game("Juego", 1920, 1080);
+        Game g = new Game("Juego", 1080, 720);
         g.start();
     }
     
