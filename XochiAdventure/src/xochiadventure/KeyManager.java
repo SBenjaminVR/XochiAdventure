@@ -70,30 +70,6 @@ public class KeyManager implements KeyListener {
          * checks if in the last tick the keys 'p', 'g', 'c', and 'r' were pressed and if in the current tick they were released
          * if this is true the corresponding flag of the key is true, else it is false
          */
-//        if (lastPause && !keys[KeyEvent.VK_P]) {
-//            pause = true;
-//        } else {
-//            pause = false;
-//        }
-//
-//        if (lastSave && !keys[KeyEvent.VK_G]) {
-//            save = true;
-//        } else {
-//            save = false;
-//        }
-//
-//        if (lastLoad  && !keys[KeyEvent.VK_C]) {
-//            load = true;
-//        } else {
-//            load = false;
-//        }
-//
-//        if (lastRestart  && !keys[KeyEvent.VK_R]) {
-//            restart = true;
-//        } else {
-//            restart = false;
-//        }
-//
 //        lastPause = keys[KeyEvent.VK_P];
 //        lastSave = keys[KeyEvent.VK_G];
 //        lastLoad  = keys[KeyEvent.VK_C];
@@ -102,41 +78,17 @@ public class KeyManager implements KeyListener {
 //        lastRestart = keys[KeyEvent.VK_R];
 //        fireShot = keys[KeyEvent.VK_SPACE];
 
-        if (lastEnter  && !keys[KeyEvent.VK_ENTER]) {
-            enter = true;
-        } else {
-            enter = false;
-        }
+        enter = lastEnter  && !keys[KeyEvent.VK_ENTER];
         
-        if (lastBack  && !keys[KeyEvent.VK_BACK_SPACE]) {
-            back = true;
-        } else {
-            back = false;
-        }
+        back = lastBack  && !keys[KeyEvent.VK_BACK_SPACE];
 
-        if (lastUp  && !keys[KeyEvent.VK_UP]) {
-            up = true;
-        } else {
-            up = false;
-        }
+        up = lastUp  && !keys[KeyEvent.VK_UP];
 
-        if (lastDown  && !keys[KeyEvent.VK_DOWN]) {
-            down = true;
-        } else {
-            down = false;
-        }
+        down = lastDown  && !keys[KeyEvent.VK_DOWN];
          
-        if (lastLeft  && !keys[KeyEvent.VK_LEFT]) {
-            left = true;
-        } else {
-            left = false;
-        }
+        left = lastLeft  && !keys[KeyEvent.VK_LEFT];
         
-        if (lastRight  && !keys[KeyEvent.VK_RIGHT]) {
-            right = true;
-        } else {
-            right = false;
-        }
+        right = lastRight  && !keys[KeyEvent.VK_RIGHT];
         
         lastEnter = keys[KeyEvent.VK_ENTER];
         lastBack = keys[KeyEvent.VK_BACK_SPACE];
@@ -144,7 +96,5 @@ public class KeyManager implements KeyListener {
         lastDown = keys[KeyEvent.VK_DOWN];
         lastLeft = keys[KeyEvent.VK_LEFT];
         lastRight = keys[KeyEvent.VK_RIGHT];
-//        up = keys[KeyEvent.VK_UP];
-//        down = keys[KeyEvent.VK_DOWN];
     }
 }

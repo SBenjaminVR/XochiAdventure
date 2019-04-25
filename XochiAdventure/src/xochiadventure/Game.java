@@ -82,8 +82,6 @@ public class Game implements Runnable {
     private OptOpt optOpt;                  // to store in which option in the options screen you are
     
     private MouseManager mouseManager;          // to manage the mouse
-    private boolean sideOfMenu;                 // flag to know in which column of the menu are you
-    private boolean canChangeSideOfMenu;         // to know if you can change the side of the menu you are in
 
     /**
      * to create title, width, height, keyManager, bricks,
@@ -266,8 +264,6 @@ public class Game implements Runnable {
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
         pauseGame = false;
-        sideOfMenu = true;
-        canChangeSideOfMenu = true;
     }
 
     @Override
@@ -319,99 +315,80 @@ public class Game implements Runnable {
                 
             // Main menu screen
             case MENU:
-                // Checks if you are on the right column of options
-                if (sideOfMenu) {
-                    // checks if the down arrow key is pressed
-                    if (keyManager.down) {
-                        // checks to where you are navigating in the menu
-                        switch(menOpt){
-                            case OPTIONS:
-                                menOpt = MenuOpt.RECIPIES;
-                                break;
-                            case RECIPIES:
-                                menOpt = MenuOpt.CONTROLS;
-                                break;
-                            case CONTROLS:
-                                menOpt = MenuOpt.OPTIONS;
-                                break;
-                        }
+                
+                // checks if the down arrow key is pressed
+                if (keyManager.down) {
+                    // checks to where you are navigating in the menu
+                    switch(menOpt){
+                        case OPTIONS:
+                            menOpt = MenuOpt.RECIPIES;
+                            break;
+                        case RECIPIES:
+                            menOpt = MenuOpt.CONTROLS;
+                            break;
+                        case CONTROLS:
+                            menOpt = MenuOpt.OPTIONS;
+                            break;
+                        case ONE:
+                            menOpt = MenuOpt.TWO;
+                            break;
+                        case TWO:
+                            menOpt = MenuOpt.THREE;
+                            break;
+                        case THREE:
+                            menOpt = MenuOpt.ONE;
+                            break;
                     }
-                    //Checks if the up arrow key is pressed
-                    if (keyManager.up) {
-                        // checks to where you are navigating in the menu
-                        switch(menOpt){
-                            case OPTIONS:
-                                menOpt = MenuOpt.CONTROLS;
-                                break;
-                            case RECIPIES:
-                                menOpt = MenuOpt.OPTIONS;
-                                break;
-                            case CONTROLS:
-                                menOpt = MenuOpt.RECIPIES;
-                                break;
-                        }
-                    }
-                    
-//                    if (canChangeSideOfMenu && (keyManager.left || keyManager.right)) {
-//                        sideOfMenu = false;
-//                        menOpt = MenuOpt.ONE;
-//                        canChangeSideOfMenu = false;
-//                    }
-                    
-                    if (keyManager.left || keyManager.right) {
-                        sideOfMenu = false;
-                        menOpt = MenuOpt.ONE;
-//                        canChangeSideOfMenu = false;
-//                        keyManager.left = keyManager.right = false;
-//                        System.out.println("" + keyManager.right + " " + keyManager.left);
+                }
+                //Checks if the up arrow key is pressed
+                if (keyManager.up) {
+                    // checks to where you are navigating in the menu
+                    switch(menOpt){
+                        case OPTIONS:
+                            menOpt = MenuOpt.CONTROLS;
+                            break;
+                        case RECIPIES:
+                            menOpt = MenuOpt.OPTIONS;
+                            break;
+                        case CONTROLS:
+                            menOpt = MenuOpt.RECIPIES;
+                            break;
+                        case ONE:
+                            menOpt = MenuOpt.THREE;
+                            break;
+                        case TWO:
+                            menOpt = MenuOpt.ONE;
+                            break;
+                        case THREE:
+                            menOpt = MenuOpt.TWO;
+                            break;
                     }
                 }
                 
-                // Checks if you are selectin a level in the main menu
-                if (!sideOfMenu) {
-                    if (keyManager.up) {
-                        switch(menOpt) {
-                            case ONE:
-                                menOpt = MenuOpt.THREE;
-                                break;
-                            case TWO:
-                                menOpt = MenuOpt.ONE;
-                                break;
-                            case THREE:
-                                menOpt = MenuOpt.TWO;
-                                break;
-                        }
+                //Checks if the left or right arrow key is pressed
+                if (keyManager.left || keyManager.right) {
+                    // checks to where you are navigating in the menu
+                    switch (menOpt) {
+                        case OPTIONS:
+                            menOpt = MenuOpt.ONE;
+                            break;
+                        case RECIPIES:
+                            menOpt = MenuOpt.TWO;
+                            break;
+                        case CONTROLS:
+                            menOpt = MenuOpt.THREE;
+                            break;
+                        case ONE:
+                            menOpt = MenuOpt.OPTIONS;
+                            break;
+                        case TWO:
+                            menOpt = MenuOpt.RECIPIES;
+                            break;
+                        case THREE:
+                            menOpt = MenuOpt.CONTROLS;
+                            break;                            
                     }
-                    
-                    if (keyManager.down) {
-                        switch(menOpt) {
-                            case ONE:
-                                menOpt = MenuOpt.TWO;
-                                break;
-                            case TWO:
-                                menOpt = MenuOpt.THREE;
-                                break;
-                            case THREE:
-                                menOpt = MenuOpt.ONE;
-                                break;
-                        }
-                    }
-                    
-//                    if (canChangeSideOfMenu && (keyManager.left || keyManager.right)) {
-//                        sideOfMenu = true;
-//                        menOpt = MenuOpt.OPTIONS;
-//                        canChangeSideOfMenu = false;
-////                        System.out.println(sideOfMenu);
-//                    }
-                    if (keyManager.left || keyManager.right) {
-                        sideOfMenu = true;
-                        menOpt = MenuOpt.OPTIONS;
-//                        canChangeSideOfMenu = false;
-//                        keyManager.left = keyManager.right = false;
-//                        System.out.println("" + keyManager.right + " " + keyManager.left);
-                    }
-                }
-              
+                }             
                 
                 // Checks to which screen you are moving to
                 if (keyManager.enter) {
