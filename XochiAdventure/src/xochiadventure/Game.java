@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static xochiadventure.Assets.titleScreen;
 
 enum Screen {
     TITLESCREEN,
@@ -41,6 +42,12 @@ enum MenuOpt {
     RECIPIES,
 }
 
+enum OptOpt {
+    DALTONICO,
+    SONIDO,
+    BRILLO
+}
+
 /**
  *
  * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández
@@ -56,23 +63,27 @@ public class Game implements Runnable {
     private int height;                                     // height of the window
     private Thread thread;                                  // thread to create the game
     private boolean running;                                // to set the game
+    
+    
     private Player player;                                  // to use a player
     private KeyManager keyManager;                          // to manage the keyboard
-    private LinkedList<Enemy> aliens;                       // to move an enemy
+    private LinkedList<Enemy> chiles;                       // to move an enemy
     private boolean endGame;                                // to know when to end the game
     private int score;                                      // to store the score
     private boolean pauseGame;                              // flag to know if the game is paused
-    private int cantAliens;                                 // to store the quantity of remaining aliens
-    private String nombreArchivo;                           // to store the name of the file
-    private Font texto;                                     // to change the font of string drawn in the screen
+//    private int cantAliens;                                 // to store the quantity of remaining aliens
+//    private String nombreArchivo;                           // to store the name of the file
+//    private Font texto;                                     // to change the font of string drawn in the screen
     private LinkedList<Bomb> bombs;
     private Shot shot;                              //to have a missile to shoot
     
     private Screen screen;                  // to store in which screen you are
-    private MenuOpt menOpt;             // to store in which option in the menu you are
+    private MenuOpt menOpt;             // to store in which option in the main menu screen you are
+    private OptOpt optOpt;                  // to store in which option in the options screen you are
+    
     private MouseManager mouseManager;          // to manage the mouse
-    private boolean canChangeScreen;            // to know if you can change the screen
     private boolean sideOfMenu;                 // flag to know in which column of the menu are you
+    private boolean canChangeSideOfMenu;         // to know if you can change the side of the menu you are in
 
     /**
      * to create title, width, height, keyManager, bricks,
@@ -88,7 +99,7 @@ public class Game implements Runnable {
         this.height = height;
         running = false;
         keyManager = new KeyManager();
-//        aliens = new LinkedList<Enemy>();
+        chiles = new LinkedList<Enemy>();
         //powerUps = new LinkedList<PowerUps>();
 //        //pollos = new LinkedList<PowerUps>();
 //        nombreArchivo = "src/space/inavders/archivo.sf";
@@ -121,8 +132,8 @@ public class Game implements Runnable {
      *
      * @return an <code>LinkedList<Enemey></code> list with all the bricks
      */
-    public LinkedList<Enemy> getBricks() {
-        return aliens;
+    public LinkedList<Enemy> getChiles() {
+        return chiles;
     }
 
     /**
@@ -134,13 +145,13 @@ public class Game implements Runnable {
         return player;
     }
 
-    /**
-     * To get the quantity of bricks that haven't been destroyed
-     * @return an <code>int</code> value with the quantity of bricks that haven't been destroyed
-     */
-    public int getCantAliens() {
-        return cantAliens;
-    }
+//    /**
+//     * To get the quantity of bricks that haven't been destroyed
+//     * @return an <code>int</code> value with the quantity of bricks that haven't been destroyed
+//     */
+//    public int getCantAliens() {
+//        return cantAliens;
+//    }
 
     /**
      * to get the shots
@@ -235,6 +246,19 @@ public class Game implements Runnable {
 //        // setting up the game variables
 //        score = 0;
 //        cantAliens = aliens.size();
+        int direction;
+        int iPosX = 0;
+        int iPosY = 10;
+        for (int i  = 0; i < 5; i++) {
+            if (i % 2 == 0) {
+                direction = 1;
+            } else {
+                direction = -1;
+            }
+            chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, this));
+            iPosX += 50;
+            iPosY += 50;
+        }
         endGame = false;
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
@@ -242,8 +266,8 @@ public class Game implements Runnable {
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
         pauseGame = false;
-        canChangeScreen = true;
         sideOfMenu = true;
+        canChangeSideOfMenu = true;
     }
 
     @Override
@@ -280,22 +304,22 @@ public class Game implements Runnable {
     private void tick() {
         // ticks key manager
         keyManager.tick();
+//         System.out.println("" + keyManager.left + " " + keyManager.right);
         
         // checks in which screen you are
         switch(screen) {
+            
+            // Tttle screen
             case TITLESCREEN:
                 if (keyManager.enter) {
                     screen = Screen.MENU;
                     menOpt = MenuOpt.OPTIONS;
-                    canChangeScreen = false;
                 }
                 break;
+                
+            // Main menu screen
             case MENU:
-                // prevents you from going directly from the menu screen into the options screen coming from the title screen
-                if (!canChangeScreen && !keyManager.enter) {
-                    canChangeScreen = true;
-                }
-                // Checks if you are on the right or left column of the options
+                // Checks if you are on the right column of options
                 if (sideOfMenu) {
                     // checks if the down arrow key is pressed
                     if (keyManager.down) {
@@ -327,16 +351,74 @@ public class Game implements Runnable {
                                 break;
                         }
                     }
-                }
-                if (!sideOfMenu) {
                     
+//                    if (canChangeSideOfMenu && (keyManager.left || keyManager.right)) {
+//                        sideOfMenu = false;
+//                        menOpt = MenuOpt.ONE;
+//                        canChangeSideOfMenu = false;
+//                    }
+                    
+                    if (keyManager.left || keyManager.right) {
+                        sideOfMenu = false;
+                        menOpt = MenuOpt.ONE;
+//                        canChangeSideOfMenu = false;
+//                        keyManager.left = keyManager.right = false;
+//                        System.out.println("" + keyManager.right + " " + keyManager.left);
+                    }
                 }
                 
+                // Checks if you are selectin a level in the main menu
+                if (!sideOfMenu) {
+                    if (keyManager.up) {
+                        switch(menOpt) {
+                            case ONE:
+                                menOpt = MenuOpt.THREE;
+                                break;
+                            case TWO:
+                                menOpt = MenuOpt.ONE;
+                                break;
+                            case THREE:
+                                menOpt = MenuOpt.TWO;
+                                break;
+                        }
+                    }
+                    
+                    if (keyManager.down) {
+                        switch(menOpt) {
+                            case ONE:
+                                menOpt = MenuOpt.TWO;
+                                break;
+                            case TWO:
+                                menOpt = MenuOpt.THREE;
+                                break;
+                            case THREE:
+                                menOpt = MenuOpt.ONE;
+                                break;
+                        }
+                    }
+                    
+//                    if (canChangeSideOfMenu && (keyManager.left || keyManager.right)) {
+//                        sideOfMenu = true;
+//                        menOpt = MenuOpt.OPTIONS;
+//                        canChangeSideOfMenu = false;
+////                        System.out.println(sideOfMenu);
+//                    }
+                    if (keyManager.left || keyManager.right) {
+                        sideOfMenu = true;
+                        menOpt = MenuOpt.OPTIONS;
+//                        canChangeSideOfMenu = false;
+//                        keyManager.left = keyManager.right = false;
+//                        System.out.println("" + keyManager.right + " " + keyManager.left);
+                    }
+                }
+              
+                
                 // Checks to which screen you are moving to
-                if (keyManager.enter && canChangeScreen) {
+                if (keyManager.enter) {
                     switch(menOpt) {
                         case OPTIONS:
                             screen = Screen.OPTIONS;
+                            optOpt = OptOpt.DALTONICO;
                             break;
                         case ONE:
                             //carga nivel 1
@@ -348,6 +430,7 @@ public class Game implements Runnable {
                                 break;
                         case THREE:
                             //carga nivel3
+                            Assets.background = ImageLoader.loadImage("/images/nivel 3.png");
                             screen = Screen.LEVEL;
                                 break;
                         case RECIPIES:
@@ -360,23 +443,64 @@ public class Game implements Runnable {
                 }
                 
                 break;
+                
+            // Options screen
             case OPTIONS:
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
-                break;
+                
+                if (keyManager.down) {
+                    switch (optOpt) {
+                        case DALTONICO:
+                            optOpt = OptOpt.SONIDO;
+                            break;
+                        case SONIDO:
+                            optOpt = OptOpt.BRILLO;
+                            break;
+                        case BRILLO:
+                            optOpt = OptOpt.DALTONICO;
+                            break;
+                    }
+                }
+                
+                if (keyManager.up) {
+                    switch (optOpt) {
+                        case DALTONICO:
+                            optOpt = OptOpt.BRILLO;
+                            break;
+                        case SONIDO:
+                            optOpt = OptOpt.DALTONICO;
+                            break;
+                        case BRILLO:
+                            optOpt = OptOpt.SONIDO;
+                            break;
+                    }
+                }
+                
+            // Recipies screen
             case RECIPIES:
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
                 break;
+                
+            // Controls screen
             case CONTROLS:
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
                 break;
+            
+            // Level screen
             case LEVEL:
-                
+                if (keyManager.back) {
+                    screen = Screen.MENU;
+                }
+                for (int i  = 0; i < chiles.size(); i++) {
+                    Enemy chile = chiles.get(i);
+                    chile.tick();
+                }
                 break;
         }
     }
@@ -397,12 +521,10 @@ public class Game implements Runnable {
             // Checks which screen to render
             switch(screen) {
                 case TITLESCREEN:
-//                    g.drawImage(Assets.titleScreen, 0, 0, 1920, 1080, null);
-                    g.drawImage(Assets.titleScreen, 0, 0, 1280, 720, null);
+                    g.drawImage(Assets.titleScreen, 0, 0, getWidth(), getHeight(), null);
                     break;
                 case MENU:
-//                    g.drawImage(Assets.menu, 0, 0, 1920, 1080, null);
-                    g.drawImage(Assets.menu, 0, 0, 1280, 720, null);
+                    g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
                     // Checks where to draw the rectangle that shows which option of the menu you are selecting
                     switch(menOpt) {
                         case OPTIONS:
@@ -419,30 +541,44 @@ public class Game implements Runnable {
                                 break;
                         case ONE:
 //                            g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
-                            g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
+                            g.drawImage(Assets.rec, 600, 125, 100, 100, null);
                             //carga nivel 1
                                 break;
                         case TWO:
+                            g.drawImage(Assets.rec, 600, 150, 100, 100, null);
                             //carga nivel2
                                 break;
                         case THREE:
+                            g.drawImage(Assets.rec, 600, 175, 100, 100, null);
                             //carga nivel3
                                 break;
                     }
                     break;
                 case OPTIONS:
-//                    g.drawImage(Assets.options, 0, 0, 1920, 1080, null);
-                    g.drawImage(Assets.options, 0, 0, 1280, 720, null);
-
+                    g.drawImage(Assets.options, 0, 0, getWidth(), getHeight(), null);
+                    switch (optOpt) {
+                        case DALTONICO:
+                            g.drawImage(Assets.rec, 290, 140, 500, 100, null);
+                            break;
+                        case SONIDO:
+                            g.drawImage(Assets.rec, 290, 260, 500, 100, null);
+                            break;
+                        case BRILLO:
+                            g.drawImage(Assets.rec, 290, 380, 500, 100, null);
+                            break;
+                    }
                     break;
                 case RECIPIES:
-                    g.drawImage(Assets.recipies, 0, 0, 1280, 720, null);
+                    g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
                     break;
                 case CONTROLS:
-                    g.drawImage(Assets.controls, 0, 0, 1280, 720, null);
+                    g.drawImage(Assets.controls, 0, 0, getWidth(), getHeight(), null);
                     break;
                 case LEVEL:
-                    g.drawImage(Assets.menu, 0, 0, 1280, 720, null);
+                    g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
+                    for (int i = 0; i < 5; i++) {
+                        chiles.get(i).render(g);
+                    }
                     break;
             }
             
@@ -481,15 +617,15 @@ public class Game implements Runnable {
         }
     }
 
-    /**
-     * To get all the variable that need to be stored in the file as a string
-     *
-     * @return an <code>String</code> value with all the information of the
-     * variables
-     */
-    public String toString() {
-        return (score + " " + cantAliens + " " + (endGame ? 1 : 0) +  " " + (pauseGame ? 1 : 0));
-    }
+//    /**
+//     * To get all the variable that need to be stored in the file as a string
+//     *
+//     * @return an <code>String</code> value with all the information of the
+//     * variables
+//     */
+//    public String toString() {
+//        //return (score + " " + cantAliens + " " + (endGame ? 1 : 0) +  " " + (pauseGame ? 1 : 0));
+//    }
 
     // Carga la información del objeto desde un string
     /**

@@ -13,7 +13,7 @@ import java.awt.event.KeyListener;
  * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández A01410921
  */
 public class KeyManager implements KeyListener {
-//
+
 //    public boolean left;    // flag to move left the player
 //    public boolean right;   // flag to move right the player
 //    public boolean pause;   // flag to pause the game
@@ -30,8 +30,15 @@ public class KeyManager implements KeyListener {
     public boolean back;
     public boolean down;
     public boolean up;
+    public boolean right;
+    public boolean left;
+    
+    public boolean lastEnter;
+    public boolean lastBack;
     public boolean lastUp;
     public boolean lastDown;
+    public boolean lastLeft;
+    public boolean lastRight;
     
     private boolean keys[];  // to store all the flags for every key
 
@@ -95,6 +102,18 @@ public class KeyManager implements KeyListener {
 //        lastRestart = keys[KeyEvent.VK_R];
 //        fireShot = keys[KeyEvent.VK_SPACE];
 
+        if (lastEnter  && !keys[KeyEvent.VK_ENTER]) {
+            enter = true;
+        } else {
+            enter = false;
+        }
+        
+        if (lastBack  && !keys[KeyEvent.VK_BACK_SPACE]) {
+            back = true;
+        } else {
+            back = false;
+        }
+
         if (lastUp  && !keys[KeyEvent.VK_UP]) {
             up = true;
         } else {
@@ -106,9 +125,26 @@ public class KeyManager implements KeyListener {
         } else {
             down = false;
         }
-        enter = keys[KeyEvent.VK_ENTER];
-        back = keys[KeyEvent.VK_BACK_SPACE];
+         
+        if (lastLeft  && !keys[KeyEvent.VK_LEFT]) {
+            left = true;
+        } else {
+            left = false;
+        }
+        
+        if (lastRight  && !keys[KeyEvent.VK_RIGHT]) {
+            right = true;
+        } else {
+            right = false;
+        }
+        
+        lastEnter = keys[KeyEvent.VK_ENTER];
+        lastBack = keys[KeyEvent.VK_BACK_SPACE];
         lastUp = keys[KeyEvent.VK_UP];
         lastDown = keys[KeyEvent.VK_DOWN];
+        lastLeft = keys[KeyEvent.VK_LEFT];
+        lastRight = keys[KeyEvent.VK_RIGHT];
+//        up = keys[KeyEvent.VK_UP];
+//        down = keys[KeyEvent.VK_DOWN];
     }
 }

@@ -31,6 +31,7 @@ public class Assets {
     public static BufferedImage controls;           // to store the instructions screen image
     public static BufferedImage rec;                // to store the red rectangle image
     public static BufferedImage recipies;       // to store the recipies screen image
+    public static BufferedImage chile;       // to store the chile image
     
     // Sounds
     public static SoundClip laser;
@@ -51,6 +52,7 @@ public class Assets {
         controls = ImageLoader.loadImage("/images/controles.jpg");
         rec = ImageLoader.loadImage("/images/red_rectangle.png");
         recipies = ImageLoader.loadImage("/images/Recetario.png");
+        chile = ImageLoader.loadImage("/images/chile.png");
 //        laser = new SoundClip("/sounds/laser.wav");
     }
     
