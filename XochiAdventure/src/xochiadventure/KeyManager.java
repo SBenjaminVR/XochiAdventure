@@ -16,16 +16,15 @@ public class KeyManager implements KeyListener {
 
 //    public boolean left;    // flag to move left the player
 //    public boolean right;   // flag to move right the player
-//    public boolean pause;   // flag to pause the game
 //    public boolean save;    // flag to save the game
 //    public boolean load;    // flag to load the game
 //    public boolean restart;     // flag to restart the game
-//    public boolean lastPause;   // flag to know the state of the pause on the previous tick
 //    public boolean lastSave;    // flag to know the state of the save on the previous tick
 //    public boolean lastLoad;    // flag to know the state of the load on the previous tick
 //    public boolean lastRestart; // flag to know the state of the restart on the previous tick
 //    public boolean fireShot;    // flag to shoot
-    
+        
+    public boolean pause;   // flag to pause the game
     public boolean enter;
     public boolean back;
     public boolean down;
@@ -33,6 +32,7 @@ public class KeyManager implements KeyListener {
     public boolean right;
     public boolean left;
     
+    public boolean lastPause;   // flag to know the state of the pause on the previous tick
     public boolean lastEnter;
     public boolean lastBack;
     public boolean lastUp;
@@ -70,7 +70,6 @@ public class KeyManager implements KeyListener {
          * checks if in the last tick the keys 'p', 'g', 'c', and 'r' were pressed and if in the current tick they were released
          * if this is true the corresponding flag of the key is true, else it is false
          */
-//        lastPause = keys[KeyEvent.VK_P];
 //        lastSave = keys[KeyEvent.VK_G];
 //        lastLoad  = keys[KeyEvent.VK_C];
 //        left = keys[KeyEvent.VK_LEFT];
@@ -78,18 +77,15 @@ public class KeyManager implements KeyListener {
 //        lastRestart = keys[KeyEvent.VK_R];
 //        fireShot = keys[KeyEvent.VK_SPACE];
 
+        pause = lastPause && !keys[KeyEvent.VK_ESCAPE];
         enter = lastEnter  && !keys[KeyEvent.VK_ENTER];
-        
         back = lastBack  && !keys[KeyEvent.VK_BACK_SPACE];
-
         up = lastUp  && !keys[KeyEvent.VK_UP];
-
         down = lastDown  && !keys[KeyEvent.VK_DOWN];
-         
         left = lastLeft  && !keys[KeyEvent.VK_LEFT];
-        
         right = lastRight  && !keys[KeyEvent.VK_RIGHT];
         
+        lastPause = keys[KeyEvent.VK_ESCAPE];
         lastEnter = keys[KeyEvent.VK_ENTER];
         lastBack = keys[KeyEvent.VK_BACK_SPACE];
         lastUp = keys[KeyEvent.VK_UP];

@@ -13,10 +13,7 @@ import java.awt.Rectangle;
  * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández A01410921
  */
 public abstract class Shot extends Item {
-    private int width;              // to know the width of the shot
-    private int height;             // to know the height of the shot
     private int directionY;         // to know the direction in the y axis of tha shot
-    private Game game;          // to know the game of the player
     private boolean fired;     // flag to know if the ball is moving
 
     /**
@@ -28,31 +25,12 @@ public abstract class Shot extends Item {
      * @param game to ser the game of the shot
      */
     public Shot (int x, int y, int width, int height, Game game) {
-        super(x, y);
-        this.width = width;
-        this.height = height;
+        super(x, y, width, height, game);
         this.directionY = 0;
-        this.game = game;
         fired = false;
     }
 
-    // GETS
-
-    /**
-     * To get the width of the shot
-     * @return an <code>int</code> value with the width
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * To get the height of the shot
-     * @return an <code>int</code> value with the height
-     */
-    public int getHeight() {
-        return height;
-    }
+    // GETS ----------------------------------------------------------------
 
    /**
      * To get the direction of the shot in the y axis
@@ -70,23 +48,7 @@ public abstract class Shot extends Item {
         return fired;
     }
 
-    //SETS
-
-    /**
-     * To set the width of the shot
-     * @param width to set the width of the shot
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    /**
-     * To set the height of the shot
-     * @param height to set the height of the shot
-     */
-    public void setHeight(int height) {
-        this.height = height;
-    }
+    //SETS ----------------------------------------------------------------
 
      /**
      * To set the direction of the shot
@@ -104,7 +66,7 @@ public abstract class Shot extends Item {
         this.fired = fired;
     }
 
-    // FUNCTIONS
+    // FUNCTIONS ----------------------------------------------------------------
 
     /**
      * To get a rectangle with the position, width, and height of the shot
@@ -131,7 +93,7 @@ public abstract class Shot extends Item {
     public void loadFromString(String[] datos){
         this.y = Integer.parseInt(datos[0]);
         this.directionY = Integer.parseInt(datos[1]);
-        this.fired = (Integer.parseInt(datos[2]) == 1 ? true : false);
+        this.fired = (Integer.parseInt(datos[2]) == 1);
     }
 
     /**

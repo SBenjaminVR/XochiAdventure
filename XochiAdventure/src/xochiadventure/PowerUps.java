@@ -13,37 +13,15 @@ import java.awt.Rectangle;
  * @author betin
  */
 public class PowerUps extends Item{
-    private int width;
-    private int height;
     private int speed;
     private int direction;
     private int type;
-    private Game game;
     
     public PowerUps (int x, int y, int width, int height, int speed , int type, Game game) {
-        super(x, y);
-        this.width = width;
-        this.height = height;
+        super(x, y, width, height, game);
         this.speed = speed;
         this.direction = 1;
         this.type = type;
-        this.game = game;
-    }
-
-    /**
-     * To get the width of the power up
-     * @return an <code>int</code> value with the width
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * To get the height of the power up
-     * @return an <code>int</code> value with the height
-     */
-    public int getHeight() {
-        return height;
     }
     
     /**
@@ -68,22 +46,6 @@ public class PowerUps extends Item{
      */
     public int getType() {
         return type;
-    }
-
-     /**
-     * To set the width of the power up
-     * @param width to set the width of the power up
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    /**
-     * To set the height of the power up
-     * @param height to set the height of the power up
-     */
-    public void setHeight(int height) {
-        this.height = height;
     }
     
     /**

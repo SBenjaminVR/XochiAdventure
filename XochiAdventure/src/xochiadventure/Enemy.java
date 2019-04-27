@@ -13,9 +13,6 @@ import java.awt.Rectangle;
  * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández A01410921
  */
 public class Enemy extends Item {
-    private int width;                      // to store the width of the bricks
-    private int height;                     // to store the height of the bricks
-    private Game game;              // to store the game
     private int direction;
     private boolean destroyed;     // to store if the brick has been hit
 
@@ -28,53 +25,17 @@ public class Enemy extends Item {
      * @param game to set the game of the enemy
      */
     public Enemy(int x, int y, int width, int height,int direction, Game game) {
-        super(x, y);
-        this.width = width;
-        this.height = height;
+        super(x, y, width, height, game);
         this.direction = direction;
-        this.game = game;
         this.destroyed = false;
     }
-
-
-    /**
-     * To get the width of the enemy
-     * @return an <code>int</code> value with the width
-     */
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * To get the height of the enemy
-     * @return an <code>int</code> value with the height
-     */
-    public int getHeight() {
-        return height;
-    }
-
+    
     /**
      * To know if the brick has been hit
      * @return an <code>boolean</code> value of the state of the brick
      */
     public boolean isDestroyed() {
         return destroyed;
-    }
-
-    /**
-     * To set the width of the enemy
-     * @param width to set the width of the enemy
-     */
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    /**
-     * To set the height of the enemy
-     * @param height to set the height of the enemy
-     */
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     /**

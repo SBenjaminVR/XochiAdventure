@@ -15,16 +15,27 @@ import java.awt.Graphics;
 public abstract class Item {
     protected int x;        // to store x position
     protected int y;        // to store y position
+    protected int width;
+    protected int height;
+    protected Game game;
     
     /**
      * Set the initial values to create the item
      * @param x <b>x</b> position of the object
      * @param y <b>y</b> position of the object
+     * @param width
+     * @param height
+     * @param game
      */
-    public Item(int x, int y) {
+    public Item(int x, int y, int width, int height, Game game) {
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
+        this.game = game;
     }
+    
+    // GETS ----------------------------------------------------------------
 
     /**
      * Get x value
@@ -41,6 +52,24 @@ public abstract class Item {
     public int getY() {
         return y;
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public int getHeight() {
+        return height;
+    }
+    
+    // SETS ----------------------------------------------------------------
 
     /**
      * Set x value
@@ -57,6 +86,24 @@ public abstract class Item {
     public void setY(int y) {
         this.y = y;
     }
+
+    /**
+     * 
+     * @param width 
+     */
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    /**
+     * 
+     * @param height 
+     */
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    
+    // FUNCTIONS -----------------------------------------------------------
     
     /**
      * To update positions of the item for every tick

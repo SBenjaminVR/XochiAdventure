@@ -36,7 +36,7 @@ enum Screen {
 enum MenuOpt {
     ONE,
     TWO,
-    THREE, 
+    THREE,
     OPTIONS,
     CONTROLS,
     RECIPIES,
@@ -63,24 +63,26 @@ public class Game implements Runnable {
     private int height;                                     // height of the window
     private Thread thread;                                  // thread to create the game
     private boolean running;                                // to set the game
-    
-    
+
+
     private Player player;                                  // to use a player
+    private LinkedList<Platform> platforms;
     private KeyManager keyManager;                          // to manage the keyboard
     private LinkedList<Enemy> chiles;                       // to move an enemy
+    private LinkedList<PowerUps> powerups;
     private boolean endGame;                                // to know when to end the game
-    private int score;                                      // to store the score
+//    private int score;                                      // to store the score
     private boolean pauseGame;                              // flag to know if the game is paused
 //    private int cantAliens;                                 // to store the quantity of remaining aliens
 //    private String nombreArchivo;                           // to store the name of the file
 //    private Font texto;                                     // to change the font of string drawn in the screen
-    private LinkedList<Bomb> bombs;
+//    private LinkedList<Bomb> bombs;
     private Shot shot;                              //to have a missile to shoot
-    
+
     private Screen screen;                  // to store in which screen you are
     private MenuOpt menOpt;             // to store in which option in the main menu screen you are
     private OptOpt optOpt;                  // to store in which option in the options screen you are
-    
+
     private MouseManager mouseManager;          // to manage the mouse
 
     /**
@@ -105,6 +107,8 @@ public class Game implements Runnable {
 //        bombs = new LinkedList<Bomb>();
         screen = Screen.TITLESCREEN;
         mouseManager = new MouseManager();
+        powerups = new LinkedList<PowerUps>();
+        platforms = new LinkedList<Platform>();
     }
 
     /**
@@ -170,13 +174,13 @@ public class Game implements Runnable {
     }
 
     /**
-     * To get the current score
-     *
-     * @return an <code>int</code> value with the score
-     */
-    public int getScore() {
-        return score;
-    }
+//     * To get the current score
+//     *
+//     * @return an <code>int</code> value with the score
+//     */
+//    public int getScore() {
+//        return score;
+//    }
 
     /**
      * To set if the game is ended
@@ -187,14 +191,14 @@ public class Game implements Runnable {
         this.endGame = endGame;
     }
 
-    /**
-     * To set the score
-     *
-     * @param score to set the score
-     */
-    public void setScore(int score) {
-        this.score = score;
-    }
+//    /**
+//     * To set the score
+//     *
+//     * @param score to set the score
+//     */
+//    public void setScore(int score) {
+//        this.score = score;
+//    }
 
     /**
      * To set the shot
@@ -210,6 +214,43 @@ public class Game implements Runnable {
      */
     public KeyManager getKeyManager() {
         return keyManager;
+    }
+
+    private void loadLevel(String txt) {
+
+      // lee txt
+
+      int direction;
+      int iPosX = 0;
+      int iPosY = 10;
+
+      // se crean los chiles
+      for (int i  = 0; i < 5; i++) {
+          if (i % 2 == 0) {
+              direction = 1;
+          } else {
+              direction = -1;
+          }
+          chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, this));
+          iPosX += 50;
+          iPosY += 50;
+      }
+
+      // se crean los powerups
+      for (int i  = 0; i < 5; i++) {
+          powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 0, 0, this));
+          iPosX += 50;
+          iPosY += 50;
+      }
+
+      // se crean las plataformas
+      for (int i  = 0; i < 5; i++) {
+          platforms.add(new Platform(iPosX, iPosY, 50, 50, this));
+          iPosX += 50;
+          iPosY += 50;
+      }
+
+      // se crean al jugador
     }
 
     /**
@@ -244,19 +285,9 @@ public class Game implements Runnable {
 //        // setting up the game variables
 //        score = 0;
 //        cantAliens = aliens.size();
-        int direction;
-        int iPosX = 0;
-        int iPosY = 10;
-        for (int i  = 0; i < 5; i++) {
-            if (i % 2 == 0) {
-                direction = 1;
-            } else {
-                direction = -1;
-            }
-            chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, this));
-            iPosX += 50;
-            iPosY += 50;
-        }
+
+
+        // se inicializan las variables
         endGame = false;
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
@@ -301,10 +332,10 @@ public class Game implements Runnable {
         // ticks key manager
         keyManager.tick();
 //         System.out.println("" + keyManager.left + " " + keyManager.right);
-        
+
         // checks in which screen you are
         switch(screen) {
-            
+
             // Tttle screen
             case TITLESCREEN:
                 if (keyManager.enter) {
@@ -312,10 +343,10 @@ public class Game implements Runnable {
                     menOpt = MenuOpt.OPTIONS;
                 }
                 break;
-                
+
             // Main menu screen
             case MENU:
-                
+
                 // checks if the down arrow key is pressed
                 if (keyManager.down) {
                     // checks to where you are navigating in the menu
@@ -364,7 +395,7 @@ public class Game implements Runnable {
                             break;
                     }
                 }
-                
+
                 //Checks if the left or right arrow key is pressed
                 if (keyManager.left || keyManager.right) {
                     // checks to where you are navigating in the menu
@@ -386,10 +417,10 @@ public class Game implements Runnable {
                             break;
                         case THREE:
                             menOpt = MenuOpt.CONTROLS;
-                            break;                            
+                            break;
                     }
-                }             
-                
+                }
+
                 // Checks to which screen you are moving to
                 if (keyManager.enter) {
                     switch(menOpt) {
@@ -399,14 +430,19 @@ public class Game implements Runnable {
                             break;
                         case ONE:
                             //carga nivel 1
+                            loadLevel("nivel 1");
+//                            Assets.background = ImageLoader.loadImage("/images/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
                             //carga nivel2
+                            loadLevel("nivel 2");
+//                            Assets.background = ImageLoader.loadImage("/images/nivel 2.png");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
                             //carga nivel3
+                            loadLevel("nivel 3");
                             Assets.background = ImageLoader.loadImage("/images/nivel 3.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -418,15 +454,15 @@ public class Game implements Runnable {
                                 break;
                     }
                 }
-                
+
                 break;
-                
+
             // Options screen
             case OPTIONS:
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
-                
+
                 if (keyManager.down) {
                     switch (optOpt) {
                         case DALTONICO:
@@ -440,7 +476,7 @@ public class Game implements Runnable {
                             break;
                     }
                 }
-                
+
                 if (keyManager.up) {
                     switch (optOpt) {
                         case DALTONICO:
@@ -454,29 +490,67 @@ public class Game implements Runnable {
                             break;
                     }
                 }
-                
+
+                if (keyManager.enter) {
+                    switch (optOpt) {
+                        case DALTONICO:
+                            // turns on and off
+                            break;
+                        case SONIDO:
+                            // turns on and off
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                // Checks that you are on the brightness setting
+                if (optOpt == OptOpt.BRILLO) {
+                    if (keyManager.left) {
+                        // disminuye el brillo
+                    } else if (keyManager.right) {
+                        // aumenta el brillo
+                    }
+                }
+
             // Recipies screen
             case RECIPIES:
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
                 break;
-                
+
             // Controls screen
             case CONTROLS:
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
                 break;
-            
+
             // Level screen
             case LEVEL:
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
+
+                player.tick();
+
+                // se tickea a los chiles
                 for (int i  = 0; i < chiles.size(); i++) {
                     Enemy chile = chiles.get(i);
                     chile.tick();
+                }
+
+                // se tickea a los powerups
+                for (int i  = 0; i < powerups.size(); i++) {
+                    PowerUps power = powerups.get(i);
+                    power.tick();
+                }
+
+                // se tickean las plataformas
+                for (int i  = 0; i < chiles.size(); i++) {
+                    Platform platform = platforms.get(i);
+                    platform.tick();
                 }
                 break;
         }
@@ -553,12 +627,26 @@ public class Game implements Runnable {
                     break;
                 case LEVEL:
                     g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
+
+                    player.render(g);
+
+                    // dibujar los chiles
                     for (int i = 0; i < 5; i++) {
                         chiles.get(i).render(g);
                     }
+
+                    // dibujar los powerups
+                    for (int i = 0; i < 5; i++) {
+                        powerups.get(i).render(g);
+                    }
+
+                    // dibujar las plataformas
+                    for (int i = 0; i < 5; i++) {
+                        platforms.get(i).render(g);
+                    }
                     break;
             }
-            
+
 //            g.setFont(texto);
 //            // draw score
 //            g.drawString("Score: " + score, 5, getHeight() - 20);

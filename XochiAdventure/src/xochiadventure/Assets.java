@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @authors 
+ * @authors
  *      - Alberto García Viegas A00822649
  *      - Melba Geraldine Consuelos Fernández A01410921
  *      - Humberto
@@ -24,7 +24,7 @@ public class Assets {
     public static BufferedImage shot;                   //to store flask color
     public static BufferedImage asteroid;
     public static BufferedImage heart;
-    
+
     public static BufferedImage titleScreen;        // to store the title screen
     public static BufferedImage menu;               // to store the menu image
     public static BufferedImage options;            // to store the options screen image
@@ -32,10 +32,12 @@ public class Assets {
     public static BufferedImage rec;                // to store the red rectangle image
     public static BufferedImage recipies;       // to store the recipies screen image
     public static BufferedImage chile;       // to store the chile image
-    
+    public static BufferedImage platform;
+    public static BufferedImage powerup;
+
     // Sounds
     public static SoundClip laser;
-// 
+//
     /**
      * initializing the images of the game
      */
@@ -50,12 +52,12 @@ public class Assets {
         menu = ImageLoader.loadImage("/images/mainMenu.jpg");
         options = ImageLoader.loadImage("/images/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/controles.jpg");
-        rec = ImageLoader.loadImage("/images/red_rectangle.png");
+        rec = ImageLoader.loadImage("/images/flecha.png");
         recipies = ImageLoader.loadImage("/images/Recetario.png");
         chile = ImageLoader.loadImage("/images/chile.png");
+        // platform = ImageLoader.loadImage("/images/");
+        // powerup = ImageLoader.loadImage("/images/");
 //        laser = new SoundClip("/sounds/laser.wav");
     }
-    
+
 }
-
-

@@ -15,10 +15,6 @@ import java.util.Set;
  */
 public class Player extends Item{
 
-    private int width;      // to know the width of the player
-    private int height;     // to know the height of the player
-    private Game game;      // to be able to use the KeyManager
-
     /**
      * to create direction, width, height, and game and set the player is not moving
      * @param x to set the x of the player
@@ -29,10 +25,7 @@ public class Player extends Item{
      * @param game to set the game of the player
      */
     public Player(int x, int y, int direction, int width, int height, Game game) {
-        super(x, y);
-        this.width = width;
-        this.height = height;
-        this.game = game;
+        super(x, y, width, height, game);
     }
 
     /**
