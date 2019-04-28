@@ -22,10 +22,11 @@ public class Bomb extends Item {
    * @param y to set the y of the shot
    * @param width to set the width of the shot
    * @param height to set the height of the shot
+     * @param speedX
    * @param game to ser the game of the shot
    */
-  public Bomb (int x, int y, int width, int height, Game game) {
-      super(x, y, width, height, game);
+  public Bomb (int x, int y, int width, int height, int speedX, Game game) {
+      super(x, y, width, height, speedX, game);
       this.directionY = 0;
       fired = false;
   }
@@ -81,7 +82,6 @@ public class Bomb extends Item {
    * @param obj to know if the bomb is intersecting with it
    * @return an <code>boolean</code> value with the state of the collision
    */
-
   public boolean intersectaJugador(Object obj) {
       return ((obj instanceof Player) && (getPerimetro().intersects(((Player) obj).getPerimetro())));
    }
@@ -120,5 +120,10 @@ public class Bomb extends Item {
   public void render(Graphics g) {
       g.drawImage(Assets.bomb, getX(), getY(), getWidth(), getHeight(), null);
   }
+
+    @Override
+    public String intoString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

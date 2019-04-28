@@ -13,18 +13,46 @@ import java.awt.Rectangle;
  * @author betin
  */
 public class Platform extends Item {
-
-    public Platform (int x, int y, int width, int height, Game game) {
-        super(x, y, width, height, game);
+    
+    /**
+     * 
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param speedX
+     * @param game 
+     */
+    public Platform (int x, int y, int width, int height, int speedX, Game game) {
+        super(x, y, width, height, speedX, game);
     }
 
+   /**
+   * To know if the bomb is intersecting with the player
+   * @param obj to know if the bomb is intersecting with it
+   * @return an <code>boolean</code> value with the state of the collision
+   */
+    public boolean intersectaJugador(Object obj) {
+      return ((obj instanceof Player) && (getPerimetro().intersects(((Player) obj).getPerimetro())));
+   }
+   
     @Override
     public void tick() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void render(Graphics g) {
+        g.drawImage(Assets.platform, getX(), getY(), getWidth(), getHeight(), null);
+    }
+
+    @Override
+    public void loadFromString(String[] datos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String intoString() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

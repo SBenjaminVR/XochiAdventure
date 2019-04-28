@@ -22,10 +22,12 @@ public class Enemy extends Item {
      * @param y to set the y of the enemy
      * @param width to set the width of the enemy
      * @param height  to set the height of the enemy
+     * @param direction
+     * @param speedX
      * @param game to set the game of the enemy
      */
-    public Enemy(int x, int y, int width, int height,int direction, Game game) {
-        super(x, y, width, height, game);
+    public Enemy(int x, int y, int width, int height, int direction, int speedX, Game game) {
+        super(x, y, width, height, speedX, game);
         this.direction = direction;
         this.destroyed = false;
     }
@@ -71,7 +73,7 @@ public class Enemy extends Item {
         this.x = Integer.parseInt(datos[0]);
         this.y = Integer.parseInt(datos[1]);
         this.direction = Integer.parseInt(datos[2]);
-        this.destroyed = (Integer.parseInt(datos[3]) == 1 ? true : false);
+        this.destroyed = (Integer.parseInt(datos[3]) == 1);
     }
 
     /**
@@ -80,19 +82,6 @@ public class Enemy extends Item {
      */
     public String toString(){
         return (x + " " + y + " " + direction + " " + (destroyed ? "1":"0"));
-    }
-
-    /**
-     * To get the rectangle of the brick
-     * @return an <code>Rectangle</code> value with the rectangle of the brick
-     */
-    public Rectangle getPerimetro() {
-        return new Rectangle(getX(), getY(), getWidth(), getHeight());
-    }
-
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.chile, getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
@@ -109,5 +98,15 @@ public class Enemy extends Item {
         setDirection(getDirection() * -1);
         }
      */
+    }
+    
+    @Override
+    public void render(Graphics g) {
+        g.drawImage(Assets.chile, getX(), getY(), getWidth(), getHeight(), null);
+    }
+
+    @Override
+    public String intoString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

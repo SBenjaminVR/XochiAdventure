@@ -13,24 +13,16 @@ import java.awt.Rectangle;
  * @author betin
  */
 public class PowerUps extends Item{
-    private int speed;
     private int direction;
     private int type;
     
-    public PowerUps (int x, int y, int width, int height, int speed , int type, Game game) {
-        super(x, y, width, height, game);
-        this.speed = speed;
+    public PowerUps (int x, int y, int width, int height, int speedX , int type, Game game) {
+        super(x, y, width, height, speedX, game);
         this.direction = 1;
         this.type = type;
     }
     
-    /**
-     * To get the speed of the power up
-     * @return an <code>int</code> value with the speed
-     */
-    public int getSpeed() {
-        return speed;
-    }
+    // GETS
     
     /**
      * To get the direction of the power up
@@ -48,14 +40,8 @@ public class PowerUps extends Item{
         return type;
     }
     
-    /**
-     * To set the speed of the power up
-     * @param speed to set the speed of the power up
-     */
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
+    // SETS
+    
     /**
      * To set the direction of the power up
      * @param direction to set the direction of the power up
@@ -71,18 +57,31 @@ public class PowerUps extends Item{
     public void setType(int type) {
         this.type = type;
     }
+    
+    // FUNCTIONS
+    
+    /**
+   * To know if the bomb is intersecting with the player
+   * @param obj to know if the bomb is intersecting with it
+   * @return an <code>boolean</code> value with the state of the collision
+   */
+    public boolean intersectaJugador(Object obj) {
+        return ((obj instanceof Player) && (getPerimetro().intersects(((Player) obj).getPerimetro())));
+    }
+    
+    @Override
+    public void loadFromString(String[] datos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-       /**
-     * To get a rectangle with the position, width, and height of the power up
-     * @return an <code>Rectangle</code> rectangle with the given position, width, and height
-     */
-    public Rectangle getPerimetro() {
-        return new Rectangle(getX(), getY(), getWidth(), getHeight());
+    @Override
+    public String intoString() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
     public void tick() {
-        setX(getX() + getSpeed() * getDirection());
+        setX(getX() + getSpeedX() * getDirection());
         
         // checks that the object does not goes out of the bounds
         if (getX() + 60 >= game.getWidth()) {
@@ -106,7 +105,7 @@ public class PowerUps extends Item{
 //        } else {
 //            g.drawImage(Assets.pollos, getX(), getY(), getWidth(), getHeight(), null);
 //        }
+       g.drawImage(Assets.powerup, getX(), getY(), getWidth(), getHeight(), null);
         
-    }
-    
+    }    
 }

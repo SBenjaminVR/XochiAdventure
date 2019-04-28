@@ -22,10 +22,11 @@ public abstract class Shot extends Item {
      * @param y to set the y of the shot
      * @param width to set the width of the shot
      * @param height to set the height of the shot
+     * @param speedX
      * @param game to ser the game of the shot
      */
-    public Shot (int x, int y, int width, int height, Game game) {
-        super(x, y, width, height, game);
+    public Shot (int x, int y, int width, int height, int speedX, Game game) {
+        super(x, y, width, height, speedX, game);
         this.directionY = 0;
         fired = false;
     }
@@ -67,14 +68,6 @@ public abstract class Shot extends Item {
     }
 
     // FUNCTIONS ----------------------------------------------------------------
-
-    /**
-     * To get a rectangle with the position, width, and height of the shot
-     * @return an <code>Rectangle</code> rectangle with the given position, width, and height
-     */
-    public Rectangle getPerimetro() {
-        return new Rectangle(getX(), getY(), getWidth(), getHeight());
-    }
 
     /**
      * To know if the shot is intersecting with the alien

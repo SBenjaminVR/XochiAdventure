@@ -55,6 +55,7 @@ enum OptOpt {
  */
 public class Game implements Runnable {
 
+    // Screen's variables
     private BufferStrategy bs;                              // to have several buffers when displaying
     private Graphics g;                                     // to paint objects
     private Display display;                                // to display in the game
@@ -64,21 +65,21 @@ public class Game implements Runnable {
     private Thread thread;                                  // thread to create the game
     private boolean running;                                // to set the game
 
-
+    // Game logic variables
     private Player player;                                  // to use a player
-    private LinkedList<Platform> platforms;
     private KeyManager keyManager;                          // to manage the keyboard
+    private boolean endGame;                                // to know when to end the game
+    private boolean pauseGame;                              // flag to know if the game is paused
+//    private String nombreArchivo;                         // to store the name of the file
+//    private Font texto;                                   // to change the font of string drawn in the screen
+    private Shot shot;                                      //to have a missile to shoot
+
+    // Linked lists
+    private LinkedList<Platform> platforms;
     private LinkedList<Enemy> chiles;                       // to move an enemy
     private LinkedList<PowerUps> powerups;
-    private boolean endGame;                                // to know when to end the game
-//    private int score;                                      // to store the score
-    private boolean pauseGame;                              // flag to know if the game is paused
-//    private int cantAliens;                                 // to store the quantity of remaining aliens
-//    private String nombreArchivo;                           // to store the name of the file
-//    private Font texto;                                     // to change the font of string drawn in the screen
-//    private LinkedList<Bomb> bombs;
-    private Shot shot;                              //to have a missile to shoot
 
+    // Menu navigation variables
     private Screen screen;                  // to store in which screen you are
     private MenuOpt menOpt;             // to store in which option in the main menu screen you are
     private OptOpt optOpt;                  // to store in which option in the options screen you are
@@ -110,6 +111,8 @@ public class Game implements Runnable {
         powerups = new LinkedList<PowerUps>();
         platforms = new LinkedList<Platform>();
     }
+
+    // GETS ------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * To get the width of the game window
@@ -147,14 +150,6 @@ public class Game implements Runnable {
         return player;
     }
 
-//    /**
-//     * To get the quantity of bricks that haven't been destroyed
-//     * @return an <code>int</code> value with the quantity of bricks that haven't been destroyed
-//     */
-//    public int getCantAliens() {
-//        return cantAliens;
-//    }
-
     /**
      * to get the shots
      *
@@ -173,14 +168,7 @@ public class Game implements Runnable {
         return endGame;
     }
 
-    /**
-//     * To get the current score
-//     *
-//     * @return an <code>int</code> value with the score
-//     */
-//    public int getScore() {
-//        return score;
-//    }
+    // SETS ------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * To set if the game is ended
@@ -190,15 +178,6 @@ public class Game implements Runnable {
     public void setEndGame(boolean endGame) {
         this.endGame = endGame;
     }
-
-//    /**
-//     * To set the score
-//     *
-//     * @param score to set the score
-//     */
-//    public void setScore(int score) {
-//        this.score = score;
-//    }
 
     /**
      * To set the shot
@@ -216,9 +195,17 @@ public class Game implements Runnable {
         return keyManager;
     }
 
+    // FUNCTIONS ------------------------------------------------------------------------------------------------------------------------------------
+
+    /**
+     *
+     * @param txt
+     */
     private void loadLevel(String txt) {
 
       // lee txt
+
+      player = new Player (500, 500, 100, 100, 5, this);
 
       int direction;
       int iPosX = 0;
@@ -231,102 +218,27 @@ public class Game implements Runnable {
           } else {
               direction = -1;
           }
-          chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, this));
+          chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, 5, this));
           iPosX += 50;
           iPosY += 50;
       }
 
       // se crean los powerups
       for (int i  = 0; i < 5; i++) {
-          powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 0, 0, this));
+          powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 5, 0, this));
           iPosX += 50;
           iPosY += 50;
       }
 
       // se crean las plataformas
       for (int i  = 0; i < 5; i++) {
-          platforms.add(new Platform(iPosX, iPosY, 50, 50, this));
+          platforms.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
           iPosX += 50;
           iPosY += 50;
       }
-
-      // se crean al jugador
     }
 
-    /**
-     * initializing the display window of the game
-     */
-    private void init() {
-        display = new Display(title, getWidth(), getHeight());
-        Assets.init();
-
-        //creating the player and the shot
-//        player = new Player(getWidth() / 2, getHeight() - 100, 1, 100, 80, this);
-//        shot = new Shot(player.getX() + player.getWidth() / 2, player.getY() - player.getHeight(), 5, 5, this) {
-//        };
-//
-//        // set up the initial position for the aliens
-//        int iPosX = 0;
-//        int iPosY = 10;
-//        for (int i = 1; i <= 24; i++) {
-//            //aliens.add(new Enemy(iPosX, iPosY, 50, 50, this));
-//            iPosX += 60;
-//            aliens.add(new Enemy(iPosX, iPosY, 50, 50, 1, this));
-//            bombs.add(new Bomb(iPosX, iPosY, 10, 20, this));
-//
-//            // create 6 aliens every row
-//            if (i % 6 == 0) {
-//                iPosY += 60;
-//                iPosX = 0;
-//            }
-//
-//        }
-//
-//        // setting up the game variables
-//        score = 0;
-//        cantAliens = aliens.size();
-
-
-        // se inicializan las variables
-        endGame = false;
-        display.getJframe().addKeyListener(keyManager);
-        display.getJframe().addMouseListener(mouseManager);
-        display.getJframe().addMouseMotionListener(mouseManager);
-        display.getCanvas().addMouseListener(mouseManager);
-        display.getCanvas().addMouseMotionListener(mouseManager);
-        pauseGame = false;
-    }
-
-    @Override
-    public void run() {
-        init();
-        // frames per second
-        int fps = 50;
-        // time for each tick in nano segs
-        double timeTick = 1000000000 / fps;
-        // initializing delta
-        double delta = 0;
-        // define now to use inside the loop
-        long now;
-        // initializing last time to the computer time in nanosecs
-        long lastTime = System.nanoTime();
-        while (running) {
-            // setting the time now to the actual time
-            now = System.nanoTime();
-            // acumulating to delta the difference between times in timeTick units
-            delta += (now - lastTime) / timeTick;
-            // updating the last time
-            lastTime = now;
-
-            // if delta is positive we tick the game
-            if (delta >= 1) {
-                tick();
-                render();
-                delta--;
-            }
-        }
-        stop();
-    }
+    // tick and render ------------------------------------------------------------------------------------------------------------------------------------
 
     private void tick() {
         // ticks key manager
@@ -336,7 +248,7 @@ public class Game implements Runnable {
         // checks in which screen you are
         switch(screen) {
 
-            // Tttle screen
+            // Tttle screen ------------------------------------------------------------------
             case TITLESCREEN:
                 if (keyManager.enter) {
                     screen = Screen.MENU;
@@ -344,7 +256,7 @@ public class Game implements Runnable {
                 }
                 break;
 
-            // Main menu screen
+            // Main menu screen ------------------------------------------------------------------
             case MENU:
 
                 // checks if the down arrow key is pressed
@@ -431,13 +343,13 @@ public class Game implements Runnable {
                         case ONE:
                             //carga nivel 1
                             loadLevel("nivel 1");
-//                            Assets.background = ImageLoader.loadImage("/images/nivel 1.png");
+                            Assets.background = ImageLoader.loadImage("/images/nivel 1.jpg");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
                             //carga nivel2
                             loadLevel("nivel 2");
-//                            Assets.background = ImageLoader.loadImage("/images/nivel 2.png");
+                            Assets.background = ImageLoader.loadImage("/images/nivel 2.jpg");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
@@ -457,7 +369,7 @@ public class Game implements Runnable {
 
                 break;
 
-            // Options screen
+            // Options screen ------------------------------------------------------------------
             case OPTIONS:
                 if (keyManager.back) {
                     screen = Screen.MENU;
@@ -513,21 +425,21 @@ public class Game implements Runnable {
                     }
                 }
 
-            // Recipies screen
+            // Recipies screen ------------------------------------------------------------------
             case RECIPIES:
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
                 break;
 
-            // Controls screen
+            // Controls screen ------------------------------------------------------------------
             case CONTROLS:
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
                 break;
 
-            // Level screen
+            // Level screen ------------------------------------------------------------------
             case LEVEL:
                 if (keyManager.back) {
                     screen = Screen.MENU;
@@ -654,7 +566,83 @@ public class Game implements Runnable {
             bs.show();
             g.dispose();
         }
+    }
 
+    // start(), init(), run(), and stop()
+
+    /**
+     * initializing the display window of the game
+     */
+    private void init() {
+        display = new Display(title, getWidth(), getHeight());
+        Assets.init();
+
+        //creating the player and the shot
+//        player = new Player(getWidth() / 2, getHeight() - 100, 1, 100, 80, this);
+//        shot = new Shot(player.getX() + player.getWidth() / 2, player.getY() - player.getHeight(), 5, 5, this) {
+//        };
+//
+//        // set up the initial position for the aliens
+//        int iPosX = 0;
+//        int iPosY = 10;
+//        for (int i = 1; i <= 24; i++) {
+//            //aliens.add(new Enemy(iPosX, iPosY, 50, 50, this));
+//            iPosX += 60;
+//            aliens.add(new Enemy(iPosX, iPosY, 50, 50, 1, this));
+//            bombs.add(new Bomb(iPosX, iPosY, 10, 20, this));
+//
+//            // create 6 aliens every row
+//            if (i % 6 == 0) {
+//                iPosY += 60;
+//                iPosX = 0;
+//            }
+//
+//        }
+//
+//        // setting up the game variables
+//        score = 0;
+//        cantAliens = aliens.size();
+
+
+        // se inicializan las variables
+        endGame = false;
+        display.getJframe().addKeyListener(keyManager);
+        display.getJframe().addMouseListener(mouseManager);
+        display.getJframe().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
+        pauseGame = false;
+    }
+
+    @Override
+    public void run() {
+        init();
+        // frames per second
+        int fps = 50;
+        // time for each tick in nano segs
+        double timeTick = 1000000000 / fps;
+        // initializing delta
+        double delta = 0;
+        // define now to use inside the loop
+        long now;
+        // initializing last time to the computer time in nanosecs
+        long lastTime = System.nanoTime();
+        while (running) {
+            // setting the time now to the actual time
+            now = System.nanoTime();
+            // acumulating to delta the difference between times in timeTick units
+            delta += (now - lastTime) / timeTick;
+            // updating the last time
+            lastTime = now;
+
+            // if delta is positive we tick the game
+            if (delta >= 1) {
+                tick();
+                render();
+                delta--;
+            }
+        }
+        stop();
     }
 
     /**
@@ -682,15 +670,18 @@ public class Game implements Runnable {
         }
     }
 
-//    /**
-//     * To get all the variable that need to be stored in the file as a string
-//     *
-//     * @return an <code>String</code> value with all the information of the
-//     * variables
-//     */
-//    public String toString() {
-//        //return (score + " " + cantAliens + " " + (endGame ? 1 : 0) +  " " + (pauseGame ? 1 : 0));
-//    }
+    // LECTURA Y GUARDADO DE DATOS
+
+    /**
+     * To get all the variable that need to be stored in the file as a string
+     *
+     * @return an <code>String</code> value with all the information of the
+     * variables
+     */
+    public String intoString() {
+        //return (score + " " + cantAliens + " " + (endGame ? 1 : 0) +  " " + (pauseGame ? 1 : 0));
+        return "";
+    }
 
     // Carga la información del objeto desde un string
     /**
@@ -754,13 +745,5 @@ public class Game implements Runnable {
 //        }
 //
 //        fileIn.close();
-    }
-
-    String getLives() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void setLives(int lives) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
