@@ -31,7 +31,7 @@ public class Enemy extends Item {
         this.direction = direction;
         this.destroyed = false;
     }
-    
+
     /**
      * To know if the brick has been hit
      * @return an <code>boolean</code> value of the state of the brick
@@ -80,33 +80,30 @@ public class Enemy extends Item {
      * To get all the variable that need to be stored in the file as a string
      * @return an <code>String</code> value with all the information of the variables
      */
-    public String toString(){
+    @Override
+    public String intoString(){
         return (x + " " + y + " " + direction + " " + (destroyed ? "1":"0"));
     }
 
     @Override
     public void tick() {
         // this function exists so all abstracts methods from Item are overriden
-        if(getDirection() >= 1){
-        setX((getX()+1) * getDirection());
-        }
-        if(getDirection() < 1){
-            setX((getX())-1);
-        }
-        /*
+        // if(getDirection() >= 1){
+        // setX((getX() + speedX) * getDirection());
+        // }
+        // if(getDirection() < 1){
+        //     setX((getX()) - speedX);
+        // }
+        setX(getX() + speedX * direction);
+
         if( getX() >= 500 || getX() == 0){
         setDirection(getDirection() * -1);
         }
-     */
-    }
-    
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.chile, getX(), getY(), getWidth(), getHeight(), null);
     }
 
     @Override
-    public String intoString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void render(Graphics g) {
+        // g.drawImage(Assets.chile, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
+        g.drawImage(Assets.chile, getX(), getY(), getWidth(), getHeight(), null);
     }
 }

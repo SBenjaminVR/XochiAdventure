@@ -34,6 +34,8 @@ public class Assets {
     public static BufferedImage chile;       // to store the chile image
     public static BufferedImage platform;
     public static BufferedImage powerup;
+    public static BufferedImage comida;
+    public static BufferedImage rectangle;
 
     // Sounds
     public static SoundClip laser;
@@ -58,6 +60,8 @@ public class Assets {
         platform = ImageLoader.loadImage("/images/brick.png");
         powerup = ImageLoader.loadImage("/images/flask2.png");
         player = ImageLoader.loadImage("/images/gyrados.png");
+        comida = ImageLoader.loadImage("/images/malo.png");
+        rectangle = ImageLoader.loadImage("/images/192.png");
 //        laser = new SoundClip("/sounds/laser.wav");
     }
 

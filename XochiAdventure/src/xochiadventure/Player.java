@@ -51,12 +51,12 @@ public class Player extends Item{
     @Override
     public void tick() {
         // moving player depending on flags
-//        if (game.getKeyManager().left) {
-//           setX(x -= 5);
-//        }
-//        if (game.getKeyManager().right) {
-//           setX(x += 5);
-//        }
+       if (game.getKeyManager().lastLeft) {
+          setX(x -= 4);
+       }
+       if (game.getKeyManager().lastRight) {
+          setX(x += 4);
+       }
 
         // checks that the object does not goes out of the bounds
         if (getX() + getWidth() >= game.getWidth()) {
@@ -69,6 +69,7 @@ public class Player extends Item{
 
     @Override
     public void render(Graphics g) {
+        // g.drawImage(Assets.player, game.getWidth() / 2 - getWidth() / 2, game.getHeight() / 2 - getHeight() / 2, getWidth(), getHeight(), null);
         g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
     }
 }

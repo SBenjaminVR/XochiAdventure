@@ -13,15 +13,15 @@ import java.awt.Rectangle;
  * @author betin
  */
 public class Platform extends Item {
-    
+
     /**
-     * 
+     *
      * @param x
      * @param y
      * @param width
      * @param height
      * @param speedX
-     * @param game 
+     * @param game
      */
     public Platform (int x, int y, int width, int height, int speedX, Game game) {
         super(x, y, width, height, speedX, game);
@@ -35,7 +35,7 @@ public class Platform extends Item {
     public boolean intersectaJugador(Object obj) {
       return ((obj instanceof Player) && (getPerimetro().intersects(((Player) obj).getPerimetro())));
    }
-   
+
     @Override
     public void tick() {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -43,6 +43,7 @@ public class Platform extends Item {
 
     @Override
     public void render(Graphics g) {
+        // g.drawImage(Assets.platform, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
         g.drawImage(Assets.platform, getX(), getY(), getWidth(), getHeight(), null);
     }
 

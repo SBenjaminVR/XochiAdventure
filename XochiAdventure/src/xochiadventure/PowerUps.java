@@ -15,15 +15,15 @@ import java.awt.Rectangle;
 public class PowerUps extends Item{
     private int direction;
     private int type;
-    
+
     public PowerUps (int x, int y, int width, int height, int speedX , int type, Game game) {
         super(x, y, width, height, speedX, game);
         this.direction = 1;
         this.type = type;
     }
-    
+
     // GETS
-    
+
     /**
      * To get the direction of the power up
      * @return an <code>int</code> value with the direction
@@ -39,9 +39,9 @@ public class PowerUps extends Item{
     public int getType() {
         return type;
     }
-    
+
     // SETS
-    
+
     /**
      * To set the direction of the power up
      * @param direction to set the direction of the power up
@@ -49,7 +49,7 @@ public class PowerUps extends Item{
     public void setDirection(int direction) {
         this.direction = direction;
     }
-    
+
     /**
      * To set the type of power up
      * @param type to set the type
@@ -57,9 +57,9 @@ public class PowerUps extends Item{
     public void setType(int type) {
         this.type = type;
     }
-    
+
     // FUNCTIONS
-    
+
     /**
    * To know if the bomb is intersecting with the player
    * @param obj to know if the bomb is intersecting with it
@@ -68,7 +68,7 @@ public class PowerUps extends Item{
     public boolean intersectaJugador(Object obj) {
         return ((obj instanceof Player) && (getPerimetro().intersects(((Player) obj).getPerimetro())));
     }
-    
+
     @Override
     public void loadFromString(String[] datos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -78,11 +78,11 @@ public class PowerUps extends Item{
     public String intoString() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void tick() {
         setX(getX() + getSpeedX() * getDirection());
-        
+
         // checks that the object does not goes out of the bounds
         if (getX() + 60 >= game.getWidth()) {
             setX(game.getWidth() - this.getWidth());
@@ -105,7 +105,8 @@ public class PowerUps extends Item{
 //        } else {
 //            g.drawImage(Assets.pollos, getX(), getY(), getWidth(), getHeight(), null);
 //        }
+       // g.drawImage(Assets.powerup, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
        g.drawImage(Assets.powerup, getX(), getY(), getWidth(), getHeight(), null);
-        
-    }    
+
+    }
 }

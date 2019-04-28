@@ -75,10 +75,18 @@ public abstract class Item {
         return height;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public int getSpeedX() {
         return speedX;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public int getSpeedY() {
         return speedY;
     }
@@ -117,10 +125,18 @@ public abstract class Item {
         this.height = height;
     }
 
+    /**
+     * 
+     * @param speedX 
+     */
     public void setSpeedX(int speedX) {
         this.speedX = speedX;
     }
 
+    /**
+     * 
+     * @param speedY 
+     */
     public void setSpeedY(int speedY) {
         this.speedY = speedY;
     }

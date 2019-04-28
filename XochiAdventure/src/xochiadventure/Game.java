@@ -73,16 +73,21 @@ public class Game implements Runnable {
 //    private String nombreArchivo;                         // to store the name of the file
 //    private Font texto;                                   // to change the font of string drawn in the screen
     private Shot shot;                                      //to have a missile to shoot
+    private Rectangle rec;
 
     // Linked lists
     private LinkedList<Platform> platforms;
     private LinkedList<Enemy> chiles;                       // to move an enemy
     private LinkedList<PowerUps> powerups;
+    private LinkedList<Comida> comidas;
 
     // Menu navigation variables
     private Screen screen;                  // to store in which screen you are
     private MenuOpt menOpt;             // to store in which option in the main menu screen you are
     private OptOpt optOpt;                  // to store in which option in the options screen you are
+
+    private int playerX;
+    private int playerY;
 
     private MouseManager mouseManager;          // to manage the mouse
 
@@ -110,6 +115,8 @@ public class Game implements Runnable {
         mouseManager = new MouseManager();
         powerups = new LinkedList<PowerUps>();
         platforms = new LinkedList<Platform>();
+        comidas = new LinkedList<Comida>();
+        rec = new Rectangle(0, 0, getWidth(), getHeight());
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -205,10 +212,18 @@ public class Game implements Runnable {
 
       // lee txt
 
-      player = new Player (500, 500, 100, 100, 5, this);
-
+      /*
+      int cantChiles;
+      int cantPlatforms;
+      int cantPowerUps
+      int posX;
+      int posY;
+      int iWidth;
+      int iHeight
+      int speed;
+      */
       int direction;
-      int iPosX = 0;
+      int iPosX = 10;
       int iPosY = 10;
 
       // se crean los chiles
@@ -223,19 +238,35 @@ public class Game implements Runnable {
           iPosY += 50;
       }
 
+      iPosX = 50;
+      iPosY = 10;
+
       // se crean los powerups
-      for (int i  = 0; i < 5; i++) {
+      for (int i  = 0; i < 2; i++) {
           powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 5, 0, this));
           iPosX += 50;
           iPosY += 50;
       }
 
+      iPosX = 100;
+      iPosY = 10;
       // se crean las plataformas
-      for (int i  = 0; i < 5; i++) {
+      for (int i  = 0; i < 2; i++) {
           platforms.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
           iPosX += 50;
           iPosY += 50;
       }
+
+      // for (int i  = 0; i < 5; i++) {
+      //     comida.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
+      //     iPosX += 50;
+      //     iPosY += 50;
+      // }
+      playerX = getWidth() / 2 - 50;
+      playerY = getHeight() / 2 - 50;
+      player = new Player (playerX, playerY, 100, 100, 5, this);
+//      System.out.println("x and y " + playerX + " " + playerY);
+//      System.out.println("player " + player.getX() + " " + player.getY());
     }
 
     // tick and render ------------------------------------------------------------------------------------------------------------------------------------
@@ -446,6 +477,7 @@ public class Game implements Runnable {
                 }
 
                 player.tick();
+                rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
 
                 // se tickea a los chiles
                 for (int i  = 0; i < chiles.size(); i++) {
@@ -460,7 +492,7 @@ public class Game implements Runnable {
                 }
 
                 // se tickean las plataformas
-                for (int i  = 0; i < chiles.size(); i++) {
+                for (int i  = 0; i < platforms.size(); i++) {
                     Platform platform = platforms.get(i);
                     platform.tick();
                 }
@@ -540,22 +572,45 @@ public class Game implements Runnable {
                 case LEVEL:
                     g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
 
+                    //g.drawImage(Assets.rectangle, (int)(rec.getX()), (int)(rec.getY()), (int)(rec.getWidth()), (int)(rec.getHeight()), null);
+                    g.drawImage(Assets.rectangle, player.getX() - playerX, player.getY() - playerY, (int)(rec.getWidth()), (int)(rec.getHeight()), null);
+
                     player.render(g);
 
                     // dibujar los chiles
-                    for (int i = 0; i < 5; i++) {
-                        chiles.get(i).render(g);
+                    for (int i = 0; i < chiles.size(); i++) {
+                      Enemy chile = chiles.get(i);
+                      System.out.println("Chile" + i + " " + (rec.intersects(chile.getPerimetro())));
+                      if (rec.intersects(chile.getPerimetro())) {
+                        chile.render(g);
+                      }
                     }
 
                     // dibujar los powerups
-                    for (int i = 0; i < 5; i++) {
-                        powerups.get(i).render(g);
+                    for (int i = 0; i < powerups.size(); i++) {
+                      PowerUps powerup = powerups.get(i);
+                      System.out.println("powerup" + i + " " + (rec.intersects(powerup.getPerimetro())));
+                      if (rec.intersects(powerup.getPerimetro())) {
+                        powerup.render(g);
+                      }
                     }
 
                     // dibujar las plataformas
-                    for (int i = 0; i < 5; i++) {
-                        platforms.get(i).render(g);
+                    for (int i = 0; i < platforms.size(); i++) {
+                      Platform platform = platforms.get(i);
+                      System.out.println("platform" + i + " " + (rec.intersects(platform.getPerimetro())));
+                      if (rec.intersects(platform.getPerimetro())) {
+                        platform.render(g);
+                      }
                     }
+
+                    // dibujar comidas
+                    // for (int i = 0; i < 5; i++) {
+                    //   Comida comida = comidas.get(i);
+                    //   if (rec.intersects(comida.getPerimetro())) {
+                    //     comida.render(g);
+                    //   }
+                    // }
                     break;
             }
 
