@@ -52,24 +52,32 @@ public class Player extends Item{
     public void tick() {
         // moving player depending on flags
        if (game.getKeyManager().lastLeft) {
-          setX(x -= 4);
+          setX(getX() - 4);
        }
        if (game.getKeyManager().lastRight) {
-          setX(x += 4);
+          setX(getX() + 4);
+       }
+       if (game.getKeyManager().lastUp) {
+          setY(getY() - 4);
+       }
+       if (game.getKeyManager().lastDown) {
+          setY(getY() + 4);
        }
 
         // checks that the object does not goes out of the bounds
-        if (getX() + getWidth() >= game.getWidth()) {
-            setX(game.getWidth() - this.getWidth());
-        }
-        else if (getX() <= 0) {
-            setX(0);
-        }
+        // if (getX() + getWidth() >= game.getWidth()) {
+        //     setX(game.getWidth() - this.getWidth());
+        // }
+        // else if (getX() <= 0) {
+        //     setX(0);
+        // }
     }
 
     @Override
     public void render(Graphics g) {
+        g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);
+        // g.drawImage(Assets.comida, getX(), getY(), getWidth(), getHeight(), null);
         // g.drawImage(Assets.player, game.getWidth() / 2 - getWidth() / 2, game.getHeight() / 2 - getHeight() / 2, getWidth(), getHeight(), null);
-        g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+        // g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
     }
 }

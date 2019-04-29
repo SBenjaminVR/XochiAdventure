@@ -175,6 +175,30 @@ public class Game implements Runnable {
         return endGame;
     }
 
+    /**
+     *
+     * @return
+     */
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getPlayerY() {
+        return playerY;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Rectangle getRec() {
+        return rec;
+    }
+
     // SETS ------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -572,8 +596,8 @@ public class Game implements Runnable {
                 case LEVEL:
                     g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
 
-                    //g.drawImage(Assets.rectangle, (int)(rec.getX()), (int)(rec.getY()), (int)(rec.getWidth()), (int)(rec.getHeight()), null);
-                    g.drawImage(Assets.rectangle, player.getX() - playerX, player.getY() - playerY, (int)(rec.getWidth()), (int)(rec.getHeight()), null);
+                    // g.drawImage(Assets.rectangle, (int)(rec.getX()), (int)(rec.getY()), (int)(rec.getWidth()), (int)(rec.getHeight()), null);
+                    // g.drawImage(Assets.rectangle, player.getX() - playerX, player.getY() - playerY, (int)(rec.getWidth()), (int)(rec.getHeight()), null);
 
                     player.render(g);
 

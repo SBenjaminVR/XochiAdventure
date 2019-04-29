@@ -106,7 +106,8 @@ public class PowerUps extends Item{
 //            g.drawImage(Assets.pollos, getX(), getY(), getWidth(), getHeight(), null);
 //        }
        // g.drawImage(Assets.powerup, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
-       g.drawImage(Assets.powerup, getX(), getY(), getWidth(), getHeight(), null);
+       g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+       // g.drawImage(Assets.powerup, getX(), getY(), getWidth(), getHeight(), null);
 
     }
 }

@@ -44,7 +44,9 @@ public class Platform extends Item {
     @Override
     public void render(Graphics g) {
         // g.drawImage(Assets.platform, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
-        g.drawImage(Assets.platform, getX(), getY(), getWidth(), getHeight(), null);
+        // g.drawImage(Assets.platform, getX(), getY(), getWidth(), getHeight(), null);
+        g.drawImage(Assets.platform, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+
     }
 
     @Override

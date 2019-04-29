@@ -103,7 +103,9 @@ public class Enemy extends Item {
 
     @Override
     public void render(Graphics g) {
-        // g.drawImage(Assets.chile, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
-        g.drawImage(Assets.chile, getX(), getY(), getWidth(), getHeight(), null);
+        // g.drawImage(Assets.comida, (game.getPlayer().getX() - getX()), (game.getPlayer().getY() - getY()), getWidth(), getHeight(), null);
+        // g.drawImage(Assets.comida, -1 * (game.getRec().x - getX()), -1 * (game.getRec().y - getY()), getWidth(), getHeight(), null);
+        g.drawImage(Assets.chile, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        // g.drawImage(Assets.chile, getX(), getY(), getWidth(), getHeight(), null);
     }
 }
