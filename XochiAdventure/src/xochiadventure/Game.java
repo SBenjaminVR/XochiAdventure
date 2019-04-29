@@ -107,10 +107,10 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         chiles = new LinkedList<Enemy>();
         //powerUps = new LinkedList<PowerUps>();
-//        //pollos = new LinkedList<PowerUps>();
-//        nombreArchivo = "src/space/inavders/archivo.sf";
-//        texto = new Font("Font", 2, 32);
-//        bombs = new LinkedList<Bomb>();
+       //pollos = new LinkedList<PowerUps>();
+       // nombreArchivo = "src/space/inavders/archivo.sf";
+       // texto = new Font("Font", 2, 32);
+       // bombs = new LinkedList<Bomb>();
         screen = Screen.TITLESCREEN;
         mouseManager = new MouseManager();
         powerups = new LinkedList<PowerUps>();
@@ -176,27 +176,35 @@ public class Game implements Runnable {
     }
 
     /**
-     *
-     * @return
+     *  To get the position in the x axis of the player where it is going to be drawn
+     * @return an <code>int</code> valuer of the x position
      */
     public int getPlayerX() {
         return playerX;
     }
 
     /**
-     *
-     * @return
+     *  To get the position in the y axis of the player where it is going to be drawn
+     * @return an <code>int</code> value of the y position
      */
     public int getPlayerY() {
         return playerY;
     }
 
     /**
-     *
-     * @return
+     * To get the rectangle that is used to know which sprites need to be drawned
+     * @return an <code>Rectangle</code> value with the rectangle
      */
     public Rectangle getRec() {
         return rec;
+    }
+
+    /**
+     * To get the key manager
+     * @return an <code>KeyManager</code> value with the key manager
+     */
+    public KeyManager getKeyManager() {
+        return keyManager;
     }
 
     // SETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -218,19 +226,13 @@ public class Game implements Runnable {
         this.shot = shot;
     }
 
-    /**
-     * To get the key manager
-     * @return an <code>KeyManager</code> value with the key manager
-     */
-    public KeyManager getKeyManager() {
-        return keyManager;
-    }
+
 
     // FUNCTIONS ------------------------------------------------------------------------------------------------------------------------------------
 
     /**
-     *
-     * @param txt
+     * To load the chosen level
+     * @param txt to know which file to read
      */
     private void loadLevel(String txt) {
 
@@ -291,6 +293,17 @@ public class Game implements Runnable {
       player = new Player (playerX, playerY, 100, 100, 5, this);
 //      System.out.println("x and y " + playerX + " " + playerY);
 //      System.out.println("player " + player.getX() + " " + player.getY());
+    }
+
+    /**
+     *  To unload a level
+     */
+    private void unloadLevel() {
+        player = null;
+        chiles.clear();
+        platforms.clear();
+        comidas.clear();
+        powerups.clear();
     }
 
     // tick and render ------------------------------------------------------------------------------------------------------------------------------------
@@ -497,29 +510,32 @@ public class Game implements Runnable {
             // Level screen ------------------------------------------------------------------
             case LEVEL:
                 if (keyManager.back) {
+                    unloadLevel();
                     screen = Screen.MENU;
+                } else {
+                  player.tick();
+                  rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
+
+                  // se tickea a los chiles
+                  for (int i  = 0; i < chiles.size(); i++) {
+                      Enemy chile = chiles.get(i);
+                      chile.tick();
+                  }
+
+                  // se tickea a los powerups
+                  for (int i  = 0; i < powerups.size(); i++) {
+                      PowerUps power = powerups.get(i);
+                      power.tick();
+                  }
+
+                  // se tickean las plataformas
+                  for (int i  = 0; i < platforms.size(); i++) {
+                      Platform platform = platforms.get(i);
+                      platform.tick();
+                  }
                 }
 
-                player.tick();
-                rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
 
-                // se tickea a los chiles
-                for (int i  = 0; i < chiles.size(); i++) {
-                    Enemy chile = chiles.get(i);
-                    chile.tick();
-                }
-
-                // se tickea a los powerups
-                for (int i  = 0; i < powerups.size(); i++) {
-                    PowerUps power = powerups.get(i);
-                    power.tick();
-                }
-
-                // se tickean las plataformas
-                for (int i  = 0; i < platforms.size(); i++) {
-                    Platform platform = platforms.get(i);
-                    platform.tick();
-                }
                 break;
         }
     }
@@ -543,111 +559,108 @@ public class Game implements Runnable {
                     g.drawImage(Assets.titleScreen, 0, 0, getWidth(), getHeight(), null);
                     break;
                 case MENU:
-                    g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
-                    // Checks where to draw the rectangle that shows which option of the menu you are selecting
-                    switch(menOpt) {
-                        case OPTIONS:
-//                            g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
-                            g.drawImage(Assets.rec, 800, 60, 200, 100, null);
-                            break;
-                        case RECIPIES:
-//                            g.drawImage(Assets.rec, 1340, 200, 400, 100, null);
-                            g.drawImage(Assets.rec, 800, 120, 200, 100, null);
-                            break;
-                       case CONTROLS:
-//                           g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
-                           g.drawImage(Assets.rec, 800, 180, 200, 100, null);
-                                break;
-                        case ONE:
-//                            g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
-                            g.drawImage(Assets.rec, 600, 125, 100, 100, null);
-                            //carga nivel 1
-                                break;
-                        case TWO:
-                            g.drawImage(Assets.rec, 600, 150, 100, 100, null);
-                            //carga nivel2
-                                break;
-                        case THREE:
-                            g.drawImage(Assets.rec, 600, 175, 100, 100, null);
-                            //carga nivel3
-                                break;
-                    }
-                    break;
+                  g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
+                  // Checks where to draw the rectangle that shows which option of the menu you are selecting
+                  switch(menOpt) {
+                    case OPTIONS:
+                      //g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
+                      g.drawImage(Assets.rec, 800, 60, 200, 100, null);
+                      break;
+                    case RECIPIES:
+                      //g.drawImage(Assets.rec, 1340, 200, 400, 100, null);
+                      g.drawImage(Assets.rec, 800, 120, 200, 100, null);
+                      break;
+                   case CONTROLS:
+                      //g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
+                      g.drawImage(Assets.rec, 800, 180, 200, 100, null);
+                      break;
+                    case ONE:
+                      //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
+                      g.drawImage(Assets.rec, 600, 125, 100, 100, null);
+                      break;
+                    case TWO:
+                      g.drawImage(Assets.rec, 600, 150, 100, 100, null);
+                      break;
+                    case THREE:
+                      g.drawImage(Assets.rec, 600, 175, 100, 100, null);
+                      break;
+                  }
+                  break;
                 case OPTIONS:
-                    g.drawImage(Assets.options, 0, 0, getWidth(), getHeight(), null);
-                    switch (optOpt) {
-                        case DALTONICO:
-                            g.drawImage(Assets.rec, 290, 140, 500, 100, null);
-                            break;
-                        case SONIDO:
-                            g.drawImage(Assets.rec, 290, 260, 500, 100, null);
-                            break;
-                        case BRILLO:
-                            g.drawImage(Assets.rec, 290, 380, 500, 100, null);
-                            break;
-                    }
+                  g.drawImage(Assets.options, 0, 0, getWidth(), getHeight(), null);
+                  switch (optOpt) {
+                      case DALTONICO:
+                          g.drawImage(Assets.rec, 290, 140, 500, 100, null);
+                          break;
+                      case SONIDO:
+                          g.drawImage(Assets.rec, 290, 260, 500, 100, null);
+                          break;
+                      case BRILLO:
+                          g.drawImage(Assets.rec, 290, 380, 500, 100, null);
+                          break;
+                  }
                     break;
                 case RECIPIES:
-                    g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
-                    break;
+                  g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
+                  break;
                 case CONTROLS:
-                    g.drawImage(Assets.controls, 0, 0, getWidth(), getHeight(), null);
-                    break;
+                  g.drawImage(Assets.controls, 0, 0, getWidth(), getHeight(), null);
+                  break;
                 case LEVEL:
-                    g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
+                  g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
 
-                    // g.drawImage(Assets.rectangle, (int)(rec.getX()), (int)(rec.getY()), (int)(rec.getWidth()), (int)(rec.getHeight()), null);
-                    // g.drawImage(Assets.rectangle, player.getX() - playerX, player.getY() - playerY, (int)(rec.getWidth()), (int)(rec.getHeight()), null);
+                  // g.drawImage(Assets.rectangle, (int)(rec.getX()), (int)(rec.getY()), (int)(rec.getWidth()), (int)(rec.getHeight()), null);
+                  // g.drawImage(Assets.rectangle, player.getX() - playerX, player.getY() - playerY, (int)(rec.getWidth()), (int)(rec.getHeight()), null);
 
-                    player.render(g);
+                  player.render(g);
 
-                    // dibujar los chiles
-                    for (int i = 0; i < chiles.size(); i++) {
-                      Enemy chile = chiles.get(i);
-                      System.out.println("Chile" + i + " " + (rec.intersects(chile.getPerimetro())));
-                      if (rec.intersects(chile.getPerimetro())) {
-                        chile.render(g);
-                      }
+                  // dibujar los chiles
+                  for (int i = 0; i < chiles.size(); i++) {
+                    Enemy chile = chiles.get(i);
+                    // System.out.println("Chile" + i + " " + (rec.intersects(chile.getPerimetro())));
+                    if (rec.intersects(chile.getPerimetro())) {
+                      chile.render(g);
                     }
+                  }
 
-                    // dibujar los powerups
-                    for (int i = 0; i < powerups.size(); i++) {
-                      PowerUps powerup = powerups.get(i);
-                      System.out.println("powerup" + i + " " + (rec.intersects(powerup.getPerimetro())));
-                      if (rec.intersects(powerup.getPerimetro())) {
-                        powerup.render(g);
-                      }
+                  // dibujar los powerups
+                  for (int i = 0; i < powerups.size(); i++) {
+                    PowerUps powerup = powerups.get(i);
+                    // System.out.println("powerup" + i + " " + (rec.intersects(powerup.getPerimetro())));
+                    if (rec.intersects(powerup.getPerimetro())) {
+                      powerup.render(g);
                     }
+                  }
 
-                    // dibujar las plataformas
-                    for (int i = 0; i < platforms.size(); i++) {
-                      Platform platform = platforms.get(i);
-                      System.out.println("platform" + i + " " + (rec.intersects(platform.getPerimetro())));
-                      if (rec.intersects(platform.getPerimetro())) {
-                        platform.render(g);
-                      }
+                  // dibujar las plataformas
+                  for (int i = 0; i < platforms.size(); i++) {
+                    Platform platform = platforms.get(i);
+                    // System.out.println("platform" + i + " " + (rec.intersects(platform.getPerimetro())));
+                    if (rec.intersects(platform.getPerimetro())) {
+                      platform.render(g);
                     }
+                  }
 
-                    // dibujar comidas
-                    // for (int i = 0; i < 5; i++) {
-                    //   Comida comida = comidas.get(i);
-                    //   if (rec.intersects(comida.getPerimetro())) {
-                    //     comida.render(g);
-                    //   }
-                    // }
-                    break;
+                  // dibujar comidas
+                  for (int i = 0; i < comida.size(); i++) {
+                    Comida comida = comidas.get(i);
+                    if (rec.intersects(comida.getPerimetro())) {
+                      comida.render(g);
+                    }
+                  }
+                  break;
             }
 
-//            g.setFont(texto);
-//            // draw score
-//            g.drawString("Score: " + score, 5, getHeight() - 20);
+           // g.setFont(texto);
+           // draw score
+           // g.drawString("Score: " + score, 5, getHeight() - 20);
 
             bs.show();
             g.dispose();
         }
     }
 
-    // start(), init(), run(), and stop()
+    // start(), init(), run(), and stop() ------------------------------------------------------------------
 
     /**
      * initializing the display window of the game
@@ -762,7 +775,7 @@ public class Game implements Runnable {
         return "";
     }
 
-    // Carga la información del objeto desde un string
+    // Carga la información del objeto desde un string ------------------------------------------------------------------
     /**
      * To set the value of the score, lives and the state of the game from the
      * file that was loaded
