@@ -642,7 +642,7 @@ public class Game implements Runnable {
                   }
 
                   // dibujar comidas
-                  for (int i = 0; i < comida.size(); i++) {
+                  for (int i = 0; i < comidas.size(); i++) {
                     Comida comida = comidas.get(i);
                     if (rec.intersects(comida.getPerimetro())) {
                       comida.render(g);
