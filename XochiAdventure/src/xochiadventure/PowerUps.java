@@ -100,13 +100,17 @@ public class PowerUps extends Item{
 
     @Override
     public void render(Graphics g) {
+      if (game.getPlayer().getX() < game.getPlayerX()) {
+        g.drawImage(Assets.powerup, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+      } else {
+        g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+      }
 //        if (type == 1) {
 //            g.drawImage(Assets.blueFlask, getX(), getY(), getWidth(), getHeight(), null);
 //        } else {
 //            g.drawImage(Assets.pollos, getX(), getY(), getWidth(), getHeight(), null);
 //        }
        // g.drawImage(Assets.powerup, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
-       g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
        // g.drawImage(Assets.powerup, getX(), getY(), getWidth(), getHeight(), null);
 
     }

@@ -539,7 +539,12 @@ public class Game implements Runnable {
                     screen = Screen.MENU;
                 } else {
                   player.tick();
-                  rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
+                  if (player.getX() < playerX) {
+                    rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
+                  } else {
+                    rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
+                  }
+
 
                   // se tickea a los chiles
                   for (int i  = 0; i < chiles.size(); i++) {

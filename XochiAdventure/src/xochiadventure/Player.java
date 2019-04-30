@@ -125,7 +125,12 @@ public class Player extends Item{
 
     @Override
     public void render(Graphics g) {
+      if (x < game.getPlayerX()) {
+        g.drawImage(Assets.player, x, game.getPlayerY(), getWidth(), getHeight(), null);
+      } else {
         g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);
+      }
+
         // g.drawImage(Assets.comida, getX(), getY(), getWidth(), getHeight(), null);
         // g.drawImage(Assets.player, game.getWidth() / 2 - getWidth() / 2, game.getHeight() / 2 - getHeight() / 2, getWidth(), getHeight(), null);
         // g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
