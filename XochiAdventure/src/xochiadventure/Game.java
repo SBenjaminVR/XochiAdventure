@@ -282,7 +282,7 @@ public class Game implements Runnable {
       //     iPosX += 50;
       //     iPosY += 50;
       // }
-      platforms.add(new Platform(0, 250, 500, 200, 0, this));
+      platforms.add(new Platform(0, 250, 500, 200,  0, this));
       platforms.add(new Platform(1300, 250, 500, 200, 0, this));
       platforms.add(new Platform(2100, 250, 500, 200, 0, this));
 
@@ -293,11 +293,11 @@ public class Game implements Runnable {
       platforms.add(new Platform(0, 900, 150, 50, 0, this));
       Platform plat = platforms.get(5);
       platforms.add(new Platform(plat.getX() - plat.getWidth() / 2 - 75, 900, 150, 50, 0, this));
-      platforms.add(new Platform(2450, 900, 150, 200, 0, this));
+      platforms.add(new Platform(2450, 900, 150, 50, 0, this));
 
       platforms.add(new Platform(0, 1200, 500, 200, 0, this));
       platforms.add(new Platform(1000, 1200, 500, 200, 0, this));
-      platforms.add(new Platform(1500, 1200, 500, 200, 0, this));
+      platforms.add(new Platform(1800, 1200, 500, 200, 0, this));
 
       platforms.add(new Platform(2350, 1200, 500, 200, 0, this));
       platforms.add(new Platform(600, 1500, 150, 50, 0, this));
@@ -559,10 +559,16 @@ public class Game implements Runnable {
                   }
 
                   // se tickean las plataformas
-                  for (int i  = 0; i < platforms.size(); i++) {
-                      Platform platform = platforms.get(i);
-                      platform.tick();
+                  if (player.isInTheAir()) {
+                    for (int i  = 0; i < platforms.size(); i++) {
+                        Platform platf = platforms.get(i);
+                        // platf.tick();
+                        if (platf.intersectaJugador(player)) {
+                          player.setInTheAir(false);
+                        }
+                    }
                   }
+
                 }
 
 

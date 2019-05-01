@@ -45,6 +45,14 @@ public class Player extends Item{
         return lives;
     }
 
+    /**
+     * 
+     * @return 
+     */
+    public boolean isInTheAir() {
+        return inTheAir;
+    }
+
     // SETS ------------------------------------------------------------------
 
     /**
@@ -53,6 +61,14 @@ public class Player extends Item{
      */
     public void setLives(int lives){
         this.lives = lives;
+    }
+    
+    /**
+     * 
+     * @param inTheAir 
+     */
+    public void setInTheAir(boolean inTheAir) {
+        this.inTheAir = inTheAir;
     }
 
     // Carga la información del objeto desde un string ------------------------------------------------------------------
@@ -81,18 +97,18 @@ public class Player extends Item{
     public void tick() {
         // moving player depending on flags
        if (game.getKeyManager().lastLeft || game.getKeyManager().a) {
-          setX(getX() - 4);
+          setX(getX() - 8);
        }
        if (game.getKeyManager().lastRight || game.getKeyManager().d) {
-          setX(getX() + 4);
+          setX(getX() + 8);
        }
 
        if (game.getKeyManager().lastUp) {
-          y -= 4;
+          y -= 8;
        }
 
        if (game.getKeyManager().lastDown) {
-          y += 4;
+          y += 8;
        }
 
        if (game.getKeyManager().space && !inTheAir) {
@@ -105,10 +121,8 @@ public class Player extends Item{
 
        if (inTheAir) {
          y -= speedY;
-         speedY -= 2;
-         if (speedY == -40) {
-           inTheAir = false;
-           y -= 40;
+         if (speedY > -20) {
+           speedY -= 2;
          }
        }
 
