@@ -454,7 +454,7 @@ public class Game implements Runnable {
                         case TWO:
                             //carga nivel2
                             loadLevel("nivel 2");
-                            Assets.background = ImageLoader.loadImage("/images/nivel 2.jpg");
+                            Assets.background = ImageLoader.loadImage("/images/nivel 2.png");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
@@ -681,7 +681,7 @@ public class Game implements Runnable {
                     g.drawImage(Assets.titleScreen, 0, 0, getWidth(), getHeight(), null);
                     break;
                 case MENU:
-                  g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);                  
+                  g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
                   switch(menOpt) {
                     case OPTIONS:
@@ -737,7 +737,7 @@ public class Game implements Runnable {
                   // g.drawImage(Assets.rectangle, player.getX() - playerX, player.getY() - playerY, (int)(rec.getWidth()), (int)(rec.getHeight()), null);
 
                   // GAME
-             
+
                   // dibujar las plataformas
                   for (int i = 0; i < platforms.size(); i++) {
                     Platform platform = platforms.get(i);

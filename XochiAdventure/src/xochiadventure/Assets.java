@@ -75,7 +75,7 @@ public class Assets {
         select = ImageLoader.loadImage("/images/select.png");
         recipies = ImageLoader.loadImage("/images/Recetario.png");
         chile = ImageLoader.loadImage("/images/chile.png");
-        platform = ImageLoader.loadImage("/images/brick.png");
+        platform = ImageLoader.loadImage("/images/brick_barro.png");
         powerup = ImageLoader.loadImage("/images/flask2.png");
         player = ImageLoader.loadImage("/images/gyrados.png");
         comida = ImageLoader.loadImage("/images/malo.png");
