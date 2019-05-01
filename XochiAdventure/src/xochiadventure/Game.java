@@ -72,24 +72,24 @@ public class Game implements Runnable {
     private boolean pauseGame;                              // flag to know if the game is paused
 //    private String nombreArchivo;                         // to store the name of the file
 //    private Font texto;                                   // to change the font of string drawn in the screen
-    private Shot shot;                                      //to have a missile to shoot
-    private Rectangle rec;
+    private Shot shot;                                      // to have a missile to shoot
+    private Rectangle rec;                                  // to store the rectangle that checks which sprites are going to be drawn
 
     // Linked lists
-    private LinkedList<Platform> platforms;
-    private LinkedList<Enemy> chiles;                       // to move an enemy
-    private LinkedList<PowerUps> powerups;
-    private LinkedList<Comida> comidas;
+    private LinkedList<Platform> platforms;                 // to store all the platforms
+    private LinkedList<Enemy> chiles;                       // to store all the enemies
+    private LinkedList<PowerUps> powerups;                  // to store all the powerups
+    private LinkedList<Comida> comidas;                     // to store all the food
 
     // Menu navigation variables
-    private Screen screen;                  // to store in which screen you are
-    private MenuOpt menOpt;             // to store in which option in the main menu screen you are
-    private OptOpt optOpt;                  // to store in which option in the options screen you are
+    private Screen screen;                                  // to store in which screen you are
+    private MenuOpt menOpt;                                 // to store in which option in the main menu screen you are
+    private OptOpt optOpt;                                  // to store in which option in the options screen you are
 
-    private int playerX;
-    private int playerY;
+    private int playerX;                                    // to store the position in which the player will be drawn
+    private int playerY;                                    // to store the position in which the player will be drawn
 
-    private MouseManager mouseManager;          // to manage the mouse
+    private MouseManager mouseManager;                      // to manage the mouse
 
     private SoundClip confirmSound;
 
@@ -108,11 +108,8 @@ public class Game implements Runnable {
         running = false;
         keyManager = new KeyManager();
         chiles = new LinkedList<Enemy>();
-        //powerUps = new LinkedList<PowerUps>();
-       //pollos = new LinkedList<PowerUps>();
-       // nombreArchivo = "src/space/inavders/archivo.sf";
-       // texto = new Font("Font", 2, 32);
-       // bombs = new LinkedList<Bomb>();
+        // nombreArchivo = "src/space/inavders/archivo.sf";
+        // texto = new Font("Font", 2, 32);
         screen = Screen.TITLESCREEN;
         mouseManager = new MouseManager();
         powerups = new LinkedList<PowerUps>();
@@ -227,8 +224,6 @@ public class Game implements Runnable {
     public void setShot(Shot shot) {
         this.shot = shot;
     }
-
-
 
     // FUNCTIONS ------------------------------------------------------------------------------------------------------------------------------------
 
@@ -439,6 +434,7 @@ public class Game implements Runnable {
                             break;
                         case ONE:
                             //carga nivel 1
+                            Assets.selectSnd.play();
                             loadLevel("nivel 1");
                             Assets.background = ImageLoader.loadImage("/images/nivel 1.jpg");
                             screen = Screen.LEVEL;
@@ -856,27 +852,41 @@ public class Game implements Runnable {
      * @throws IOException when file not found
      */
     public void leeArchivo() throws IOException {
-//
-//        BufferedReader fileIn;
-//        try {
-//            fileIn = new BufferedReader(new FileReader(nombreArchivo));
-//        } catch (FileNotFoundException e) {
-//            File archivo = new File(nombreArchivo);
-//            PrintWriter fileOut = new PrintWriter(archivo);
-//            fileOut.println("100,demo");
-//            fileOut.close();
-//            fileIn = new BufferedReader(new FileReader(nombreArchivo));
-//        }
-//        loadFromString(fileIn.readLine().split("\\s+"));
-//        this.player.loadFromString(fileIn.readLine().split("\\s+"));
-//        shot.loadFromString(fileIn.readLine().split("\\s+"));
-//        for(Enemy alien : aliens){
-//            alien.loadFromString(fileIn.readLine().split("\\s+"));
-//        }
-//        for (Bomb bomb : bombs) {
-//            bomb.loadFromString(fileIn.readLine().split("\\s+"));
-//        }
-//
-//        fileIn.close();
+       //
+       // BufferedReader fileIn;
+       // try {
+       //     fileIn = new BufferedReader(new FileReader(nombreArchivo));
+       // } catch (FileNotFoundException e) {
+       //     File archivo = new File(nombreArchivo);
+       //     PrintWriter fileOut = new PrintWriter(archivo);
+       //     fileOut.println("100,demo");
+       //     fileOut.close();
+       //     fileIn = new BufferedReader(new FileReader(nombreArchivo));
+       // }
+       // loadFromString(fileIn.readLine().split("\\s+"));
+       // this.player.loadFromString(fileIn.readLine().split("\\s+"));
+       // shot.loadFromString(fileIn.readLine().split("\\s+"));
+       // for(Enemy alien : aliens){
+       //     alien.loadFromString(fileIn.readLine().split("\\s+"));
+       // }
+       // for (Bomb bomb : bombs) {
+       //     bomb.loadFromString(fileIn.readLine().split("\\s+"));
+       // }
+       //
+       // fileIn.close();
+        // if (getKeyManager().save) {
+        //     try {
+        //         grabarArchivo();
+        //     } catch (IOException ex) {
+        //         Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        //     }
+        // }
+        // if (getKeyManager().load) {
+        //     try {
+        //         leeArchivo();
+        //     } catch (IOException ex) {
+        //         Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+        //     }
+        // }
     }
 }
