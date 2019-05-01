@@ -16,6 +16,7 @@ import java.util.Set;
 public class Player extends Item{
 
     private int lives;
+    private int maxLives;
     private int water;
     private boolean inTheAir;
 
@@ -30,7 +31,8 @@ public class Player extends Item{
      */
     public Player(int x, int y, int width, int height, int speedX, int lives, Game game) {
         super(x, y, width, height, speedX, game);
-        this.lives = lives;
+        this.maxLives = lives;
+        this.lives = maxLives;
         this.water = 100;
         this.inTheAir = false;
     }
@@ -43,6 +45,10 @@ public class Player extends Item{
      */
     public int getLives() {
         return lives;
+    }
+
+    public int getMaxLives() {
+        return maxLives;
     }
 
     /**

@@ -309,7 +309,7 @@ public class Game implements Runnable {
       //     iPosX += 50;
       //     iPosY += 50;
       // }
-      player = new Player (100, 100, 100, 100, 5, 0 ,this);
+      player = new Player (100, 100, 100, 100, 5, 3 ,this);
       playerX = getWidth() / 2 - player.getWidth() / 2;
       playerY = getHeight() / 2 - player.getHeight() / 2;
 
@@ -556,6 +556,31 @@ public class Game implements Runnable {
                   for (int i  = 0; i < powerups.size(); i++) {
                       PowerUps power = powerups.get(i);
                       power.tick();
+                      if (power.intersectaJugador(player)) {
+                          switch (power.getType()) {
+                                case ATOLE:
+                                    // Recover all of the player hp/lives
+                                    getPlayer().setLives(getPlayer().getMaxLives());
+                                    Assets.atoleSnd.play();
+                                    powerups.remove(i);
+                                    break;
+                                case AGUA:
+                                    // Refill a little bit the players ammo
+                                    break;
+                                    
+                                case DULCE:
+                                    // Recover 1 life
+                                    if (getPlayer().getLives() < getPlayer().getMaxLives())
+                                        getPlayer().setLives(getPlayer().getLives() + 1);
+                                    Assets.dulceSnd.play();
+                                    powerups.remove(i);
+                                    break;
+                                    
+                                case FRIJOL:
+                                    
+                                    break;                                  
+                          }
+                        }
                   }
 
                   // se tickean las plataformas
