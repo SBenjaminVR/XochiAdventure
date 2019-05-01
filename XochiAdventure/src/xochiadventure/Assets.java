@@ -79,6 +79,7 @@ public class Assets {
         player = ImageLoader.loadImage("/images/gyrados.png");
         comida = ImageLoader.loadImage("/images/malo.png");
         rectangle = ImageLoader.loadImage("/images/192.png");
+        heart = ImageLoader.loadImage("/images/tacoHeart.png");
 //        laser = new SoundClip("/sounds/laser.wav");
 
         atole = ImageLoader.loadImage("/images/atole.png");
