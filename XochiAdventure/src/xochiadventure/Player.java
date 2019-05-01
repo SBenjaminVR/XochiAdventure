@@ -15,6 +15,10 @@ import java.util.Set;
  */
 public class Player extends Item{
 
+    private int lives;
+    private int water;
+    private boolean inTheAir;
+
     /**
      * to create direction, width, height, and game and set the player is not moving
      * @param x to set the x of the player
@@ -24,17 +28,40 @@ public class Player extends Item{
      * @param height  to set the height of the player
      * @param game to set the game of the player
      */
-    public Player(int x, int y, int width, int height, int speedX, Game game) {
+    public Player(int x, int y, int width, int height, int speedX, int lives, Game game) {
         super(x, y, width, height, speedX, game);
+        this.lives = lives;
+        this.water = 100;
+        this.inTheAir = false;
     }
 
-    // Carga la información del objeto desde un string
-   /**
+    // GETS ------------------------------------------------------------------
+
+    /**
+     *
+     * @return
+     */
+    public int getLives() {
+        return lives;
+    }
+
+    // SETS ------------------------------------------------------------------
+
+    /**
+     *
+     * @param lives
+     */
+    public void setLives(int lives){
+        this.lives = lives;
+    }
+
+    // Carga la información del objeto desde un string ------------------------------------------------------------------
+    /**
      * To set the value of the position in the x axis and the width of the player from the file that was loaded
      * @param datos to set all the variables
      */
     @Override
-    public void loadFromString(String[] datos){
+    public void loadFromString(String[] datos) {
         this.x = Integer.parseInt(datos[0]);
         this.width = Integer.parseInt(datos[1]);
     }
@@ -48,21 +75,44 @@ public class Player extends Item{
         return (x +" " + width);
     }
 
+    // tick y render ------------------------------------------------------------------
+
     @Override
     public void tick() {
         // moving player depending on flags
-       if (game.getKeyManager().lastLeft) {
+       if (game.getKeyManager().lastLeft || game.getKeyManager().a) {
           setX(getX() - 4);
        }
-       if (game.getKeyManager().lastRight) {
+       if (game.getKeyManager().lastRight || game.getKeyManager().d) {
           setX(getX() + 4);
        }
+
        if (game.getKeyManager().lastUp) {
-          setY(getY() - 4);
+          y -= 4;
        }
+
        if (game.getKeyManager().lastDown) {
-          setY(getY() + 4);
+          y += 4;
        }
+
+       if (game.getKeyManager().space && !inTheAir) {
+          speedY = 40;
+          inTheAir = true;
+       }
+       if (game.getKeyManager().z || game.getKeyManager().o) {
+         //attack
+       }
+
+       if (inTheAir) {
+         y -= speedY;
+         speedY -= 2;
+         if (speedY == -40) {
+           inTheAir = false;
+           y -= 40;
+         }
+       }
+
+       // hacer que xochi ataque
 
         // checks that the object does not goes out of the bounds
         // if (getX() + getWidth() >= game.getWidth()) {
@@ -75,7 +125,12 @@ public class Player extends Item{
 
     @Override
     public void render(Graphics g) {
+      if (x < game.getPlayerX()) {
+        g.drawImage(Assets.player, x, game.getPlayerY(), getWidth(), getHeight(), null);
+      } else {
         g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);
+      }
+
         // g.drawImage(Assets.comida, getX(), getY(), getWidth(), getHeight(), null);
         // g.drawImage(Assets.player, game.getWidth() / 2 - getWidth() / 2, game.getHeight() / 2 - getHeight() / 2, getWidth(), getHeight(), null);
         // g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);

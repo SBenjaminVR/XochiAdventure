@@ -23,7 +23,7 @@ public class KeyManager implements KeyListener {
 //    public boolean lastLoad;    // flag to know the state of the load on the previous tick
 //    public boolean lastRestart; // flag to know the state of the restart on the previous tick
 //    public boolean fireShot;    // flag to shoot
-        
+
     public boolean pause;   // flag to pause the game
     public boolean enter;
     public boolean back;
@@ -31,7 +31,8 @@ public class KeyManager implements KeyListener {
     public boolean up;
     public boolean right;
     public boolean left;
-    
+    public boolean space;
+
     public boolean lastPause;   // flag to know the state of the pause on the previous tick
     public boolean lastEnter;
     public boolean lastBack;
@@ -39,7 +40,14 @@ public class KeyManager implements KeyListener {
     public boolean lastDown;
     public boolean lastLeft;
     public boolean lastRight;
-    
+    public boolean lastSpace;
+
+    public boolean a;
+    public boolean d;
+    public boolean o;
+    public boolean z;
+
+
     private boolean keys[];  // to store all the flags for every key
 
     public KeyManager() {
@@ -84,7 +92,8 @@ public class KeyManager implements KeyListener {
         down = lastDown  && !keys[KeyEvent.VK_DOWN];
         left = lastLeft  && !keys[KeyEvent.VK_LEFT];
         right = lastRight  && !keys[KeyEvent.VK_RIGHT];
-        
+        space = lastSpace && !keys[KeyEvent.VK_SPACE];
+
         lastPause = keys[KeyEvent.VK_ESCAPE];
         lastEnter = keys[KeyEvent.VK_ENTER];
         lastBack = keys[KeyEvent.VK_BACK_SPACE];
@@ -92,5 +101,12 @@ public class KeyManager implements KeyListener {
         lastDown = keys[KeyEvent.VK_DOWN];
         lastLeft = keys[KeyEvent.VK_LEFT];
         lastRight = keys[KeyEvent.VK_RIGHT];
+        lastSpace = keys[KeyEvent.VK_SPACE];
+
+        a = keys[KeyEvent.VK_A];
+        d = keys[KeyEvent.VK_D];
+        o = keys[KeyEvent.VK_O];
+        z = keys[KeyEvent.VK_Z];
+
     }
 }

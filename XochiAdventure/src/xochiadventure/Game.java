@@ -279,20 +279,45 @@ public class Game implements Runnable {
       iPosX = 100;
       iPosY = 10;
       // se crean las plataformas
-      for (int i  = 0; i < 2; i++) {
-          platforms.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
-          iPosX += 50;
-          iPosY += 50;
-      }
+      // for (int i  = 0; i < 2; i++) {
+      //     platforms.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
+      //     iPosX += 50;
+      //     iPosY += 50;
+      // }
+      platforms.add(new Platform(0, 250, 500, 200, 0, this));
+      platforms.add(new Platform(1300, 250, 500, 200, 0, this));
+      platforms.add(new Platform(2100, 250, 500, 200, 0, this));
+
+      platforms.add(new Platform(550, 500, 500, 50, 0, this));
+      platforms.add(new Platform(900, 500, 500, 50, 0, this));
+      platforms.add(new Platform(250, 650, 2100, 200, 0, this));
+
+      platforms.add(new Platform(0, 900, 150, 50, 0, this));
+      Platform plat = platforms.get(5);
+      platforms.add(new Platform(plat.getX() - plat.getWidth() / 2 - 75, 900, 150, 50, 0, this));
+      platforms.add(new Platform(2450, 900, 150, 200, 0, this));
+
+      platforms.add(new Platform(0, 1200, 500, 200, 0, this));
+      platforms.add(new Platform(1000, 1200, 500, 200, 0, this));
+      platforms.add(new Platform(1500, 1200, 500, 200, 0, this));
+
+      platforms.add(new Platform(2350, 1200, 500, 200, 0, this));
+      platforms.add(new Platform(600, 1500, 150, 50, 0, this));
+      platforms.add(new Platform(1800, 1500, 500, 200, 0, this));
+
+      platforms.add(new Platform(0, 1800, 500, 200, 0, this));
+      platforms.add(new Platform(750, 1800, 1350, 200, 0, this));
+      platforms.add(new Platform(2000, 1800, 500, 200, 0, this));
 
       // for (int i  = 0; i < 5; i++) {
       //     comida.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
       //     iPosX += 50;
       //     iPosY += 50;
       // }
-      playerX = getWidth() / 2 - 50;
-      playerY = getHeight() / 2 - 50;
-      player = new Player (playerX, playerY, 100, 100, 5, this);
+      player = new Player (100, 100, 100, 100, 5, 0 ,this);
+      playerX = getWidth() / 2 - player.getWidth() / 2;
+      playerY = getHeight() / 2 - player.getHeight() / 2;
+
 //      System.out.println("x and y " + playerX + " " + playerY);
 //      System.out.println("player " + player.getX() + " " + player.getY());
     }
@@ -517,7 +542,12 @@ public class Game implements Runnable {
                     screen = Screen.MENU;
                 } else {
                   player.tick();
-                  rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
+                  if (player.getX() < playerX) {
+                    rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
+                  } else {
+                    rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
+                  }
+
 
                   // se tickea a los chiles
                   for (int i  = 0; i < chiles.size(); i++) {
