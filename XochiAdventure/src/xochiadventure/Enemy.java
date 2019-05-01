@@ -14,7 +14,8 @@ import java.awt.Rectangle;
  */
 public class Enemy extends Item {
     private int direction;          // to store the direction in which the enemy is moving
-    private int limitsX[];
+    private int leftLimit;
+    private int rightLimit;
 
     /**
      * to create direction, width, height, directionX, and directionY and set the enemy is not moving
@@ -26,10 +27,11 @@ public class Enemy extends Item {
      * @param speedX to set the speed in the x axis of the enemy
      * @param game to set the game of the enemy
      */
-    public Enemy(int x, int y, int width, int height, int direction, int speedX, int limitsX[], Game game) {
+    public Enemy(int x, int y, int width, int height, int direction, int speedX, int left, int right, Game game) {
         super(x, y, width, height, speedX, game);
         this.direction = direction;
-        this.limitsX = limitsX;
+        this.leftLimit = left;
+        this.rightLimit = right;
     }
 
     // GETS ------------------------------------------------------------------
@@ -97,7 +99,7 @@ public class Enemy extends Item {
         // }
         setX(getX() + speedX * direction);
 
-        if( getX() >= limitsX[1] || getX() <= limitsX[0]){
+        if( getX() >= rightLimit || getX() <= leftLimit){
           setDirection(getDirection() * -1);
         }
     }

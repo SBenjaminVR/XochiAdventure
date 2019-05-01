@@ -19,6 +19,11 @@ public class Player extends Item{
     private int maxLives;
     private int water;
     private boolean inTheAir;
+    private int direction;
+    private int contGotHit;
+    private boolean drawPlayer;
+    private int leftLimit;
+    private int rightLimit;
 
     /**
      * to create direction, width, height, speed in the x axis, and game
@@ -29,12 +34,17 @@ public class Player extends Item{
      * @param speedX to set the speed in the x axis of the player
      * @param game to set the game of the player
      */
-    public Player(int x, int y, int width, int height, int speedX, int lives, Game game) {
+    public Player(int x, int y, int width, int height, int speedX, int lives, int left, int right, Game game) {
         super(x, y, width, height, speedX, game);
         this.maxLives = lives;
         this.lives = maxLives;
         this.water = 100;
         this.inTheAir = false;
+        this.direction = 1;
+        this.contGotHit = 0;
+        this.drawPlayer = true;
+        this.leftLimit = left;
+        this.rightLimit = right;
     }
 
     // GETS ------------------------------------------------------------------
@@ -63,6 +73,22 @@ public class Player extends Item{
         return inTheAir;
     }
 
+     /**
+     *
+     * @return
+     */
+    public int getContGotHit() {
+        return contGotHit;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getDirection() {
+        return direction;
+    }
+    
     // SETS ------------------------------------------------------------------
 
     /**
@@ -79,6 +105,27 @@ public class Player extends Item{
      */
     public void setInTheAir(boolean inTheAir) {
         this.inTheAir = inTheAir;
+    }
+
+    /**
+     *
+     * @param contGotHit
+     */
+    public void setContGotHit(int contGotHit) {
+        this.contGotHit = contGotHit;
+    }
+
+    /**
+     *
+     * @param direction
+     */
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    public void setLimits (int left, int right) {
+      this.leftLimit = left;
+      this.rightLimit = right;
     }
 
     // Carga la información del objeto desde un string ------------------------------------------------------------------
@@ -106,11 +153,13 @@ public class Player extends Item{
     @Override
     public void tick() {
         // moving player depending on flags
-       if (game.getKeyManager().lastLeft || game.getKeyManager().a) {
+       if (getX() > 0 && (game.getKeyManager().lastLeft || game.getKeyManager().a)) {
           setX(getX() - 8);
+          direction = 1;
        }
-       if (game.getKeyManager().lastRight || game.getKeyManager().d) {
+       if (getX() < 3000 && (game.getKeyManager().lastRight || game.getKeyManager().d)) {
           setX(getX() + 8);
+          direction = -1;
        }
 
        if (game.getKeyManager().lastUp) {
@@ -122,11 +171,12 @@ public class Player extends Item{
        }
 
        if (game.getKeyManager().lastSpace && !inTheAir) {
-          speedY = 40;
+          speedY = 36;
           inTheAir = true;
        }
-       if (game.getKeyManager().z || game.getKeyManager().o) {
-         //attack
+
+       if (x + width <= leftLimit || x > rightLimit) {
+         inTheAir = true;
        }
 
        if (inTheAir) {
@@ -154,12 +204,22 @@ public class Player extends Item{
        * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
        * En este caso el jugador se dibujara en su respectiva 'x' y 'y' (dependiendo del caso)
        */
-      // aqui hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
-      if (x < game.getPlayerX()) { // aquí también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
-        g.drawImage(Assets.player, x, game.getPlayerY(), getWidth(), getHeight(), null);
-      } else {
-        g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);
+      // hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
+      // también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
+      if (contGotHit > 0) {
+        contGotHit -= 1;
+        if (contGotHit % 5 == 0) {
+          drawPlayer = !drawPlayer;
+        }
       }
+      if (drawPlayer) {
+        if (x < game.getPlayerX()) {
+          g.drawImage(Assets.player, x, game.getPlayerY(), getWidth(), getHeight(), null);
+        } else {
+          g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);
+        }
+      }
+
 
         // g.drawImage(Assets.comida, getX(), getY(), getWidth(), getHeight(), null);
         // g.drawImage(Assets.player, game.getWidth() / 2 - getWidth() / 2, game.getHeight() / 2 - getHeight() / 2, getWidth(), getHeight(), null);

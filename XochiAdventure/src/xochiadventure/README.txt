@@ -3,6 +3,9 @@ Que funciona
 	- Salta
 	- Se mueve
 	- Colisiona con las plataformas
+	- Se cae de las plataformas
+	- No se sale de la pantalla
+	- Parpadea cuando es pegado por un chile
 - Chiles
 	- Se mueven
 	- No se salen de su area designada
@@ -29,5 +32,9 @@ Que funciona
 	- Se puede acceder a todos los niveles
 
 Que no funciona
+- Jugador
+	- No ataca
+- Lógica general del juego
+	- No hemos implementado la base de datos
 
 Recomendacions

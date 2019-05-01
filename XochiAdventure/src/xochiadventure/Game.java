@@ -255,10 +255,9 @@ public class Game implements Runnable {
       int iPosX = 10;
       int iPosY = 10;
 
-      limitX[0] = 0;
-      limitX[1] = 500;
-
       // poner donde va a estar la fuente
+      fuente.x = 500;
+      fuente.y = 500;
 
       // se crean los chiles
       for (int i  = 0; i < 5; i++) {
@@ -267,7 +266,7 @@ public class Game implements Runnable {
           } else {
               direction = -1;
           }
-          chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, 5, limitX, this));
+          chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, 5, 0, 500, this));
           iPosX += 50;
           iPosY += 50;
       }
@@ -290,37 +289,38 @@ public class Game implements Runnable {
       //     iPosX += 50;
       //     iPosY += 50;
       // }
-      platforms.add(new Platform(0, 250, 500, 200,  0, this));
-      platforms.add(new Platform(1300, 250, 500, 200, 0, this));
-      platforms.add(new Platform(2100, 250, 500, 200, 0, this));
+      platforms.add(new Platform(0, 250, 500, 150,  0, this));
+      platforms.add(new Platform(1300, 250, 500, 150, 0, this));
+      platforms.add(new Platform(2600, 250, 500, 150, 0, this));
 
-      platforms.add(new Platform(550, 500, 500, 50, 0, this));
-      platforms.add(new Platform(900, 500, 500, 50, 0, this));
-      platforms.add(new Platform(250, 650, 2100, 200, 0, this));
+      platforms.add(new Platform(650, 500, 500, 50, 0, this));
+      platforms.add(new Platform(1950, 500, 500, 50, 0, this));
+      platforms.add(new Platform(300, 650, 2500, 150, 0, this));
 
       platforms.add(new Platform(0, 900, 150, 50, 0, this));
       Platform plat = platforms.get(5);
       platforms.add(new Platform(plat.getX() - plat.getWidth() / 2 - 75, 900, 150, 50, 0, this));
-      platforms.add(new Platform(2450, 900, 150, 50, 0, this));
+      platforms.add(new Platform(2950, 900, 150, 50, 0, this));
 
-      platforms.add(new Platform(0, 1200, 500, 200, 0, this));
-      platforms.add(new Platform(1000, 1200, 500, 200, 0, this));
-      platforms.add(new Platform(1800, 1200, 500, 200, 0, this));
+      platforms.add(new Platform(0, 1200, 500, 150, 0, this));
+      platforms.add(new Platform(1000, 1200, 500, 150, 0, this));
+      platforms.add(new Platform(1800, 1200, 500, 150, 0, this));
 
-      platforms.add(new Platform(2350, 1200, 500, 200, 0, this));
+      platforms.add(new Platform(2350, 1200, 500, 150, 0, this));
       platforms.add(new Platform(600, 1500, 150, 50, 0, this));
-      platforms.add(new Platform(1800, 1500, 500, 200, 0, this));
+      platforms.add(new Platform(1800, 1500, 500, 150, 0, this));
 
-      platforms.add(new Platform(0, 1800, 500, 200, 0, this));
-      platforms.add(new Platform(750, 1800, 1350, 200, 0, this));
-      platforms.add(new Platform(2000, 1800, 500, 200, 0, this));
+      platforms.add(new Platform(0, 1800, 500, 150, 0, this));
+      platforms.add(new Platform(750, 1800, 1350, 150, 0, this));
+      platforms.add(new Platform(2000, 1800, 500, 150, 0, this));
 
       for (int i  = 0; i < 5; i++) {
           comidas.add(new Comida(iPosX, iPosY, 50, 50, 5, this));
           iPosX += 50;
           iPosY += 50;
       }
-      player = new Player (100, 100, 100, 100, 5, 3 ,this);
+
+      player = new Player (100, 100, 100, 100, 5, 3, 0, 150, this);
       playerX = getWidth() / 2 - player.getWidth() / 2;
       playerY = getHeight() / 2 - player.getHeight() / 2;
 
@@ -337,6 +337,7 @@ public class Game implements Runnable {
         platforms.clear();
         comidas.clear();
         powerups.clear();
+        recolectado.clear();
     }
 
     // tick and render ------------------------------------------------------------------------------------------------------------------------------------
@@ -545,10 +546,21 @@ public class Game implements Runnable {
 
             // Level screen ------------------------------------------------------------------
             case LEVEL:
+
+
+                // checks if the escape key was pressed to pause or unpause the game
+                if (keyManager.pause) {
+                  pauseGame = !pauseGame;
+                }
+
+                // checks if the backspace key was pressed to return to the main menu
                 if (keyManager.back) {
                     unloadLevel();
                     screen = Screen.MENU;
-                } else {
+                }
+
+                // ckecks if the game is paused
+                if (!pauseGame) {
 
                   // se tickea al jugador
                   player.tick();
@@ -569,13 +581,24 @@ public class Game implements Runnable {
 
                   // checar si el jugador está en la fuente
 
+                  // if (getKeyManager().z || getKeyManager().o) {
+                  //   //attack
+                  //   if (player.getDirection() == 1) {
+                  //     // attack to the right
+                  //   } else {
+                  //     // attack to the left
+                  //   }
+                  //
+                  // }
+
                   // se tickea a los chiles
                   for (int i  = 0; i < chiles.size(); i++) {
                       Enemy chile = chiles.get(i);
                       chile.tick();
-                      if (chile.intersectaJugador(player)) {
-                        chiles.remove(i);
+                      if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
+                        // chiles.remove(i);
                         // quitarle vida al jugador
+                        player.setContGotHit(60);
                       }
                   }
 
@@ -585,29 +608,29 @@ public class Game implements Runnable {
                       power.tick();
                       if (power.intersectaJugador(player)) {
                           switch (power.getType()) {
-                                case ATOLE:
-                                    // Recover all of the player hp/lives
-                                    getPlayer().setLives(getPlayer().getMaxLives());
-                                    Assets.atoleSnd.play();
-                                    powerups.remove(i);
-                                    break;
-                                case AGUA:
-                                    // Refill a little bit the players ammo
-                                    break;
+                              case ATOLE:
+                                  // Recover all of the player hp/lives
+                                  getPlayer().setLives(getPlayer().getMaxLives());
+                                  Assets.atoleSnd.play();
+                                  powerups.remove(i);
+                                  break;
+                              case AGUA:
+                                  // Refill a little bit the players ammo
+                                  break;
 
-                                case DULCE:
-                                    // Recover 1 life
-                                    if (getPlayer().getLives() < getPlayer().getMaxLives())
-                                        getPlayer().setLives(getPlayer().getLives() + 1);
-                                    Assets.dulceSnd.play();
-                                    powerups.remove(i);
-                                    break;
+                              case DULCE:
+                                  // Recover 1 life
+                                  if (getPlayer().getLives() < getPlayer().getMaxLives())
+                                      getPlayer().setLives(getPlayer().getLives() + 1);
+                                  Assets.dulceSnd.play();
+                                  powerups.remove(i);
+                                  break;
 
-                                case FRIJOL:
+                              case FRIJOL:
 
-                                    break;
+                                  break;
                           }
-                        }
+                      }
                   }
 
                   // se checa si el jugador está en el aire. si sí lo está se checa si ha colisionado con alguna plataforma
@@ -617,6 +640,8 @@ public class Game implements Runnable {
                         // platf.tick();
                         if (platf.intersectaJugador(player)) {
                           player.setInTheAir(false);
+                          player.setSpeedY(0);
+                          player.setLimits(platf.getX(), platf.getX() + platf.getWidth());
                         }
                     }
                   }
@@ -633,8 +658,6 @@ public class Game implements Runnable {
                   }
 
                 }
-
-
                 break;
         }
     }
@@ -663,25 +686,25 @@ public class Game implements Runnable {
                   switch(menOpt) {
                     case OPTIONS:
                       //g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
-                      g.drawImage(Assets.rec, 800, 60, 200, 100, null);
+                      g.drawImage(Assets.select, 810, 70, 100, 100, null);
                       break;
                     case RECIPIES:
                       //g.drawImage(Assets.rec, 1340, 200, 400, 100, null);
-                      g.drawImage(Assets.rec, 800, 120, 200, 100, null);
+                      g.drawImage(Assets.select, 785, 125, 100, 100, null);
                       break;
                    case CONTROLS:
                       //g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
-                      g.drawImage(Assets.rec, 800, 180, 200, 100, null);
+                      g.drawImage(Assets.select, 770, 185, 100, 100, null);
                       break;
                     case ONE:
                       //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
-                      g.drawImage(Assets.rec, 600, 125, 100, 100, null);
+                      g.drawImage(Assets.select, 600, 125, 100, 100, null);
                       break;
                     case TWO:
-                      g.drawImage(Assets.rec, 600, 150, 100, 100, null);
+                      g.drawImage(Assets.select, 600, 150, 100, 100, null);
                       break;
                     case THREE:
-                      g.drawImage(Assets.rec, 600, 175, 100, 100, null);
+                      g.drawImage(Assets.select, 600, 175, 100, 100, null);
                       break;
                   }
                   break;
@@ -689,13 +712,13 @@ public class Game implements Runnable {
                   g.drawImage(Assets.options, 0, 0, getWidth(), getHeight(), null);
                   switch (optOpt) {
                       case DALTONICO:
-                          g.drawImage(Assets.rec, 290, 140, 500, 100, null);
+                          g.drawImage(Assets.select, 190, 145, 100, 100, null);
                           break;
                       case SONIDO:
-                          g.drawImage(Assets.rec, 290, 260, 500, 100, null);
+                          g.drawImage(Assets.select, 190, 255, 100, 100, null);
                           break;
                       case BRILLO:
-                          g.drawImage(Assets.rec, 290, 380, 500, 100, null);
+                          g.drawImage(Assets.select, 190, 370, 100, 100, null);
                           break;
                   }
                     break;
@@ -725,6 +748,12 @@ public class Game implements Runnable {
                   }
 
                   // dibujar la fuente
+
+                  if (player.getX() < playerX) { // aquí también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
+                    g.drawImage(Assets.fuente, fuente.x, (fuente.y - rec.y), fuente.width, fuente.height, null);
+                  } else {
+                    g.drawImage(Assets.fuente, (fuente.x - rec.x), (fuente.y - rec.y), fuente.width, fuente.height, null);
+                  }
 
                   // dibujar los chiles
                   for (int i = 0; i < chiles.size(); i++) {

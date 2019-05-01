@@ -29,13 +29,14 @@ public class Assets {
     public static BufferedImage menu;               // to store the menu image
     public static BufferedImage options;            // to store the options screen image
     public static BufferedImage controls;           // to store the instructions screen image
-    public static BufferedImage rec;                // to store the red rectangle image
+    public static BufferedImage select;                // to store the red rectangle image
     public static BufferedImage recipies;       // to store the recipies screen image
     public static BufferedImage chile;       // to store the chile image
     public static BufferedImage platform;
     public static BufferedImage powerup;
     public static BufferedImage comida;
     public static BufferedImage rectangle;
+    public static BufferedImage fuente;
 
     // Power-Ups
     public static BufferedImage atole;              // to store the atole image
@@ -71,7 +72,7 @@ public class Assets {
         menu = ImageLoader.loadImage("/images/mainMenu.jpg");
         options = ImageLoader.loadImage("/images/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/controles.jpg");
-        rec = ImageLoader.loadImage("/images/flecha.png");
+        select = ImageLoader.loadImage("/images/select.png");
         recipies = ImageLoader.loadImage("/images/Recetario.png");
         chile = ImageLoader.loadImage("/images/chile.png");
         platform = ImageLoader.loadImage("/images/brick.png");
@@ -79,6 +80,7 @@ public class Assets {
         player = ImageLoader.loadImage("/images/gyrados.png");
         comida = ImageLoader.loadImage("/images/malo.png");
         rectangle = ImageLoader.loadImage("/images/192.png");
+        fuente = ImageLoader.loadImage("/images/fountain_beta.png");
 //        laser = new SoundClip("/sounds/laser.wav");
 
         atole = ImageLoader.loadImage("/images/atole.png");

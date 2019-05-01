@@ -26,7 +26,7 @@ public class Comida extends Item{
      */
     public Comida(int x, int y, int width, int height, int speedX, Game game) {
         super(x, y, width, height, speedX, game);
-//        recolectado = false;
+        // recolectado = false;
     }
 
     // GETS ------------------------------------------------------------------
