@@ -14,12 +14,36 @@ import java.awt.Rectangle;
  */
 public class PowerUps extends Item{
     private int direction;
-    private int type;
+    public enum Type {
+        ATOLE,  // Drop que recupera toda la vida al jugador
+        AGUA,   // Drop que funciona como municion para recargar el disparo del jugador
+        DULCE,  // Drop que recupera lo equivalente a un golpe al jugador
+        FRIJOL  // Drop que aumenta la resistencia del jugador
+    }
+    private Type tipo;
+    private Animation atoleAnim;
+     
 
-    public PowerUps (int x, int y, int width, int height, int speedX , int type, Game game) {
+    public PowerUps (int x, int y, int width, int height, int speedX, Game game) {
         super(x, y, width, height, speedX, game);
         this.direction = 1;
-        this.type = type;
+        int max = 100;
+        int min = 0;
+        double numerito = (Math.random() * ((max - min) + 1)) + min;
+        if (numerito < 25) {
+            this.tipo = Type.FRIJOL;
+        }
+        else if (numerito < 50) {
+            this.tipo  = Type.DULCE;
+        }
+        else if (numerito < 75) {
+            this.tipo = Type.ATOLE;
+        }
+        else {
+            this.tipo = Type.AGUA;
+        }        
+        
+        atoleAnim = new Animation(Assets.atoleAnim, 150);
     }
 
     // GETS
@@ -36,8 +60,8 @@ public class PowerUps extends Item{
      * To get the direction of the power up
      * @return an <code>int</code> value with the direction
      */
-    public int getType() {
-        return type;
+    public Type getType() {
+        return this.tipo;
     }
 
     // SETS
@@ -54,8 +78,8 @@ public class PowerUps extends Item{
      * To set the type of power up
      * @param type to set the type
      */
-    public void setType(int type) {
-        this.type = type;
+    public void setType(Type type) {
+        this.tipo = type;
     }
 
     // FUNCTIONS
@@ -96,17 +120,28 @@ public class PowerUps extends Item{
         else if (getY() <= -20) {
             setY(0);
         }
+        
+        switch (tipo) {
+            case ATOLE:
+                atoleAnim.tick();
+                break;
+        }
     }
 
     @Override
     public void render(Graphics g) {
-//        if (type == 1) {
-//            g.drawImage(Assets.blueFlask, getX(), getY(), getWidth(), getHeight(), null);
-//        } else {
-//            g.drawImage(Assets.pollos, getX(), getY(), getWidth(), getHeight(), null);
-//        }
+        switch (tipo) {
+            case ATOLE:
+                g.drawImage(atoleAnim.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            case DULCE:
+                g.drawImage(Assets.dulce, getX(), getY(), getWidth(), getHeight(), null);
+                break;
+            default:    
+                g.drawImage(Assets.powerup, getX(), getY(), getWidth(), getHeight(), null);
+        }
        // g.drawImage(Assets.powerup, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
-       g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+       //g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
        // g.drawImage(Assets.powerup, getX(), getY(), getWidth(), getHeight(), null);
 
     }

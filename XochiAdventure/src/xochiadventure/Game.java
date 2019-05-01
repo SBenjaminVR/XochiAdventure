@@ -90,6 +90,8 @@ public class Game implements Runnable {
     private int playerY;
 
     private MouseManager mouseManager;          // to manage the mouse
+    
+    private SoundClip confirmSound;
 
     /**
      * to create title, width, height, keyManager, bricks,
@@ -116,7 +118,7 @@ public class Game implements Runnable {
         powerups = new LinkedList<PowerUps>();
         platforms = new LinkedList<Platform>();
         comidas = new LinkedList<Comida>();
-        rec = new Rectangle(0, 0, getWidth(), getHeight());
+        rec = new Rectangle(0, 0, getWidth(), getHeight());        
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -269,7 +271,7 @@ public class Game implements Runnable {
 
       // se crean los powerups
       for (int i  = 0; i < 2; i++) {
-          powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 5, 0, this));
+          powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 5, this));
           iPosX += 50;
           iPosY += 50;
       }
@@ -403,6 +405,7 @@ public class Game implements Runnable {
 
                 // Checks to which screen you are moving to
                 if (keyManager.enter) {
+                    confirmSound.play();
                     switch(menOpt) {
                         case OPTIONS:
                             screen = Screen.OPTIONS;
@@ -704,6 +707,7 @@ public class Game implements Runnable {
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
         pauseGame = false;
+        confirmSound = Assets.selectSnd;
     }
 
     @Override
