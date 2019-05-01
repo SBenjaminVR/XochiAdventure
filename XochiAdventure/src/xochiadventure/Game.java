@@ -121,7 +121,7 @@ public class Game implements Runnable {
         recolectado = new LinkedList<Comida>();
         rec = new Rectangle(0, 0, getWidth(), getHeight());
         limitX = new int[2];
-        fuente = new Rectangle(0, 0, 100, 100);
+        fuente = new Rectangle(0, 0, 300, 300);
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -256,7 +256,7 @@ public class Game implements Runnable {
       int iPosY = 10;
 
       // poner donde va a estar la fuente
-      fuente.x = 500;
+      fuente.x = 1400;
       fuente.y = 500;
 
       // se crean los chiles
@@ -289,30 +289,40 @@ public class Game implements Runnable {
       //     iPosX += 50;
       //     iPosY += 50;
       // }
-      platforms.add(new Platform(0, 250, 500, 150,  0, this));
-      platforms.add(new Platform(1300, 250, 500, 150, 0, this));
-      platforms.add(new Platform(2600, 250, 500, 150, 0, this));
+      platforms.add(new Platform(0, 250, 500, 100,  0, this));
+      platforms.add(new Platform(1300, 250, 500, 100, 0, this));
+      platforms.add(new Platform(2600, 250, 500, 100, 0, this));
 
-      platforms.add(new Platform(650, 500, 500, 50, 0, this));
-      platforms.add(new Platform(1950, 500, 500, 50, 0, this));
-      platforms.add(new Platform(300, 650, 2500, 150, 0, this));
+      platforms.add(new Platform(650, 500, 500, 100, 0, this));
+      platforms.add(new Platform(1950, 500, 500, 100, 0, this));
 
-      platforms.add(new Platform(0, 900, 150, 50, 0, this));
-      Platform plat = platforms.get(5);
-      platforms.add(new Platform(plat.getX() - plat.getWidth() / 2 - 75, 900, 150, 50, 0, this));
-      platforms.add(new Platform(2950, 900, 150, 50, 0, this));
+      // 2500
+      platforms.add(new Platform(300, 800, 500, 100, 0, this));
+      platforms.add(new Platform(800, 800, 500, 100, 0, this));
+      platforms.add(new Platform(1300, 800, 500, 100, 0, this));
+      platforms.add(new Platform(1800, 800, 500, 100, 0, this));
+      platforms.add(new Platform(2300, 800, 500, 100, 0, this));
 
-      platforms.add(new Platform(0, 1200, 500, 150, 0, this));
-      platforms.add(new Platform(1000, 1200, 500, 150, 0, this));
-      platforms.add(new Platform(1800, 1200, 500, 150, 0, this));
+      // chicas
+      platforms.add(new Platform(0, 1100, 150, 30, 0, this));
+      platforms.add(new Platform(1550 - 15, 1100, 150, 30, 0, this));
+      platforms.add(new Platform(2950, 1100, 150, 30, 0, this));
 
-      platforms.add(new Platform(2350, 1200, 500, 150, 0, this));
-      platforms.add(new Platform(600, 1500, 150, 50, 0, this));
-      platforms.add(new Platform(1800, 1500, 500, 150, 0, this));
+      // grandes
+      platforms.add(new Platform(0, 1350, 500, 100, 0, this));
+      platforms.add(new Platform(950, 1350, 500, 100, 0, this));
+      platforms.add(new Platform(1900, 1350, 500, 100, 0, this));
 
-      platforms.add(new Platform(0, 1800, 500, 150, 0, this));
-      platforms.add(new Platform(750, 1800, 1350, 150, 0, this));
-      platforms.add(new Platform(2000, 1800, 500, 150, 0, this));
+      platforms.add(new Platform(2350, 1350, 500, 100, 0, this));
+
+      // chicas
+      platforms.add(new Platform(600, 1700, 150, 50, 0, this));
+      platforms.add(new Platform(1800, 1700, 150, 50, 0, this));
+
+      // grandes
+      platforms.add(new Platform(0, 2000, 500, 100, 0, this));
+      platforms.add(new Platform(750, 2000, 1350, 100, 0, this));
+      platforms.add(new Platform(2000, 2000, 500, 100, 0, this));
 
       for (int i  = 0; i < 5; i++) {
           comidas.add(new Comida(iPosX, iPosY, 50, 50, 5, this));
@@ -320,7 +330,7 @@ public class Game implements Runnable {
           iPosY += 50;
       }
 
-      player = new Player (100, 100, 100, 100, 5, 3, 0, 150, this);
+      player = new Player (1475, 650, 100, 100, 5, 3, 0, 150, this);
       playerX = getWidth() / 2 - player.getWidth() / 2;
       playerY = getHeight() / 2 - player.getHeight() / 2;
 
@@ -637,9 +647,14 @@ public class Game implements Runnable {
                           Platform platf = platforms.get(i);
                           // platf.tick();
                           if (platf.intersectaJugador(player)) {
-                            player.setInTheAir(false);
-                            player.setSpeedY(0);
-                            player.setLimits(platf.getX(), platf.getX() + platf.getWidth());
+                            if (player.getSpeedY() <= 0) {
+                              player.setInTheAir(false);
+                              player.setSpeedY(0);
+                              player.setLimits(platf.getX(), platf.getX() + platf.getWidth());
+                            } else {
+                              player.setSpeedY(0);
+                              player.setY(platf.getY() + platf.getHeight() + 1);
+                            }
                           }
                       }
                     }
@@ -652,6 +667,13 @@ public class Game implements Runnable {
                         // guardar de alguna manera que ya recolectamos una comida más o esa comida en especifico
                         recolectado.add(comi);
 
+                      }
+                    }
+
+                    if (player.getY() >= 2100) {
+                      player.setSpeedY(0);
+                      if (player.isInTheAir()) {
+                        player.setInTheAir(false);
                       }
                     }
 
