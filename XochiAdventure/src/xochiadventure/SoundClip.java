@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xochiadventure;;
+package xochiadventure;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.LineUnavailableException;
@@ -31,11 +31,11 @@ public class SoundClip {
         try {
             //crea el Buffer de sonido
             clip = AudioSystem.getClip();
-        } catch (LineUnavailableException e) { 
+        } catch (LineUnavailableException e) {
         }
     }
 
-    /** 
+    /**
      * Constructor con parametros, que carga manda llamar a load
      * esto carga el archivo de sonido.
      * @param filename es el <code>String</code> del archivo.
@@ -48,59 +48,59 @@ public class SoundClip {
     }
 
 
-    /** 
+    /**
      * Metodo de acceso que regresa un objeto de tipo Clip
      * @return clip es un <code>objeto Clip</code>.
      */
-    public Clip getClip() { 
-        return clip; 
+    public Clip getClip() {
+        return clip;
     }
 
-    /** 
+    /**
      * Metodo modificador usado para modificar si el sonido se repite.
-     * @param _looping es un valor <code>boleano</code>. 
+     * @param _looping es un valor <code>boleano</code>.
      */
     public void setLooping(boolean looping) {
-        this.looping = looping; 
+        this.looping = looping;
     }
 
-    /** 
+    /**
      * Metodo de acceso que regresa un booleano para ver si hay repeticion.
-     * @return looping  es un valor <code>boleano</code>. 
+     * @return looping  es un valor <code>boleano</code>.
      */
     public boolean getLooping() {
         return looping;
     }
 
-    /** 
+    /**
      * Metodo modificador usado para definir el numero de repeticiones.
-     * @param _repeat es un <code>entero</code> que es el numero de repeticiones. 
+     * @param _repeat es un <code>entero</code> que es el numero de repeticiones.
      */
     public void setRepeat(int repeat) {
         this.repeat = repeat;
     }
 
-    /** 
+    /**
      * Metodo de acceso que regresa el numero de repeticiones.
-     * @return repeat es un valor <code>entero</code> con el numero de repeticiones. 
+     * @return repeat es un valor <code>entero</code> con el numero de repeticiones.
      */
-    public int getRepeat() { 
-        return repeat; 
+    public int getRepeat() {
+        return repeat;
     }
 
     /**
      * Metodo modificador que asigna un nombre al archivo.
-     * @param _filename es un <code>String</code> con el nombre del archivo. 
+     * @param _filename es un <code>String</code> con el nombre del archivo.
      */
-    public void setFilename(String filename) { 
-        this.filename = filename; 
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
-    /** 
+    /**
      * Metodo de acceso que regresa el nombre del archivo.
-     * @return filename es un <code>String</code> con el nombre del archivo. 
+     * @return filename es un <code>String</code> con el nombre del archivo.
      */
-    public String getFilename() { 
+    public String getFilename() {
         return filename;
     }
 
@@ -112,22 +112,22 @@ public class SoundClip {
         return (boolean)(sample != null);
     }
 
-    /** 
+    /**
      * Metodo de acceso que regresa el url del archivo
-     * @param filename es un <code>String</code> con el nombre del archivo. 
+     * @param filename es un <code>String</code> con el nombre del archivo.
      */
     private URL getURL(String filename) {
         URL url = null;
         try {
             url = this.getClass().getResource(filename);
         }
-        catch (Exception e) { 
+        catch (Exception e) {
             System.out.println("" + filename + "does not exist");
         }
         return url;
     }
 
-    /** 
+    /**
      * Metodo que carga el archivo de sonido.
      * @param audiofile es un <code>String</code> con el nombre del archivo de sonido.
      */
@@ -152,7 +152,7 @@ public class SoundClip {
      */
     public void play() {
         //se sale si el sonido no a sido cargado
-        if (!isLoaded()) 
+        if (!isLoaded())
             return;
         //vuelve a empezar el sound clip
         clip.setFramePosition(0);
@@ -172,4 +172,3 @@ public class SoundClip {
     }
 
 }
-
