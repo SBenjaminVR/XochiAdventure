@@ -90,7 +90,7 @@ public class Game implements Runnable {
     private int playerY;
 
     private MouseManager mouseManager;          // to manage the mouse
-    
+
     private SoundClip confirmSound;
 
     /**
@@ -118,7 +118,7 @@ public class Game implements Runnable {
         powerups = new LinkedList<PowerUps>();
         platforms = new LinkedList<Platform>();
         comidas = new LinkedList<Comida>();
-        rec = new Rectangle(0, 0, getWidth(), getHeight());        
+        rec = new Rectangle(0, 0, getWidth(), getHeight());
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -430,7 +430,8 @@ public class Game implements Runnable {
 
                 // Checks to which screen you are moving to
                 if (keyManager.enter) {
-                    confirmSound.play();
+                    Assets.selectSnd.play();
+                    // confirmSound.play();
                     switch(menOpt) {
                         case OPTIONS:
                             screen = Screen.OPTIONS;

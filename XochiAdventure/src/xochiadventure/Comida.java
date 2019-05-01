@@ -43,7 +43,11 @@ public class Comida extends Item{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.comida, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
+        if (game.getPlayer().getX() < game.getPlayerX()) {
+          g.drawImage(Assets.comida, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        } else {
+          g.drawImage(Assets.comida, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        }
     }
 
 }

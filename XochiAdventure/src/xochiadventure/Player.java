@@ -46,8 +46,8 @@ public class Player extends Item{
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public boolean isInTheAir() {
         return inTheAir;
@@ -62,10 +62,10 @@ public class Player extends Item{
     public void setLives(int lives){
         this.lives = lives;
     }
-    
+
     /**
-     * 
-     * @param inTheAir 
+     *
+     * @param inTheAir
      */
     public void setInTheAir(boolean inTheAir) {
         this.inTheAir = inTheAir;
@@ -111,7 +111,7 @@ public class Player extends Item{
           y += 8;
        }
 
-       if (game.getKeyManager().space && !inTheAir) {
+       if (game.getKeyManager().lastSpace && !inTheAir) {
           speedY = 40;
           inTheAir = true;
        }
