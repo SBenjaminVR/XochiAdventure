@@ -4,7 +4,7 @@ Que funciona
 	- Se mueve
 	- Colisiona con las plataformas
 	- Se cae de las plataformas
-	- No se sale de la pantalla
+	- No se sale del nivel
 	- Parpadea cuando es pegado por un chile
 - Chiles
 	- Se mueven
@@ -34,7 +34,8 @@ Que funciona
 Que no funciona
 - Jugador
 	- No ataca
+	- Se atora en las plataformas
 - Lógica general del juego
 	- No hemos implementado la base de datos
 
-Recomendacions
+Recomendaciones

@@ -305,24 +305,24 @@ public class Game implements Runnable {
 
       // chicas
       platforms.add(new Platform(0, 1100, 150, 30, 0, this));
-      platforms.add(new Platform(1550 - 15, 1100, 150, 30, 0, this));
+      platforms.add(new Platform(1500 - 15, 1100, 150, 30, 0, this));
       platforms.add(new Platform(2950, 1100, 150, 30, 0, this));
 
       // grandes
       platforms.add(new Platform(0, 1350, 500, 100, 0, this));
       platforms.add(new Platform(950, 1350, 500, 100, 0, this));
-      platforms.add(new Platform(1900, 1350, 500, 100, 0, this));
+      platforms.add(new Platform(1650, 1350, 500, 100, 0, this));
 
-      platforms.add(new Platform(2350, 1350, 500, 100, 0, this));
+      platforms.add(new Platform(2600, 1350, 500, 100, 0, this));
 
       // chicas
-      platforms.add(new Platform(600, 1700, 150, 50, 0, this));
-      platforms.add(new Platform(1800, 1700, 150, 50, 0, this));
+      platforms.add(new Platform(650, 1650, 150, 30, 0, this));
+      platforms.add(new Platform(2300, 1650, 150, 30, 0, this));
 
       // grandes
-      platforms.add(new Platform(0, 2000, 500, 100, 0, this));
-      platforms.add(new Platform(750, 2000, 1350, 100, 0, this));
-      platforms.add(new Platform(2000, 2000, 500, 100, 0, this));
+      platforms.add(new Platform(0, 1900, 500, 100, 0, this));
+      platforms.add(new Platform(950, 1900, 1200, 100, 0, this));
+      platforms.add(new Platform(2600, 1900, 500, 100, 0, this));
 
       for (int i  = 0; i < 5; i++) {
           comidas.add(new Comida(iPosX, iPosY, 50, 50, 5, this));
@@ -672,9 +672,7 @@ public class Game implements Runnable {
 
                     if (player.getY() >= 2100) {
                       player.setSpeedY(0);
-                      if (player.isInTheAir()) {
-                        player.setInTheAir(false);
-                      }
+                      player.setInTheAir(false);
                     }
 
                   }
