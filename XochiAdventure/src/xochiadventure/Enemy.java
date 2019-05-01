@@ -14,7 +14,7 @@ import java.awt.Rectangle;
  */
 public class Enemy extends Item {
     private int direction;          // to store the direction in which the enemy is moving
-    private boolean destroyed;      // to store if the brick has been hit
+    private int limitsX[];
 
     /**
      * to create direction, width, height, directionX, and directionY and set the enemy is not moving
@@ -23,22 +23,16 @@ public class Enemy extends Item {
      * @param width to set the width of the enemy
      * @param height  to set the height of the enemy
      * @param direction to set the direcion of the enmy
-     * @param speedX
+     * @param speedX to set the speed in the x axis of the enemy
      * @param game to set the game of the enemy
      */
-    public Enemy(int x, int y, int width, int height, int direction, int speedX, Game game) {
+    public Enemy(int x, int y, int width, int height, int direction, int speedX, int limitsX[], Game game) {
         super(x, y, width, height, speedX, game);
         this.direction = direction;
-        this.destroyed = false;
+        this.limitsX = limitsX;
     }
 
-    /**
-     * To know if the brick has been hit
-     * @return an <code>boolean</code> value of the state of the brick
-     */
-    public boolean isDestroyed() {
-        return destroyed;
-    }
+    // GETS ------------------------------------------------------------------
 
     /**
       * To get the direction of the alien
@@ -48,6 +42,8 @@ public class Enemy extends Item {
         return direction;
     }
 
+    // SETS ------------------------------------------------------------------
+
     /**
     * To set the direction of the alien
     * @param direction to set the direction of the alien
@@ -56,24 +52,27 @@ public class Enemy extends Item {
         this.direction = direction;
     }
 
+    // FUNCTIONS
+
     /**
-     * To set if the brick has been hit
-     * @param destroyed
-     */
-    public void setDestroyed(boolean destroyed) {
-        this.destroyed = destroyed;
+    * To know if the bomb is intersecting with the player
+    * @param obj to know if the bomb is intersecting with it
+    * @return an <code>boolean</code> value with the state of the collision
+    */
+     public boolean intersectaJugador(Object obj) {
+       return ((obj instanceof Player) && (getPerimetro().intersects(((Player) obj).getPerimetro())));
     }
 
-    // Carga la información del objeto desde un string
+    // Carga la información del objeto desde un string ------------------------------------------------------------------
     /**
      * To set the value of destroyed from the file that was loaded
      * @param datos to set all the variables
      */
+     @Override
     public void loadFromString(String[] datos){
         this.x = Integer.parseInt(datos[0]);
         this.y = Integer.parseInt(datos[1]);
         this.direction = Integer.parseInt(datos[2]);
-        this.destroyed = (Integer.parseInt(datos[3]) == 1);
     }
 
     /**
@@ -82,8 +81,10 @@ public class Enemy extends Item {
      */
     @Override
     public String intoString(){
-        return (x + " " + y + " " + direction + " " + (destroyed ? "1":"0"));
+        return (x + " " + y + " " + direction);
     }
+
+    // tick y render ------------------------------------------------------------------
 
     @Override
     public void tick() {
@@ -96,8 +97,8 @@ public class Enemy extends Item {
         // }
         setX(getX() + speedX * direction);
 
-        if( getX() >= 500 || getX() == 0){
-        setDirection(getDirection() * -1);
+        if( getX() >= limitsX[1] || getX() <= limitsX[0]){
+          setDirection(getDirection() * -1);
         }
     }
 

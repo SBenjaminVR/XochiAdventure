@@ -74,12 +74,14 @@ public class Game implements Runnable {
 //    private Font texto;                                   // to change the font of string drawn in the screen
     private Shot shot;                                      // to have a missile to shoot
     private Rectangle rec;                                  // to store the rectangle that checks which sprites are going to be drawn
+    private Rectangle fuente;                               // to store the position of the fuente
 
     // Linked lists
     private LinkedList<Platform> platforms;                 // to store all the platforms
     private LinkedList<Enemy> chiles;                       // to store all the enemies
     private LinkedList<PowerUps> powerups;                  // to store all the powerups
     private LinkedList<Comida> comidas;                     // to store all the food
+    private LinkedList<Comida> recolectado;
 
     // Menu navigation variables
     private Screen screen;                                  // to store in which screen you are
@@ -88,6 +90,7 @@ public class Game implements Runnable {
 
     private int playerX;                                    // to store the position in which the player will be drawn
     private int playerY;                                    // to store the position in which the player will be drawn
+    private int limitX[];
 
     private MouseManager mouseManager;                      // to manage the mouse
 
@@ -115,7 +118,10 @@ public class Game implements Runnable {
         powerups = new LinkedList<PowerUps>();
         platforms = new LinkedList<Platform>();
         comidas = new LinkedList<Comida>();
+        recolectado = new LinkedList<Comida>();
         rec = new Rectangle(0, 0, getWidth(), getHeight());
+        limitX = new int[2];
+        fuente = new Rectangle(0, 0, 100, 100);
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -249,6 +255,11 @@ public class Game implements Runnable {
       int iPosX = 10;
       int iPosY = 10;
 
+      limitX[0] = 0;
+      limitX[1] = 500;
+
+      // poner donde va a estar la fuente
+
       // se crean los chiles
       for (int i  = 0; i < 5; i++) {
           if (i % 2 == 0) {
@@ -256,7 +267,7 @@ public class Game implements Runnable {
           } else {
               direction = -1;
           }
-          chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, 5, this));
+          chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, 5, limitX, this));
           iPosX += 50;
           iPosY += 50;
       }
@@ -304,11 +315,11 @@ public class Game implements Runnable {
       platforms.add(new Platform(750, 1800, 1350, 200, 0, this));
       platforms.add(new Platform(2000, 1800, 500, 200, 0, this));
 
-      // for (int i  = 0; i < 5; i++) {
-      //     comida.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
-      //     iPosX += 50;
-      //     iPosY += 50;
-      // }
+      for (int i  = 0; i < 5; i++) {
+          comidas.add(new Comida(iPosX, iPosY, 50, 50, 5, this));
+          iPosX += 50;
+          iPosY += 50;
+      }
       player = new Player (100, 100, 100, 100, 5, 3 ,this);
       playerX = getWidth() / 2 - player.getWidth() / 2;
       playerY = getHeight() / 2 - player.getHeight() / 2;
@@ -556,11 +567,16 @@ public class Game implements Runnable {
                     rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
                   }
 
+                  // checar si el jugador está en la fuente
 
                   // se tickea a los chiles
                   for (int i  = 0; i < chiles.size(); i++) {
                       Enemy chile = chiles.get(i);
                       chile.tick();
+                      if (chile.intersectaJugador(player)) {
+                        chiles.remove(i);
+                        // quitarle vida al jugador
+                      }
                   }
 
                   // se tickea a los powerups
@@ -578,7 +594,7 @@ public class Game implements Runnable {
                                 case AGUA:
                                     // Refill a little bit the players ammo
                                     break;
-                                    
+
                                 case DULCE:
                                     // Recover 1 life
                                     if (getPlayer().getLives() < getPlayer().getMaxLives())
@@ -586,10 +602,10 @@ public class Game implements Runnable {
                                     Assets.dulceSnd.play();
                                     powerups.remove(i);
                                     break;
-                                    
+
                                 case FRIJOL:
-                                    
-                                    break;                                  
+
+                                    break;
                           }
                         }
                   }
@@ -602,6 +618,16 @@ public class Game implements Runnable {
                         if (platf.intersectaJugador(player)) {
                           player.setInTheAir(false);
                         }
+                    }
+                  }
+
+                  // se tickea a los ingredientes
+                  for (int i = 0; i < comidas.size(); i++) {
+                    Comida comi = comidas.get(i);
+                    if (comi.intersectaJugador(player)) {
+                      comidas.remove(i);
+                      // guardar de alguna manera que ya recolectamos una comida más o esa comida en especifico
+                      recolectado.add(comi);
                     }
                   }
 
@@ -679,12 +705,25 @@ public class Game implements Runnable {
                   g.drawImage(Assets.controls, 0, 0, getWidth(), getHeight(), null);
                   break;
                 case LEVEL:
+
+                  // BACKGROUND
                   g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
 
                   // g.drawImage(Assets.rectangle, (int)(rec.getX()), (int)(rec.getY()), (int)(rec.getWidth()), (int)(rec.getHeight()), null);
                   // g.drawImage(Assets.rectangle, player.getX() - playerX, player.getY() - playerY, (int)(rec.getWidth()), (int)(rec.getHeight()), null);
 
-                  player.render(g);
+                  // GAME
+
+                  // dibujar las plataformas
+                  for (int i = 0; i < platforms.size(); i++) {
+                    Platform platform = platforms.get(i);
+                    // System.out.println("platform" + i + " " + (rec.intersects(platform.getPerimetro())));
+                    if (rec.intersects(platform.getPerimetro())) {
+                      platform.render(g);
+                    }
+                  }
+
+                  // dibujar la fuente
 
                   // dibujar los chiles
                   for (int i = 0; i < chiles.size(); i++) {
@@ -704,15 +743,6 @@ public class Game implements Runnable {
                     }
                   }
 
-                  // dibujar las plataformas
-                  for (int i = 0; i < platforms.size(); i++) {
-                    Platform platform = platforms.get(i);
-                    // System.out.println("platform" + i + " " + (rec.intersects(platform.getPerimetro())));
-                    if (rec.intersects(platform.getPerimetro())) {
-                      platform.render(g);
-                    }
-                  }
-
                   // dibujar comidas
                   for (int i = 0; i < comidas.size(); i++) {
                     Comida comida = comidas.get(i);
@@ -720,6 +750,25 @@ public class Game implements Runnable {
                       comida.render(g);
                     }
                   }
+
+                  player.render(g);
+
+                  // UI
+
+                  // lives
+
+                  // water
+
+                  int iPosX = getWidth() - 55;
+                  int iPosY = 20;
+
+                  // dibujar ingredientes recolectados
+                  for (int i = 0; i < recolectado.size(); i++) {
+                    Comida recol = recolectado.get(i);
+                    recol.renderUI(g, iPosX, iPosY);
+                    iPosX -= 55;
+                  }
+
                   break;
             }
 

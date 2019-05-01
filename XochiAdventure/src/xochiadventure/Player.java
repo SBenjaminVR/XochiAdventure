@@ -47,6 +47,10 @@ public class Player extends Item{
         return lives;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMaxLives() {
         return maxLives;
     }
