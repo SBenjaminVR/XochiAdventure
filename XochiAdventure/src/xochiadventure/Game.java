@@ -681,7 +681,7 @@ public class Game implements Runnable {
                     g.drawImage(Assets.titleScreen, 0, 0, getWidth(), getHeight(), null);
                     break;
                 case MENU:
-                  g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
+                  g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);                  
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
                   switch(menOpt) {
                     case OPTIONS:
@@ -737,7 +737,7 @@ public class Game implements Runnable {
                   // g.drawImage(Assets.rectangle, player.getX() - playerX, player.getY() - playerY, (int)(rec.getWidth()), (int)(rec.getHeight()), null);
 
                   // GAME
-
+             
                   // dibujar las plataformas
                   for (int i = 0; i < platforms.size(); i++) {
                     Platform platform = platforms.get(i);
@@ -786,7 +786,7 @@ public class Game implements Runnable {
                   // UI
 
                   // lives
-
+                  g.drawImage(Assets.heart, 0, 0, 75, 75, null); // PLACEHOLDER
                   // water
 
                   int iPosX = getWidth() - 55;
