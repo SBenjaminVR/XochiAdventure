@@ -13,7 +13,7 @@ import java.awt.Graphics;
  */
 public class Comida extends Item{
 
-    private boolean recolectado;
+    // private boolean recolectado;
 
     /**
      * to create direction, width, height, speed in the x axis, and game
@@ -26,28 +26,28 @@ public class Comida extends Item{
      */
     public Comida(int x, int y, int width, int height, int speedX, Game game) {
         super(x, y, width, height, speedX, game);
-        recolectado = false;
+//        recolectado = false;
     }
 
     // GETS ------------------------------------------------------------------
 
-    /**
-     *
-     * @return
-     */
-    public boolean isRecolectado() {
-        return recolectado;
-    }
+    // /**
+    //  *
+    //  * @return
+    //  */
+    // public boolean isRecolectado() {
+    //     return recolectado;
+    // }
 
     // SETS ------------------------------------------------------------------
 
-    /**
-     *
-     * @param recolectado
-     */
-    public void setRecolectado(boolean recolectado) {
-        this.recolectado = recolectado;
-    }
+    // /**
+    //  *
+    //  * @param recolectado
+    //  */
+    // public void setRecolectado(boolean recolectado) {
+    //     this.recolectado = recolectado;
+    // }
 
 
     // FUNCTIONS ------------------------------------------------------------------

@@ -628,6 +628,7 @@ public class Game implements Runnable {
                       comidas.remove(i);
                       // guardar de alguna manera que ya recolectamos una comida más o esa comida en especifico
                       recolectado.add(comi);
+
                     }
                   }
 
