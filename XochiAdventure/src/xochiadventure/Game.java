@@ -313,8 +313,8 @@ public class Game implements Runnable {
       playerX = getWidth() / 2 - player.getWidth() / 2;
       playerY = getHeight() / 2 - player.getHeight() / 2;
 
-//      System.out.println("x and y " + playerX + " " + playerY);
-//      System.out.println("player " + player.getX() + " " + player.getY());
+     // System.out.println("x and y " + playerX + " " + playerY);
+     // System.out.println("player " + player.getX() + " " + player.getY());
     }
 
     /**
@@ -538,7 +538,18 @@ public class Game implements Runnable {
                     unloadLevel();
                     screen = Screen.MENU;
                 } else {
+
+                  // se tickea al jugador
                   player.tick();
+
+                  /**
+                   * Como el rec se encarga de ver que sprite se van a dibujar en la pantalla, este sigue al jugador,
+                   * por lo que hay que checar dos condiciones:
+                   * - que el jugador esté en las orillas del nivel
+                   * - que el jugador no esté en las orillas del nivel
+                   * En el caso que la primera condicional se cumpla, solo actualizamos la 'y' del rec para que se pueda dibujar todo
+                   * En el caso que no se actualizan la 'x' y la 'y' del rec para que así pueda seguir al jugador
+                   */
                   if (player.getX() < playerX) {
                     rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
                   } else {
@@ -558,7 +569,7 @@ public class Game implements Runnable {
                       power.tick();
                   }
 
-                  // se tickean las plataformas
+                  // se checa si el jugador está en el aire. si sí lo está se checa si ha colisionado con alguna plataforma
                   if (player.isInTheAir()) {
                     for (int i  = 0; i < platforms.size(); i++) {
                         Platform platf = platforms.get(i);

@@ -20,12 +20,12 @@ public class Player extends Item{
     private boolean inTheAir;
 
     /**
-     * to create direction, width, height, and game and set the player is not moving
+     * to create direction, width, height, speed in the x axis, and game
      * @param x to set the x of the player
      * @param y to set the y of the player
      * @param width to set the width of the player
-     * @param speedX
      * @param height  to set the height of the player
+     * @param speedX to set the speed in the x axis of the player
      * @param game to set the game of the player
      */
     public Player(int x, int y, int width, int height, int speedX, int lives, Game game) {
@@ -139,7 +139,13 @@ public class Player extends Item{
 
     @Override
     public void render(Graphics g) {
-      if (x < game.getPlayerX()) {
+      /**
+       * Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
+       * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
+       * En este caso el jugador se dibujara en su respectiva 'x' y 'y' (dependiendo del caso)
+       */
+      // aqui hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
+      if (x < game.getPlayerX()) { // aquí también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
         g.drawImage(Assets.player, x, game.getPlayerY(), getWidth(), getHeight(), null);
       } else {
         g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);

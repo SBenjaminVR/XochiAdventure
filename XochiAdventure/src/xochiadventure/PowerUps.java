@@ -130,6 +130,14 @@ public class PowerUps extends Item{
 
     @Override
     public void render(Graphics g) {
+      /**
+       * Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
+       * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
+       * En este caso los powerups se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
+       */
+      // hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
+      // también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
+
         switch (tipo) {
             case ATOLE:
                 if (game.getPlayer().getX() < game.getPlayerX()) {
