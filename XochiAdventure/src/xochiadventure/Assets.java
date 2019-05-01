@@ -60,8 +60,8 @@ public class Assets {
 
         //selectSnd = new SoundClip("/sounds/Retro_8-Bit_Game-Powerup_Achievement_05.wav");
 
-        // selectSnd = new SoundClip("/sounds/selectSound.wav");
-        selectSnd = new SoundClip("/sounds/laser.wav");
+        selectSnd = new SoundClip("/sounds/selectSound.wav");
+        // selectSnd = new SoundClip("/sounds/select.wav"); OTRA OPCION NO SE CUAL ES MEJOR LOS TKM
 
         titleScreen = ImageLoader.loadImage("/images/Title Screen.jpg");
         menu = ImageLoader.loadImage("/images/mainMenu.jpg");
