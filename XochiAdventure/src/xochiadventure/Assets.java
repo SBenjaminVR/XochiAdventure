@@ -36,9 +36,15 @@ public class Assets {
     public static BufferedImage powerup;
     public static BufferedImage comida;
     public static BufferedImage rectangle;
+    
+    // Power-Ups
+    public static BufferedImage atole;              // to store the atole image
+    public static BufferedImage atoleAnim[];        // to store the frames for atole animation
+    public static BufferedImage dulce;              // to store the dulce image
 
     // Sounds
     public static SoundClip laser;
+    public static SoundClip selectSnd;
 //
     /**
      * initializing the images of the game
@@ -50,6 +56,9 @@ public class Assets {
 //        alien = ImageLoader.loadImage("/images/alien.png");
 //        shot = ImageLoader.loadImage("/images/shot.png");
 //        asteroid = ImageLoader.loadImage("/images/asteroid.png");
+
+        selectSnd = new SoundClip("/sounds/selectSound.wav");
+
         titleScreen = ImageLoader.loadImage("/images/Title Screen.jpg");
         menu = ImageLoader.loadImage("/images/mainMenu.jpg");
         options = ImageLoader.loadImage("/images/MenuOpciones.jpg");
@@ -63,6 +72,17 @@ public class Assets {
         comida = ImageLoader.loadImage("/images/malo.png");
         rectangle = ImageLoader.loadImage("/images/192.png");
 //        laser = new SoundClip("/sounds/laser.wav");
+
+        atole = ImageLoader.loadImage("/images/atole.png");
+        SpreadSheet atoleSpriteSheet = new SpreadSheet(atole);         // spritesheet of the atole
+        atoleAnim = new BufferedImage[3];                              // the sprites of the atole animation
+        
+        dulce = ImageLoader.loadImage("/images/dulce.png");
+        
+        // cropping the pictures from the player bar sheet into the array
+        for (int i = 0; i < 3; i++) {
+            atoleAnim[i] = atoleSpriteSheet.crop(i * 200, 0, 200, 200);            
+        }
     }
 
 }
