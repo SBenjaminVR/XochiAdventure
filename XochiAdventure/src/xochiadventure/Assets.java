@@ -57,7 +57,7 @@ public class Assets {
 //        shot = ImageLoader.loadImage("/images/shot.png");
 //        asteroid = ImageLoader.loadImage("/images/asteroid.png");
 
-        selectSnd = new SoundClip("/sounds/selectSound.wav");
+        selectSnd = new SoundClip("/sounds/Retro_8-Bit_Game-Powerup_Achievement_05.wav");
 
         titleScreen = ImageLoader.loadImage("/images/Title Screen.jpg");
         menu = ImageLoader.loadImage("/images/mainMenu.jpg");
