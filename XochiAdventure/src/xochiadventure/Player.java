@@ -106,16 +106,16 @@ public class Player extends Item{
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getLastX() {
         return lastX;
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getLastY() {
         return lastY;
@@ -199,11 +199,11 @@ public class Player extends Item{
     public void tick() {
         // moving player depending on flags
        if (getX() > 0 && (game.getKeyManager().lastLeft || game.getKeyManager().a)) {
-          setX(getX() - 8);
+          setX(getX() - 6);
           direction = -1;
        }
        if (getX() < 3000 && (game.getKeyManager().lastRight || game.getKeyManager().d)) {
-          setX(getX() + 8);
+          setX(getX() + 6);
           direction = 1;
        }
        if ((game.getKeyManager().lastRight || game.getKeyManager().d) || (game.getKeyManager().lastLeft || game.getKeyManager().a))
@@ -211,13 +211,13 @@ public class Player extends Item{
        else
            moving = false;
 
-       if (game.getKeyManager().lastUp) {
-          y -= 8;
-       }
-
-       if (game.getKeyManager().lastDown) {
-          y += 8;
-       }
+       // if (game.getKeyManager().lastUp) {
+       //    y -= 8;
+       // }
+       //
+       // if (game.getKeyManager().lastDown) {
+       //    y += 8;
+       // }
 
        if (game.getKeyManager().lastSpace && !inTheAir) {
           speedY = 36;
@@ -237,10 +237,10 @@ public class Player extends Item{
          lastX = x;
          lastY = y;
        }
-       
+
         if (moving)
            xochiAnim.tick();
-       
+
 
        // hacer que xochi ataque
 

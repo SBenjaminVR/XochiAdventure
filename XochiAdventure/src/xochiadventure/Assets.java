@@ -39,6 +39,7 @@ public class Assets {
     public static BufferedImage fuente;
     public static BufferedImage xochi;              // to store the xochi image
     public static BufferedImage xochiAnim[];        // to store the frames for xochi animation
+    public static BufferedImage ingredientes[];
 
     // Power-Ups
     public static BufferedImage atole;              // to store the atole image
@@ -78,16 +79,16 @@ public class Assets {
         shootSnd = new SoundClip("/sounds/shoot.wav");
         winSnd = new SoundClip("/sounds/win.wav");
 
-        titleScreen = ImageLoader.loadImage("/images/Title Screen.jpg");
-        menu = ImageLoader.loadImage("/images/mainMenu.jpg");
-        options = ImageLoader.loadImage("/images/MenuOpciones.jpg");
-        controls = ImageLoader.loadImage("/images/controles.jpg");
+        titleScreen = ImageLoader.loadImage("/images/pantallas/Title Screen.jpg");
+        menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
+        options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
+        controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
         select = ImageLoader.loadImage("/images/select.png");
-        recipies = ImageLoader.loadImage("/images/Recetario.png");
+        recipies = ImageLoader.loadImage("/images/pantallas/Recetario.png");
         chile = ImageLoader.loadImage("/images/chile.png");
         platform = ImageLoader.loadImage("/images/brick_barro.png");
         powerup = ImageLoader.loadImage("/images/flask2.png");
-        player = ImageLoader.loadImage("/images/gyrados.png");
+        // player = ImageLoader.loadImage("/images/gyrados.png");
         comida = ImageLoader.loadImage("/images/malo.png");
         rectangle = ImageLoader.loadImage("/images/192.png");
         fuente = ImageLoader.loadImage("/images/fountain_beta.png");
@@ -95,16 +96,26 @@ public class Assets {
         shot = ImageLoader.loadImage("/images/bubble.png");
 //        laser = new SoundClip("/sounds/laser.wav");
 
+        ingredientes = new BufferedImage[4];
+        ingredientes[0] = ImageLoader.loadImage("/images/comida/Tortillas.png");
+        ingredientes[1] = ImageLoader.loadImage("/images/comida/quexo.png");
+        ingredientes[2] = ImageLoader.loadImage("/images/comida/chile_collectable.png");
+        ingredientes[3] = ImageLoader.loadImage("/images/comida/tomtate.png");
+        ingredientes[4] = ImageLoader.loadImage("/images/comida/tomtate.png");
+        ingredientes[5] = ImageLoader.loadImage("/images/comida/tomtate.png");
+        ingredientes[6] = ImageLoader.loadImage("/images/comida/tomtate.png");
+
         atole = ImageLoader.loadImage("/images/atole.png");
         SpreadSheet atoleSpriteSheet = new SpreadSheet(atole);         // spritesheet of the atole
         atoleAnim = new BufferedImage[3];                              // the sprites of the atole animation
 
+
         dulce = ImageLoader.loadImage("/images/dulce.png");
-        
+
         xochi = ImageLoader.loadImage("/images/Xochi.png");
         SpreadSheet xochiSpriteSheet = new SpreadSheet(xochi);         // spritesheet of the atole
-        xochiAnim = new BufferedImage[2];   
-        
+        xochiAnim = new BufferedImage[2];
+
         // cropping the pictures from the xochi sheet into the array
         for (int i = 0; i < 2; i++) {
             xochiAnim[i] = xochiSpriteSheet.crop(i * 250, 0, 250, 250);

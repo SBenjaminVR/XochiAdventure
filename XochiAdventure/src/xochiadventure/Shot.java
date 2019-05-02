@@ -89,10 +89,8 @@ public class Shot extends Item {
     @Override
     public void render(Graphics g) {
         // g.drawImage(Assets.shot, getX(), getY(), getWidth(), getHeight(), null);
-        if (game.getPlayer().getX() < game.getPlayerX() || game.getPlayer().getX() > 3100 - game.getPlayerX()) {
-          g.drawImage(Assets.shot, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        } else {
-          g.drawImage(Assets.shot, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        }
+
+        g.drawImage(Assets.shot, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+
     }
 }

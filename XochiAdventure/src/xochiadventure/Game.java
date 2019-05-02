@@ -489,19 +489,19 @@ public class Game implements Runnable {
                             //carga nivel 1
                             Assets.selectSnd.play();
                             loadLevel("nivel 1");
-                            Assets.background = ImageLoader.loadImage("/images/nivel 1.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
                             //carga nivel2
                             loadLevel("nivel 2");
-                            Assets.background = ImageLoader.loadImage("/images/nivel 2.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 2.png");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
                             //carga nivel3
                             loadLevel("nivel 3");
-                            Assets.background = ImageLoader.loadImage("/images/nivel 3.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 3.png");
                             screen = Screen.LEVEL;
                                 break;
                         case RECIPIES:
@@ -632,10 +632,10 @@ public class Game implements Runnable {
                         //attack
                         if (player.getDirection() == 1) {
                           // attack to the right
-                          disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 4, 1, this));
+                          disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 8, 1, this));
                         } else {
                           // attack to the left
-                          disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 4, -1, this));
+                          disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 8, -1, this));
                         }
                         player.setWater(getPlayer().getWater() - 10);
                       }
@@ -661,6 +661,12 @@ public class Game implements Runnable {
                             if (disp.intersectaChile(chile)) {
                               chiles.remove(i);
                               disparos.remove(j);
+                              int max = 100;
+                              int min = 0;
+                              double numerito = (Math.random() * ((max - min) + 1)) + min;
+                              if (numerito < 25) {
+                                  powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, 0, this));
+                              }
                             }
                           }
 
@@ -698,8 +704,12 @@ public class Game implements Runnable {
                                       break;
 
                                   case FRIJOL:
+                                      powerups.remove(i);
 
                                       break;
+                                  default:
+                                    powerups.remove(i);
+                                    break;
                               }
                           }
                       }
@@ -755,20 +765,11 @@ public class Game implements Runnable {
 
                   } else {
                     if (endGame) {
-                        if (keyManager.enter) {
-                            unloadLevel();
-                            screen = Screen.MENU;
-                        }
-                      
-                        if (comidas.isEmpty() && !hasPlayedWinSnd) {
-                          // you won
-                          //Assets.winSnd.play();
-                         // hasPlayedWinSnd = true;
-                        } else if (player.getLives() == 0 && !hasPlayedWinSnd) {
-                          // you lost
-                          //Assets.loseSnd.play();
-                        }
-                  
+
+                      if (keyManager.enter) {
+                        unloadLevel();
+                        loadLevel("");
+                      }
                     }
                   }
                 }
@@ -917,10 +918,13 @@ public class Game implements Runnable {
 
                   // lives
                   for (int i = 0; i < player.getLives(); i++) {
-                    g.drawImage(Assets.heart, 0 + i * 80, 0, 75 , 75, null); // PLACEHOLDER
+                    g.drawImage(Assets.heart, 0 + i * 60, 0, 50 , 50, null); // PLACEHOLDER
                   }
 
                   // water
+                  for (int i = 0; i < 10 - disparos.size(); i++) {
+                    g.drawImage(Assets.shot, 0 + i * 60, 60, 50 , 50, null); // PLACEHOLDER
+                  }
 
                   int iPosX = getWidth() - 55;
                   int iPosY = 20;
@@ -933,14 +937,16 @@ public class Game implements Runnable {
                   }
 
                   if (endGame) {
-                    g.setFont(texto);
+                    // g.setFont(texto);
                     if (comidas.isEmpty()) {
                       // you won
-                      g.drawString("YOU WON", getWidth()/2 - 15, getHeight()/2 - 10);
+                      g.drawString("GANASTE", getWidth()/2 - 100, getHeight()/2 - 10);
                     } else if (player.getLives() == 0) {
                       // you lost
-                      g.drawString("YOU LOST", getWidth()/2 - 15, getHeight()/2 - 10);
+                      g.drawString("PERDISTE", getWidth()/2 - 100, getHeight()/2 - 10);
                     }
+                    g.drawString("Presiona Enter para reiniciar el nivel", getWidth()/2 - 300, getHeight()/2 + 15);
+                    g.drawString("Presiona Backspace para regresar al menu principal", getWidth()/2 - 400, getHeight()/2 + 40);
                   }
 
                   break;
