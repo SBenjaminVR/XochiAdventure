@@ -6,10 +6,12 @@ Que funciona
 	- Se cae de las plataformas
 	- No se sale del nivel
 	- Parpadea y pierde una vida cuando es pegado por un chile
+	- Dispara una burbuja
 
 - Chiles
 	- Se mueven
 	- No se salen de su area designada
+	- Se muere
 
 - Comida
 	- Se puede recolectar
@@ -21,6 +23,7 @@ Que funciona
 
 - Fuente
 	- Se dibuja
+	- Le recupera agua al jugador
 
 - UI
 	- Muestra la comida recolectada
@@ -29,7 +32,7 @@ Que funciona
 - Render
 	- Funciona la camara que sigue al jugador
 	- Muestra las cosas correctas
-	- Deja de seguir al jugador cuando llegar a la orilla izquierda del nivel
+	- Deja de seguir al jugador cuando llega a una de las orillas del nivel
 
 - Logica en general del juego (cargado de niveles, menus, etc)
 	- Se puede mover entre los menus
@@ -38,13 +41,13 @@ Que funciona
 
 Que no funciona
 - Jugador
-	- No ataca
 	- Se atora en las plataformas cuando las toca de lado
 
 - Chiles
-	- Como el jugador aun no ataca, no se mueren
+	- Aun no sueltan los power ups
 
 - Lógica general del juego
 	- Aun no se implementa un cargado de nivel correcto, por el momento carga el mismo template y se hace de manera manual, lo único que cambia es el fondo de pantalla
 
 Recomendaciones
+
