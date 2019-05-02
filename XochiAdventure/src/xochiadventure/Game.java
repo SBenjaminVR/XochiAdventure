@@ -610,129 +610,144 @@ public class Game implements Runnable {
                      * En el caso que la primera condicional se cumpla, solo actualizamos la 'y' del rec para que se pueda dibujar todo
                      * En el caso que no se actualizan la 'x' y la 'y' del rec para que así pueda seguir al jugador
                      */
-                     if (player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) {
-                      rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
-                    } else {
-                      rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
-                    }
-
-                    // checar si el jugador está en la fuente
-                    if (fuente.intersects(player.getPerimetro()) && player.getWater() < 100) {
-                      player.setWater(player.getWater() + 1);
-                    }
-
-                    if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
-                      //attack
-                      if (player.getDirection() == 1) {
-                        // attack to the right
-                        disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 4, 1, this));
+                      if ((player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) && player.getY() + player.getHeight() > 2000 - getPlayerY()) {
+                        rec.setRect(rec.x, rec.y, getWidth(), getHeight());
+                      } else if (player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) {
+                        rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
+                      } else if (player.getY() + player.getHeight() > 2000 - getPlayerY()) {
+                        rec.setRect(player.getX() - playerX, rec.y, getWidth(), getHeight());
                       } else {
-                        // attack to the left
-                        disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 4, -1, this));
+                        rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
                       }
-                      player.setWater(getPlayer().getWater() - 10);
-                    }
 
-                    // se tickea a los disparos
-                    for (int j = 0; j < disparos.size(); j++) {
-                      Shot disp = disparos.get(j);
-                      disp.tick();
-                      if (disp.getX() + disp.getWidth() <= 0 || disp.getX() >= 3100) {
-                        disparos.remove(j);
+                      // checar si el jugador está en la fuente
+                      if (fuente.intersects(player.getPerimetro()) && player.getWater() < 100) {
+                        player.setWater(player.getWater() + 1);
                       }
-                    }
 
-
-                    // se tickea a los chiles
-                    for (int i  = 0; i < chiles.size(); i++) {
-                        Enemy chile = chiles.get(i);
-                        chile.tick();
-
-                        // se checa que los disparos colisionen con los chiles
-                        for (int j = 0; j < disparos.size(); j++) {
-                          Shot disp = disparos.get(j);
-                          if (disp.intersectaChile(chile)) {
-                            chiles.remove(i);
-                            disparos.remove(j);
-                          }
+                      if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
+                        //attack
+                        if (player.getDirection() == 1) {
+                          // attack to the right
+                          disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 4, 1, this));
+                        } else {
+                          // attack to the left
+                          disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 4, -1, this));
                         }
+                        player.setWater(getPlayer().getWater() - 10);
+                      }
 
-                        if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
-                          // chiles.remove(i);
-                          // quitarle vida al jugador
+                      // se tickea a los disparos
+                      for (int j = 0; j < disparos.size(); j++) {
+                        Shot disp = disparos.get(j);
+                        disp.tick();
+                        if (disp.getX() + disp.getWidth() <= 0 || disp.getX() >= 3100) {
+                          disparos.remove(j);
+                        }
+                      }
+
+
+                      // se tickea a los chiles
+                      for (int i  = 0; i < chiles.size(); i++) {
+                          Enemy chile = chiles.get(i);
+                          chile.tick();
+
+                          // se checa que los disparos colisionen con los chiles
+                          for (int j = 0; j < disparos.size(); j++) {
+                            Shot disp = disparos.get(j);
+                            if (disp.intersectaChile(chile)) {
+                              chiles.remove(i);
+                              disparos.remove(j);
+                            }
+                          }
+
+                          if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
+                            // chiles.remove(i);
+                            // quitarle vida al jugador
+                            player.setLives(player.getLives() - 1);
+                            player.setContGotHit(60);
+                          }
+                      }
+
+                      // se tickea a los powerups
+                      for (int i  = 0; i < powerups.size(); i++) {
+                          PowerUps power = powerups.get(i);
+                          power.tick();
+                          if (power.intersectaJugador(player)) {
+                              switch (power.getType()) {
+                                  case ATOLE:
+                                      // Recover all of the player hp/lives
+                                      getPlayer().setLives(getPlayer().getMaxLives());
+                                      Assets.atoleSnd.play();
+                                      powerups.remove(i);
+                                      break;
+                                  case AGUA:
+                                      // Refill a little bit the players ammo
+                                      break;
+
+                                  case DULCE:
+                                      // Recover 1 life
+                                      if (getPlayer().getLives() < getPlayer().getMaxLives())
+                                          getPlayer().setLives(getPlayer().getLives() + 1);
+                                      Assets.dulceSnd.play();
+                                      powerups.remove(i);
+                                      break;
+
+                                  case FRIJOL:
+
+                                      break;
+                              }
+                          }
+                      }
+
+                      // se checa si el jugador está en el aire. si sí lo está se checa si ha colisionado con alguna plataforma
+                      if (player.isInTheAir()) {
+                        for (int i  = 0; i < platforms.size(); i++) {
+                            Platform platf = platforms.get(i);
+                            // platf.tick();
+                            if (platf.intersectaJugador(player)) {
+                              if (player.getSpeedY() <= 0) {
+                                player.setInTheAir(false);
+                                player.setSpeedY(0);
+                                player.setLimits(platf.getX(), platf.getX() + platf.getWidth());
+                              } else {
+                                player.setSpeedY(0);
+                                player.setY(platf.getY() + platf.getHeight() + 1);
+                              }
+                            }
+                        }
+                      }
+
+                      // se tickea a los ingredientes
+                      for (int i = 0; i < comidas.size(); i++) {
+                        Comida comi = comidas.get(i);
+                        if (comi.intersectaJugador(player)) {
+                          comidas.remove(i);
+                          // guardar de alguna manera que ya recolectamos una comida más o esa comida en especifico
+                          recolectado.add(comi);
+
+                        }
+                      }
+
+                      if (player.getY() >= 2100) {
+                        player.setSpeedY(0);
+                        player.setInTheAir(false);
+                        if (player.getContGotHit() == 0) {
                           player.setLives(player.getLives() - 1);
+                        }
+                        if (player.getLives() == 0) {
+                          endGame = false;
+
+                        } else {
+                          player.setX(player.getLastX());
+                          player.setY(player.getLastY());
                           player.setContGotHit(60);
                         }
-                    }
-
-                    // se tickea a los powerups
-                    for (int i  = 0; i < powerups.size(); i++) {
-                        PowerUps power = powerups.get(i);
-                        power.tick();
-                        if (power.intersectaJugador(player)) {
-                            switch (power.getType()) {
-                                case ATOLE:
-                                    // Recover all of the player hp/lives
-                                    getPlayer().setLives(getPlayer().getMaxLives());
-                                    Assets.atoleSnd.play();
-                                    powerups.remove(i);
-                                    break;
-                                case AGUA:
-                                    // Refill a little bit the players ammo
-                                    break;
-
-                                case DULCE:
-                                    // Recover 1 life
-                                    if (getPlayer().getLives() < getPlayer().getMaxLives())
-                                        getPlayer().setLives(getPlayer().getLives() + 1);
-                                    Assets.dulceSnd.play();
-                                    powerups.remove(i);
-                                    break;
-
-                                case FRIJOL:
-
-                                    break;
-                            }
-                        }
-                    }
-
-                    // se checa si el jugador está en el aire. si sí lo está se checa si ha colisionado con alguna plataforma
-                    if (player.isInTheAir()) {
-                      for (int i  = 0; i < platforms.size(); i++) {
-                          Platform platf = platforms.get(i);
-                          // platf.tick();
-                          if (platf.intersectaJugador(player)) {
-                            if (player.getSpeedY() <= 0) {
-                              player.setInTheAir(false);
-                              player.setSpeedY(0);
-                              player.setLimits(platf.getX(), platf.getX() + platf.getWidth());
-                            } else {
-                              player.setSpeedY(0);
-                              player.setY(platf.getY() + platf.getHeight() + 1);
-                            }
-                          }
                       }
-                    }
 
-                    // se tickea a los ingredientes
-                    for (int i = 0; i < comidas.size(); i++) {
-                      Comida comi = comidas.get(i);
-                      if (comi.intersectaJugador(player)) {
-                        comidas.remove(i);
-                        // guardar de alguna manera que ya recolectamos una comida más o esa comida en especifico
-                        recolectado.add(comi);
-
+                      if (comidas.isEmpty() || player.getLives() == 0) {
+                        endGame = true;
                       }
-                    }
-
-                    if (player.getY() >= 2100) {
-                      player.setSpeedY(0);
-                      player.setInTheAir(false);
-                    }
-
-                    if (comidas.isEmpty() || player.getLives() == 0) {
-                      endGame = true;
-                    }
 
                   } else {
                     if (endGame) {
