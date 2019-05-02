@@ -70,7 +70,7 @@ public class Game implements Runnable {
     private KeyManager keyManager;                          // to manage the keyboard
     private boolean endGame;                                // to know when to end the game
     private boolean pauseGame;                              // flag to know if the game is paused
-//    private String nombreArchivo;                         // to store the name of the file
+   // private String nombreArchivo;                         // to store the name of the file
     private Font texto;                                     // to change the font of string drawn in the screen
     private Shot shot;                                      // to have a missile to shoot
     private Rectangle rec;                                  // to store the rectangle that checks which sprites are going to be drawn
@@ -89,9 +89,13 @@ public class Game implements Runnable {
     private MenuOpt menOpt;                                 // to store in which option in the main menu screen you are
     private OptOpt optOpt;                                  // to store in which option in the options screen you are
 
+    // UI
     private int playerX;                                    // to store the position in which the player will be drawn
     private int playerY;                                    // to store the position in which the player will be drawn
+    private String nivel;
     private int limitX[];
+
+
 
     private MouseManager mouseManager;                      // to manage the mouse
 
@@ -759,13 +763,16 @@ public class Game implements Runnable {
             display.getCanvas().createBufferStrategy(3);
         } else {
             g = bs.getDrawGraphics();
+            g.setFont(texto);
             // Checks which screen to render
             switch(screen) {
                 case TITLESCREEN:
                     g.drawImage(Assets.titleScreen, 0, 0, getWidth(), getHeight(), null);
                     break;
                 case MENU:
+
                   g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
+                  g.drawString(nivel, 50, 480);
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
                   switch(menOpt) {
                     case OPTIONS:
@@ -781,13 +788,16 @@ public class Game implements Runnable {
                       g.drawImage(Assets.select, 770, 185, 100, 100, null);
                       break;
                     case ONE:
+                      nivel = "nivel 1";
                       //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
                       g.drawImage(Assets.select, 620, 380, 100, 100, null);
                       break;
                     case TWO:
+                      nivel = "nivel 2";
                       g.drawImage(Assets.select, 590, 450, 100, 100, null);
                       break;
                     case THREE:
+                      nivel = "nivel 3";
                       g.drawImage(Assets.select, 680, 535, 100, 100, null);
                       break;
                   }
@@ -961,6 +971,7 @@ public class Game implements Runnable {
         display.getCanvas().addMouseMotionListener(mouseManager);
         pauseGame = false;
         confirmSound = Assets.selectSnd;
+        nivel = "";
     }
 
     @Override
