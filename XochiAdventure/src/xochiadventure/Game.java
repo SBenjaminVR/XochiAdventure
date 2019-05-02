@@ -762,8 +762,8 @@ public class Game implements Runnable {
                   } else {
                     if (endGame) {
                       if (keyManager.enter) {
-                          unloadLevel();
-                          screen = Screen.MENU;
+                        unloadLevel();
+                        loadLevel("");
                       }
                     }
                   }

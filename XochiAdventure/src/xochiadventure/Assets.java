@@ -93,6 +93,9 @@ public class Assets {
         ingredientes[1] = ImageLoader.loadImage("/images/comida/quexo.png");
         ingredientes[2] = ImageLoader.loadImage("/images/comida/chile_collectable.png");
         ingredientes[3] = ImageLoader.loadImage("/images/comida/tomtate.png");
+        ingredientes[4] = ImageLoader.loadImage("/images/comida/tomtate.png");
+        ingredientes[5] = ImageLoader.loadImage("/images/comida/tomtate.png");
+        ingredientes[6] = ImageLoader.loadImage("/images/comida/tomtate.png");
 
         atole = ImageLoader.loadImage("/images/atole.png");
         SpreadSheet atoleSpriteSheet = new SpreadSheet(atole);         // spritesheet of the atole
