@@ -32,6 +32,8 @@ public class KeyManager implements KeyListener {
     public boolean right;
     public boolean left;
     public boolean space;
+    public boolean o;
+    public boolean z;
 
     public boolean lastPause;   // flag to know the state of the pause on the previous tick
     public boolean lastEnter;
@@ -41,11 +43,12 @@ public class KeyManager implements KeyListener {
     public boolean lastLeft;
     public boolean lastRight;
     public boolean lastSpace;
+    public boolean lastO;
+    public boolean lastZ;
 
     public boolean a;
     public boolean d;
-    public boolean o;
-    public boolean z;
+
 
 
     private boolean keys[];  // to store all the flags for every key
@@ -93,6 +96,8 @@ public class KeyManager implements KeyListener {
         left = lastLeft  && !keys[KeyEvent.VK_LEFT];
         right = lastRight  && !keys[KeyEvent.VK_RIGHT];
         space = lastSpace && !keys[KeyEvent.VK_SPACE];
+        o = lastO && !keys[KeyEvent.VK_O];
+        z = lastZ && !keys[KeyEvent.VK_Z];
 
         lastPause = keys[KeyEvent.VK_ESCAPE];
         lastEnter = keys[KeyEvent.VK_ENTER];
@@ -105,8 +110,8 @@ public class KeyManager implements KeyListener {
 
         a = keys[KeyEvent.VK_A];
         d = keys[KeyEvent.VK_D];
-        o = keys[KeyEvent.VK_O];
-        z = keys[KeyEvent.VK_Z];
+        lastO = keys[KeyEvent.VK_O];
+        lastZ = keys[KeyEvent.VK_Z];
 
     }
 }

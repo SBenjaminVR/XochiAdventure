@@ -82,6 +82,7 @@ public class Assets {
         rectangle = ImageLoader.loadImage("/images/192.png");
         fuente = ImageLoader.loadImage("/images/fountain_beta.png");
         heart = ImageLoader.loadImage("/images/tacoHeart.png");
+        shot = ImageLoader.loadImage("/images/bubble.png");
 //        laser = new SoundClip("/sounds/laser.wav");
 
         atole = ImageLoader.loadImage("/images/atole.png");

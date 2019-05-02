@@ -85,11 +85,12 @@ public class Comida extends Item{
        */
       // hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
       // también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
-        if (game.getPlayer().getX() < game.getPlayerX()) {
-          g.drawImage(Assets.comida, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        } else {
-          g.drawImage(Assets.comida, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        }
+        // if (game.getPlayer().getX() < game.getPlayerX()) {
+        //   g.drawImage(Assets.comida, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        // } else {
+        //   g.drawImage(Assets.comida, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        // }
+        g.drawImage(Assets.comida, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
     }
 
     public void renderUI(Graphics g, int x, int y) {

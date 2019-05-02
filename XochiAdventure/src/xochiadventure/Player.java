@@ -88,7 +88,15 @@ public class Player extends Item{
     public int getDirection() {
         return direction;
     }
-    
+
+    /**
+     *
+     * @return
+     */
+    public int getWater() {
+        return water;
+    }
+
     // SETS ------------------------------------------------------------------
 
     /**
@@ -123,6 +131,19 @@ public class Player extends Item{
         this.direction = direction;
     }
 
+    /**
+     *
+     * @param water
+     */
+    public void setWater(int water) {
+        this.water = water;
+    }
+
+    /**
+     *
+     * @param left
+     * @param right
+     */
     public void setLimits (int left, int right) {
       this.leftLimit = left;
       this.rightLimit = right;
@@ -155,11 +176,11 @@ public class Player extends Item{
         // moving player depending on flags
        if (getX() > 0 && (game.getKeyManager().lastLeft || game.getKeyManager().a)) {
           setX(getX() - 8);
-          direction = 1;
+          direction = -1;
        }
        if (getX() < 3000 && (game.getKeyManager().lastRight || game.getKeyManager().d)) {
           setX(getX() + 8);
-          direction = -1;
+          direction = 1;
        }
 
        if (game.getKeyManager().lastUp) {
@@ -213,11 +234,14 @@ public class Player extends Item{
         }
       }
       if (drawPlayer) {
-        if (x < game.getPlayerX()) {
-          g.drawImage(Assets.player, x, game.getPlayerY(), getWidth(), getHeight(), null);
-        } else {
-          g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);
-        }
+        // if (x < game.getPlayerX()) {
+        //   g.drawImage(Assets.player, x, game.getPlayerY(), getWidth(), getHeight(), null);
+        // } else if (x + width > 3100 - game.getPlayerX()) {
+        //   g.drawImage(Assets.player, x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        // } else {
+        //   g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);
+        // }
+        g.drawImage(Assets.player, x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
       }
 
 

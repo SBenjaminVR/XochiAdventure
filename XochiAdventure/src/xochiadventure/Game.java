@@ -71,7 +71,7 @@ public class Game implements Runnable {
     private boolean endGame;                                // to know when to end the game
     private boolean pauseGame;                              // flag to know if the game is paused
 //    private String nombreArchivo;                         // to store the name of the file
-//    private Font texto;                                   // to change the font of string drawn in the screen
+    private Font texto;                                     // to change the font of string drawn in the screen
     private Shot shot;                                      // to have a missile to shoot
     private Rectangle rec;                                  // to store the rectangle that checks which sprites are going to be drawn
     private Rectangle fuente;                               // to store the position of the fuente
@@ -82,6 +82,7 @@ public class Game implements Runnable {
     private LinkedList<PowerUps> powerups;                  // to store all the powerups
     private LinkedList<Comida> comidas;                     // to store all the food
     private LinkedList<Comida> recolectado;
+    private LinkedList<Shot> disparos;
 
     // Menu navigation variables
     private Screen screen;                                  // to store in which screen you are
@@ -112,13 +113,14 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         chiles = new LinkedList<Enemy>();
         // nombreArchivo = "src/space/inavders/archivo.sf";
-        // texto = new Font("Font", 2, 32);
+        texto = new Font("Font", 2, 32);
         screen = Screen.TITLESCREEN;
         mouseManager = new MouseManager();
         powerups = new LinkedList<PowerUps>();
         platforms = new LinkedList<Platform>();
         comidas = new LinkedList<Comida>();
         recolectado = new LinkedList<Comida>();
+        disparos = new LinkedList<Shot>();
         rec = new Rectangle(0, 0, getWidth(), getHeight());
         limitX = new int[2];
         fuente = new Rectangle(0, 0, 300, 300);
@@ -252,47 +254,58 @@ public class Game implements Runnable {
       int speed;
       */
       int direction;
-      int iPosX = 10;
-      int iPosY = 10;
+      // int iPosX = 10;
+      // int iPosY = 10;
 
       // poner donde va a estar la fuente
       fuente.x = 1400;
       fuente.y = 500;
 
       // se crean los chiles
-      for (int i  = 0; i < 5; i++) {
-          if (i % 2 == 0) {
-              direction = 1;
-          } else {
-              direction = -1;
-          }
-          chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, 5, 0, 500, this));
-          iPosX += 50;
-          iPosY += 50;
-      }
+      // for (int i  = 0; i < 5; i++) {
+      //     if (i % 2 == 0) {
+      //         direction = 1;
+      //     } else {
+      //         direction = -1;
+      //     }
+      //     chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, 5, 0, 500, this));
+      //     iPosX += 50;
+      //     iPosY += 50;
+      // }
 
-      iPosX = 50;
-      iPosY = 10;
+      chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
+      chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
+      chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
+      chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
+      chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
+      chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
+
+      // iPosX = 50;
+      // iPosY = 10;
 
       // se crean los powerups
-      for (int i  = 0; i < 2; i++) {
-          powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 5, this));
-          iPosX += 50;
-          iPosY += 50;
-      }
+      // for (int i  = 0; i < 2; i++) {
+      //     powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 5, this));
+      //     iPosX += 50;
+      //     iPosY += 50;
+      // }
 
-      iPosX = 100;
-      iPosY = 10;
+      // iPosX = 100;
+      // iPosY = 10;
       // se crean las plataformas
+
       // for (int i  = 0; i < 2; i++) {
       //     platforms.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
       //     iPosX += 50;
       //     iPosY += 50;
       // }
+
+      // grandes
       platforms.add(new Platform(0, 250, 500, 100,  0, this));
       platforms.add(new Platform(1300, 250, 500, 100, 0, this));
       platforms.add(new Platform(2600, 250, 500, 100, 0, this));
 
+      // chicas
       platforms.add(new Platform(650, 500, 500, 100, 0, this));
       platforms.add(new Platform(1950, 500, 500, 100, 0, this));
 
@@ -305,7 +318,7 @@ public class Game implements Runnable {
 
       // chicas
       platforms.add(new Platform(0, 1100, 150, 30, 0, this));
-      platforms.add(new Platform(1500 - 15, 1100, 150, 30, 0, this));
+      platforms.add(new Platform(1550 - 75, 1100, 150, 30, 0, this));
       platforms.add(new Platform(2950, 1100, 150, 30, 0, this));
 
       // grandes
@@ -324,15 +337,27 @@ public class Game implements Runnable {
       platforms.add(new Platform(950, 1900, 1200, 100, 0, this));
       platforms.add(new Platform(2600, 1900, 500, 100, 0, this));
 
-      for (int i  = 0; i < 5; i++) {
-          comidas.add(new Comida(iPosX, iPosY, 50, 50, 5, this));
-          iPosX += 50;
-          iPosY += 50;
-      }
+      // se crean los ingredientes
+      // for (int i  = 0; i < 5; i++) {
+      //     comidas.add(new Comida(iPosX, iPosY, 50, 50, 5, this));
+      //     iPosX += 50;
+      //     iPosY += 50;
+      // }
+
+      comidas.add(new Comida(225, 200, 50, 50, 0, this));
+      comidas.add(new Comida(1525, 200, 50, 50, 0, this));
+      comidas.add(new Comida(2925, 200, 50, 50, 0, this));
+      comidas.add(new Comida(1525, 1050, 50, 50, 0, this));
+      comidas.add(new Comida(225, 1850, 50, 50, 0, this));
+      comidas.add(new Comida(1525, 1850, 50, 50, 0, this));
+      comidas.add(new Comida(2925, 1850, 50, 50, 0, this));
 
       player = new Player (1475, 650, 100, 100, 5, 3, 0, 150, this);
       playerX = getWidth() / 2 - player.getWidth() / 2;
       playerY = getHeight() / 2 - player.getHeight() / 2;
+
+      endGame = false;
+      pauseGame = false;
 
      // System.out.println("x and y " + playerX + " " + playerY);
      // System.out.println("player " + player.getX() + " " + player.getY());
@@ -458,7 +483,7 @@ public class Game implements Runnable {
                             //carga nivel 1
                             Assets.selectSnd.play();
                             loadLevel("nivel 1");
-                            Assets.background = ImageLoader.loadImage("/images/nivel 1.jpg");
+                            Assets.background = ImageLoader.loadImage("/images/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
@@ -568,7 +593,7 @@ public class Game implements Runnable {
                     unloadLevel();
                     screen = Screen.MENU;
                 } else {
-                  if (!pauseGame) {
+                  if (!pauseGame && !endGame) {
 
                     // se tickea al jugador
                     player.tick();
@@ -581,31 +606,57 @@ public class Game implements Runnable {
                      * En el caso que la primera condicional se cumpla, solo actualizamos la 'y' del rec para que se pueda dibujar todo
                      * En el caso que no se actualizan la 'x' y la 'y' del rec para que así pueda seguir al jugador
                      */
-                    if (player.getX() < playerX) {
+                     if (player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) {
                       rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
                     } else {
                       rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
                     }
 
                     // checar si el jugador está en la fuente
+                    if (fuente.intersects(player.getPerimetro()) && player.getWater() < 100) {
+                      player.setWater(player.getWater() + 1);
+                    }
 
-                    // if (getKeyManager().z || getKeyManager().o) {
-                    //   //attack
-                    //   if (player.getDirection() == 1) {
-                    //     // attack to the right
-                    //   } else {
-                    //     // attack to the left
-                    //   }
-                    //
-                    // }
+                    if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
+                      //attack
+                      if (player.getDirection() == 1) {
+                        // attack to the right
+                        disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 4, 1, this));
+                      } else {
+                        // attack to the left
+                        disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 4, -1, this));
+                      }
+                      player.setWater(getPlayer().getWater() - 10);
+                    }
+
+                    // se tickea a los disparos
+                    for (int j = 0; j < disparos.size(); j++) {
+                      Shot disp = disparos.get(j);
+                      disp.tick();
+                      if (disp.getX() + disp.getWidth() <= 0 || disp.getX() >= 3100) {
+                        disparos.remove(j);
+                      }
+                    }
+
 
                     // se tickea a los chiles
                     for (int i  = 0; i < chiles.size(); i++) {
                         Enemy chile = chiles.get(i);
                         chile.tick();
+
+                        // se checa que los disparos colisionen con los chiles
+                        for (int j = 0; j < disparos.size(); j++) {
+                          Shot disp = disparos.get(j);
+                          if (disp.intersectaChile(chile)) {
+                            chiles.remove(i);
+                            disparos.remove(j);
+                          }
+                        }
+
                         if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
                           // chiles.remove(i);
                           // quitarle vida al jugador
+                          player.setLives(player.getLives() - 1);
                           player.setContGotHit(60);
                         }
                     }
@@ -675,6 +726,17 @@ public class Game implements Runnable {
                       player.setInTheAir(false);
                     }
 
+                    if (comidas.isEmpty() || player.getLives() == 0) {
+                      endGame = true;
+                    }
+
+                  } else {
+                    if (endGame) {
+                      if (keyManager.enter) {
+                          unloadLevel();
+                          screen = Screen.MENU;
+                      }
+                    }
                   }
                 }
 
@@ -771,7 +833,7 @@ public class Game implements Runnable {
 
                   // dibujar la fuente
 
-                  if (player.getX() < playerX) { // aquí también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
+                  if (player.getX() < playerX) {
                     g.drawImage(Assets.fuente, fuente.x, (fuente.y - rec.y), fuente.width, fuente.height, null);
                   } else {
                     g.drawImage(Assets.fuente, (fuente.x - rec.x), (fuente.y - rec.y), fuente.width, fuente.height, null);
@@ -803,12 +865,22 @@ public class Game implements Runnable {
                     }
                   }
 
+                  for (int i = 0; i < disparos.size(); i++) {
+                    Shot disp = disparos.get(i);
+                    if (rec.intersects(disp.getPerimetro())) {
+                      disp.render(g);
+                    }
+                  }
+
                   player.render(g);
 
                   // UI
 
                   // lives
-                  g.drawImage(Assets.heart, 0, 0, 75, 75, null); // PLACEHOLDER
+                  for (int i = 0; i < player.getLives(); i++) {
+                    g.drawImage(Assets.heart, 0 + i * 80, 0, 75 , 75, null); // PLACEHOLDER
+                  }
+
                   // water
 
                   int iPosX = getWidth() - 55;
@@ -821,12 +893,23 @@ public class Game implements Runnable {
                     iPosX -= 55;
                   }
 
+                  if (endGame) {
+                    g.setFont(texto);
+                    if (comidas.isEmpty()) {
+                      // you won
+                      g.drawString("YOU WON", getWidth()/2 - 15, getHeight()/2 - 10);
+                    } else if (player.getLives() == 0) {
+                      // you lost
+                      g.drawString("YOU LOST", getWidth()/2 - 15, getHeight()/2 - 10);
+                    }
+                  }
+
                   break;
             }
 
-           // g.setFont(texto);
+
            // draw score
-           // g.drawString("Score: " + score, 5, getHeight() - 20);
+
 
             bs.show();
             g.dispose();

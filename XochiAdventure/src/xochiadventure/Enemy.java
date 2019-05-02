@@ -99,7 +99,7 @@ public class Enemy extends Item {
         // }
         setX(getX() + speedX * direction);
 
-        if( getX() >= rightLimit || getX() <= leftLimit){
+        if( getX() + getWidth() >= rightLimit || getX() <= leftLimit){
           setDirection(getDirection() * -1);
         }
     }

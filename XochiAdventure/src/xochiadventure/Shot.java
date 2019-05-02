@@ -12,9 +12,8 @@ import java.awt.Rectangle;
  *
  * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández A01410921
  */
-public abstract class Shot extends Item {
-    private int directionY;         // to know the direction in the y axis of tha shot
-    private boolean fired;     // flag to know if the ball is moving
+public class Shot extends Item {
+    private int directionX;         // to know the direction in the y axis of tha shot
 
     /**
      * To create position, width, height, direction in the x and y axis, speed and game
@@ -25,10 +24,9 @@ public abstract class Shot extends Item {
      * @param speedX
      * @param game to ser the game of the shot
      */
-    public Shot (int x, int y, int width, int height, int speedX, Game game) {
+    public Shot (int x, int y, int width, int height, int speedX, int directionX, Game game) {
         super(x, y, width, height, speedX, game);
-        this.directionY = 0;
-        fired = false;
+        this.directionX = directionX;
     }
 
     // GETS ----------------------------------------------------------------
@@ -37,34 +35,18 @@ public abstract class Shot extends Item {
      * To get the direction of the shot in the y axis
      * @return an <code>int</code> value with the direction in the axis
      */
-    public int getDirectionY() {
-        return directionY;
-    }
-
-    /**
-     * To know if the shot has been fired
-     * @return an <code>boolean</code> value with the state of the shot
-     */
-    public boolean isFired() {
-        return fired;
+    public int getDirectionX() {
+        return directionX;
     }
 
     //SETS ----------------------------------------------------------------
 
      /**
      * To set the direction of the shot
-     * @param directionY to set the direction of the shot
+     * @param directionX
      */
-    public void setDirectionY(int directionY) {
-        this.directionY = directionY;
-    }
-
-    /**
-     * To set if the shot has been fired
-     * @param fired to set fired
-     */
-    public void setFired(boolean fired) {
-        this.fired = fired;
+    public void setDirectionX(int directionX) {
+        this.directionX = directionX;
     }
 
     // FUNCTIONS ----------------------------------------------------------------
@@ -74,7 +56,7 @@ public abstract class Shot extends Item {
      * @param obj to know if the shot is intersecting with it
      * @return an <code>boolean</code> value with the state of the collision
      */
-    public boolean intersectaAlien(Object obj) {
+    public boolean intersectaChile(Object obj) {
         return ((obj instanceof Enemy) && (getPerimetro().intersects(((Enemy) obj).getPerimetro())));
      }
 
@@ -83,28 +65,34 @@ public abstract class Shot extends Item {
      * To set the value of position and the direction both in the 'x' and 'y' axis of the ball from the file that was loaded
      * @param datos to set all the variables
      */
+    @Override
     public void loadFromString(String[] datos){
         this.y = Integer.parseInt(datos[0]);
-        this.directionY = Integer.parseInt(datos[1]);
-        this.fired = (Integer.parseInt(datos[2]) == 1);
+        this.directionX = Integer.parseInt(datos[1]);
     }
 
     /**
      * To get all the variable that need to be stored in the file as a string
      * @return an <code>String</code> value with all the information of the variables
      */
-    public String toString(){
-        return (y + " " + directionY + " " + (fired ? "1" : "0"));
+    @Override
+    public String intoString(){
+        return (y + " " + directionX);
     }
 
     @Override
     public void tick() {
              // updates the position of the shot
-            setY((getY()-5));
+             setX(getX() + getSpeedX() * getDirectionX());
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.shot, getX(), getY(), getWidth(), getHeight(), null);
+        // g.drawImage(Assets.shot, getX(), getY(), getWidth(), getHeight(), null);
+        if (game.getPlayer().getX() < game.getPlayerX() || game.getPlayer().getX() > 3100 - game.getPlayerX()) {
+          g.drawImage(Assets.shot, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        } else {
+          g.drawImage(Assets.shot, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        }
     }
 }

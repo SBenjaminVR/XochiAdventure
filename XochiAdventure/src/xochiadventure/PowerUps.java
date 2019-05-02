@@ -105,21 +105,21 @@ public class PowerUps extends Item{
 
     @Override
     public void tick() {
-        setX(getX() + getSpeedX() * getDirection());
-
-        // checks that the object does not goes out of the bounds
-        if (getX() + 60 >= game.getWidth()) {
-            setX(game.getWidth() - this.getWidth());
-        }
-        else if (getX() <= -30) {
-            setX(0);
-        }
-        if (getY() + 80 >= game.getHeight()) {
-            setY(game.getHeight() - this.getHeight());
-        }
-        else if (getY() <= -20) {
-            setY(0);
-        }
+        // setX(getX() + getSpeedX() * getDirection());
+        //
+        // // checks that the object does not goes out of the bounds
+        // if (getX() + 60 >= game.getWidth()) {
+        //     setX(game.getWidth() - this.getWidth());
+        // }
+        // else if (getX() <= -30) {
+        //     setX(0);
+        // }
+        // if (getY() + 80 >= game.getHeight()) {
+        //     setY(game.getHeight() - this.getHeight());
+        // }
+        // else if (getY() <= -20) {
+        //     setY(0);
+        // }
 
         switch (tipo) {
             case ATOLE:
@@ -140,7 +140,7 @@ public class PowerUps extends Item{
 
         switch (tipo) {
             case ATOLE:
-                if (game.getPlayer().getX() < game.getPlayerX()) {
+                if (game.getPlayer().getX() < game.getPlayerX() || game.getPlayer().getX() > 3100 - game.getPlayerX()) {
                   g.drawImage(atoleAnim.getCurrentFrame(), x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 } else {
                   g.drawImage(atoleAnim.getCurrentFrame(), (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
