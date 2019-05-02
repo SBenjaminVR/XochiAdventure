@@ -487,19 +487,19 @@ public class Game implements Runnable {
                             //carga nivel 1
                             Assets.selectSnd.play();
                             loadLevel("nivel 1");
-                            Assets.background = ImageLoader.loadImage("/images/nivel 1.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
                             //carga nivel2
                             loadLevel("nivel 2");
-                            Assets.background = ImageLoader.loadImage("/images/nivel 2.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 2.png");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
                             //carga nivel3
                             loadLevel("nivel 3");
-                            Assets.background = ImageLoader.loadImage("/images/nivel 3.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 3.png");
                             screen = Screen.LEVEL;
                                 break;
                         case RECIPIES:
@@ -919,14 +919,16 @@ public class Game implements Runnable {
                   }
 
                   if (endGame) {
-                    g.setFont(texto);
+                    // g.setFont(texto);
                     if (comidas.isEmpty()) {
                       // you won
-                      g.drawString("YOU WON", getWidth()/2 - 15, getHeight()/2 - 10);
+                      g.drawString("GANASTE", getWidth()/2 - 100, getHeight()/2 - 10);
                     } else if (player.getLives() == 0) {
                       // you lost
-                      g.drawString("YOU LOST", getWidth()/2 - 15, getHeight()/2 - 10);
+                      g.drawString("PERDISTE", getWidth()/2 - 100, getHeight()/2 - 10);
                     }
+                    g.drawString("Presiona Enter para reiniciar el nivel", getWidth()/2 - 300, getHeight()/2 + 15);
+                    g.drawString("Presiona Backspace para regresar al menu principal", getWidth()/2 - 400, getHeight()/2 + 40);
                   }
 
                   break;

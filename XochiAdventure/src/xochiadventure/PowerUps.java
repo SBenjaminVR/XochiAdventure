@@ -140,25 +140,26 @@ public class PowerUps extends Item{
 
         switch (tipo) {
             case ATOLE:
-                if (game.getPlayer().getX() < game.getPlayerX() || game.getPlayer().getX() > 3100 - game.getPlayerX()) {
-                  g.drawImage(atoleAnim.getCurrentFrame(), x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                } else {
+                // if (game.getPlayer().getX() < game.getPlayerX() || game.getPlayer().getX() > 3100 - game.getPlayerX()) {
+                //   g.drawImage(atoleAnim.getCurrentFrame(), x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                // } else {
                   g.drawImage(atoleAnim.getCurrentFrame(), (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                }
+                // }
                 break;
             case DULCE:
-                if (game.getPlayer().getX() < game.getPlayerX()) {
-                  g.drawImage(Assets.dulce, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                } else {
+                // if (game.getPlayer().getX() < game.getPlayerX()) {
+                //   g.drawImage(Assets.dulce, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                // } else {
                   g.drawImage(Assets.dulce, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                }
+                // }
                 break;
             default:
-                if (game.getPlayer().getX() < game.getPlayerX()) {
-                  g.drawImage(Assets.powerup, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                } else {
+                // if (game.getPlayer().getX() < game.getPlayerX()) {
+                //   g.drawImage(Assets.powerup, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                // } else {
                   g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                }
+                // }
+                break;
         }
        // g.drawImage(Assets.powerup, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
        //g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);

@@ -14,6 +14,13 @@ import java.awt.Graphics;
 public class Comida extends Item{
 
     // private boolean recolectado;
+    public enum Type {
+        Tortillas,  // Drop que recupera toda la vida al jugador
+        Queso,   // Drop que funciona como municion para recargar el disparo del jugador
+        Chile,  // Drop que recupera lo equivalente a un golpe al jugador
+        Tomate  // Drop que aumenta la resistencia del jugador
+    }
+    private Type tipo;
 
     /**
      * to create direction, width, height, speed in the x axis, and game
@@ -27,6 +34,21 @@ public class Comida extends Item{
     public Comida(int x, int y, int width, int height, int speedX, Game game) {
         super(x, y, width, height, speedX, game);
         // recolectado = false;
+        int max = 100;
+        int min = 0;
+        double numerito = (Math.random() * ((max - min) + 1)) + min;
+        if (numerito < 25) {
+            this.tipo = Type.Tortillas;
+        }
+        else if (numerito < 50) {
+            this.tipo  = Type.Queso;
+        }
+        else if (numerito < 75) {
+            this.tipo = Type.Chile;
+        }
+        else {
+            this.tipo = Type.Tomate;
+        }
     }
 
     // GETS ------------------------------------------------------------------
@@ -90,7 +112,20 @@ public class Comida extends Item{
         // } else {
         //   g.drawImage(Assets.comida, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
         // }
-        g.drawImage(Assets.comida, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        switch (tipo) {
+            case Tortillas:
+                g.drawImage(Assets.ingredientes[0], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                break;
+            case Queso:
+                g.drawImage(Assets.ingredientes[1], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                break;
+            case Chile:
+                g.drawImage(Assets.ingredientes[2], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                break;
+            case Tomate:
+                g.drawImage(Assets.ingredientes[3], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                break;
+        }
     }
 
     public void renderUI(Graphics g, int x, int y) {
@@ -106,7 +141,20 @@ public class Comida extends Item{
         // } else {
         //   g.drawImage(Assets.comida, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
         // }
-        g.drawImage(Assets.comida, x, y, getWidth(), getHeight(), null);
+        switch (tipo) {
+            case Tortillas:
+                g.drawImage(Assets.ingredientes[0], x, y, getWidth(), getHeight(), null);
+                break;
+            case Queso:
+                g.drawImage(Assets.ingredientes[1], x, y, getWidth(), getHeight(), null);
+                break;
+            case Chile:
+                g.drawImage(Assets.ingredientes[2], x, y, getWidth(), getHeight(), null);
+                break;
+            case Tomate:
+                g.drawImage(Assets.ingredientes[3], x, y, getWidth(), getHeight(), null);
+                break;
+        }
 
     }
 
