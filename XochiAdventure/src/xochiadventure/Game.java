@@ -100,6 +100,7 @@ public class Game implements Runnable {
     private MouseManager mouseManager;                      // to manage the mouse
 
     private SoundClip confirmSound;
+    private boolean hasPlayedWinSnd;
 
     /**
      * to create title, width, height, keyManager, bricks,
@@ -128,6 +129,7 @@ public class Game implements Runnable {
         rec = new Rectangle(0, 0, getWidth(), getHeight());
         limitX = new int[2];
         fuente = new Rectangle(0, 0, 300, 300);
+        hasPlayedWinSnd = false;
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -585,7 +587,7 @@ public class Game implements Runnable {
 
             // Level screen ------------------------------------------------------------------
             case LEVEL:
-
+                hasPlayedWinSnd = false;
 
                 // checks if the escape key was pressed to pause or unpause the game
                 if (keyManager.pause) {
@@ -626,6 +628,7 @@ public class Game implements Runnable {
                       }
 
                       if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
+                          Assets.shootSnd.play();
                         //attack
                         if (player.getDirection() == 1) {
                           // attack to the right
@@ -665,6 +668,7 @@ public class Game implements Runnable {
                             // chiles.remove(i);
                             // quitarle vida al jugador
                             player.setLives(player.getLives() - 1);
+                            Assets.hurtSnd.play();
                             player.setContGotHit(60);
                           }
                       }
@@ -733,7 +737,7 @@ public class Game implements Runnable {
                         player.setSpeedY(0);
                         player.setInTheAir(false);
                         if (player.getContGotHit() == 0) {
-                          player.setLives(player.getLives() - 1);
+                          player.setLives(player.getLives() - 1);                          
                         }
                         if (player.getLives() == 0) {
                           endGame = false;
@@ -746,15 +750,25 @@ public class Game implements Runnable {
                       }
 
                       if (comidas.isEmpty() || player.getLives() == 0) {
-                        endGame = true;
+                        endGame = true;                        
                       }
 
                   } else {
                     if (endGame) {
-                      if (keyManager.enter) {
-                          unloadLevel();
-                          screen = Screen.MENU;
-                      }
+                        if (keyManager.enter) {
+                            unloadLevel();
+                            screen = Screen.MENU;
+                        }
+                      
+                        if (comidas.isEmpty() && !hasPlayedWinSnd) {
+                          // you won
+                          //Assets.winSnd.play();
+                         // hasPlayedWinSnd = true;
+                        } else if (player.getLives() == 0 && !hasPlayedWinSnd) {
+                          // you lost
+                          //Assets.loseSnd.play();
+                        }
+                  
                     }
                   }
                 }

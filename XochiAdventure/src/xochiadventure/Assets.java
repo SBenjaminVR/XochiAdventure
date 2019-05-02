@@ -50,6 +50,10 @@ public class Assets {
     public static SoundClip selectSnd;
     public static SoundClip atoleSnd;
     public static SoundClip dulceSnd;
+    public static SoundClip loseSnd;
+    public static SoundClip hurtSnd;
+    public static SoundClip shootSnd;
+    public static SoundClip winSnd;
 //
     /**
      * initializing the images of the game
@@ -69,6 +73,10 @@ public class Assets {
         // selectSnd = new SoundClip("/sounds/select.wav"); OTRA OPCION NO SE CUAL ES MEJOR LOS TKM
         atoleSnd = new SoundClip("/sounds/powerUp.wav");
         dulceSnd = new SoundClip("/sounds/powerUp1.wav");
+        loseSnd = new SoundClip("/sounds/lose.wav");
+        hurtSnd = new SoundClip("/sounds/hurt.wav");
+        shootSnd = new SoundClip("/sounds/shoot.wav");
+        winSnd = new SoundClip("/sounds/win.wav");
 
         titleScreen = ImageLoader.loadImage("/images/Title Screen.jpg");
         menu = ImageLoader.loadImage("/images/mainMenu.jpg");
