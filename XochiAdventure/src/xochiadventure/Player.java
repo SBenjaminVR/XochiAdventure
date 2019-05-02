@@ -24,6 +24,8 @@ public class Player extends Item{
     private boolean drawPlayer;
     private int leftLimit;
     private int rightLimit;
+    private Animation xochiAnim;
+    private boolean moving;
 
     /**
      * to create direction, width, height, speed in the x axis, and game
@@ -45,6 +47,8 @@ public class Player extends Item{
         this.drawPlayer = true;
         this.leftLimit = left;
         this.rightLimit = right;
+        xochiAnim = new Animation(Assets.xochiAnim, 150);
+        moving = false;
     }
 
     // GETS ------------------------------------------------------------------
@@ -182,6 +186,10 @@ public class Player extends Item{
           setX(getX() + 8);
           direction = 1;
        }
+       if ((game.getKeyManager().lastRight || game.getKeyManager().d) || (game.getKeyManager().lastLeft || game.getKeyManager().a))
+            moving = true;
+       else
+           moving = false;
 
        if (game.getKeyManager().lastUp) {
           y -= 8;
@@ -205,6 +213,10 @@ public class Player extends Item{
          if (speedY > -20) {
            speedY -= 2;
          }
+       }
+       
+       if (moving) {
+           xochiAnim.tick();
        }
 
        // hacer que xochi ataque
@@ -241,7 +253,10 @@ public class Player extends Item{
         // } else {
         //   g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);
         // }
-        g.drawImage(Assets.player, x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        if (moving)
+            g.drawImage(xochiAnim.getCurrentFrame(), x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        else
+            g.drawImage(Assets.xochiAnim[0], x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
       }
 
 
