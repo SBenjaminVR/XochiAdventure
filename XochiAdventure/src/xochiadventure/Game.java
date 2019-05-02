@@ -629,10 +629,10 @@ public class Game implements Runnable {
                         //attack
                         if (player.getDirection() == 1) {
                           // attack to the right
-                          disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 4, 1, this));
+                          disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 8, 1, this));
                         } else {
                           // attack to the left
-                          disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 4, -1, this));
+                          disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 8, -1, this));
                         }
                         player.setWater(getPlayer().getWater() - 10);
                       }
@@ -658,6 +658,12 @@ public class Game implements Runnable {
                             if (disp.intersectaChile(chile)) {
                               chiles.remove(i);
                               disparos.remove(j);
+                              int max = 100;
+                              int min = 0;
+                              double numerito = (Math.random() * ((max - min) + 1)) + min;
+                              if (numerito < 25) {
+                                  powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, 0, this));
+                              }
                             }
                           }
 
@@ -694,8 +700,12 @@ public class Game implements Runnable {
                                       break;
 
                                   case FRIJOL:
+                                      powerups.remove(i);
 
                                       break;
+                                  default:
+                                    powerups.remove(i);
+                                    break;
                               }
                           }
                       }
@@ -903,10 +913,13 @@ public class Game implements Runnable {
 
                   // lives
                   for (int i = 0; i < player.getLives(); i++) {
-                    g.drawImage(Assets.heart, 0 + i * 80, 0, 75 , 75, null); // PLACEHOLDER
+                    g.drawImage(Assets.heart, 0 + i * 60, 0, 50 , 50, null); // PLACEHOLDER
                   }
 
                   // water
+                  for (int i = 0; i < 10 - disparos.size(); i++) {
+                    g.drawImage(Assets.shot, 0 + i * 60, 60, 50 , 50, null); // PLACEHOLDER
+                  }
 
                   int iPosX = getWidth() - 55;
                   int iPosY = 20;

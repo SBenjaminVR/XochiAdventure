@@ -12,6 +12,7 @@ Que funciona
 	- Se mueven
 	- No se salen de su area designada
 	- Se muere
+	- Pueden soltar un power up cuando mueren, es aletorio
 
 - Comida
 	- Se puede recolectar
@@ -42,9 +43,6 @@ Que funciona
 Que no funciona
 - Jugador
 	- Se atora en las plataformas cuando las toca de lado
-
-- Chiles
-	- Aun no sueltan los power ups
 
 - Lógica general del juego
 	- Aun no se implementa un cargado de nivel correcto, por el momento carga el mismo template y se hace de manera manual, lo único que cambia es el fondo de pantalla
