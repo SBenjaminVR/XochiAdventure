@@ -1,3 +1,10 @@
+T-Bird Studios
+
+Melba Geraldine Consuelos Fernández 		A01410921
+Humberto González Sánchez			A00822594
+Benjamín Valdez Rodríguez			A00822027
+Alberto García Viegas				A00822649
+
 Que funciona
 - Jugador
 	- Salta
@@ -43,9 +50,17 @@ Que funciona
 Que no funciona
 - Jugador
 	- Se atora en las plataformas cuando las toca de lado
+	- Su animación no cubre caminar hacia la derecha
+
+- Comidas
+	- Se decide aletoriamente que ingrediente es, por lo que se puede repetir el ingrediente 
+
+- UI
+	- No muestra correctamente cuantas burbujas puedes disparar
 
 - Lógica general del juego
 	- Aun no se implementa un cargado de nivel correcto, por el momento carga el mismo template y se hace de manera manual, lo único que cambia es el fondo de pantalla
 
 Recomendaciones
+- La fuente le regenera el agua al personaje principal, por lo que podrá disparar más. Tiene un tope
 
