@@ -782,13 +782,13 @@ public class Game implements Runnable {
                       break;
                     case ONE:
                       //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
-                      g.drawImage(Assets.select, 600, 125, 100, 100, null);
+                      g.drawImage(Assets.select, 620, 380, 100, 100, null);
                       break;
                     case TWO:
-                      g.drawImage(Assets.select, 600, 150, 100, 100, null);
+                      g.drawImage(Assets.select, 590, 450, 100, 100, null);
                       break;
                     case THREE:
-                      g.drawImage(Assets.select, 600, 175, 100, 100, null);
+                      g.drawImage(Assets.select, 680, 535, 100, 100, null);
                       break;
                   }
                   break;
