@@ -71,7 +71,7 @@ public class Assets {
         atoleSnd = new SoundClip("/sounds/powerUp.wav");
         dulceSnd = new SoundClip("/sounds/powerUp1.wav");
 
-        titleScreen = ImageLoader.loadImage("/images/pantallas/Title Screen.jpg");
+        titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
         menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
         options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
@@ -88,7 +88,7 @@ public class Assets {
         shot = ImageLoader.loadImage("/images/bubble.png");
 //        laser = new SoundClip("/sounds/laser.wav");
 
-        ingredientes = new BufferedImage[4];
+        ingredientes = new BufferedImage[7];
         ingredientes[0] = ImageLoader.loadImage("/images/comida/Tortillas.png");
         ingredientes[1] = ImageLoader.loadImage("/images/comida/quexo.png");
         ingredientes[2] = ImageLoader.loadImage("/images/comida/chile_collectable.png");
