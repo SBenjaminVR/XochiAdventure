@@ -26,6 +26,8 @@ public class Player extends Item{
     private int rightLimit;
     private Animation xochiAnim;
     private boolean moving;
+    private int lastX;
+    private int lastY;
 
     /**
      * to create direction, width, height, speed in the x axis, and game
@@ -47,8 +49,10 @@ public class Player extends Item{
         this.drawPlayer = true;
         this.leftLimit = left;
         this.rightLimit = right;
-        xochiAnim = new Animation(Assets.xochiAnim, 150);
         moving = false;
+
+        this.lastX = x;
+        this.lastY = x;
     }
 
     // GETS ------------------------------------------------------------------
@@ -99,6 +103,22 @@ public class Player extends Item{
      */
     public int getWater() {
         return water;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public int getLastX() {
+        return lastX;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public int getLastY() {
+        return lastY;
     }
 
     // SETS ------------------------------------------------------------------
@@ -213,6 +233,9 @@ public class Player extends Item{
          if (speedY > -20) {
            speedY -= 2;
          }
+       } else {
+         lastX = x;
+         lastY = y;
        }
        
        if (moving) {
