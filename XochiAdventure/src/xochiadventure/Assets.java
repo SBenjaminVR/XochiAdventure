@@ -79,7 +79,7 @@ public class Assets {
         shootSnd = new SoundClip("/sounds/shoot.wav");
         winSnd = new SoundClip("/sounds/win.wav");
 
-        titleScreen = ImageLoader.loadImage("/images/pantallas/Title Screen.jpg");
+        titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
         menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
         options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
@@ -96,14 +96,14 @@ public class Assets {
         shot = ImageLoader.loadImage("/images/bubble.png");
 //        laser = new SoundClip("/sounds/laser.wav");
 
-        ingredientes = new BufferedImage[4];
+        ingredientes = new BufferedImage[7];
         ingredientes[0] = ImageLoader.loadImage("/images/comida/Tortillas.png");
         ingredientes[1] = ImageLoader.loadImage("/images/comida/quexo.png");
         ingredientes[2] = ImageLoader.loadImage("/images/comida/chile_collectable.png");
         ingredientes[3] = ImageLoader.loadImage("/images/comida/tomtate.png");
-        ingredientes[4] = ImageLoader.loadImage("/images/comida/tomtate.png");
-        ingredientes[5] = ImageLoader.loadImage("/images/comida/tomtate.png");
-        ingredientes[6] = ImageLoader.loadImage("/images/comida/tomtate.png");
+        ingredientes[4] = ImageLoader.loadImage("/images/comida/crema.png");
+        ingredientes[5] = ImageLoader.loadImage("/images/comida/oil.png");
+        ingredientes[6] = ImageLoader.loadImage("/images/comida/cebollaFEa.png");
 
         atole = ImageLoader.loadImage("/images/atole.png");
         SpreadSheet atoleSpriteSheet = new SpreadSheet(atole);         // spritesheet of the atole

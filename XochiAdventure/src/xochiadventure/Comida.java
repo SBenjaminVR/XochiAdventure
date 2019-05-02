@@ -18,7 +18,10 @@ public class Comida extends Item{
         Tortillas,  // Drop que recupera toda la vida al jugador
         Queso,   // Drop que funciona como municion para recargar el disparo del jugador
         Chile,  // Drop que recupera lo equivalente a un golpe al jugador
-        Tomate  // Drop que aumenta la resistencia del jugador
+        Tomate,  // Drop que aumenta la resistencia del jugador
+        Crema,
+        Aceite,
+        Cebolla
     }
     private Type tipo;
 
