@@ -50,7 +50,7 @@ public class Player extends Item{
         this.leftLimit = left;
         this.rightLimit = right;
         moving = false;
-
+        xochiAnim = new Animation(Assets.xochiAnim, 150);
         this.lastX = x;
         this.lastY = x;
     }
@@ -238,9 +238,9 @@ public class Player extends Item{
          lastY = y;
        }
        
-       if (moving) {
+        if (moving)
            xochiAnim.tick();
-       }
+       
 
        // hacer que xochi ataque
 
