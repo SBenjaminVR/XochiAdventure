@@ -747,7 +747,7 @@ public class Game implements Runnable {
                         player.setSpeedY(0);
                         player.setInTheAir(false);
                         if (player.getContGotHit() == 0) {
-                          player.setLives(player.getLives() - 1);                          
+                          player.setLives(player.getLives() - 1);
                         }
                         if (player.getLives() == 0) {
                           endGame = false;
@@ -760,7 +760,7 @@ public class Game implements Runnable {
                       }
 
                       if (comidas.isEmpty() || player.getLives() == 0) {
-                        endGame = true;                        
+                        endGame = true;
                       }
 
                   } else {
@@ -922,8 +922,12 @@ public class Game implements Runnable {
                   }
 
                   // water
-                  for (int i = 0; i < 10 - disparos.size(); i++) {
-                    g.drawImage(Assets.shot, 0 + i * 60, 60, 50 , 50, null); // PLACEHOLDER
+                  // for (int i = 0; i < 10 - disparos.size(); i++) {
+                  //   g.drawImage(Assets.shot, 0 + i * 60, 60, 50 , 50, null); // PLACEHOLDER
+                  // }
+
+                  for (int i = 0; i < 100 - (100 - player.getWater()); i+=10) {
+                    g.drawImage(Assets.shot, 0 + i * 6, 60, 50 , 50, null); // PLACEHOLDER
                   }
 
                   int iPosX = getWidth() - 55;
