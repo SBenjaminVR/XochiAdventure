@@ -279,7 +279,7 @@ public class Player extends Item{
         if (moving)
             g.drawImage(xochiAnim.getCurrentFrame(), x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
         else
-            g.drawImage(Assets.xochiAnim[0], x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+            g.drawImage(Assets.xochiIdle, x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
       }
 
 

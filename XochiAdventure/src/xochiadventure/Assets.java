@@ -37,7 +37,7 @@ public class Assets {
     public static BufferedImage comida;
     public static BufferedImage rectangle;
     public static BufferedImage fuente;
-    public static BufferedImage xochi;              // to store the xochi image
+    public static BufferedImage xochiIdle;              // to store the xochi image
     public static BufferedImage xochiAnim[];        // to store the frames for xochi animation
     public static BufferedImage ingredientes[];
 
@@ -112,14 +112,13 @@ public class Assets {
 
         dulce = ImageLoader.loadImage("/images/dulce.png");
 
-        xochi = ImageLoader.loadImage("/images/Xochi.png");
-        SpreadSheet xochiSpriteSheet = new SpreadSheet(xochi);         // spritesheet of the atole
-        xochiAnim = new BufferedImage[2];
+        xochiIdle = ImageLoader.loadImage("/images/Xochi/AxolotlIdle.png");
+        xochiAnim = new BufferedImage[4];
+        xochiAnim[0] = ImageLoader.loadImage("/images/Xochi/Axolotl1.png");
+        xochiAnim[1] = ImageLoader.loadImage("/images/Xochi/Axolotl2.png");
+        xochiAnim[2] = ImageLoader.loadImage("/images/Xochi/Axolotl3.png");
+        xochiAnim[3] = ImageLoader.loadImage("/images/Xochi/Axolotl4.png");
 
-        // cropping the pictures from the xochi sheet into the array
-        for (int i = 0; i < 2; i++) {
-            xochiAnim[i] = xochiSpriteSheet.crop(i * 250, 0, 250, 250);
-        }
 
         // cropping the pictures from the atole sheet into the array
         for (int i = 0; i < 3; i++) {
