@@ -14,30 +14,30 @@ import java.awt.event.KeyListener;
  */
 public class KeyManager implements KeyListener {
 
-    public boolean pause;   // flag to pause the game
-    public boolean enter;
-    public boolean back;
-    public boolean down;
-    public boolean up;
-    public boolean right;
-    public boolean left;
-    public boolean space;
-    public boolean o;
-    public boolean z;
+    public boolean pause;   	// flag to pause the game
+    public boolean enter;		// flag to select an option in the menus or to restart the level
+    public boolean back;		// flag to return to the previous screen
+    public boolean down;		// flag to move down in the menus
+    public boolean up;			// flag to move up in the menus
+    public boolean right;		// flag to move right in the menus
+    public boolean left;		// flag to move left in the menus
+    public boolean space;		// flag to jump
+    public boolean o;			// flag to shoot
+    public boolean z;			// flag to shoot
 
     public boolean lastPause;   // flag to know the state of the pause on the previous tick
-    public boolean lastEnter;
-    public boolean lastBack;
-    public boolean lastUp;
-    public boolean lastDown;
-    public boolean lastLeft;
-    public boolean lastRight;
-    public boolean lastSpace;
-    public boolean lastO;
-    public boolean lastZ;
+    public boolean lastEnter;	// flag to know the state of enter key on the previous tick
+    public boolean lastBack;	// flag to know the state of backspace key on the previous tick
+    public boolean lastUp;		// flag to know the state of up arrow key on the previous tick
+    public boolean lastDown;	// flag to know the state of down arrow key on the previous tick
+    public boolean lastLeft;	// flag to know the state of left arrow key on the previous tick
+    public boolean lastRight;	// flag to know the state of right arrow key on the previous tick
+    public boolean lastSpace;	// flag to know the state of space bar on the previous tick
+    public boolean lastO;		// flag to know the state of O key pause on the previous tick
+    public boolean lastZ;		// flag to know the state of Z key pause on the previous tick
 
-    public boolean a;
-    public boolean d;
+    public boolean d;			// flag to move to the left
+    public boolean a;			// flag to move to the right
 
 
 
@@ -67,16 +67,11 @@ public class KeyManager implements KeyListener {
      * to enable or disable moves on every tick
      */
     public void tick() {
+        
         /**
-         * checks if in the last tick the keys 'p', 'g', 'c', and 'r' were pressed and if in the current tick they were released
-         * if this is true the corresponding flag of the key is true, else it is false
+         * For every key it check if in the last tick the key was pressed and if in the current tick the key is released
+         * If this is true, the flags are true, else the flag is false
          */
-//        lastSave = keys[KeyEvent.VK_G];
-//        lastLoad  = keys[KeyEvent.VK_C];
-//        left = keys[KeyEvent.VK_LEFT];
-//        right = keys[KeyEvent.VK_RIGHT];
-//        lastRestart = keys[KeyEvent.VK_R];
-//        fireShot = keys[KeyEvent.VK_SPACE];
 
         pause = lastPause && !keys[KeyEvent.VK_ESCAPE];
         enter = lastEnter  && !keys[KeyEvent.VK_ENTER];
@@ -89,6 +84,8 @@ public class KeyManager implements KeyListener {
         o = lastO && !keys[KeyEvent.VK_O];
         z = lastZ && !keys[KeyEvent.VK_Z];
 
+		// update the flags to wether the keys are being pressed or not
+
         lastPause = keys[KeyEvent.VK_ESCAPE];
         lastEnter = keys[KeyEvent.VK_ENTER];
         lastBack = keys[KeyEvent.VK_BACK_SPACE];
@@ -97,11 +94,12 @@ public class KeyManager implements KeyListener {
         lastLeft = keys[KeyEvent.VK_LEFT];
         lastRight = keys[KeyEvent.VK_RIGHT];
         lastSpace = keys[KeyEvent.VK_SPACE];
+        lastO = keys[KeyEvent.VK_O];
+        lastZ = keys[KeyEvent.VK_Z];
 
         a = keys[KeyEvent.VK_A];
         d = keys[KeyEvent.VK_D];
-        lastO = keys[KeyEvent.VK_O];
-        lastZ = keys[KeyEvent.VK_Z];
+        
 
     }
 }
