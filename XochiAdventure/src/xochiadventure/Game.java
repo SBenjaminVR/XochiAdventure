@@ -75,6 +75,7 @@ public class Game implements Runnable {
     private Shot shot;                                      // to have a missile to shoot
     private Rectangle rec;                                  // to store the rectangle that checks which sprites are going to be drawn
     private Rectangle fuente;                               // to store the position of the fuente
+    private boolean soundOn;
 
     // Linked lists
     private LinkedList<Platform> platforms;                 // to store all the platforms
@@ -478,7 +479,9 @@ public class Game implements Runnable {
 
                 // Checks to which screen you are moving to
                 if (keyManager.enter) {
-                    Assets.selectSnd.play();
+					if (soundOn) {
+						Assets.selectSnd.play();
+					}
                     // confirmSound.play();
                     switch(menOpt) {
                         case OPTIONS:
@@ -488,19 +491,22 @@ public class Game implements Runnable {
                         case ONE:
                             //carga nivel 1
                             Assets.selectSnd.play();
-                            loadLevel("nivel 1");
+							nivel = "nivel 1";
+                            loadLevel(nivel);
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
                             //carga nivel2
-                            loadLevel("nivel 2");
+                            nivel = "nivel 2";
+                            loadLevel(nivel);
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 2.png");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
                             //carga nivel3
-                            loadLevel("nivel 3");
+                            nivel = "nivel 3";
+                            loadLevel(nivel);
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 3.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -555,7 +561,7 @@ public class Game implements Runnable {
                             // turns on and off
                             break;
                         case SONIDO:
-                            // turns on and off
+                            soundOn = !soundOn;
                             break;
                         default:
                             break;
@@ -627,8 +633,10 @@ public class Game implements Runnable {
                         player.setWater(player.getWater() + 1);
                       }
 
-                      if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
-                          Assets.shootSnd.play();
+                    if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
+						if (soundOn) {
+							Assets.shootSnd.play();
+						}
                         //attack
                         if (player.getDirection() == 1) {
                           // attack to the right
@@ -658,6 +666,7 @@ public class Game implements Runnable {
                           // se checa que los disparos colisionen con los chiles
                           for (int j = 0; j < disparos.size(); j++) {
                             Shot disp = disparos.get(j);
+							// si colisionan elimina el chile y el disparo, aparte de checar si el chile soltará algún power up o no
                             if (disp.intersectaChile(chile)) {
                               chiles.remove(i);
                               disparos.remove(j);
@@ -665,13 +674,12 @@ public class Game implements Runnable {
                               int min = 0;
                               double numerito = (Math.random() * ((max - min) + 1)) + min;
                               if (numerito < 25) {
-                                  powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, 0, this));
+                                  powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, this));
                               }
                             }
                           }
 
                           if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
-                            // chiles.remove(i);
                             // quitarle vida al jugador
                             player.setLives(player.getLives() - 1);
                             Assets.hurtSnd.play();
@@ -768,7 +776,7 @@ public class Game implements Runnable {
 
                       if (keyManager.enter) {
                         unloadLevel();
-                        loadLevel("");
+                        loadLevel(nivel);
                       }
                     }
                   }
@@ -921,11 +929,7 @@ public class Game implements Runnable {
                     g.drawImage(Assets.heart, 0 + i * 60, 0, 50 , 50, null); // PLACEHOLDER
                   }
 
-                  // water
-                  // for (int i = 0; i < 10 - disparos.size(); i++) {
-                  //   g.drawImage(Assets.shot, 0 + i * 60, 60, 50 , 50, null); // PLACEHOLDER
-                  // }
-
+                  // bubbles
                   for (int i = 0; i < 100 - (100 - player.getWater()); i+=10) {
                     g.drawImage(Assets.shot, 0 + i * 6, 60, 50 , 50, null); // PLACEHOLDER
                   }

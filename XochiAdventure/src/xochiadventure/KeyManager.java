@@ -14,16 +14,6 @@ import java.awt.event.KeyListener;
  */
 public class KeyManager implements KeyListener {
 
-//    public boolean left;    // flag to move left the player
-//    public boolean right;   // flag to move right the player
-//    public boolean save;    // flag to save the game
-//    public boolean load;    // flag to load the game
-//    public boolean restart;     // flag to restart the game
-//    public boolean lastSave;    // flag to know the state of the save on the previous tick
-//    public boolean lastLoad;    // flag to know the state of the load on the previous tick
-//    public boolean lastRestart; // flag to know the state of the restart on the previous tick
-//    public boolean fireShot;    // flag to shoot
-
     public boolean pause;   // flag to pause the game
     public boolean enter;
     public boolean back;

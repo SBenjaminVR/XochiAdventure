@@ -13,20 +13,31 @@ import java.awt.Rectangle;
  * @author betin
  */
 public class PowerUps extends Item{
-    private int direction;
-    public enum Type {
+	
+    private int direction; // to store the direction of the power up
+	// to know which type of power up exist
+	public enum Type {
         ATOLE,  // Drop que recupera toda la vida al jugador
         AGUA,   // Drop que funciona como municion para recargar el disparo del jugador
         DULCE,  // Drop que recupera lo equivalente a un golpe al jugador
         FRIJOL  // Drop que aumenta la resistencia del jugador
     }
-    private Type tipo;
-    private Animation atoleAnim;
-
-
-    public PowerUps (int x, int y, int width, int height, int speedX, Game game) {
-        super(x, y, width, height, speedX, game);
+    private Type tipo;				// to store which type of power up it is
+    private Animation atoleAnim;	// to animate the power up
+	
+    /**
+     * To create position, width, height, direction in the x and y axis, speed and game of the power up
+     * @param x to set the x of the power up
+     * @param y to set the y of the power up
+     * @param width to set the width of the power up
+     * @param height to set the height of the power up
+     * @param game to ser the game of the power up
+     */
+    public PowerUps (int x, int y, int width, int height, Game game) {
+        super(x, y, width, height, 0, game);
         this.direction = 1;
+		
+		// to determine which type of power up it will be
         int max = 100;
         int min = 0;
         double numerito = (Math.random() * ((max - min) + 1)) + min;
@@ -42,7 +53,7 @@ public class PowerUps extends Item{
         else {
             this.tipo = Type.AGUA;
         }
-
+		
         atoleAnim = new Animation(Assets.atoleAnim, 150);
     }
 
@@ -105,22 +116,8 @@ public class PowerUps extends Item{
 
     @Override
     public void tick() {
-        // setX(getX() + getSpeedX() * getDirection());
-        //
-        // // checks that the object does not goes out of the bounds
-        // if (getX() + 60 >= game.getWidth()) {
-        //     setX(game.getWidth() - this.getWidth());
-        // }
-        // else if (getX() <= -30) {
-        //     setX(0);
-        // }
-        // if (getY() + 80 >= game.getHeight()) {
-        //     setY(game.getHeight() - this.getHeight());
-        // }
-        // else if (getY() <= -20) {
-        //     setY(0);
-        // }
-
+	
+		// to make the animation work
         switch (tipo) {
             case ATOLE:
                 atoleAnim.tick();
@@ -130,41 +127,22 @@ public class PowerUps extends Item{
 
     @Override
     public void render(Graphics g) {
-      /**
-       * Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
-       * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
-       * En este caso los powerups se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
-       */
-      // hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
-      // también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
-
+		/**
+		* Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
+		* pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
+		* En este caso los powerups se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
+		*/
+	   
         switch (tipo) {
             case ATOLE:
-                // if (game.getPlayer().getX() < game.getPlayerX() || game.getPlayer().getX() > 3100 - game.getPlayerX()) {
-                //   g.drawImage(atoleAnim.getCurrentFrame(), x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                // } else {
-                  g.drawImage(atoleAnim.getCurrentFrame(), (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                // }
+                g.drawImage(atoleAnim.getCurrentFrame(), (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
             case DULCE:
-                // if (game.getPlayer().getX() < game.getPlayerX()) {
-                //   g.drawImage(Assets.dulce, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                // } else {
-                  g.drawImage(Assets.dulce, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                // }
+                g.drawImage(Assets.dulce, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
             default:
-                // if (game.getPlayer().getX() < game.getPlayerX()) {
-                //   g.drawImage(Assets.powerup, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                // } else {
-                  g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                // }
+                g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
         }
-       // g.drawImage(Assets.powerup, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
-       //g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-
-       // g.drawImage(Assets.powerup, getX(), getY(), getWidth(), getHeight(), null);
-
     }
 }

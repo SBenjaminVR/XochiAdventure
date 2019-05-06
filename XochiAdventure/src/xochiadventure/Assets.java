@@ -94,7 +94,7 @@ public class Assets {
         fuente = ImageLoader.loadImage("/images/fountain_beta.png");
         heart = ImageLoader.loadImage("/images/tacoHeart.png");
         shot = ImageLoader.loadImage("/images/bubble.png");
-//        laser = new SoundClip("/sounds/laser.wav");
+        // laser = new SoundClip("/sounds/laser.wav");
 
         ingredientes = new BufferedImage[7];
         ingredientes[0] = ImageLoader.loadImage("/images/comida/Tortillas.png");

@@ -15,7 +15,7 @@ import java.awt.Rectangle;
 public class Platform extends Item {
 
     /**
-     *
+     * Set the initial values to create the platform
      * @param x
      * @param y
      * @param width

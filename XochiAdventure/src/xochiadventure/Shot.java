@@ -13,7 +13,7 @@ import java.awt.Rectangle;
  * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández A01410921
  */
 public class Shot extends Item {
-    private int directionX;         // to know the direction in the y axis of tha shot
+    private int directionX;         // to know the direction in the x axis of tha shot
 
     /**
      * To create position, width, height, direction in the x and y axis, speed and game
@@ -82,8 +82,8 @@ public class Shot extends Item {
 
     @Override
     public void tick() {
-             // updates the position of the shot
-             setX(getX() + getSpeedX() * getDirectionX());
+        // updates the position of the shot
+        setX(getX() + getSpeedX() * getDirectionX());
     }
 
     @Override

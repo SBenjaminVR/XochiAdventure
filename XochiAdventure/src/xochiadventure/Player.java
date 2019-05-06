@@ -15,26 +15,26 @@ import java.util.Set;
  */
 public class Player extends Item{
 
-    private int lives;
-    private int maxLives;
-    private int water;
-    private boolean inTheAir;
-    private int direction;
-    private int contGotHit;
-    private boolean drawPlayer;
-    private int leftLimit;
-    private int rightLimit;
-    private Animation xochiAnim;
-    private boolean moving;
-    private int lastX;
-    private int lastY;
+    private int lives;					// to store the lives that the player has
+    private int maxLives;				// to store the max lives the player can have
+    private int water;					// to store how much water the player has
+    private boolean inTheAir;			// to know if the player is in the air
+    private int direction;				// to store the direction of the player
+    private int contGotHit;				// to store how many more ticks the player is invunerable because they were hit
+    private boolean drawPlayer;			// to know if the player should be drawn
+    private int leftLimit;				// to store the limit in the x axis where the player can move to the left before falling
+    private int rightLimit;				// to store the limit in the x axis where the player can move to the right before falling
+    private Animation xochiAnim;		// to animate the player
+    private boolean moving;				// to know if the player is moving int the x axis
+    private int lastX;					// to store the last position on the x axis while on the ground
+    private int lastY;					// to store the last position on the y axis while on the ground
 
     /**
      * to create direction, width, height, speed in the x axis, and game
      * @param x to set the x of the player
      * @param y to set the y of the player
      * @param width to set the width of the player
-     * @param height  to set the height of the player
+     * @param height to set the height of the player
      * @param speedX to set the speed in the x axis of the player
      * @param game to set the game of the player
      */
@@ -56,115 +56,136 @@ public class Player extends Item{
     }
 
     // GETS ------------------------------------------------------------------
-
+	
     /**
-     *
-     * @return
+     * To get the lives the player has
+     * @return an <code>int</code> value with the lives of the player
      */
     public int getLives() {
         return lives;
     }
 
     /**
-     *
-     * @return
+     * To get the max lives the player can have
+     * @return an <code>int</code> value with the max lives
      */
     public int getMaxLives() {
         return maxLives;
     }
 
     /**
-     *
-     * @return
+     * To know if the player is in the air
+     * @return an <code>boolean</code> value to know the state of the player
      */
     public boolean isInTheAir() {
         return inTheAir;
     }
 
      /**
-     *
-     * @return
+     * To get how many more ticks will the player will be in a state of invunerability
+     * @return an <code>int</code> value with the remaining ticks
      */
     public int getContGotHit() {
         return contGotHit;
     }
 
     /**
-     *
-     * @return
+     * To get the direction in the x axis of the player
+     * @return an <code>int</code> value with the direction 
      */
     public int getDirection() {
         return direction;
     }
 
     /**
-     *
-     * @return
+     * To get the remaining quantity of water the player has
+     * @return an <code>int</code> value with the remaining quantity of water
      */
     public int getWater() {
         return water;
     }
 
     /**
-     *
-     * @return
+     * To get the last position in the x axis of the player while it was on the ground
+     * @return an <code>int</code> value with the last position in the x axis
      */
     public int getLastX() {
         return lastX;
     }
 
     /**
-     *
-     * @return
+     * To get the last position in the y axis of the player while it was on the ground
+     * @return an <code>int</code> value with the last position in the y axis
      */
     public int getLastY() {
         return lastY;
     }
 
-    // SETS ------------------------------------------------------------------
+    /**
+     * 
+     * @return 
+     */
+    public int getLeftLimit() {
+        return leftLimit;
+    }
 
     /**
-     *
-     * @param lives
+     * 
+     * @return 
+     */
+    public int getRightLimit() {
+        return rightLimit;
+    }
+
+    // SETS ------------------------------------------------------------------
+
+	/**
+     * To set the direction of the power up
+     * @param direction to set the direction of the power up
+     */
+
+    /**
+     * To set the lives the player has
+     * @param lives to set the lives the player has
      */
     public void setLives(int lives){
         this.lives = lives;
     }
 
     /**
-     *
-     * @param inTheAir
+     * To set if the player is in the air
+     * @param inTheAir to set if the player is in the air
      */
     public void setInTheAir(boolean inTheAir) {
         this.inTheAir = inTheAir;
     }
 
     /**
-     *
-     * @param contGotHit
+     * To set how many more ticks will the player will be in a state of invunerability
+     * @param contGotHit to set how many more ticks will the player will be in a state of invunerability
      */
     public void setContGotHit(int contGotHit) {
         this.contGotHit = contGotHit;
     }
 
     /**
-     *
-     * @param direction
+     * To set the direction of the player
+     * @param direction to set the direction of the player
      */
     public void setDirection(int direction) {
         this.direction = direction;
     }
 
     /**
-     *
-     * @param water
+     * To set the remaining quantity of water the player has
+     * @param water to set the remaining quantity of water the player has
      */
     public void setWater(int water) {
         this.water = water;
     }
 
     /**
-     *
+     * 
      * @param left
      * @param right
      */
@@ -198,93 +219,67 @@ public class Player extends Item{
     @Override
     public void tick() {
         // moving player depending on flags
-       if (getX() > 0 && (game.getKeyManager().lastLeft || game.getKeyManager().a)) {
-          setX(getX() - 6);
-          direction = -1;
-       }
-       if (getX() < 3000 && (game.getKeyManager().lastRight || game.getKeyManager().d)) {
-          setX(getX() + 6);
-          direction = 1;
-       }
-       if ((game.getKeyManager().lastRight || game.getKeyManager().d) || (game.getKeyManager().lastLeft || game.getKeyManager().a))
-            moving = true;
-       else
-           moving = false;
-
-       // if (game.getKeyManager().lastUp) {
-       //    y -= 8;
-       // }
-       //
-       // if (game.getKeyManager().lastDown) {
-       //    y += 8;
-       // }
-
-       if (game.getKeyManager().lastSpace && !inTheAir) {
-          speedY = 36;
-          inTheAir = true;
-       }
-
-       if (x + width <= leftLimit || x > rightLimit) {
-         inTheAir = true;
-       }
-
-       if (inTheAir) {
-         y -= speedY;
-         if (speedY > -20) {
-           speedY -= 2;
-         }
-       } else {
-         lastX = x;
-         lastY = y;
-       }
-
+		if (getX() > 0 && (game.getKeyManager().lastLeft || game.getKeyManager().a)) {
+			setX(getX() - 6);
+			direction = -1;
+		}
+		if (getX() < 3000 && (game.getKeyManager().lastRight || game.getKeyManager().d)) {
+			setX(getX() + 6);
+			direction = 1;
+		}
+		
+		// checks if the player is moving
+		if ((game.getKeyManager().lastRight || game.getKeyManager().d) || (game.getKeyManager().lastLeft || game.getKeyManager().a))
+			moving = true;
+		else
+			moving = false;
+		
+		// making the player jump
+		if (game.getKeyManager().lastSpace && !inTheAir) {
+			speedY = 36;
+			inTheAir = true;
+		}
+		
+		// checks if the player is on top of the last platform it collide with
+		if (getX() + getWidth() <= getLeftLimit() || getX() >= getRightLimit()) {
+			inTheAir = true;
+		}
+	
+	
+		// checks if the player is in the air to update its position in the y axis
+		if (inTheAir) {
+			y -= speedY;
+			if (speedY > -20) {
+				speedY -= 2;
+			}
+		} else {
+			lastX = x;
+			lastY = y;
+		}
+	
+		// checks if the player is moving to animate its walking
         if (moving)
            xochiAnim.tick();
-
-
-       // hacer que xochi ataque
-
-        // checks that the object does not goes out of the bounds
-        // if (getX() + getWidth() >= game.getWidth()) {
-        //     setX(game.getWidth() - this.getWidth());
-        // }
-        // else if (getX() <= 0) {
-        //     setX(0);
-        // }
     }
 
     @Override
     public void render(Graphics g) {
-      /**
-       * Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
-       * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
-       * En este caso el jugador se dibujara en su respectiva 'x' y 'y' (dependiendo del caso)
-       */
-      // hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
-      // también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
-      if (contGotHit > 0) {
-        contGotHit -= 1;
-        if (contGotHit % 5 == 0) {
-          drawPlayer = !drawPlayer;
-        }
-      }
-      if (drawPlayer) {
-        // if (x < game.getPlayerX()) {
-        //   g.drawImage(Assets.player, x, game.getPlayerY(), getWidth(), getHeight(), null);
-        // } else if (x + width > 3100 - game.getPlayerX()) {
-        //   g.drawImage(Assets.player, x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        // } else {
-        //   g.drawImage(Assets.player, game.getPlayerX(), game.getPlayerY(), getWidth(), getHeight(), null);
-        // }
-        if (moving)
-            g.drawImage(xochiAnim.getCurrentFrame(), x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        else
-            g.drawImage(Assets.xochiIdle, x - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-      }
-
-
-        // g.drawImage(Assets.comida, getX(), getY(), getWidth(), getHeight(), null);
-        // g.drawImage(Assets.player, game.getWidth() / 2 - getWidth() / 2, game.getHeight() / 2 - getHeight() / 2, getWidth(), getHeight(), null);
-        // g.drawImage(Assets.player, getX(), getY(), getWidth(), getHeight(), null);
+		/**
+		 * Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
+		 * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
+		 * En este caso el jugador se dibujara en su respectiva 'x' y 'y' (dependiendo del caso)
+		 */
+		if (contGotHit > 0) {
+			contGotHit -= 1;
+			if (contGotHit % 5 == 0) {
+				drawPlayer = !drawPlayer;
+			}
+		}
+		if (drawPlayer) {
+			if (moving)
+				g.drawImage(xochiAnim.getCurrentFrame(), getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+			else
+				g.drawImage(Assets.xochiIdle, getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+		}
     }
 }
