@@ -16,11 +16,11 @@ import java.awt.Rectangle;
 public abstract class Item {
     protected int x;        // to store x position
     protected int y;        // to store y position
-    protected int width;
-    protected int height;
-    protected int speedY;
-    protected int speedX;
-    protected Game game;
+    protected int width;	// to store the width
+    protected int height;	// to store the height
+    protected int speedY;	// to store the speed in the y axis
+    protected int speedX; 	// to store the speed in the x axis
+    protected Game game;	// to store the game
     
     /**
      * Set the initial values to create the item
@@ -60,32 +60,32 @@ public abstract class Item {
     }
     
     /**
-     * 
-     * @return 
+     * Get width value
+     * @return width
      */
     public int getWidth() {
         return width;
     }
 
     /**
-     * 
-     * @return 
+     * Get height value
+     * @return height
      */
     public int getHeight() {
         return height;
     }
 
     /**
-     * 
-     * @return 
+     * Get speedX value
+     * @return speedX
      */
     public int getSpeedX() {
         return speedX;
     }
 
     /**
-     * 
-     * @return 
+     * Get speedY value
+     * @return speedY
      */
     public int getSpeedY() {
         return speedY;
@@ -110,32 +110,32 @@ public abstract class Item {
     }
 
     /**
-     * 
-     * @param width 
+     * Set width value
+     * @param width to modify
      */
     public void setWidth(int width) {
         this.width = width;
     }
 
     /**
-     * 
-     * @param height 
+     * Set height value
+     * @param height to modify
      */
     public void setHeight(int height) {
         this.height = height;
     }
 
     /**
-     * 
-     * @param speedX 
+     * Set speedX value
+     * @param speedX to modify
      */
     public void setSpeedX(int speedX) {
         this.speedX = speedX;
     }
 
     /**
-     * 
-     * @param speedY 
+     * Set speedY value
+     * @param speedY to modify
      */
     public void setSpeedY(int speedY) {
         this.speedY = speedY;
@@ -144,7 +144,7 @@ public abstract class Item {
     // FUNCTIONS -----------------------------------------------------------
     
     /**
-     * To get a rectangle with the position, width, and height of the power up
+     * To get a rectangle with the position, width, and height of the item
      * @return an <code>Rectangle</code> rectangle with the given position, width, and height
      */
     public Rectangle getPerimetro() {

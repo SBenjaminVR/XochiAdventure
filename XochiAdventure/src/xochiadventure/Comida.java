@@ -13,20 +13,20 @@ import java.awt.Graphics;
  */
 public class Comida extends Item{
 
-    // private boolean recolectado;
+	// to know all the ingredients that exist
     public enum Type {
         Tortillas,  // Drop que recupera toda la vida al jugador
-        Queso,   // Drop que funciona como municion para recargar el disparo del jugador
-        Chile,  // Drop que recupera lo equivalente a un golpe al jugador
-        Tomate,  // Drop que aumenta la resistencia del jugador
+        Queso,   	// Drop que funciona como municion para recargar el disparo del jugador
+        Chile,  	// Drop que recupera lo equivalente a un golpe al jugador
+        Tomate,  	// Drop que aumenta la resistencia del jugador
         Crema,
         Aceite,
         Cebolla
     }
-    private Type tipo;
+    private Type tipo;	// to store which ingredient is the item
 
     /**
-     * to create direction, width, height, speed in the x axis, and game
+     * to create direction, width, height, speed in the x axis, and game of the food
      * @param x to set the x of the food
      * @param y to set the y of the food
      * @param width to set the width of the food
@@ -36,7 +36,6 @@ public class Comida extends Item{
      */
     public Comida(int x, int y, int width, int height, int speedX, Game game) {
         super(x, y, width, height, speedX, game);
-        // recolectado = false;
         int max = 100;
         int min = 0;
         double numerito = (Math.random() * ((max - min) + 1)) + min;

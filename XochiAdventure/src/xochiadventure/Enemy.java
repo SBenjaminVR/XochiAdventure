@@ -14,16 +14,16 @@ import java.awt.Rectangle;
  */
 public class Enemy extends Item {
     private int direction;          // to store the direction in which the enemy is moving
-    private int leftLimit;
-    private int rightLimit;
+    private int leftLimit;			// to store the left limit in the x axis until which the enemy can move
+    private int rightLimit;			// to store the rights limit in the x axis until which the enemy can move
 
     /**
-     * to create direction, width, height, directionX, and directionY and set the enemy is not moving
+     * to create direction, width, height, direction, speedX, leftLimit, rightLimit, and game of the enemy
      * @param x to set the x of the enemy
      * @param y to set the y of the enemy
      * @param width to set the width of the enemy
      * @param height  to set the height of the enemy
-     * @param direction to set the direcion of the enmy
+     * @param direction to set the direction of the enemy
      * @param speedX to set the speed in the x axis of the enemy
      * @param game to set the game of the enemy
      */
@@ -37,24 +37,56 @@ public class Enemy extends Item {
     // GETS ------------------------------------------------------------------
 
     /**
-      * To get the direction of the alien
+      * To get the direction of the enemy
       * @return an <code>int</code> value with the direction
       */
     public int getDirection() {
         return direction;
     }
 
+    /**
+     * To get the left limit in the x axis until which the enemy can move
+     * @return an <code>int</code> value with the left limit
+     */
+    public int getLeftLimit() {
+        return leftLimit;
+    }
+
+    /**
+     * To get the right limit in the x axis until which the enemy can move
+     * @return an <code>int</code> value with the right limit
+     */
+    public int getRightLimit() {
+        return rightLimit;
+    }
+
     // SETS ------------------------------------------------------------------
 
     /**
     * To set the direction of the alien
-    * @param direction to set the direction of the alien
+    * @param direction to set the direction of the enemy
     */
     public void setDirection(int direction) {
         this.direction = direction;
     }
 
-    // FUNCTIONS
+    /**
+     * To set the left limit in the x axis until which the enemy can move
+     * @param leftLimit to set the left limit of the enemy
+     */
+    public void setLeftLimit(int leftLimit) {
+        this.leftLimit = leftLimit;
+    }
+
+    /**
+     * To set the left limit in the x axis until which the enemy can move
+     * @param rightLimit to set the right limit of the enemy
+     */
+    public void setRightLimit(int rightLimit) {
+        this.rightLimit = rightLimit;
+    }
+
+    // FUNCTIONS ------------------------------------------------------------------
 
     /**
     * To know if the bomb is intersecting with the player
@@ -90,15 +122,10 @@ public class Enemy extends Item {
 
     @Override
     public void tick() {
-        // this function exists so all abstracts methods from Item are overriden
-        // if(getDirection() >= 1){
-        // setX((getX() + speedX) * getDirection());
-        // }
-        // if(getDirection() < 1){
-        //     setX((getX()) - speedX);
-        // }
+		// updates the position of the enemy
         setX(getX() + speedX * direction);
-
+	
+		// checks if the enemy has surpassed any of its limits, if it has it starts moving in the oposite direction
         if( getX() + getWidth() >= rightLimit || getX() <= leftLimit){
           setDirection(getDirection() * -1);
         }
@@ -111,14 +138,10 @@ public class Enemy extends Item {
        * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
        * En este caso los chiles se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
        */
-      // aqui hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
-      if (game.getPlayer().getX() < game.getPlayerX()) { // aquí también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
+      if (game.getPlayer().getX() < game.getPlayerX()) {
         g.drawImage(Assets.chile, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
       } else {
         g.drawImage(Assets.chile, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
       }
-        // g.drawImage(Assets.comida, (game.getPlayer().getX() - getX()), (game.getPlayer().getY() - getY()), getWidth(), getHeight(), null);
-        // g.drawImage(Assets.comida, -1 * (game.getRec().x - getX()), -1 * (game.getRec().y - getY()), getWidth(), getHeight(), null);
-        // g.drawImage(Assets.chile, getX(), getY(), getWidth(), getHeight(), null);
     }
 }
