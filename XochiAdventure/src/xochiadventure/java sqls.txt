@@ -1,0 +1,81 @@
+myRs = myStmt.executeQuery("select * from food");
+myRs.getInt("foodID") + ", " + myRs.getString("foodName")
+
+int level;
+
+// Level -----------------------------------------------
+
+myRs = myStmt.executeQuery("select width, height 
+                            from LevelG 
+                            where levelID =" + level);
+
+while (myRs.next()) {
+    width = myRs.getInt("width");
+    height = myRs.getInt("height");
+
+    // add
+} 
+
+
+// Fountain -----------------------------------------------
+
+myRs = myStmt.executeQuery("select *
+                            from LevelG 
+                            where levelID =" + level);
+
+posX = myRs.getInt("posX");
+posY = myRs.getInt("posY");
+width = myRs.getInt("width");
+height = myRs.getInt("height");
+//add
+
+// Player -----------------------------------------------
+
+myRs = myStmt.executeQuery("select *
+                            from Player 
+                            where levelID =" + level);
+
+posX = myRs.getInt("posX");
+posY = myRs.getInt("posY");
+width = myRs.getInt("width");
+height = myRs.getInt("height");
+speedX = myRs.getInt("speedX");
+lives = myRs.getInt("lives");
+left = myRs.getInt("leftLimit");
+right = myRs.getInt("rightLimit");
+
+// Platform -----------------------------------------------
+
+while (myRs.next()) {
+    posX = myRs.getInt("posX");
+    posY = myRs.getInt("posY");
+    width = myRs.getInt("width");
+    height = myRs.getInt("height");
+
+    // add
+} 
+
+// chile -----------------------------------------------
+
+while (myRs.next()) {
+    posX = myRs.getInt("posX");
+    posY = myRs.getInt("posY");
+    width = myRs.getInt("width");
+    height = myRs.getInt("height");
+    speedX = myRs.getInt("speedX");
+    left = myRs.getInt("leftLimit");
+    right = myRs.getInt("rightLimit");
+
+    // add
+} 
+
+// comida -----------------------------------------------
+
+while (myRs.next()) {
+    posX = myRs.getInt("posX");
+    posY = myRs.getInt("posY");
+    width = myRs.getInt("width");
+    height = myRs.getInt("height");
+
+    // add
+} 
