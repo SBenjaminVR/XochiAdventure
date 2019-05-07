@@ -81,6 +81,9 @@ public class Game implements Runnable {
     private Rectangle rec;                                  // to store the rectangle that checks which sprites are going to be drawn
     private Rectangle fuente;                               // to store the position of the fuente
     private boolean soundOn;
+    private int nivel;
+    private int levelWidth;
+    private int levelHeight;
 
     // Linked lists
     private LinkedList<Platform> platforms;                 // to store all the platforms
@@ -98,7 +101,6 @@ public class Game implements Runnable {
     // UI
     private int playerX;                                    // to store the position in which the player will be drawn
     private int playerY;                                    // to store the position in which the player will be drawn
-    private int nivel;
     private int limitX[];
 
 
@@ -239,14 +241,14 @@ public class Game implements Runnable {
       // lee txt
 
       /*
-      int cantChiles;
-      int cantPlatforms;
-      int cantPowerUps
       int posX;
       int posY;
       int iWidth;
       int iHeight
-      int speed;
+      int speedX;
+      int playerPlat;
+      int leftLimit;
+      int rightLimit;
       */
       int direction;
       // int iPosX = 10;
@@ -313,13 +315,16 @@ public class Game implements Runnable {
           comidas.add(new Comida(1525, 1850, 50, 50, this));
           comidas.add(new Comida(2925, 1850, 50, 50, this));
 
-          player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
+          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
+          levelWidth = 3100;
+          levelHeight = 2100;
 
           break;
 
         case 2:
+          // Chiles
           chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
           chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
           chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
@@ -327,44 +332,36 @@ public class Game implements Runnable {
           chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
           chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
 
-          // grandes 3
+          // Plataformas
           platforms.add(new Platform(0, 250, 500, 100, this));
           platforms.add(new Platform(1300, 250, 500, 100, this));
           platforms.add(new Platform(2600, 250, 500, 100, this));
 
-          // chicas 2
           platforms.add(new Platform(650, 500, 500, 100, this));
           platforms.add(new Platform(1950, 500, 500, 100, this));
 
-          // 2500 5
           platforms.add(new Platform(-400, 800, 500, 100, this));
           platforms.add(new Platform(300, 800, 500, 100, this));
-          platforms.add(new Platform(1000, 800, 1500, 100, this));
-          platforms.add(new Platform(2700, 800, 500, 100, this));
+          platforms.add(new Platform(1000, 800, 1100, 100, this));
+          platforms.add(new Platform(2300, 800, 500, 100, this));
           platforms.add(new Platform(3000, 800, 500, 100, this));
 
-          // chicas 3
-          platforms.add(new Platform(950, 1100, 500, 100, this));
-          platforms.add(new Platform(1750, 1100, 500, 100, this));
+          platforms.add(new Platform(800, 1100, 500, 100, this));
+          platforms.add(new Platform(1800, 1100, 500, 100, this));
 
-          platforms.add(new Platform(400, 1350, 500, 100, this));
-          platforms.add(new Platform(1600, 1350, 500, 100, this));
-          platforms.add(new Platform(2700, 1350, 500, 100, this));
+          platforms.add(new Platform(550, 1400, 150, 30, this));
+          platforms.add(new Platform(1475, 1400, 150, 30, this));
+          platforms.add(new Platform(2400, 1400, 150, 30, this));
 
-          platforms.add(new Platform(0, 1650, 400, 100, this));
-          platforms.add(new Platform(500, 1350, 400, 100, this));
+          platforms.add(new Platform(0, 1700, 400, 100, this));
+          platforms.add(new Platform(575, 1700, 300, 100, this));
+          platforms.add(new Platform(1050, 1700, 300, 100, this));
+          platforms.add(new Platform(1500, 1700, 100, 20, this));
+          platforms.add(new Platform(1750, 1700, 300, 100, this));
+          platforms.add(new Platform(2225, 1700, 300, 100, this));
+          platforms.add(new Platform(2700, 1700, 400, 100, this));
 
-          // chicas 2
-          platforms.add(new Platform(1000, 1650, 400, 100, this));
-          platforms.add(new Platform(1475, 1650, 150, 30, this));
-
-          // grandes 5
-          platforms.add(new Platform(1700, 1650, 400, 100, this));
-          // platforms.add(new Platform(950, 1900, 1200, 100, this));
-          platforms.add(new Platform(2200, 1650, 400, 100, this));
-          platforms.add(new Platform(2700, 1650, 400, 100, this));
-          // platforms.add(new Platform(1550, 1900, 500, 100, this));
-          // platforms.add(new Platform(2600, 1900, 500, 100, this));
+          // Comidas
 
           comidas.add(new Comida(225, 200, 50, 50, this));
           comidas.add(new Comida(1525, 200, 50, 50, this));
@@ -374,9 +371,11 @@ public class Game implements Runnable {
           comidas.add(new Comida(1525, 1850, 50, 50, this));
           comidas.add(new Comida(2925, 1850, 50, 50, this));
 
-          player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
+          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7),  this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
+          levelWidth = 3100;
+          levelHeight = 1950;
           break;
 
         case 3:
@@ -434,7 +433,7 @@ public class Game implements Runnable {
           comidas.add(new Comida(1525, 1850, 50, 50, this));
           comidas.add(new Comida(2925, 1850, 50, 50, this));
 
-          player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
+          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
           break;
@@ -692,11 +691,11 @@ public class Game implements Runnable {
                      * En el caso que la primera condicional se cumpla, solo actualizamos la 'y' del rec para que se pueda dibujar todo
                      * En el caso que no se actualizan la 'x' y la 'y' del rec para que así pueda seguir al jugador
                      */
-                    if ((player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) && player.getY() + player.getHeight() > 2000 - getPlayerY()) {
+                    if ((player.getX() < playerX || player.getX() + player.getWidth()> levelWidth - getPlayerX()) && player.getY() + player.getHeight() > levelHeight - 100 - getPlayerY()) {
                       rec.setRect(rec.x, rec.y, getWidth(), getHeight());
-                    } else if (player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) {
+                    } else if (player.getX() < playerX || player.getX() + player.getWidth()> levelWidth - getPlayerX()) {
                       rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
-                    } else if (player.getY() + player.getHeight() > 2000 - getPlayerY()) {
+                    } else if (player.getY() + player.getHeight() > levelHeight - 100 - getPlayerY()) {
                       rec.setRect(player.getX() - playerX, rec.y, getWidth(), getHeight());
                     } else {
                       rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
@@ -811,7 +810,7 @@ public class Game implements Runnable {
                               if (player.getSpeedY() <= 0) {
                                 player.setInTheAir(false);
                                 player.setSpeedY(0);
-                                player.setLimits(platf.getX(), platf.getX() + platf.getWidth());
+                                player.setPlat(platf);
                               } else {
                                 player.setSpeedY(0);
                                 player.setY(platf.getY() + platf.getHeight() + 1);
@@ -831,7 +830,7 @@ public class Game implements Runnable {
                         }
                       }
 
-                      if (player.getY() >= 2100) {
+                      if (player.getY() >= levelHeight) {
                         player.setSpeedY(0);
                         player.setInTheAir(false);
                         if (player.getContGotHit() == 0) {
@@ -841,9 +840,10 @@ public class Game implements Runnable {
                           endGame = false;
 
                         } else {
-                          player.setX(player.getLastX());
-                          player.setY(player.getLastY());
-                          player.setContGotHit(60);
+                          int dif = (getPlayer().getX() < getPlayer().getPlat().getX()) ? 0 : getPlayer().getPlat().getWidth() - getPlayer().getWidth();
+                          getPlayer().setX(getPlayer().getPlat().getX() + dif);
+                          getPlayer().setY(getPlayer().getPlat().getY() - getPlayer().getHeight());
+                          getPlayer().setContGotHit(60);
                         }
                       }
 

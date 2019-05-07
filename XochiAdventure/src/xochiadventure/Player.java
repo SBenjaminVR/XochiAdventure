@@ -22,12 +22,9 @@ public class Player extends Item{
     private int direction;				// to store the direction of the player
     private int contGotHit;				// to store how many more ticks the player is invunerable because they were hit
     private boolean drawPlayer;			// to know if the player should be drawn
-    private int leftLimit;				// to store the limit in the x axis where the player can move to the left before falling
-    private int rightLimit;				// to store the limit in the x axis where the player can move to the right before falling
+    private Platform plat;              // to store the last platform the player was on to know when it is going to fall
     private Animation xochiAnim;		// to animate the player
     private boolean moving;				// to know if the player is moving int the x axis
-    private int lastX;					// to store the last position on the x axis while on the ground
-    private int lastY;					// to store the last position on the y axis while on the ground
 
     /**
      * to create direction, width, height, speed in the x axis, and game
@@ -37,25 +34,21 @@ public class Player extends Item{
      * @param height to set the height of the player
      * @param speedX to set the speed in the x axis of the player
      * @param lives to set the lives the player has
-     * @param left to set the left limit in the x axis of the player
-     * @param right to set the right limit in the x axis of the player
+     * @param plat
      * @param game to set the game of the player
      */
-    public Player(int x, int y, int width, int height, int speedX, int lives, int left, int right, Game game) {
+    public Player(int x, int y, int width, int height, int speedX, int lives, Platform plat, Game game) {
         super(x, y, width, height, speedX, game);
         this.maxLives = lives;
         this.lives = maxLives;
         this.water = 100;
-        this.inTheAir = false;
+        this.inTheAir = true;
         this.direction = 1;
         this.contGotHit = 0;
         this.drawPlayer = true;
-        this.leftLimit = left;
-        this.rightLimit = right;
+        this.plat = plat;
         moving = false;
         xochiAnim = new Animation(Assets.xochiAnim, 150);
-        this.lastX = x;
-        this.lastY = x;
     }
 
     // GETS ------------------------------------------------------------------
@@ -109,35 +102,11 @@ public class Player extends Item{
     }
 
     /**
-     * To get the last position in the x axis of the player while it was on the ground
-     * @return an <code>int</code> value with the last position in the x axis
+     * 
+     * @return 
      */
-    public int getLastX() {
-        return lastX;
-    }
-
-    /**
-     * To get the last position in the y axis of the player while it was on the ground
-     * @return an <code>int</code> value with the last position in the y axis
-     */
-    public int getLastY() {
-        return lastY;
-    }
-
-    /**
-     * To get the left limit in the x axis until which the player can move
-     * @return an <code>int</code> value with the left limit
-     */
-    public int getLeftLimit() {
-        return leftLimit;
-    }
-
-    /**
-     * To get the right limit in the x axis until which the player can move
-     * @return an <code>int</code> value with the right limit
-     */
-    public int getRightLimit() {
-        return rightLimit;
+    public Platform getPlat() {
+        return plat;
     }
 
     // SETS ------------------------------------------------------------------
@@ -184,29 +153,11 @@ public class Player extends Item{
     }
 
     /**
-     * To set both left and right limits in the x axis until which the player can move
-     * @param left to set the left limit of the player
-     * @param right to set the right limit of the player
-     */
-    public void setLimits (int left, int right) {
-      this.leftLimit = left;
-      this.rightLimit = right;
-    }
-
-    /**
      * 
-     * @param lastX 
+     * @param plat 
      */
-    public void setLastX(int lastX) {
-        this.lastX = lastX;
-    }
-
-    /**
-     * 
-     * @param lastY 
-     */
-    public void setLastY(int lastY) {
-        this.lastY = lastY;
+    public void setPlat(Platform plat) {
+        this.plat = plat;
     }
 
     // tick y render ------------------------------------------------------------------
@@ -236,7 +187,7 @@ public class Player extends Item{
 		}
 		
 		// checks if the player is on top of the last platform it collide with
-		if (getX() + getWidth() <= getLeftLimit() || getX() >= getRightLimit()) {
+		if (getX() + getWidth() <= getPlat().getX() || getX() >= getPlat().getX() + getPlat().getWidth()) {
             setInTheAir(true);
 		}
 	
@@ -244,14 +195,10 @@ public class Player extends Item{
 		// checks if the player is in the air to update its position in the y axis
 		if (isInTheAir()) {
             setY(getY() - getSpeedY());
-			if (speedY > -20) {
-				speedY -= 2;
-			}
-		} else {
-            lastX = x;
-            setLastX(getX());
-			lastY = y;
-		}
+			if (getSpeedY() > -20) {
+                setSpeedY(getSpeedY() - 2);
+            }
+        }
 	
 		// checks if the player is moving to animate its walking
         if (moving)

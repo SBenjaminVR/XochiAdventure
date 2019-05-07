@@ -26,10 +26,10 @@ CREATE TABLE Player (
 	height			int		NOT NULL,
     speedX          int     NOT NULL,
     lives           int     NOT NULL,
-    leftLimit       int     NOT NULL,
-    rightLimit      int     NOT NULL,  
+    platformID      int     NOT NULL,     
 	PRIMARY KEY (platformID),
-    FOREIGN KEY (levelID) REFERENCES LevelG (levelID)
+    FOREIGN KEY (levelID) REFERENCES LevelG (levelID),
+    FOREIGN KEY (platformID) REFERENCES Platform (platformID)
 );
 
 CREATE TABLE Platform (
@@ -73,7 +73,7 @@ CREATE TABLE Comida (
 INSERT INTO LevelG VALUES (1, 3100, 2100);
 
 -- Nivel 2
-INSERT INTO LevelG VALUES (2, 0, 0);
+INSERT INTO LevelG VALUES (2, 3100, 2000);
 
 -- Nivel 3
 INSERT INTO LevelG VALUES (3, 0, 0);
@@ -146,7 +146,7 @@ INSERT INTO Comida VALUES (18, 3);
 
 -- Player --------------------------------------------------------------
 -- Nivel 1
-INSERT INTO Player VALUES (1, 1, 1475, 650, 100, 100, 5, 3, 0, 150);
+INSERT INTO Player VALUES (1, 1, 1475, 650, 100, 100, 5, 3, 8);
 
 -- Nivel 2
 INSERT INTO Player VALUES (2, 2);
