@@ -130,17 +130,23 @@ INSERT INTO Platform VALUES (3, 3);
 
 -- Comida --------------------------------------------------------------
 -- Nivel 1
-INSERT INTO Comida VALUES (1, 1);
+INSERT INTO Comida VALUES (1, 1, 225, 200, 50, 50);
+INSERT INTO Comida VALUES (2, 1, 1525, 200, 50, 50);
+INSERT INTO Comida VALUES (3, 1, 2925, 200, 50, 50);
+INSERT INTO Comida VALUES (4, 1, 1525, 1050, 50, 50);
+INSERT INTO Comida VALUES (5, 1, 225, 1850, 50, 50);
+INSERT INTO Comida VALUES (6, 1, 1525, 1850, 50, 50);
+INSERT INTO Comida VALUES (7, 1, 2925, 1850, 50, 50);
 
 -- Nivel 2
-INSERT INTO Comida VALUES (2, 2);
+INSERT INTO Comida VALUES (8, 2);
 
 -- Nivel 3
-INSERT INTO Comida VALUES (3, 3);
+INSERT INTO Comida VALUES (18, 3);
 
 -- Player --------------------------------------------------------------
 -- Nivel 1
-INSERT INTO Player VALUES (1, 1);
+INSERT INTO Player VALUES (1, 1, 1475, 650, 100, 100, 5, 3, 0, 150);
 
 -- Nivel 2
 INSERT INTO Player VALUES (2, 2);
