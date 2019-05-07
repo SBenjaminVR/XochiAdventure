@@ -151,19 +151,6 @@ public abstract class Item {
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
     
-    // Carga la información del objeto desde un string
-   /**
-     * To set the value of the position in the x axis and the width of the player from the file that was loaded
-     * @param datos to set all the variables
-     */
-    public abstract void loadFromString(String[] datos);
-
-    /**
-     * To get all the variable that need to be stored in the file as a string
-     * @return an <code>String</code> value with all the information of the variables
-     */
-    public abstract String intoString();
-    
     /**
      * To update positions of the item for every tick
      */

@@ -58,28 +58,8 @@ public class Shot extends Item {
      */
     public boolean intersectaChile(Object obj) {
         return ((obj instanceof Enemy) && (getPerimetro().intersects(((Enemy) obj).getPerimetro())));
-     }
-
-    // Carga la información del objeto desde un string
-    /**
-     * To set the value of position and the direction both in the 'x' and 'y' axis of the ball from the file that was loaded
-     * @param datos to set all the variables
-     */
-    @Override
-    public void loadFromString(String[] datos){
-        this.y = Integer.parseInt(datos[0]);
-        this.directionX = Integer.parseInt(datos[1]);
     }
-
-    /**
-     * To get all the variable that need to be stored in the file as a string
-     * @return an <code>String</code> value with all the information of the variables
-     */
-    @Override
-    public String intoString(){
-        return (y + " " + directionX);
-    }
-
+    
     @Override
     public void tick() {
         // updates the position of the shot

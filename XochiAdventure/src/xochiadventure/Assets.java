@@ -17,30 +17,32 @@ import java.awt.image.BufferedImage;
  */
 public class Assets {
     // Images
-    public static BufferedImage background;         // to store background image
-    public static BufferedImage player;             // to store the player image
-    public static BufferedImage shot;               // to store flask color
-    public static BufferedImage heart;              // to store the taco heart image
+    public static BufferedImage background;                 // to store background image
+    public static BufferedImage player;                     // to store the player image
+    public static BufferedImage shot;                       // to store flask color
+    public static BufferedImage heart;                      // to store the taco heart image
 
-    public static BufferedImage titleScreen;        // to store the title screen
-    public static BufferedImage menu;               // to store the menu image
-    public static BufferedImage options;            // to store the options screen image
-    public static BufferedImage controls;           // to store the instructions screen image
-    public static BufferedImage select;             // to store the red rectangle image
-    public static BufferedImage recipies;           // to store the recipies screen image
-    public static BufferedImage chile;              // to store the chile image
-    public static BufferedImage platform;           // to store the platform image
-    public static BufferedImage powerup;            // to store the power
-    public static BufferedImage rectangle;          
+    public static BufferedImage titleScreen;                // to store the title screen
+    public static BufferedImage menu;                       // to store the menu image
+    public static BufferedImage options;                    // to store the options screen image
+    public static BufferedImage controls;                   // to store the instructions screen image
+    public static BufferedImage select;                     // to store the red rectangle image
+    public static BufferedImage recipies;                   // to store the recipies screen image
+    public static BufferedImage chile;                      // to store the chile image
+    public static BufferedImage platform;                   // to store the platform image
+    public static BufferedImage powerup;                    // to store the power
+    public static BufferedImage rectangle;
     public static BufferedImage fuente;
-    public static BufferedImage xochiIdle;          // to store the xochi image
-    public static BufferedImage xochiAnim[];        // to store the frames for xochi animation
-    public static BufferedImage ingredientes[];
+    public static BufferedImage xochiIdle;                  // to store the xochi image
+    public static BufferedImage xochiAnim[];                // to store the frames for xochi animation
+    public static BufferedImage ingredientesEnchiladas[];
+    public static BufferedImage ingredientesMole[];
+    public static BufferedImage ingredientesQuecas[];
 
     // Power-Ups
-    public static BufferedImage atole;              // to store the atole image
-    public static BufferedImage atoleAnim[];        // to store the frames for atole animation
-    public static BufferedImage dulce;              // to store the dulce image
+    public static BufferedImage atole;                      // to store the atole image
+    public static BufferedImage atoleAnim[];                // to store the frames for atole animation
+    public static BufferedImage dulce;                      // to store the dulce image
 
     // Sounds
     public static SoundClip laser;
@@ -56,14 +58,6 @@ public class Assets {
      * initializing the images of the game
      */
     public static void init() {
-//        background = ImageLoader.loadImage("/images/space.png");
-//        player = ImageLoader.loadImage("/images/spaceship.png");
-//        bomb = ImageLoader.loadImage("/images/bomb.png");
-//        alien = ImageLoader.loadImage("/images/alien.png");
-//        shot = ImageLoader.loadImage("/images/shot.png");
-//        asteroid = ImageLoader.loadImage("/images/asteroid.png");
-
-
         //selectSnd = new SoundClip("/sounds/Retro_8-Bit_Game-Powerup_Achievement_05.wav");
 
         // Loading of sounds
@@ -93,22 +87,35 @@ public class Assets {
         heart = ImageLoader.loadImage("/images/tacoHeart.png");
         shot = ImageLoader.loadImage("/images/bubble.png");
 
-        // Loading of images of ingredients
-        ingredientes = new BufferedImage[7];
-        ingredientes[0] = ImageLoader.loadImage("/images/comida/Tortillas.png");
-        ingredientes[1] = ImageLoader.loadImage("/images/comida/quexo.png");
-        ingredientes[2] = ImageLoader.loadImage("/images/comida/chile_collectable.png");
-        ingredientes[3] = ImageLoader.loadImage("/images/comida/tomtate.png");
-        ingredientes[4] = ImageLoader.loadImage("/images/comida/crema.png");
-        ingredientes[5] = ImageLoader.loadImage("/images/comida/oil.png");
-        ingredientes[6] = ImageLoader.loadImage("/images/comida/cebollaFEa.png");
+        // Loading of images of ingredients for the enchiladas
+        ingredientesEnchiladas = new BufferedImage[7];
+        ingredientesEnchiladas[0] = ImageLoader.loadImage("/images/comida/enchiladas/Tortillas.png");
+        ingredientesEnchiladas[1] = ImageLoader.loadImage("/images/comida/enchiladas/biggieCheese.png");
+        ingredientesEnchiladas[2] = ImageLoader.loadImage("/images/comida/enchiladas/chile_collectable.png");
+        ingredientesEnchiladas[3] = ImageLoader.loadImage("/images/comida/enchiladas/tomatoB.png");
+        ingredientesEnchiladas[4] = ImageLoader.loadImage("/images/comida/enchiladas/crema.png");
+        ingredientesEnchiladas[5] = ImageLoader.loadImage("/images/comida/enchiladas/oil.png");
+        ingredientesEnchiladas[6] = ImageLoader.loadImage("/images/comida/enchiladas/CebollaBlack.png");
+
+        // Loading of images of ingredients for the mole
+        ingredientesMole = new BufferedImage[0];
+        ingredientesMole[0] = ImageLoader.loadImage("/images/comida/mole/poyo.png");
+
+        // Loading of images of ingredients for the quesadillas
+        ingredientesQuecas = new BufferedImage[7];
+        ingredientesQuecas[0] = ImageLoader.loadImage("/images/comida/quecas/Ajo.png");
+        ingredientesQuecas[1] = ImageLoader.loadImage("/images/comida/quecas/CebollaBlack.png");
+        ingredientesQuecas[2] = ImageLoader.loadImage("/images/comida/quecas/Champinon.png");
+        ingredientesQuecas[3] = ImageLoader.loadImage("/images/comida/quecas/Cilantro.png");
+        ingredientesQuecas[4] = ImageLoader.loadImage("/images/comida/quecas/Quesadilla.png");
+        ingredientesQuecas[5] = ImageLoader.loadImage("/images/comida/quecas/tomatoB.png");
+        ingredientesQuecas[6] = ImageLoader.loadImage("/images/comida/quecas/Tortillasb.png");
 
 
         // Loading of animations
         atole = ImageLoader.loadImage("/images/atole.png");
         SpreadSheet atoleSpriteSheet = new SpreadSheet(atole);         // spritesheet of the atole
         atoleAnim = new BufferedImage[3];                              // the sprites of the atole animation
-
 
         dulce = ImageLoader.loadImage("/images/dulce.png");
 

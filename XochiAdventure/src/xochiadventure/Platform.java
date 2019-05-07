@@ -37,28 +37,11 @@ public class Platform extends Item {
 
     @Override
     public void tick() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void render(Graphics g) {
-      if (game.getPlayer().getX() < game.getPlayerX()) {
-        g.drawImage(Assets.platform, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-      } else {
         g.drawImage(Assets.platform, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-      }
-        // g.drawImage(Assets.platform, getX() - (getX() - game.getPlayer().getX()), getY() - (getY() - game.getPlayer().getY()), getWidth(), getHeight(), null);
-        // g.drawImage(Assets.platform, getX(), getY(), getWidth(), getHeight(), null);
-
-    }
-
-    @Override
-    public void loadFromString(String[] datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String intoString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

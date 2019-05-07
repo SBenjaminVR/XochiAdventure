@@ -194,26 +194,6 @@ public class Player extends Item{
       this.rightLimit = right;
     }
 
-    // Carga la información del objeto desde un string ------------------------------------------------------------------
-    /**
-     * To set the value of the position in the x axis and the width of the player from the file that was loaded
-     * @param datos to set all the variables
-     */
-    @Override
-    public void loadFromString(String[] datos) {
-        this.x = Integer.parseInt(datos[0]);
-        this.width = Integer.parseInt(datos[1]);
-    }
-
-    /**
-     * To get all the variable that need to be stored in the file as a string
-     * @return an <code>String</code> value with all the information of the variables
-     */
-    @Override
-    public String intoString(){
-        return (x +" " + width);
-    }
-
     // tick y render ------------------------------------------------------------------
 
     @Override

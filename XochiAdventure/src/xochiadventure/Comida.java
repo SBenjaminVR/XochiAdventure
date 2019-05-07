@@ -15,10 +15,10 @@ public class Comida extends Item{
 
 	// to know all the ingredients that exist
     public enum Type {
-        Tortillas,  // Drop que recupera toda la vida al jugador
-        Queso,   	// Drop que funciona como municion para recargar el disparo del jugador
-        Chile,  	// Drop que recupera lo equivalente a un golpe al jugador
-        Tomate,  	// Drop que aumenta la resistencia del jugador
+        Tortillas,
+        Queso,   	
+        Chile,  	
+        Tomate,  	
         Crema,
         Aceite,
         Cebolla
@@ -54,24 +54,7 @@ public class Comida extends Item{
 
     // GETS ------------------------------------------------------------------
 
-    // /**
-    //  *
-    //  * @return
-    //  */
-    // public boolean isRecolectado() {
-    //     return recolectado;
-    // }
-
     // SETS ------------------------------------------------------------------
-
-    // /**
-    //  *
-    //  * @param recolectado
-    //  */
-    // public void setRecolectado(boolean recolectado) {
-    //     this.recolectado = recolectado;
-    // }
-
 
     // FUNCTIONS ------------------------------------------------------------------
 
@@ -85,34 +68,17 @@ public class Comida extends Item{
     }
 
     @Override
-    public void loadFromString(String[] datos) {
-
-    }
-
-    @Override
-    public String intoString() {
-        return "";
-    }
-
-    @Override
     public void tick() {
 
     }
 
     @Override
     public void render(Graphics g) {
-      /**
-       * Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
-       * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
-       * En este caso los powerups se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
-       */
-      // hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
-      // también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
-        // if (game.getPlayer().getX() < game.getPlayerX()) {
-        //   g.drawImage(Assets.comida, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        // } else {
-        //   g.drawImage(Assets.comida, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        // }
+        /**
+         * Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
+         * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
+         * En este caso los powerups se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
+         */
         switch (tipo) {
             case Tortillas:
                 g.drawImage(Assets.ingredientes[0], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
@@ -130,18 +96,11 @@ public class Comida extends Item{
     }
 
     public void renderUI(Graphics g, int x, int y) {
-      /**
-       * Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
-       * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
-       * En este caso los powerups se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
-       */
-      // hay que agregar una condicional para cuando este mero abajo del nivel, pero tenemos que acabar de diseñar el nivel para sacar bien las alturas
-      // también hay que agregar una condicional para cuando esté hasta la mera derecha, pero al igual que la condicional de la "y", tenemos que terminar de diseñar bien los niveles para poder sacar bien las distancias
-        // if (game.getPlayer().getX() < game.getPlayerX()) {
-        //   g.drawImage(Assets.comida, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        // } else {
-        //   g.drawImage(Assets.comida, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-        // }
+        /**
+         * Como estamos simulando una camara que siga al jugador, tenemos que dibujar al jugador siempre en medio
+         * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
+         * En este caso los powerups se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
+         */
         switch (tipo) {
             case Tortillas:
                 g.drawImage(Assets.ingredientes[0], x, y, getWidth(), getHeight(), null);

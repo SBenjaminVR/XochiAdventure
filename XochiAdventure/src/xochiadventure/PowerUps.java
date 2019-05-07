@@ -105,16 +105,6 @@ public class PowerUps extends Item{
     }
 
     @Override
-    public void loadFromString(String[] datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String intoString() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void tick() {
 	
 		// to make the animation work

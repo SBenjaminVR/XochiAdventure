@@ -97,27 +97,6 @@ public class Enemy extends Item {
        return ((obj instanceof Player) && (getPerimetro().intersects(((Player) obj).getPerimetro())));
     }
 
-    // Carga la información del objeto desde un string ------------------------------------------------------------------
-    /**
-     * To set the value of destroyed from the file that was loaded
-     * @param datos to set all the variables
-     */
-     @Override
-    public void loadFromString(String[] datos){
-        this.x = Integer.parseInt(datos[0]);
-        this.y = Integer.parseInt(datos[1]);
-        this.direction = Integer.parseInt(datos[2]);
-    }
-
-    /**
-     * To get all the variable that need to be stored in the file as a string
-     * @return an <code>String</code> value with all the information of the variables
-     */
-    @Override
-    public String intoString(){
-        return (x + " " + y + " " + direction);
-    }
-
     // tick y render ------------------------------------------------------------------
 
     @Override
