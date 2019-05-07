@@ -293,41 +293,43 @@ public class Game implements Runnable {
       //     iPosY += 50;
       // }
 
-      // grandes
+      // grandes 3
       platforms.add(new Platform(0, 250, 500, 100, this));
       platforms.add(new Platform(1300, 250, 500, 100, this));
       platforms.add(new Platform(2600, 250, 500, 100, this));
 
-      // chicas
+      // chicas 2
       platforms.add(new Platform(650, 500, 500, 100, this));
       platforms.add(new Platform(1950, 500, 500, 100, this));
 
-      // 2500
+      // 2500 5
       platforms.add(new Platform(300, 800, 500, 100, this));
       platforms.add(new Platform(800, 800, 500, 100, this));
       platforms.add(new Platform(1300, 800, 500, 100, this));
       platforms.add(new Platform(1800, 800, 500, 100, this));
       platforms.add(new Platform(2300, 800, 500, 100, this));
 
-      // chicas
+      // chicas 3
       platforms.add(new Platform(0, 1100, 150, 30, this));
       platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
       platforms.add(new Platform(2950, 1100, 150, 30, this));
 
-      // grandes
+      // grandes 4
       platforms.add(new Platform(0, 1350, 500, 100, this));
       platforms.add(new Platform(950, 1350, 500, 100, this));
       platforms.add(new Platform(1650, 1350, 500, 100, this));
-
       platforms.add(new Platform(2600, 1350, 500, 100, this));
 
-      // chicas
+      // chicas 2
       platforms.add(new Platform(650, 1650, 150, 30, this));
       platforms.add(new Platform(2300, 1650, 150, 30, this));
 
-      // grandes
+      // grandes 5
       platforms.add(new Platform(0, 1900, 500, 100, this));
-      platforms.add(new Platform(950, 1900, 1200, 100, this));
+      // platforms.add(new Platform(950, 1900, 1200, 100, this));
+      platforms.add(new Platform(950, 1900, 500, 100, this));
+      platforms.add(new Platform(1450, 1900, 500, 100, this));
+      platforms.add(new Platform(1550, 1900, 500, 100, this));
       platforms.add(new Platform(2600, 1900, 500, 100, this));
 
       // se crean los ingredientes
