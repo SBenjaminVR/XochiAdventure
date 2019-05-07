@@ -5,6 +5,7 @@
  */
 package xochiadventure;
 
+import java.sql.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -17,6 +18,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
@@ -977,6 +979,7 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
+        
 
         //creating the player and the shot
 //        player = new Player(getWidth() / 2, getHeight() - 100, 1, 100, 80, this);
