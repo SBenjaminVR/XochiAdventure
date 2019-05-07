@@ -377,7 +377,7 @@ public class Game implements Runnable {
     private void tick() {
         // ticks key manager
         keyManager.tick();
-//         System.out.println("" + keyManager.left + " " + keyManager.right);
+        // System.out.println("" + keyManager.left + " " + keyManager.right);
 
         // checks in which screen you are
         switch(screen) {
@@ -592,8 +592,8 @@ public class Game implements Runnable {
 
                 // checks if the backspace key was pressed to return to the main menu
                 if (keyManager.back) {
-                    unloadLevel();
-                    screen = Screen.MENU;
+                  unloadLevel();
+                  screen = Screen.MENU;
                 } else {
                   if (!pauseGame && !endGame) {
 
@@ -608,111 +608,115 @@ public class Game implements Runnable {
                      * En el caso que la primera condicional se cumpla, solo actualizamos la 'y' del rec para que se pueda dibujar todo
                      * En el caso que no se actualizan la 'x' y la 'y' del rec para que así pueda seguir al jugador
                      */
-                      if ((player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) && player.getY() + player.getHeight() > 2000 - getPlayerY()) {
-                        rec.setRect(rec.x, rec.y, getWidth(), getHeight());
-                      } else if (player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) {
-                        rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
-                      } else if (player.getY() + player.getHeight() > 2000 - getPlayerY()) {
-                        rec.setRect(player.getX() - playerX, rec.y, getWidth(), getHeight());
-                      } else {
-                        rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
-                      }
+                    if ((player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) && player.getY() + player.getHeight() > 2000 - getPlayerY()) {
+                      rec.setRect(rec.x, rec.y, getWidth(), getHeight());
+                    } else if (player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) {
+                      rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
+                    } else if (player.getY() + player.getHeight() > 2000 - getPlayerY()) {
+                      rec.setRect(player.getX() - playerX, rec.y, getWidth(), getHeight());
+                    } else {
+                      rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
+                    }
 
-                      // checar si el jugador está en la fuente
-                      if (fuente.intersects(player.getPerimetro()) && player.getWater() < 100) {
-                        player.setWater(player.getWater() + 1);
-                      }
+                    // checar si el jugador está en la fuente
+                    if (fuente.intersects(player.getPerimetro()) && player.getWater() < 100) {
+                      player.setWater(player.getWater() + 1);
+                    }
 
                     if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
           						if (soundOn) {
           							Assets.shootSnd.play();
           						}
-                        //attack
-                        if (player.getDirection() == 1) {
-                          // attack to the right
-                          disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 8, 1, this));
-                        } else {
-                          // attack to the left
-                          disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 8, -1, this));
-                        }
-                        player.setWater(getPlayer().getWater() - 10);
+                      //attack
+                      if (player.getDirection() == 1) {
+                        // attack to the right
+                        disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 8, 1, this));
+                      } else {
+                        // attack to the left
+                        disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 8, -1, this));
                       }
+                      player.setWater(getPlayer().getWater() - 10);
+                    }
 
-                      // se tickea a los disparos
+                    // se tickea a los disparos
+                    for (int j = 0; j < disparos.size(); j++) {
+                      Shot disp = disparos.get(j);
+                      disp.tick();
+                      if (disp.getX() + disp.getWidth() <= 0 || disp.getX() >= 3100) {
+                        disparos.remove(j);
+                      }
+                    }
+
+
+                    // se tickea a los chiles
+                    for (int i  = 0; i < chiles.size(); i++) {
+                      Enemy chile = chiles.get(i);
+                      chile.tick();
+
+                      // se checa que los disparos colisionen con los chiles
                       for (int j = 0; j < disparos.size(); j++) {
                         Shot disp = disparos.get(j);
-                        disp.tick();
-                        if (disp.getX() + disp.getWidth() <= 0 || disp.getX() >= 3100) {
+
+                        // si colisionan elimina el chile y el disparo, aparte de checar si el chile soltará algún power up o no
+                        if (disp.intersectaChile(chile)) {
+                          chiles.remove(i);
                           disparos.remove(j);
+                          int max = 100;
+                          int min = 0;
+                          double numerito = (Math.random() * ((max - min) + 1)) + min;
+                          if (numerito < 25) {
+                            powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, this));
+                          }
                         }
                       }
 
+                      if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
+                        // quitarle vida al jugador
+                        player.setLives(player.getLives() - 1);
+                        Assets.hurtSnd.play();
+                        player.setContGotHit(60);
+                      }
+                    }
 
-                      // se tickea a los chiles
-                      for (int i  = 0; i < chiles.size(); i++) {
-                          Enemy chile = chiles.get(i);
-                          chile.tick();
+                    // se tickea a los powerups
+                    for (int i  = 0; i < powerups.size(); i++) {
+                      PowerUps power = powerups.get(i);
+                      power.tick();
+                      if (power.intersectaJugador(player)) {
+                          switch (power.getType()) {
+                              case ATOLE:
+                                  // Recover all of the player hp/lives
+                                  getPlayer().setLives(getPlayer().getMaxLives());
+                                  Assets.atoleSnd.play();
+                                  powerups.remove(i);
+                                  break;
+                              case AGUA:
+                                  // Refill a little bit the players ammo
+                                  getPlayer().setWater(getPlayer().getWater() + 25);
+                                  if (getPlayer().getWater() > 100) {
+                                    getPlayer().setWater(100);
+                                  }
+                                  powerups.remove(i);
+                                  break;
 
-                          // se checa que los disparos colisionen con los chiles
-                          for (int j = 0; j < disparos.size(); j++) {
-                            Shot disp = disparos.get(j);
+                              case DULCE:
+                                  // Recover 1 life
+                                  if (getPlayer().getLives() < getPlayer().getMaxLives())
+                                      getPlayer().setLives(getPlayer().getLives() + 1);
+                                  Assets.dulceSnd.play();
+                                  powerups.remove(i);
+                                  break;
 
-                            // si colisionan elimina el chile y el disparo, aparte de checar si el chile soltará algún power up o no
-                            if (disp.intersectaChile(chile)) {
-                              chiles.remove(i);
-                              disparos.remove(j);
-                              int max = 100;
-                              int min = 0;
-                              double numerito = (Math.random() * ((max - min) + 1)) + min;
-                              if (numerito < 25) {
-                                  powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, this));
-                              }
-                            }
-                          }
+                              case FRIJOL:
+                                  powerups.remove(i);
 
-                          if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
-                            // quitarle vida al jugador
-                            player.setLives(player.getLives() - 1);
-                            Assets.hurtSnd.play();
-                            player.setContGotHit(60);
+                                  break;
+                              default:
+                                powerups.remove(i);
+                                break;
                           }
                       }
-
-                      // se tickea a los powerups
-                      for (int i  = 0; i < powerups.size(); i++) {
-                          PowerUps power = powerups.get(i);
-                          power.tick();
-                          if (power.intersectaJugador(player)) {
-                              switch (power.getType()) {
-                                  case ATOLE:
-                                      // Recover all of the player hp/lives
-                                      getPlayer().setLives(getPlayer().getMaxLives());
-                                      Assets.atoleSnd.play();
-                                      powerups.remove(i);
-                                      break;
-                                  case AGUA:
-                                      // Refill a little bit the players ammo
-                                      getPlayer().setWater(getPlayer().getWater() + 25);
-                                      break;
-
-                                  case DULCE:
-                                      // Recover 1 life
-                                      if (getPlayer().getLives() < getPlayer().getMaxLives())
-                                          getPlayer().setLives(getPlayer().getLives() + 1);
-                                      Assets.dulceSnd.play();
-                                      powerups.remove(i);
-                                      break;
-
-                                  case FRIJOL:
-                                      powerups.remove(i);
-
-                                      break;
-                                  default:
-                                    powerups.remove(i);
-                                    break;
-                              }
-                          }
-                      }
+                    }
 
                       // se checa si el jugador está en el aire. si sí lo está se checa si ha colisionado con alguna plataforma
                       if (player.isInTheAir()) {
@@ -765,7 +769,6 @@ public class Game implements Runnable {
 
                   } else {
                     if (endGame) {
-
                       if (keyManager.enter) {
                         unloadLevel();
                         loadLevel(nivel);
@@ -773,8 +776,6 @@ public class Game implements Runnable {
                     }
                   }
                 }
-
-                // ckecks if the game is paused
 
                 break;
         }
@@ -834,6 +835,9 @@ public class Game implements Runnable {
                   break;
                 case OPTIONS:
                   g.drawImage(Assets.options, 0, 0, getWidth(), getHeight(), null);
+                  if (soundOn) {
+                    g.drawImage(Assets.checkmark, 920, 278, 34, 34, null);
+                  }
                   switch (optOpt) {
                       case DALTONICO:
                           g.drawImage(Assets.select, 190, 145, 100, 100, null);
@@ -952,10 +956,6 @@ public class Game implements Runnable {
                   break;
             }
 
-
-           // draw score
-
-
             bs.show();
             g.dispose();
         }
@@ -969,45 +969,20 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        
-
-        //creating the player and the shot
-//        player = new Player(getWidth() / 2, getHeight() - 100, 1, 100, 80, this);
-//        shot = new Shot(player.getX() + player.getWidth() / 2, player.getY() - player.getHeight(), 5, 5, this) {
-//        };
-//
-//        // set up the initial position for the aliens
-//        int iPosX = 0;
-//        int iPosY = 10;
-//        for (int i = 1; i <= 24; i++) {
-//            //aliens.add(new Enemy(iPosX, iPosY, 50, 50, this));
-//            iPosX += 60;
-//            aliens.add(new Enemy(iPosX, iPosY, 50, 50, 1, this));
-//            bombs.add(new Bomb(iPosX, iPosY, 10, 20, this));
-//
-//            // create 6 aliens every row
-//            if (i % 6 == 0) {
-//                iPosY += 60;
-//                iPosX = 0;
-//            }
-//
-//        }
-//
-//        // setting up the game variables
-//        score = 0;
-//        cantAliens = aliens.size();
-
 
         // se inicializan las variables
         endGame = false;
-        display.getJframe().addKeyListener(keyManager);
-        display.getJframe().addMouseListener(mouseManager);
-        display.getJframe().addMouseMotionListener(mouseManager);
-        display.getCanvas().addMouseListener(mouseManager);
-        display.getCanvas().addMouseMotionListener(mouseManager);
         pauseGame = false;
         confirmSound = Assets.selectSnd;
         nivel = "";
+        soundOn = true;
+
+        display.getJframe().addKeyListener(keyManager);
+        // display.getJframe().addMouseListener(mouseManager);
+        // display.getJframe().addMouseMotionListener(mouseManager);
+        // display.getCanvas().addMouseListener(mouseManager);
+        // display.getCanvas().addMouseMotionListener(mouseManager);
+        
     }
 
     @Override
@@ -1064,96 +1039,5 @@ public class Game implements Runnable {
                 ie.printStackTrace();
             }
         }
-    }
-
-    // LECTURA Y GUARDADO DE DATOS
-
-    /**
-     * To get all the variable that need to be stored in the file as a string
-     *
-     * @return an <code>String</code> value with all the information of the
-     * variables
-     */
-    public String intoString() {
-        //return (score + " " + cantAliens + " " + (endGame ? 1 : 0) +  " " + (pauseGame ? 1 : 0));
-        return "";
-    }
-
-    // Carga la información del objeto desde un string ------------------------------------------------------------------
-    /**
-     * To set the value of the score, lives and the state of the game from the
-     * file that was loaded
-     *
-     * @param datos to set all the variables
-     */
-    public void loadFromString(String[] datos) {
-//        this.score = Integer.parseInt(datos[0]);
-//        this.cantAliens = Integer.parseInt(datos[1]);
-//        this.endGame = (Integer.parseInt(datos[2]) == 1 ? true : false);
-//        this.pauseGame = (Integer.parseInt(datos[3]) == 1 ? true : false);
-    }
-
-    /**
-     * Writes in the given file all the given information
-     *
-     * @throws IOException when file not found
-     */
-    public void grabarArchivo() throws IOException {
-//        PrintWriter fileOut = new PrintWriter(new FileWriter(nombreArchivo));
-//        fileOut.println(this.toString());
-//        fileOut.println(player.toString());
-//        fileOut.println(shot.toString());
-//        for(Enemy alien : aliens){
-//            fileOut.println(alien.toString());
-//        }
-//        for (Bomb bomb : bombs) {
-//            fileOut.println(bomb.toString());
-//        }
-//
-//        fileOut.close();
-    }
-
-    /**
-     * Load all the information from the given file
-     *
-     * @throws IOException when file not found
-     */
-    public void leeArchivo() throws IOException {
-       //
-       // BufferedReader fileIn;
-       // try {
-       //     fileIn = new BufferedReader(new FileReader(nombreArchivo));
-       // } catch (FileNotFoundException e) {
-       //     File archivo = new File(nombreArchivo);
-       //     PrintWriter fileOut = new PrintWriter(archivo);
-       //     fileOut.println("100,demo");
-       //     fileOut.close();
-       //     fileIn = new BufferedReader(new FileReader(nombreArchivo));
-       // }
-       // loadFromString(fileIn.readLine().split("\\s+"));
-       // this.player.loadFromString(fileIn.readLine().split("\\s+"));
-       // shot.loadFromString(fileIn.readLine().split("\\s+"));
-       // for(Enemy alien : aliens){
-       //     alien.loadFromString(fileIn.readLine().split("\\s+"));
-       // }
-       // for (Bomb bomb : bombs) {
-       //     bomb.loadFromString(fileIn.readLine().split("\\s+"));
-       // }
-       //
-       // fileIn.close();
-        // if (getKeyManager().save) {
-        //     try {
-        //         grabarArchivo();
-        //     } catch (IOException ex) {
-        //         Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        //     }
-        // }
-        // if (getKeyManager().load) {
-        //     try {
-        //         leeArchivo();
-        //     } catch (IOException ex) {
-        //         Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        //     }
-        // }
     }
 }
