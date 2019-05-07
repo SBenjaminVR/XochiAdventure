@@ -31,11 +31,10 @@ public class Comida extends Item{
      * @param y to set the y of the food
      * @param width to set the width of the food
      * @param height to set the height of the food
-     * @param speedX to set the speed in the x axis of the food
      * @param game to set the game of the food
      */
-    public Comida(int x, int y, int width, int height, int speedX, Game game) {
-        super(x, y, width, height, speedX, game);
+    public Comida(int x, int y, int width, int height, Game game) {
+        super(x, y, width, height, 0, game);
         int max = 100;
         int min = 0;
         double numerito = (Math.random() * ((max - min) + 1)) + min;
