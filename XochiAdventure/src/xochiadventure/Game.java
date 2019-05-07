@@ -98,7 +98,7 @@ public class Game implements Runnable {
     // UI
     private int playerX;                                    // to store the position in which the player will be drawn
     private int playerY;                                    // to store the position in which the player will be drawn
-    private String nivel;
+    private int nivel;
     private int limitX[];
 
 
@@ -234,8 +234,8 @@ public class Game implements Runnable {
      * To load the chosen level
      * @param txt to know which level to load
      */
-    private void loadLevel(String txt) {
-
+    private void loadLevel() {
+    
       // lee txt
 
       /*
@@ -256,108 +256,192 @@ public class Game implements Runnable {
       fuente.x = 1400;
       fuente.y = 500;
 
-      // se crean los chiles
-      // for (int i  = 0; i < 5; i++) {
-      //     if (i % 2 == 0) {
-      //         direction = 1;
-      //     } else {
-      //         direction = -1;
-      //     }
-      //     chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, 5, 0, 500, this));
-      //     iPosX += 50;
-      //     iPosY += 50;
-      // }
+      
+      switch(nivel){
+        case 1:
+          chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
+          chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
+          chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
+          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
+          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
+          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
 
-      chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
-      chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
-      chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
-      chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
-      chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
-      chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
+          // grandes 3
+          platforms.add(new Platform(0, 250, 500, 100, this));
+          platforms.add(new Platform(1300, 250, 500, 100, this));
+          platforms.add(new Platform(2600, 250, 500, 100, this));
 
-      // iPosX = 50;
-      // iPosY = 10;
+          // chicas 2
+          platforms.add(new Platform(650, 500, 500, 100, this));
+          platforms.add(new Platform(1950, 500, 500, 100, this));
 
-      // se crean los powerups
-      // for (int i  = 0; i < 2; i++) {
-      //     powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 5, this));
-      //     iPosX += 50;
-      //     iPosY += 50;
-      // }
+          // 2500 5
+          platforms.add(new Platform(300, 800, 500, 100, this));
+          platforms.add(new Platform(800, 800, 500, 100, this));
+          platforms.add(new Platform(1300, 800, 500, 100, this));
+          platforms.add(new Platform(1800, 800, 500, 100, this));
+          platforms.add(new Platform(2300, 800, 500, 100, this));
 
-      // iPosX = 100;
-      // iPosY = 10;
-      // se crean las plataformas
+          // chicas 3
+          platforms.add(new Platform(0, 1100, 150, 30, this));
+          platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
+          platforms.add(new Platform(2950, 1100, 150, 30, this));
 
-      // for (int i  = 0; i < 2; i++) {
-      //     platforms.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
-      //     iPosX += 50;
-      //     iPosY += 50;
-      // }
+          // grandes 4
+          platforms.add(new Platform(0, 1350, 500, 100, this));
+          platforms.add(new Platform(950, 1350, 500, 100, this));
+          platforms.add(new Platform(1650, 1350, 500, 100, this));
+          platforms.add(new Platform(2600, 1350, 500, 100, this));
 
-      // grandes 3
-      platforms.add(new Platform(0, 250, 500, 100, this));
-      platforms.add(new Platform(1300, 250, 500, 100, this));
-      platforms.add(new Platform(2600, 250, 500, 100, this));
+          // chicas 2
+          platforms.add(new Platform(650, 1650, 150, 30, this));
+          platforms.add(new Platform(2300, 1650, 150, 30, this));
 
-      // chicas 2
-      platforms.add(new Platform(650, 500, 500, 100, this));
-      platforms.add(new Platform(1950, 500, 500, 100, this));
+          // grandes 5
+          platforms.add(new Platform(0, 1900, 500, 100, this));
+          // platforms.add(new Platform(950, 1900, 1200, 100, this));
+          platforms.add(new Platform(950, 1900, 500, 100, this));
+          platforms.add(new Platform(1450, 1900, 500, 100, this));
+          platforms.add(new Platform(1550, 1900, 500, 100, this));
+          platforms.add(new Platform(2600, 1900, 500, 100, this));
 
-      // 2500 5
-      platforms.add(new Platform(300, 800, 500, 100, this));
-      platforms.add(new Platform(800, 800, 500, 100, this));
-      platforms.add(new Platform(1300, 800, 500, 100, this));
-      platforms.add(new Platform(1800, 800, 500, 100, this));
-      platforms.add(new Platform(2300, 800, 500, 100, this));
+          comidas.add(new Comida(225, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 200, 50, 50, this));
+          comidas.add(new Comida(2925, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 1050, 50, 50, this));
+          comidas.add(new Comida(225, 1850, 50, 50, this));
+          comidas.add(new Comida(1525, 1850, 50, 50, this));
+          comidas.add(new Comida(2925, 1850, 50, 50, this));
 
-      // chicas 3
-      platforms.add(new Platform(0, 1100, 150, 30, this));
-      platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
-      platforms.add(new Platform(2950, 1100, 150, 30, this));
+          player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
+          playerX = getWidth() / 2 - player.getWidth() / 2;
+          playerY = getHeight() / 2 - player.getHeight() / 2;
 
-      // grandes 4
-      platforms.add(new Platform(0, 1350, 500, 100, this));
-      platforms.add(new Platform(950, 1350, 500, 100, this));
-      platforms.add(new Platform(1650, 1350, 500, 100, this));
-      platforms.add(new Platform(2600, 1350, 500, 100, this));
+          break;
 
-      // chicas 2
-      platforms.add(new Platform(650, 1650, 150, 30, this));
-      platforms.add(new Platform(2300, 1650, 150, 30, this));
+        case 2:
+          chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
+          chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
+          chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
+          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
+          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
+          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
 
-      // grandes 5
-      platforms.add(new Platform(0, 1900, 500, 100, this));
-      // platforms.add(new Platform(950, 1900, 1200, 100, this));
-      platforms.add(new Platform(950, 1900, 500, 100, this));
-      platforms.add(new Platform(1450, 1900, 500, 100, this));
-      platforms.add(new Platform(1550, 1900, 500, 100, this));
-      platforms.add(new Platform(2600, 1900, 500, 100, this));
+          // grandes 3
+          platforms.add(new Platform(0, 250, 500, 100, this));
+          platforms.add(new Platform(1300, 250, 500, 100, this));
+          platforms.add(new Platform(2600, 250, 500, 100, this));
 
-      // se crean los ingredientes
-      // for (int i  = 0; i < 5; i++) {
-      //     comidas.add(new Comida(iPosX, iPosY, 50, 50, 5, this));
-      //     iPosX += 50;
-      //     iPosY += 50;
-      // }
+          // chicas 2
+          platforms.add(new Platform(650, 500, 500, 100, this));
+          platforms.add(new Platform(1950, 500, 500, 100, this));
 
-      comidas.add(new Comida(225, 200, 50, 50, this));
-      comidas.add(new Comida(1525, 200, 50, 50, this));
-      comidas.add(new Comida(2925, 200, 50, 50, this));
-      comidas.add(new Comida(1525, 1050, 50, 50, this));
-      comidas.add(new Comida(225, 1850, 50, 50, this));
-      comidas.add(new Comida(1525, 1850, 50, 50, this));
-      comidas.add(new Comida(2925, 1850, 50, 50, this));
+          // 2500 5
+          platforms.add(new Platform(-400, 800, 500, 100, this));
+          platforms.add(new Platform(300, 800, 500, 100, this));
+          platforms.add(new Platform(1000, 800, 1500, 100, this));
+          platforms.add(new Platform(2700, 800, 500, 100, this));
+          platforms.add(new Platform(3000, 800, 500, 100, this));
 
-      player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
-      playerX = getWidth() / 2 - player.getWidth() / 2;
-      playerY = getHeight() / 2 - player.getHeight() / 2;
+          // chicas 3
+          platforms.add(new Platform(950, 1100, 500, 100, this));
+          platforms.add(new Platform(1750, 1100, 500, 100, this));
 
+          platforms.add(new Platform(400, 1350, 500, 100, this));
+          platforms.add(new Platform(1600, 1350, 500, 100, this));
+          platforms.add(new Platform(2700, 1350, 500, 100, this));
+
+          platforms.add(new Platform(0, 1650, 400, 100, this));
+          platforms.add(new Platform(500, 1350, 400, 100, this));
+
+          // chicas 2
+          platforms.add(new Platform(1000, 1650, 400, 100, this));
+          platforms.add(new Platform(1475, 1650, 150, 30, this));
+
+          // grandes 5
+          platforms.add(new Platform(1700, 1650, 400, 100, this));
+          // platforms.add(new Platform(950, 1900, 1200, 100, this));
+          platforms.add(new Platform(2200, 1650, 400, 100, this));
+          platforms.add(new Platform(2700, 1650, 400, 100, this));
+          // platforms.add(new Platform(1550, 1900, 500, 100, this));
+          // platforms.add(new Platform(2600, 1900, 500, 100, this));
+
+          comidas.add(new Comida(225, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 200, 50, 50, this));
+          comidas.add(new Comida(2925, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 1050, 50, 50, this));
+          comidas.add(new Comida(225, 1850, 50, 50, this));
+          comidas.add(new Comida(1525, 1850, 50, 50, this));
+          comidas.add(new Comida(2925, 1850, 50, 50, this));
+
+          player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
+          playerX = getWidth() / 2 - player.getWidth() / 2;
+          playerY = getHeight() / 2 - player.getHeight() / 2;
+          break;
+
+        case 3:
+          chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
+          chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
+          chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
+          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
+          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
+          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
+
+          // grandes 3
+          platforms.add(new Platform(0, 250, 500, 100, this));
+          platforms.add(new Platform(1300, 250, 500, 100, this));
+          platforms.add(new Platform(2600, 250, 500, 100, this));
+
+          // chicas 2
+          platforms.add(new Platform(650, 500, 500, 100, this));
+          platforms.add(new Platform(1950, 500, 500, 100, this));
+
+          // 2500 5
+          platforms.add(new Platform(300, 800, 500, 100, this));
+          platforms.add(new Platform(800, 800, 500, 100, this));
+          platforms.add(new Platform(1300, 800, 500, 100, this));
+          platforms.add(new Platform(1800, 800, 500, 100, this));
+          platforms.add(new Platform(2300, 800, 500, 100, this));
+
+          // chicas 3
+          platforms.add(new Platform(0, 1100, 150, 30, this));
+          platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
+          platforms.add(new Platform(2950, 1100, 150, 30, this));
+
+          // grandes 4
+          platforms.add(new Platform(0, 1350, 500, 100, this));
+          platforms.add(new Platform(950, 1350, 500, 100, this));
+          platforms.add(new Platform(1650, 1350, 500, 100, this));
+          platforms.add(new Platform(2600, 1350, 500, 100, this));
+
+          // chicas 2
+          platforms.add(new Platform(650, 1650, 150, 30, this));
+          platforms.add(new Platform(2300, 1650, 150, 30, this));
+
+          // grandes 5
+          platforms.add(new Platform(0, 1900, 500, 100, this));
+          // platforms.add(new Platform(950, 1900, 1200, 100, this));
+          platforms.add(new Platform(950, 1900, 500, 100, this));
+          platforms.add(new Platform(1450, 1900, 500, 100, this));
+          platforms.add(new Platform(1550, 1900, 500, 100, this));
+          platforms.add(new Platform(2600, 1900, 500, 100, this));
+
+          comidas.add(new Comida(225, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 200, 50, 50, this));
+          comidas.add(new Comida(2925, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 1050, 50, 50, this));
+          comidas.add(new Comida(225, 1850, 50, 50, this));
+          comidas.add(new Comida(1525, 1850, 50, 50, this));
+          comidas.add(new Comida(2925, 1850, 50, 50, this));
+
+          player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
+          playerX = getWidth() / 2 - player.getWidth() / 2;
+          playerY = getHeight() / 2 - player.getHeight() / 2;
+          break;
+      }
+      
       endGame = false;
       pauseGame = false;
-
-     // System.out.println("x and y " + playerX + " " + playerY);
-     // System.out.println("player " + player.getX() + " " + player.getY());
     }
 
     /**
@@ -481,22 +565,22 @@ public class Game implements Runnable {
                         case ONE:
                             //carga nivel 1
                             Assets.selectSnd.play();
-							nivel = "nivel 1";
-                            loadLevel(nivel);
+                            nivel = 1;
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
                             //carga nivel2
-                            nivel = "nivel 2";
-                            loadLevel(nivel);
+                            nivel = 2;
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 2.png");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
                             //carga nivel3
-                            nivel = "nivel 3";
-                            loadLevel(nivel);
+                            nivel = 3;
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 3.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -771,7 +855,7 @@ public class Game implements Runnable {
                     if (endGame) {
                       if (keyManager.enter) {
                         unloadLevel();
-                        loadLevel(nivel);
+                        loadLevel();
                       }
                     }
                   }
@@ -803,7 +887,7 @@ public class Game implements Runnable {
                 case MENU:
 
                   g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
-                  g.drawString(nivel, 50, 480);
+                  g.drawString("" + nivel, 50, 480);
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
                   switch(menOpt) {
                     case OPTIONS:
@@ -819,17 +903,14 @@ public class Game implements Runnable {
                       g.drawImage(Assets.select, 770, 185, 100, 100, null);
                       break;
                     case ONE:
-                      nivel = "nivel 1 jaja";
                       //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
                       g.drawImage(Assets.miniLevel, 40, 420, 400, 230, null);
                       g.drawImage(Assets.select, 620, 380, 100, 100, null);
                       break;
                     case TWO:
-                      nivel = "nivel 2";
                       g.drawImage(Assets.select, 590, 450, 100, 100, null);
                       break;
                     case THREE:
-                      nivel = "nivel 3";
                       g.drawImage(Assets.select, 680, 535, 100, 100, null);
                       break;
                   }
@@ -975,7 +1056,6 @@ public class Game implements Runnable {
         endGame = false;
         pauseGame = false;
         confirmSound = Assets.selectSnd;
-        nivel = "";
         soundOn = true;
 
         display.getJframe().addKeyListener(keyManager);
