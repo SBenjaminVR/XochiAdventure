@@ -9,35 +9,31 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @authors
- *      - Alberto García Viegas A00822649
- *      - Melba Geraldine Consuelos Fernández A01410921
- *      - Humberto
- *      - Benjamin
+ * @author
+ *      - Alberto García Viegas                 A00822649
+ *      - Melba Geraldine Consuelos Fernández   A01410921
+ *      - Humberto González Sánchez             A00822594
+ *      - Benjamín Váldez Rodríguez             A00822027
  */
 public class Assets {
     // Images
     public static BufferedImage background;         // to store background image
-    public static BufferedImage player;                 // to store the player image
-    public static BufferedImage bomb;                   // to store the bomb image
-    public static BufferedImage alien;                  // to store the alien image
-    public static BufferedImage shot;                   //to store flask color
-    public static BufferedImage asteroid;
-    public static BufferedImage heart;
+    public static BufferedImage player;             // to store the player image
+    public static BufferedImage shot;               // to store flask color
+    public static BufferedImage heart;              // to store the taco heart image
 
     public static BufferedImage titleScreen;        // to store the title screen
     public static BufferedImage menu;               // to store the menu image
     public static BufferedImage options;            // to store the options screen image
     public static BufferedImage controls;           // to store the instructions screen image
-    public static BufferedImage select;                // to store the red rectangle image
-    public static BufferedImage recipies;       // to store the recipies screen image
-    public static BufferedImage chile;       // to store the chile image
-    public static BufferedImage platform;
-    public static BufferedImage powerup;
-    public static BufferedImage comida;
-    public static BufferedImage rectangle;
+    public static BufferedImage select;             // to store the red rectangle image
+    public static BufferedImage recipies;           // to store the recipies screen image
+    public static BufferedImage chile;              // to store the chile image
+    public static BufferedImage platform;           // to store the platform image
+    public static BufferedImage powerup;            // to store the power
+    public static BufferedImage rectangle;          
     public static BufferedImage fuente;
-    public static BufferedImage xochiIdle;              // to store the xochi image
+    public static BufferedImage xochiIdle;          // to store the xochi image
     public static BufferedImage xochiAnim[];        // to store the frames for xochi animation
     public static BufferedImage ingredientes[];
 
@@ -70,6 +66,7 @@ public class Assets {
 
         //selectSnd = new SoundClip("/sounds/Retro_8-Bit_Game-Powerup_Achievement_05.wav");
 
+        // Loading of sounds
         selectSnd = new SoundClip("/sounds/selectSound.wav");
         // selectSnd = new SoundClip("/sounds/select.wav"); OTRA OPCION NO SE CUAL ES MEJOR LOS TKM
         atoleSnd = new SoundClip("/sounds/powerUp.wav");
@@ -79,23 +76,24 @@ public class Assets {
         shootSnd = new SoundClip("/sounds/shoot.wav");
         winSnd = new SoundClip("/sounds/win.wav");
 
+        // Loading of images of menu screens
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
         menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
         options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
         select = ImageLoader.loadImage("/images/select.png");
         recipies = ImageLoader.loadImage("/images/pantallas/Recetario.png");
+
+        // Loading of images of game objects
         chile = ImageLoader.loadImage("/images/chile.png");
         platform = ImageLoader.loadImage("/images/brick_barro.png");
         powerup = ImageLoader.loadImage("/images/flask2.png");
-        // player = ImageLoader.loadImage("/images/gyrados.png");
-        comida = ImageLoader.loadImage("/images/malo.png");
         rectangle = ImageLoader.loadImage("/images/192.png");
         fuente = ImageLoader.loadImage("/images/fountain_beta.png");
         heart = ImageLoader.loadImage("/images/tacoHeart.png");
         shot = ImageLoader.loadImage("/images/bubble.png");
-        // laser = new SoundClip("/sounds/laser.wav");
 
+        // Loading of images of ingredients
         ingredientes = new BufferedImage[7];
         ingredientes[0] = ImageLoader.loadImage("/images/comida/Tortillas.png");
         ingredientes[1] = ImageLoader.loadImage("/images/comida/quexo.png");
@@ -105,6 +103,8 @@ public class Assets {
         ingredientes[5] = ImageLoader.loadImage("/images/comida/oil.png");
         ingredientes[6] = ImageLoader.loadImage("/images/comida/cebollaFEa.png");
 
+
+        // Loading of animations
         atole = ImageLoader.loadImage("/images/atole.png");
         SpreadSheet atoleSpriteSheet = new SpreadSheet(atole);         // spritesheet of the atole
         atoleAnim = new BufferedImage[3];                              // the sprites of the atole animation

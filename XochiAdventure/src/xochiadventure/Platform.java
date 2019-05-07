@@ -20,11 +20,10 @@ public class Platform extends Item {
      * @param y
      * @param width
      * @param height
-     * @param speedX
      * @param game
      */
-    public Platform (int x, int y, int width, int height, int speedX, Game game) {
-        super(x, y, width, height, speedX, game);
+    public Platform (int x, int y, int width, int height, Game game) {
+        super(x, y, width, height, 0, game);
     }
 
    /**

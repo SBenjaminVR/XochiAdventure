@@ -50,8 +50,11 @@ enum OptOpt {
 
 /**
  *
- * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández
- * A01410921
+ * @author
+ *      - Alberto García Viegas                 A00822649
+ *      - Melba Geraldine Consuelos Fernández   A01410921
+ *      - Humberto González Sánchez             A00822594
+ *      - Benjamín Váldez Rodríguez             A00822027
  */
 public class Game implements Runnable {
 
@@ -154,9 +157,9 @@ public class Game implements Runnable {
     }
 
     /**
-     * To get the list of all the bricks
+     * To get the list of all the chiles
      *
-     * @return an <code>LinkedList<Enemey></code> list with all the bricks
+     * @return an <code>LinkedList<Enemey></code> list with all the chiles
      */
     public LinkedList<Enemy> getChiles() {
         return chiles;
@@ -169,15 +172,6 @@ public class Game implements Runnable {
      */
     public Player getPlayer() {
         return player;
-    }
-
-    /**
-     * to get the shots
-     *
-     * @return
-     */
-    public Shot getShot() {
-        return shot;
     }
 
     /**
@@ -232,19 +226,11 @@ public class Game implements Runnable {
         this.endGame = endGame;
     }
 
-    /**
-     * To set the shot
-     * @param shot to set the shot
-     */
-    public void setShot(Shot shot) {
-        this.shot = shot;
-    }
-
     // FUNCTIONS ------------------------------------------------------------------------------------------------------------------------------------
 
     /**
      * To load the chosen level
-     * @param txt to know which file to read
+     * @param txt to know which level to load
      */
     private void loadLevel(String txt) {
 
@@ -308,41 +294,41 @@ public class Game implements Runnable {
       // }
 
       // grandes
-      platforms.add(new Platform(0, 250, 500, 100,  0, this));
-      platforms.add(new Platform(1300, 250, 500, 100, 0, this));
-      platforms.add(new Platform(2600, 250, 500, 100, 0, this));
+      platforms.add(new Platform(0, 250, 500, 100, this));
+      platforms.add(new Platform(1300, 250, 500, 100, this));
+      platforms.add(new Platform(2600, 250, 500, 100, this));
 
       // chicas
-      platforms.add(new Platform(650, 500, 500, 100, 0, this));
-      platforms.add(new Platform(1950, 500, 500, 100, 0, this));
+      platforms.add(new Platform(650, 500, 500, 100, this));
+      platforms.add(new Platform(1950, 500, 500, 100, this));
 
       // 2500
-      platforms.add(new Platform(300, 800, 500, 100, 0, this));
-      platforms.add(new Platform(800, 800, 500, 100, 0, this));
-      platforms.add(new Platform(1300, 800, 500, 100, 0, this));
-      platforms.add(new Platform(1800, 800, 500, 100, 0, this));
-      platforms.add(new Platform(2300, 800, 500, 100, 0, this));
+      platforms.add(new Platform(300, 800, 500, 100, this));
+      platforms.add(new Platform(800, 800, 500, 100, this));
+      platforms.add(new Platform(1300, 800, 500, 100, this));
+      platforms.add(new Platform(1800, 800, 500, 100, this));
+      platforms.add(new Platform(2300, 800, 500, 100, this));
 
       // chicas
-      platforms.add(new Platform(0, 1100, 150, 30, 0, this));
-      platforms.add(new Platform(1550 - 75, 1100, 150, 30, 0, this));
-      platforms.add(new Platform(2950, 1100, 150, 30, 0, this));
+      platforms.add(new Platform(0, 1100, 150, 30, this));
+      platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
+      platforms.add(new Platform(2950, 1100, 150, 30, this));
 
       // grandes
-      platforms.add(new Platform(0, 1350, 500, 100, 0, this));
-      platforms.add(new Platform(950, 1350, 500, 100, 0, this));
-      platforms.add(new Platform(1650, 1350, 500, 100, 0, this));
+      platforms.add(new Platform(0, 1350, 500, 100, this));
+      platforms.add(new Platform(950, 1350, 500, 100, this));
+      platforms.add(new Platform(1650, 1350, 500, 100, this));
 
-      platforms.add(new Platform(2600, 1350, 500, 100, 0, this));
+      platforms.add(new Platform(2600, 1350, 500, 100, this));
 
       // chicas
-      platforms.add(new Platform(650, 1650, 150, 30, 0, this));
-      platforms.add(new Platform(2300, 1650, 150, 30, 0, this));
+      platforms.add(new Platform(650, 1650, 150, 30, this));
+      platforms.add(new Platform(2300, 1650, 150, 30, this));
 
       // grandes
-      platforms.add(new Platform(0, 1900, 500, 100, 0, this));
-      platforms.add(new Platform(950, 1900, 1200, 100, 0, this));
-      platforms.add(new Platform(2600, 1900, 500, 100, 0, this));
+      platforms.add(new Platform(0, 1900, 500, 100, this));
+      platforms.add(new Platform(950, 1900, 1200, 100, this));
+      platforms.add(new Platform(2600, 1900, 500, 100, this));
 
       // se crean los ingredientes
       // for (int i  = 0; i < 5; i++) {
@@ -351,13 +337,13 @@ public class Game implements Runnable {
       //     iPosY += 50;
       // }
 
-      comidas.add(new Comida(225, 200, 50, 50, 0, this));
-      comidas.add(new Comida(1525, 200, 50, 50, 0, this));
-      comidas.add(new Comida(2925, 200, 50, 50, 0, this));
-      comidas.add(new Comida(1525, 1050, 50, 50, 0, this));
-      comidas.add(new Comida(225, 1850, 50, 50, 0, this));
-      comidas.add(new Comida(1525, 1850, 50, 50, 0, this));
-      comidas.add(new Comida(2925, 1850, 50, 50, 0, this));
+      comidas.add(new Comida(225, 200, 50, 50, this));
+      comidas.add(new Comida(1525, 200, 50, 50, this));
+      comidas.add(new Comida(2925, 200, 50, 50, this));
+      comidas.add(new Comida(1525, 1050, 50, 50, this));
+      comidas.add(new Comida(225, 1850, 50, 50, this));
+      comidas.add(new Comida(1525, 1850, 50, 50, this));
+      comidas.add(new Comida(2925, 1850, 50, 50, this));
 
       player = new Player (1475, 650, 100, 100, 5, 3, 0, 150, this);
       playerX = getWidth() / 2 - player.getWidth() / 2;
@@ -634,9 +620,9 @@ public class Game implements Runnable {
                       }
 
                     if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
-						if (soundOn) {
-							Assets.shootSnd.play();
-						}
+          						if (soundOn) {
+          							Assets.shootSnd.play();
+          						}
                         //attack
                         if (player.getDirection() == 1) {
                           // attack to the right
@@ -666,7 +652,8 @@ public class Game implements Runnable {
                           // se checa que los disparos colisionen con los chiles
                           for (int j = 0; j < disparos.size(); j++) {
                             Shot disp = disparos.get(j);
-							// si colisionan elimina el chile y el disparo, aparte de checar si el chile soltará algún power up o no
+
+                            // si colisionan elimina el chile y el disparo, aparte de checar si el chile soltará algún power up o no
                             if (disp.intersectaChile(chile)) {
                               chiles.remove(i);
                               disparos.remove(j);
@@ -701,6 +688,7 @@ public class Game implements Runnable {
                                       break;
                                   case AGUA:
                                       // Refill a little bit the players ammo
+                                      getPlayer().setWater(getPlayer().getWater() + 25);
                                       break;
 
                                   case DULCE:
