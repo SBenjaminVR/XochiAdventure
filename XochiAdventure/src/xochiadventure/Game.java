@@ -100,7 +100,7 @@ public class Game implements Runnable {
     // UI
     private int playerX;                                    // to store the position in which the player will be drawn
     private int playerY;                                    // to store the position in which the player will be drawn
-    private String nivel;
+    private int nivel;
     private int limitX[];
 
 
@@ -237,8 +237,8 @@ public class Game implements Runnable {
      * To load the chosen level
      * @param txt to know which level to load
      */
-    private void loadLevel(String txt) {
-
+    private void loadLevel() {
+    
       // lee txt
 
       /*
@@ -259,108 +259,192 @@ public class Game implements Runnable {
       fuente.x = 1400;
       fuente.y = 500;
 
-      // se crean los chiles
-      // for (int i  = 0; i < 5; i++) {
-      //     if (i % 2 == 0) {
-      //         direction = 1;
-      //     } else {
-      //         direction = -1;
-      //     }
-      //     chiles.add(new Enemy(iPosX, iPosY, 50, 50, direction, 5, 0, 500, this));
-      //     iPosX += 50;
-      //     iPosY += 50;
-      // }
+      
+      switch(nivel){
+        case 1:
+          chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
+          chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
+          chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
+          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
+          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
+          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
 
-      chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
-      chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
-      chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
-      chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
-      chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
-      chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
+          // grandes 3
+          platforms.add(new Platform(0, 250, 500, 100, this));
+          platforms.add(new Platform(1300, 250, 500, 100, this));
+          platforms.add(new Platform(2600, 250, 500, 100, this));
 
-      // iPosX = 50;
-      // iPosY = 10;
+          // chicas 2
+          platforms.add(new Platform(650, 500, 500, 100, this));
+          platforms.add(new Platform(1950, 500, 500, 100, this));
 
-      // se crean los powerups
-      // for (int i  = 0; i < 2; i++) {
-      //     powerups.add(new PowerUps(iPosX, iPosY, 50, 50, 5, this));
-      //     iPosX += 50;
-      //     iPosY += 50;
-      // }
+          // 2500 5
+          platforms.add(new Platform(300, 800, 500, 100, this));
+          platforms.add(new Platform(800, 800, 500, 100, this));
+          platforms.add(new Platform(1300, 800, 500, 100, this));
+          platforms.add(new Platform(1800, 800, 500, 100, this));
+          platforms.add(new Platform(2300, 800, 500, 100, this));
 
-      // iPosX = 100;
-      // iPosY = 10;
-      // se crean las plataformas
+          // chicas 3
+          platforms.add(new Platform(0, 1100, 150, 30, this));
+          platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
+          platforms.add(new Platform(2950, 1100, 150, 30, this));
 
-      // for (int i  = 0; i < 2; i++) {
-      //     platforms.add(new Platform(iPosX, iPosY, 50, 50, 5, this));
-      //     iPosX += 50;
-      //     iPosY += 50;
-      // }
+          // grandes 4
+          platforms.add(new Platform(0, 1350, 500, 100, this));
+          platforms.add(new Platform(950, 1350, 500, 100, this));
+          platforms.add(new Platform(1650, 1350, 500, 100, this));
+          platforms.add(new Platform(2600, 1350, 500, 100, this));
 
-      // grandes 3
-      platforms.add(new Platform(0, 250, 500, 100, this));
-      platforms.add(new Platform(1300, 250, 500, 100, this));
-      platforms.add(new Platform(2600, 250, 500, 100, this));
+          // chicas 2
+          platforms.add(new Platform(650, 1650, 150, 30, this));
+          platforms.add(new Platform(2300, 1650, 150, 30, this));
 
-      // chicas 2
-      platforms.add(new Platform(650, 500, 500, 100, this));
-      platforms.add(new Platform(1950, 500, 500, 100, this));
+          // grandes 5
+          platforms.add(new Platform(0, 1900, 500, 100, this));
+          // platforms.add(new Platform(950, 1900, 1200, 100, this));
+          platforms.add(new Platform(950, 1900, 500, 100, this));
+          platforms.add(new Platform(1450, 1900, 500, 100, this));
+          platforms.add(new Platform(1550, 1900, 500, 100, this));
+          platforms.add(new Platform(2600, 1900, 500, 100, this));
 
-      // 2500 5
-      platforms.add(new Platform(300, 800, 500, 100, this));
-      platforms.add(new Platform(800, 800, 500, 100, this));
-      platforms.add(new Platform(1300, 800, 500, 100, this));
-      platforms.add(new Platform(1800, 800, 500, 100, this));
-      platforms.add(new Platform(2300, 800, 500, 100, this));
+          comidas.add(new Comida(225, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 200, 50, 50, this));
+          comidas.add(new Comida(2925, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 1050, 50, 50, this));
+          comidas.add(new Comida(225, 1850, 50, 50, this));
+          comidas.add(new Comida(1525, 1850, 50, 50, this));
+          comidas.add(new Comida(2925, 1850, 50, 50, this));
 
-      // chicas 3
-      platforms.add(new Platform(0, 1100, 150, 30, this));
-      platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
-      platforms.add(new Platform(2950, 1100, 150, 30, this));
+          player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
+          playerX = getWidth() / 2 - player.getWidth() / 2;
+          playerY = getHeight() / 2 - player.getHeight() / 2;
 
-      // grandes 4
-      platforms.add(new Platform(0, 1350, 500, 100, this));
-      platforms.add(new Platform(950, 1350, 500, 100, this));
-      platforms.add(new Platform(1650, 1350, 500, 100, this));
-      platforms.add(new Platform(2600, 1350, 500, 100, this));
+          break;
 
-      // chicas 2
-      platforms.add(new Platform(650, 1650, 150, 30, this));
-      platforms.add(new Platform(2300, 1650, 150, 30, this));
+        case 2:
+          chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
+          chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
+          chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
+          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
+          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
+          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
 
-      // grandes 5
-      platforms.add(new Platform(0, 1900, 500, 100, this));
-      // platforms.add(new Platform(950, 1900, 1200, 100, this));
-      platforms.add(new Platform(950, 1900, 500, 100, this));
-      platforms.add(new Platform(1450, 1900, 500, 100, this));
-      platforms.add(new Platform(1550, 1900, 500, 100, this));
-      platforms.add(new Platform(2600, 1900, 500, 100, this));
+          // grandes 3
+          platforms.add(new Platform(0, 250, 500, 100, this));
+          platforms.add(new Platform(1300, 250, 500, 100, this));
+          platforms.add(new Platform(2600, 250, 500, 100, this));
 
-      // se crean los ingredientes
-      // for (int i  = 0; i < 5; i++) {
-      //     comidas.add(new Comida(iPosX, iPosY, 50, 50, 5, this));
-      //     iPosX += 50;
-      //     iPosY += 50;
-      // }
+          // chicas 2
+          platforms.add(new Platform(650, 500, 500, 100, this));
+          platforms.add(new Platform(1950, 500, 500, 100, this));
 
-      comidas.add(new Comida(225, 200, 50, 50, this));
-      comidas.add(new Comida(1525, 200, 50, 50, this));
-      comidas.add(new Comida(2925, 200, 50, 50, this));
-      comidas.add(new Comida(1525, 1050, 50, 50, this));
-      comidas.add(new Comida(225, 1850, 50, 50, this));
-      comidas.add(new Comida(1525, 1850, 50, 50, this));
-      comidas.add(new Comida(2925, 1850, 50, 50, this));
+          // 2500 5
+          platforms.add(new Platform(-400, 800, 500, 100, this));
+          platforms.add(new Platform(300, 800, 500, 100, this));
+          platforms.add(new Platform(1000, 800, 1500, 100, this));
+          platforms.add(new Platform(2700, 800, 500, 100, this));
+          platforms.add(new Platform(3000, 800, 500, 100, this));
 
-      player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
-      playerX = getWidth() / 2 - player.getWidth() / 2;
-      playerY = getHeight() / 2 - player.getHeight() / 2;
+          // chicas 3
+          platforms.add(new Platform(950, 1100, 500, 100, this));
+          platforms.add(new Platform(1750, 1100, 500, 100, this));
 
+          platforms.add(new Platform(400, 1350, 500, 100, this));
+          platforms.add(new Platform(1600, 1350, 500, 100, this));
+          platforms.add(new Platform(2700, 1350, 500, 100, this));
+
+          platforms.add(new Platform(0, 1650, 400, 100, this));
+          platforms.add(new Platform(500, 1350, 400, 100, this));
+
+          // chicas 2
+          platforms.add(new Platform(1000, 1650, 400, 100, this));
+          platforms.add(new Platform(1475, 1650, 150, 30, this));
+
+          // grandes 5
+          platforms.add(new Platform(1700, 1650, 400, 100, this));
+          // platforms.add(new Platform(950, 1900, 1200, 100, this));
+          platforms.add(new Platform(2200, 1650, 400, 100, this));
+          platforms.add(new Platform(2700, 1650, 400, 100, this));
+          // platforms.add(new Platform(1550, 1900, 500, 100, this));
+          // platforms.add(new Platform(2600, 1900, 500, 100, this));
+
+          comidas.add(new Comida(225, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 200, 50, 50, this));
+          comidas.add(new Comida(2925, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 1050, 50, 50, this));
+          comidas.add(new Comida(225, 1850, 50, 50, this));
+          comidas.add(new Comida(1525, 1850, 50, 50, this));
+          comidas.add(new Comida(2925, 1850, 50, 50, this));
+
+          player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
+          playerX = getWidth() / 2 - player.getWidth() / 2;
+          playerY = getHeight() / 2 - player.getHeight() / 2;
+          break;
+
+        case 3:
+          chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
+          chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
+          chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
+          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
+          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
+          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
+
+          // grandes 3
+          platforms.add(new Platform(0, 250, 500, 100, this));
+          platforms.add(new Platform(1300, 250, 500, 100, this));
+          platforms.add(new Platform(2600, 250, 500, 100, this));
+
+          // chicas 2
+          platforms.add(new Platform(650, 500, 500, 100, this));
+          platforms.add(new Platform(1950, 500, 500, 100, this));
+
+          // 2500 5
+          platforms.add(new Platform(300, 800, 500, 100, this));
+          platforms.add(new Platform(800, 800, 500, 100, this));
+          platforms.add(new Platform(1300, 800, 500, 100, this));
+          platforms.add(new Platform(1800, 800, 500, 100, this));
+          platforms.add(new Platform(2300, 800, 500, 100, this));
+
+          // chicas 3
+          platforms.add(new Platform(0, 1100, 150, 30, this));
+          platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
+          platforms.add(new Platform(2950, 1100, 150, 30, this));
+
+          // grandes 4
+          platforms.add(new Platform(0, 1350, 500, 100, this));
+          platforms.add(new Platform(950, 1350, 500, 100, this));
+          platforms.add(new Platform(1650, 1350, 500, 100, this));
+          platforms.add(new Platform(2600, 1350, 500, 100, this));
+
+          // chicas 2
+          platforms.add(new Platform(650, 1650, 150, 30, this));
+          platforms.add(new Platform(2300, 1650, 150, 30, this));
+
+          // grandes 5
+          platforms.add(new Platform(0, 1900, 500, 100, this));
+          // platforms.add(new Platform(950, 1900, 1200, 100, this));
+          platforms.add(new Platform(950, 1900, 500, 100, this));
+          platforms.add(new Platform(1450, 1900, 500, 100, this));
+          platforms.add(new Platform(1550, 1900, 500, 100, this));
+          platforms.add(new Platform(2600, 1900, 500, 100, this));
+
+          comidas.add(new Comida(225, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 200, 50, 50, this));
+          comidas.add(new Comida(2925, 200, 50, 50, this));
+          comidas.add(new Comida(1525, 1050, 50, 50, this));
+          comidas.add(new Comida(225, 1850, 50, 50, this));
+          comidas.add(new Comida(1525, 1850, 50, 50, this));
+          comidas.add(new Comida(2925, 1850, 50, 50, this));
+
+          player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
+          playerX = getWidth() / 2 - player.getWidth() / 2;
+          playerY = getHeight() / 2 - player.getHeight() / 2;
+          break;
+      }
+      
       endGame = false;
       pauseGame = false;
-
-     // System.out.println("x and y " + playerX + " " + playerY);
-     // System.out.println("player " + player.getX() + " " + player.getY());
     }
 
     /**
@@ -380,7 +464,7 @@ public class Game implements Runnable {
     private void tick() throws SQLException {
         // ticks key manager
         keyManager.tick();
-//         System.out.println("" + keyManager.left + " " + keyManager.right);
+        // System.out.println("" + keyManager.left + " " + keyManager.right);
 
         // checks in which screen you are
         switch(screen) {
@@ -484,22 +568,22 @@ public class Game implements Runnable {
                         case ONE:
                             //carga nivel 1
                             Assets.selectSnd.play();
-							nivel = "nivel 1";
-                            loadLevel(nivel);
+                            nivel = 1;
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
                             //carga nivel2
-                            nivel = "nivel 2";
-                            loadLevel(nivel);
+                            nivel = 2;
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 2.png");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
                             //carga nivel3
-                            nivel = "nivel 3";
-                            loadLevel(nivel);
+                            nivel = 3;
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 3.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -605,8 +689,8 @@ public class Game implements Runnable {
 
                 // checks if the backspace key was pressed to return to the main menu
                 if (keyManager.back) {
-                    unloadLevel();
-                    screen = Screen.MENU;
+                  unloadLevel();
+                  screen = Screen.MENU;
                 } else {
                   if (!pauseGame && !endGame) {
 
@@ -621,111 +705,115 @@ public class Game implements Runnable {
                      * En el caso que la primera condicional se cumpla, solo actualizamos la 'y' del rec para que se pueda dibujar todo
                      * En el caso que no se actualizan la 'x' y la 'y' del rec para que así pueda seguir al jugador
                      */
-                      if ((player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) && player.getY() + player.getHeight() > 2000 - getPlayerY()) {
-                        rec.setRect(rec.x, rec.y, getWidth(), getHeight());
-                      } else if (player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) {
-                        rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
-                      } else if (player.getY() + player.getHeight() > 2000 - getPlayerY()) {
-                        rec.setRect(player.getX() - playerX, rec.y, getWidth(), getHeight());
-                      } else {
-                        rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
-                      }
+                    if ((player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) && player.getY() + player.getHeight() > 2000 - getPlayerY()) {
+                      rec.setRect(rec.x, rec.y, getWidth(), getHeight());
+                    } else if (player.getX() < playerX || player.getX() + player.getWidth()> 3100 - getPlayerX()) {
+                      rec.setRect(rec.x, player.getY() - playerY, getWidth(), getHeight());
+                    } else if (player.getY() + player.getHeight() > 2000 - getPlayerY()) {
+                      rec.setRect(player.getX() - playerX, rec.y, getWidth(), getHeight());
+                    } else {
+                      rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
+                    }
 
-                      // checar si el jugador está en la fuente
-                      if (fuente.intersects(player.getPerimetro()) && player.getWater() < 100) {
-                        player.setWater(player.getWater() + 1);
-                      }
+                    // checar si el jugador está en la fuente
+                    if (fuente.intersects(player.getPerimetro()) && player.getWater() < 100) {
+                      player.setWater(player.getWater() + 1);
+                    }
 
                     if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
           						if (soundOn) {
           							Assets.shootSnd.play();
           						}
-                        //attack
-                        if (player.getDirection() == 1) {
-                          // attack to the right
-                          disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 8, 1, this));
-                        } else {
-                          // attack to the left
-                          disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 8, -1, this));
-                        }
-                        player.setWater(getPlayer().getWater() - 10);
+                      //attack
+                      if (player.getDirection() == 1) {
+                        // attack to the right
+                        disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 8, 1, this));
+                      } else {
+                        // attack to the left
+                        disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 8, -1, this));
                       }
+                      player.setWater(getPlayer().getWater() - 10);
+                    }
 
-                      // se tickea a los disparos
+                    // se tickea a los disparos
+                    for (int j = 0; j < disparos.size(); j++) {
+                      Shot disp = disparos.get(j);
+                      disp.tick();
+                      if (disp.getX() + disp.getWidth() <= 0 || disp.getX() >= 3100) {
+                        disparos.remove(j);
+                      }
+                    }
+
+
+                    // se tickea a los chiles
+                    for (int i  = 0; i < chiles.size(); i++) {
+                      Enemy chile = chiles.get(i);
+                      chile.tick();
+
+                      // se checa que los disparos colisionen con los chiles
                       for (int j = 0; j < disparos.size(); j++) {
                         Shot disp = disparos.get(j);
-                        disp.tick();
-                        if (disp.getX() + disp.getWidth() <= 0 || disp.getX() >= 3100) {
+
+                        // si colisionan elimina el chile y el disparo, aparte de checar si el chile soltará algún power up o no
+                        if (disp.intersectaChile(chile)) {
+                          chiles.remove(i);
                           disparos.remove(j);
+                          int max = 100;
+                          int min = 0;
+                          double numerito = (Math.random() * ((max - min) + 1)) + min;
+                          if (numerito < 25) {
+                            powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, this));
+                          }
                         }
                       }
 
+                      if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
+                        // quitarle vida al jugador
+                        player.setLives(player.getLives() - 1);
+                        Assets.hurtSnd.play();
+                        player.setContGotHit(60);
+                      }
+                    }
 
-                      // se tickea a los chiles
-                      for (int i  = 0; i < chiles.size(); i++) {
-                          Enemy chile = chiles.get(i);
-                          chile.tick();
+                    // se tickea a los powerups
+                    for (int i  = 0; i < powerups.size(); i++) {
+                      PowerUps power = powerups.get(i);
+                      power.tick();
+                      if (power.intersectaJugador(player)) {
+                          switch (power.getType()) {
+                              case ATOLE:
+                                  // Recover all of the player hp/lives
+                                  getPlayer().setLives(getPlayer().getMaxLives());
+                                  Assets.atoleSnd.play();
+                                  powerups.remove(i);
+                                  break;
+                              case AGUA:
+                                  // Refill a little bit the players ammo
+                                  getPlayer().setWater(getPlayer().getWater() + 25);
+                                  if (getPlayer().getWater() > 100) {
+                                    getPlayer().setWater(100);
+                                  }
+                                  powerups.remove(i);
+                                  break;
 
-                          // se checa que los disparos colisionen con los chiles
-                          for (int j = 0; j < disparos.size(); j++) {
-                            Shot disp = disparos.get(j);
+                              case DULCE:
+                                  // Recover 1 life
+                                  if (getPlayer().getLives() < getPlayer().getMaxLives())
+                                      getPlayer().setLives(getPlayer().getLives() + 1);
+                                  Assets.dulceSnd.play();
+                                  powerups.remove(i);
+                                  break;
 
-                            // si colisionan elimina el chile y el disparo, aparte de checar si el chile soltará algún power up o no
-                            if (disp.intersectaChile(chile)) {
-                              chiles.remove(i);
-                              disparos.remove(j);
-                              int max = 100;
-                              int min = 0;
-                              double numerito = (Math.random() * ((max - min) + 1)) + min;
-                              if (numerito < 25) {
-                                  powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, this));
-                              }
-                            }
-                          }
+                              case FRIJOL:
+                                  powerups.remove(i);
 
-                          if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
-                            // quitarle vida al jugador
-                            player.setLives(player.getLives() - 1);
-                            Assets.hurtSnd.play();
-                            player.setContGotHit(60);
+                                  break;
+                              default:
+                                powerups.remove(i);
+                                break;
                           }
                       }
-
-                      // se tickea a los powerups
-                      for (int i  = 0; i < powerups.size(); i++) {
-                          PowerUps power = powerups.get(i);
-                          power.tick();
-                          if (power.intersectaJugador(player)) {
-                              switch (power.getType()) {
-                                  case ATOLE:
-                                      // Recover all of the player hp/lives
-                                      getPlayer().setLives(getPlayer().getMaxLives());
-                                      Assets.atoleSnd.play();
-                                      powerups.remove(i);
-                                      break;
-                                  case AGUA:
-                                      // Refill a little bit the players ammo
-                                      getPlayer().setWater(getPlayer().getWater() + 25);
-                                      break;
-
-                                  case DULCE:
-                                      // Recover 1 life
-                                      if (getPlayer().getLives() < getPlayer().getMaxLives())
-                                          getPlayer().setLives(getPlayer().getLives() + 1);
-                                      Assets.dulceSnd.play();
-                                      powerups.remove(i);
-                                      break;
-
-                                  case FRIJOL:
-                                      powerups.remove(i);
-
-                                      break;
-                                  default:
-                                    powerups.remove(i);
-                                    break;
-                              }
-                          }
-                      }
+                    }
 
                       // se checa si el jugador está en el aire. si sí lo está se checa si ha colisionado con alguna plataforma
                       if (player.isInTheAir()) {
@@ -778,16 +866,13 @@ public class Game implements Runnable {
 
                   } else {
                     if (endGame) {
-
                       if (keyManager.enter) {
                         unloadLevel();
-                        loadLevel(nivel);
+                        loadLevel();
                       }
                     }
                   }
                 }
-
-                // ckecks if the game is paused
 
                 break;
         }
@@ -815,7 +900,7 @@ public class Game implements Runnable {
                 case MENU:
 
                   g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
-                  g.drawString(nivel, 50, 480);
+                  g.drawString("" + nivel, 50, 480);
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
                   switch(menOpt) {
                     case OPTIONS:
@@ -831,22 +916,23 @@ public class Game implements Runnable {
                       g.drawImage(Assets.select, 770, 185, 100, 100, null);
                       break;
                     case ONE:
-                      nivel = "nivel 1";
                       //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
+                      g.drawImage(Assets.miniLevel, 40, 420, 400, 230, null);
                       g.drawImage(Assets.select, 620, 380, 100, 100, null);
                       break;
                     case TWO:
-                      nivel = "nivel 2";
                       g.drawImage(Assets.select, 590, 450, 100, 100, null);
                       break;
                     case THREE:
-                      nivel = "nivel 3";
                       g.drawImage(Assets.select, 680, 535, 100, 100, null);
                       break;
                   }
                   break;
                 case OPTIONS:
                   g.drawImage(Assets.options, 0, 0, getWidth(), getHeight(), null);
+                  if (soundOn) {
+                    g.drawImage(Assets.checkmark, 920, 278, 34, 34, null);
+                  }
                   switch (optOpt) {
                       case DALTONICO:
                           g.drawImage(Assets.select, 190, 145, 100, 100, null);
@@ -965,10 +1051,6 @@ public class Game implements Runnable {
                   break;
             }
 
-
-           // draw score
-
-
             bs.show();
             g.dispose();
         }
@@ -982,45 +1064,19 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, getWidth(), getHeight());
         Assets.init();
-        
-
-        //creating the player and the shot
-//        player = new Player(getWidth() / 2, getHeight() - 100, 1, 100, 80, this);
-//        shot = new Shot(player.getX() + player.getWidth() / 2, player.getY() - player.getHeight(), 5, 5, this) {
-//        };
-//
-//        // set up the initial position for the aliens
-//        int iPosX = 0;
-//        int iPosY = 10;
-//        for (int i = 1; i <= 24; i++) {
-//            //aliens.add(new Enemy(iPosX, iPosY, 50, 50, this));
-//            iPosX += 60;
-//            aliens.add(new Enemy(iPosX, iPosY, 50, 50, 1, this));
-//            bombs.add(new Bomb(iPosX, iPosY, 10, 20, this));
-//
-//            // create 6 aliens every row
-//            if (i % 6 == 0) {
-//                iPosY += 60;
-//                iPosX = 0;
-//            }
-//
-//        }
-//
-//        // setting up the game variables
-//        score = 0;
-//        cantAliens = aliens.size();
-
 
         // se inicializan las variables
         endGame = false;
-        display.getJframe().addKeyListener(keyManager);
-        display.getJframe().addMouseListener(mouseManager);
-        display.getJframe().addMouseMotionListener(mouseManager);
-        display.getCanvas().addMouseListener(mouseManager);
-        display.getCanvas().addMouseMotionListener(mouseManager);
         pauseGame = false;
         confirmSound = Assets.selectSnd;
-        nivel = "";
+        soundOn = true;
+
+        display.getJframe().addKeyListener(keyManager);
+        // display.getJframe().addMouseListener(mouseManager);
+        // display.getJframe().addMouseMotionListener(mouseManager);
+        // display.getCanvas().addMouseListener(mouseManager);
+        // display.getCanvas().addMouseMotionListener(mouseManager);
+        
     }
 
     @Override
@@ -1081,96 +1137,5 @@ public class Game implements Runnable {
                 ie.printStackTrace();
             }
         }
-    }
-
-    // LECTURA Y GUARDADO DE DATOS
-
-    /**
-     * To get all the variable that need to be stored in the file as a string
-     *
-     * @return an <code>String</code> value with all the information of the
-     * variables
-     */
-    public String intoString() {
-        //return (score + " " + cantAliens + " " + (endGame ? 1 : 0) +  " " + (pauseGame ? 1 : 0));
-        return "";
-    }
-
-    // Carga la información del objeto desde un string ------------------------------------------------------------------
-    /**
-     * To set the value of the score, lives and the state of the game from the
-     * file that was loaded
-     *
-     * @param datos to set all the variables
-     */
-    public void loadFromString(String[] datos) {
-//        this.score = Integer.parseInt(datos[0]);
-//        this.cantAliens = Integer.parseInt(datos[1]);
-//        this.endGame = (Integer.parseInt(datos[2]) == 1 ? true : false);
-//        this.pauseGame = (Integer.parseInt(datos[3]) == 1 ? true : false);
-    }
-
-    /**
-     * Writes in the given file all the given information
-     *
-     * @throws IOException when file not found
-     */
-    public void grabarArchivo() throws IOException {
-//        PrintWriter fileOut = new PrintWriter(new FileWriter(nombreArchivo));
-//        fileOut.println(this.toString());
-//        fileOut.println(player.toString());
-//        fileOut.println(shot.toString());
-//        for(Enemy alien : aliens){
-//            fileOut.println(alien.toString());
-//        }
-//        for (Bomb bomb : bombs) {
-//            fileOut.println(bomb.toString());
-//        }
-//
-//        fileOut.close();
-    }
-
-    /**
-     * Load all the information from the given file
-     *
-     * @throws IOException when file not found
-     */
-    public void leeArchivo() throws IOException {
-       //
-       // BufferedReader fileIn;
-       // try {
-       //     fileIn = new BufferedReader(new FileReader(nombreArchivo));
-       // } catch (FileNotFoundException e) {
-       //     File archivo = new File(nombreArchivo);
-       //     PrintWriter fileOut = new PrintWriter(archivo);
-       //     fileOut.println("100,demo");
-       //     fileOut.close();
-       //     fileIn = new BufferedReader(new FileReader(nombreArchivo));
-       // }
-       // loadFromString(fileIn.readLine().split("\\s+"));
-       // this.player.loadFromString(fileIn.readLine().split("\\s+"));
-       // shot.loadFromString(fileIn.readLine().split("\\s+"));
-       // for(Enemy alien : aliens){
-       //     alien.loadFromString(fileIn.readLine().split("\\s+"));
-       // }
-       // for (Bomb bomb : bombs) {
-       //     bomb.loadFromString(fileIn.readLine().split("\\s+"));
-       // }
-       //
-       // fileIn.close();
-        // if (getKeyManager().save) {
-        //     try {
-        //         grabarArchivo();
-        //     } catch (IOException ex) {
-        //         Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        //     }
-        // }
-        // if (getKeyManager().load) {
-        //     try {
-        //         leeArchivo();
-        //     } catch (IOException ex) {
-        //         Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-        //     }
-        // }
     }
 }

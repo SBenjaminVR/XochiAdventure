@@ -24,6 +24,7 @@ public class Assets {
 
     public static BufferedImage titleScreen;                // to store the title screen
     public static BufferedImage menu;                       // to store the menu image
+    public static BufferedImage miniLevel;                  // to store the level 1 image for the main menu
     public static BufferedImage options;                    // to store the options screen image
     public static BufferedImage controls;                   // to store the instructions screen image
     public static BufferedImage select;                     // to store the red rectangle image
@@ -38,6 +39,7 @@ public class Assets {
     public static BufferedImage ingredientesEnchiladas[];
     public static BufferedImage ingredientesMole[];
     public static BufferedImage ingredientesQuecas[];
+    public static BufferedImage checkmark;
 
     // Power-Ups
     public static BufferedImage atole;                      // to store the atole image
@@ -77,6 +79,8 @@ public class Assets {
         controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
         select = ImageLoader.loadImage("/images/select.png");
         recipies = ImageLoader.loadImage("/images/pantallas/Recetario.png");
+        miniLevel = ImageLoader.loadImage("/images/pantallas/miniNivel1.png");
+        checkmark = ImageLoader.loadImage("/images/flechaVerde.png");
 
         // Loading of images of game objects
         chile = ImageLoader.loadImage("/images/chile.png");
