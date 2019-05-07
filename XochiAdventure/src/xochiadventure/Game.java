@@ -19,6 +19,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
@@ -84,6 +85,7 @@ public class Game implements Runnable {
     private int nivel;
     private int levelWidth;
     private int levelHeight;
+    private boolean loadedFromDB;
 
     // Linked lists
     private LinkedList<Platform> platforms;                 // to store all the platforms
@@ -138,6 +140,7 @@ public class Game implements Runnable {
         limitX = new int[2];
         fuente = new Rectangle(0, 0, 300, 300);
         hasPlayedWinSnd = false;
+        loadedFromDB = false;
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -457,7 +460,7 @@ public class Game implements Runnable {
 
     // tick and render ------------------------------------------------------------------------------------------------------------------------------------
 
-    private void tick() {
+    private void tick() throws SQLException {
         // ticks key manager
         keyManager.tick();
         // System.out.println("" + keyManager.left + " " + keyManager.right);
@@ -654,6 +657,16 @@ public class Game implements Runnable {
             case RECIPIES:
                 if (keyManager.back) {
                     screen = Screen.MENU;
+                    loadedFromDB = false;
+                }
+                if (!loadedFromDB){
+                    System.out.println(recetarioDB.getFood(1));
+                    LinkedList<String> myIngredients = new LinkedList<String>();
+                    recetarioDB.getIngredients(3, myIngredients);
+                    for (int i = 0; i < myIngredients.size(); i++) {                        
+                        System.out.println(myIngredients.get(i));
+                    }
+                    loadedFromDB = true;
                 }
                 break;
 
@@ -1089,9 +1102,13 @@ public class Game implements Runnable {
 
             // if delta is positive we tick the game
             if (delta >= 1) {
-                tick();
-                render();
-                delta--;
+                try {
+                    tick();
+                    render();
+                    delta--;
+                } catch (SQLException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         stop();
