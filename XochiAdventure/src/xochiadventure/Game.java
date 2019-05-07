@@ -818,8 +818,9 @@ public class Game implements Runnable {
                       g.drawImage(Assets.select, 770, 185, 100, 100, null);
                       break;
                     case ONE:
-                      nivel = "nivel 1";
+                      nivel = "nivel 1 jaja";
                       //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
+                      g.drawImage(Assets.miniLevel, 40, 420, 400, 230, null);
                       g.drawImage(Assets.select, 620, 380, 100, 100, null);
                       break;
                     case TWO:
