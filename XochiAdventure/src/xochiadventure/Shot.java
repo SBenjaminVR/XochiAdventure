@@ -21,7 +21,7 @@ public class Shot extends Item {
      * @param y to set the y of the shot
      * @param width to set the width of the shot
      * @param height to set the height of the shot
-     * @param speedX
+     * @param speedX to set the speed in the x axis of the shot
      * @param game to ser the game of the shot
      */
     public Shot (int x, int y, int width, int height, int speedX, int directionX, Game game) {
@@ -68,9 +68,6 @@ public class Shot extends Item {
 
     @Override
     public void render(Graphics g) {
-        // g.drawImage(Assets.shot, getX(), getY(), getWidth(), getHeight(), null);
-
         g.drawImage(Assets.shot, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-
     }
 }

@@ -15,12 +15,12 @@ import java.awt.Rectangle;
 public class Platform extends Item {
 
     /**
-     * Set the initial values to create the platform
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param game
+     * to create direction, width, height, and game of the platform
+     * @param x to set the x of the platform
+     * @param y to set the y of the platform
+     * @param width to set the width of the platform
+     * @param height  to set the height of the platform
+     * @param game to set the game of the platform
      */
     public Platform (int x, int y, int width, int height, Game game) {
         super(x, y, width, height, 0, game);

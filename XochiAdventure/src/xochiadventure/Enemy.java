@@ -14,8 +14,8 @@ import java.awt.Rectangle;
  */
 public class Enemy extends Item {
     private int direction;          // to store the direction in which the enemy is moving
-    private int leftLimit;			// to store the left limit in the x axis until which the enemy can move
-    private int rightLimit;			// to store the rights limit in the x axis until which the enemy can move
+    private int leftLimit;			    // to store the left limit in the x axis until which the enemy can move
+    private int rightLimit;			    // to store the rights limit in the x axis until which the enemy can move
 
     /**
      * to create direction, width, height, direction, speedX, leftLimit, rightLimit, and game of the enemy
@@ -25,6 +25,8 @@ public class Enemy extends Item {
      * @param height  to set the height of the enemy
      * @param direction to set the direction of the enemy
      * @param speedX to set the speed in the x axis of the enemy
+     * @param left to set the left limit in the x axis of the enemy
+     * @param right to set the right limit in the x axis of the enemy
      * @param game to set the game of the enemy
      */
     public Enemy(int x, int y, int width, int height, int direction, int speedX, int left, int right, Game game) {
@@ -38,7 +40,7 @@ public class Enemy extends Item {
 
     /**
       * To get the direction of the enemy
-      * @return an <code>int</code> value with the direction
+      * @return an <code>int</code> value with the direction of the enemy
       */
     public int getDirection() {
         return direction;
@@ -63,7 +65,7 @@ public class Enemy extends Item {
     // SETS ------------------------------------------------------------------
 
     /**
-    * To set the direction of the alien
+    * To set the direction of the enemy
     * @param direction to set the direction of the enemy
     */
     public void setDirection(int direction) {
@@ -89,8 +91,8 @@ public class Enemy extends Item {
     // FUNCTIONS ------------------------------------------------------------------
 
     /**
-    * To know if the bomb is intersecting with the player
-    * @param obj to know if the bomb is intersecting with it
+    * To know if the enemy is intersecting with the player
+    * @param obj to know if the enemy is intersecting with it
     * @return an <code>boolean</code> value with the state of the collision
     */
      public boolean intersectaJugador(Object obj) {

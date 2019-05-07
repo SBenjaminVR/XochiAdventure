@@ -98,7 +98,7 @@ public class Assets {
         ingredientesEnchiladas[6] = ImageLoader.loadImage("/images/comida/enchiladas/CebollaBlack.png");
 
         // Loading of images of ingredients for the mole
-        ingredientesMole = new BufferedImage[0];
+        ingredientesMole = new BufferedImage[1];
         ingredientesMole[0] = ImageLoader.loadImage("/images/comida/mole/poyo.png");
 
         // Loading of images of ingredients for the quesadillas

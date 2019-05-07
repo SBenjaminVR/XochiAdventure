@@ -36,6 +36,9 @@ public class Player extends Item{
      * @param width to set the width of the player
      * @param height to set the height of the player
      * @param speedX to set the speed in the x axis of the player
+     * @param lives to set the lives the player has
+     * @param left to set the left limit in the x axis of the player
+     * @param right to set the right limit in the x axis of the player
      * @param game to set the game of the player
      */
     public Player(int x, int y, int width, int height, int speedX, int lives, int left, int right, Game game) {
@@ -122,27 +125,22 @@ public class Player extends Item{
     }
 
     /**
-     * 
-     * @return 
+     * To get the left limit in the x axis until which the player can move
+     * @return an <code>int</code> value with the left limit
      */
     public int getLeftLimit() {
         return leftLimit;
     }
 
     /**
-     * 
-     * @return 
+     * To get the right limit in the x axis until which the player can move
+     * @return an <code>int</code> value with the right limit
      */
     public int getRightLimit() {
         return rightLimit;
     }
 
     // SETS ------------------------------------------------------------------
-
-	/**
-     * To set the direction of the power up
-     * @param direction to set the direction of the power up
-     */
 
     /**
      * To set the lives the player has
@@ -166,6 +164,7 @@ public class Player extends Item{
      */
     public void setContGotHit(int contGotHit) {
         this.contGotHit = contGotHit;
+        this.drawPlayer = true;
     }
 
     /**
@@ -185,13 +184,29 @@ public class Player extends Item{
     }
 
     /**
-     * 
-     * @param left
-     * @param right
+     * To set both left and right limits in the x axis until which the player can move
+     * @param left to set the left limit of the player
+     * @param right to set the right limit of the player
      */
     public void setLimits (int left, int right) {
       this.leftLimit = left;
       this.rightLimit = right;
+    }
+
+    /**
+     * 
+     * @param lastX 
+     */
+    public void setLastX(int lastX) {
+        this.lastX = lastX;
+    }
+
+    /**
+     * 
+     * @param lastY 
+     */
+    public void setLastY(int lastY) {
+        this.lastY = lastY;
     }
 
     // tick y render ------------------------------------------------------------------
@@ -200,40 +215,41 @@ public class Player extends Item{
     public void tick() {
         // moving player depending on flags
 		if (getX() > 0 && (game.getKeyManager().lastLeft || game.getKeyManager().a)) {
-			setX(getX() - 6);
-			direction = -1;
+			setX(getX() - getSpeedX());
+            setDirection(-1);
 		}
 		if (getX() < 3000 && (game.getKeyManager().lastRight || game.getKeyManager().d)) {
-			setX(getX() + 6);
-			direction = 1;
+			setX(getX() + getSpeedX());
+            setDirection(1);
 		}
 		
 		// checks if the player is moving
 		if ((game.getKeyManager().lastRight || game.getKeyManager().d) || (game.getKeyManager().lastLeft || game.getKeyManager().a))
-			moving = true;
+            moving = true;
 		else
 			moving = false;
 		
 		// making the player jump
-		if (game.getKeyManager().lastSpace && !inTheAir) {
-			speedY = 36;
-			inTheAir = true;
+		if (game.getKeyManager().lastSpace && !isInTheAir()) {
+            setSpeedY(36);
+            setInTheAir(true);
 		}
 		
 		// checks if the player is on top of the last platform it collide with
 		if (getX() + getWidth() <= getLeftLimit() || getX() >= getRightLimit()) {
-			inTheAir = true;
+            setInTheAir(true);
 		}
 	
 	
 		// checks if the player is in the air to update its position in the y axis
-		if (inTheAir) {
-			y -= speedY;
+		if (isInTheAir()) {
+            setY(getY() - getSpeedY());
 			if (speedY > -20) {
 				speedY -= 2;
 			}
 		} else {
-			lastX = x;
+            lastX = x;
+            setLastX(getX());
 			lastY = y;
 		}
 	

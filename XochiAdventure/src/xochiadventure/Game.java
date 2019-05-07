@@ -349,7 +349,7 @@ public class Game implements Runnable {
       comidas.add(new Comida(1525, 1850, 50, 50, this));
       comidas.add(new Comida(2925, 1850, 50, 50, this));
 
-      player = new Player (1475, 650, 100, 100, 5, 3, 0, 150, this);
+      player = new Player (1475, 650, 100, 100, 6, 3, 0, 150, this);
       playerX = getWidth() / 2 - player.getWidth() / 2;
       playerY = getHeight() / 2 - player.getHeight() / 2;
 

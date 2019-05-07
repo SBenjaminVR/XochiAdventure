@@ -81,16 +81,16 @@ public class Comida extends Item{
          */
         switch (tipo) {
             case Tortillas:
-                g.drawImage(Assets.ingredientes[0], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                g.drawImage(Assets.ingredientesEnchiladas[0], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
             case Queso:
-                g.drawImage(Assets.ingredientes[1], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                g.drawImage(Assets.ingredientesEnchiladas[1], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
             case Chile:
-                g.drawImage(Assets.ingredientes[2], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                g.drawImage(Assets.ingredientesEnchiladas[2], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
             case Tomate:
-                g.drawImage(Assets.ingredientes[3], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                g.drawImage(Assets.ingredientesEnchiladas[3], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
         }
     }
@@ -103,16 +103,16 @@ public class Comida extends Item{
          */
         switch (tipo) {
             case Tortillas:
-                g.drawImage(Assets.ingredientes[0], x, y, getWidth(), getHeight(), null);
+                g.drawImage(Assets.ingredientesEnchiladas[0], x, y, getWidth(), getHeight(), null);
                 break;
             case Queso:
-                g.drawImage(Assets.ingredientes[1], x, y, getWidth(), getHeight(), null);
+                g.drawImage(Assets.ingredientesEnchiladas[1], x, y, getWidth(), getHeight(), null);
                 break;
             case Chile:
-                g.drawImage(Assets.ingredientes[2], x, y, getWidth(), getHeight(), null);
+                g.drawImage(Assets.ingredientesEnchiladas[2], x, y, getWidth(), getHeight(), null);
                 break;
             case Tomate:
-                g.drawImage(Assets.ingredientes[3], x, y, getWidth(), getHeight(), null);
+                g.drawImage(Assets.ingredientesEnchiladas[3], x, y, getWidth(), getHeight(), null);
                 break;
         }
 
