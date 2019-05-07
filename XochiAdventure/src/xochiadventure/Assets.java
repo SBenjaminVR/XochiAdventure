@@ -39,6 +39,7 @@ public class Assets {
     public static BufferedImage ingredientesEnchiladas[];
     public static BufferedImage ingredientesMole[];
     public static BufferedImage ingredientesQuecas[];
+    public static BufferedImage checkmark;
 
     // Power-Ups
     public static BufferedImage atole;                      // to store the atole image
@@ -79,6 +80,7 @@ public class Assets {
         select = ImageLoader.loadImage("/images/select.png");
         recipies = ImageLoader.loadImage("/images/pantallas/Recetario.png");
         miniLevel = ImageLoader.loadImage("/images/pantallas/miniNivel1.png");
+        checkmark = ImageLoader.loadImage("/images/flechaVerde.png");
 
         // Loading of images of game objects
         chile = ImageLoader.loadImage("/images/chile.png");
