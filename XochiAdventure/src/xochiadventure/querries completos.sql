@@ -89,13 +89,13 @@ INSERT INTO LevelG VALUES (3, 0, 0);
 
 -- Fuente --------------------------------------------------------------
 -- Nivel 1
-INSERT INTO Fountain VALUES (1, 1, 1500, 600);
+INSERT INTO Fountain VALUES (1, 1, 1400, 500);
 
 -- Nivel 2
 INSERT INTO Fountain VALUES (2, 2, 1400, 500);
 
 -- Nivel 3
-INSERT INTO Fountain VALUES (3, 3, 1400, 500);
+INSERT INTO Fountain VALUES (3, 3, 1500, 600);
 
 -- Plataformas --------------------------------------------------------------
 -- Nivel 1
@@ -268,9 +268,9 @@ INSERT INTO Chile VALUES (14, 2, 3040, 1650, 50, 50, 5, 2700, 3100);
 
 -- Nivel 1
 
-INSERT INTO Letrero VALUES (1, 'aviso', 1, 650, 450);
-INSERT INTO Letrero VALUES (2, 'aviso', 1, 2200, 450);
-INSERT INTO Letrero VALUES (3, 'peligro', 1, 450, 1850);
-INSERT INTO Letrero VALUES (4, 'peligro', 1, 950, 1850);
-INSERT INTO Letrero VALUES (5, 'peligro', 1, 2150, 1850);
-INSERT INTO Letrero VALUES (6, 'peligro', 1, 2600, 1850);
+INSERT INTO Letrero VALUES (1, 0, 1, 300, 730);
+INSERT INTO Letrero VALUES (2, 0, 1, 2730, 730);
+INSERT INTO Letrero VALUES (3, 1, 1, 430, 1830);
+INSERT INTO Letrero VALUES (4, 1, 1, 950, 1830);
+INSERT INTO Letrero VALUES (5, 1, 1, 2080, 1830);
+INSERT INTO Letrero VALUES (6, 1, 1, 2600, 1830);
