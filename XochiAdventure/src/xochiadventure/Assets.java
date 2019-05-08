@@ -38,7 +38,8 @@ public class Assets {
     public static BufferedImage options;                    // to store the options screen image
     public static BufferedImage controls;                   // to store the instructions screen image
     public static BufferedImage select;                     // to store the red rectangle image
-    public static BufferedImage recipies;                   // to store the recipies screen image
+    public static BufferedImage recipies;                   // to store the recipies screen 
+    public static BufferedImage story;
     
     // Main menu decorations
     public static BufferedImage thinkingXochi;              // to store the image of xochi for the main menu
@@ -155,6 +156,7 @@ public class Assets {
         miniLevel2 = ImageLoader.loadImage("/images/pantallas/miniNivel2.png");
         miniLevel3 = ImageLoader.loadImage("/images/pantallas/miniNivel3.png");
         thinkingXochi = ImageLoader.loadImage("/images/pantallas/xochiT.png");
+        story = ImageLoader.loadImage("/images/pantallas/backstory.jpg");
         
         cactus = ImageLoader.loadImage("/images/pantallas/cactus.png");
         pyramid = ImageLoader.loadImage("/images/pantallas/pyramid.png");
