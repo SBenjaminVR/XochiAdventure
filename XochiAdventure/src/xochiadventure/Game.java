@@ -777,8 +777,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel 1
                             nivel = 1;
-                            //DBFunctions.loadLevelFromDB(nivel, this);
-                            loadLevel();
+                            DBFunctions.loadLevelFromDB(nivel, this);
+//                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_1.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -789,8 +789,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel2
                             nivel = 2;
-                            //DBFunctions.loadLevelFromDB(nivel, this);
-                            loadLevel();
+                            DBFunctions.loadLevelFromDB(nivel, this);
+//                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_2.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -801,8 +801,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel3
                             nivel = 3;
-                            //DBFunctions.loadLevelFromDB(nivel, this);
-                            loadLevel();
+                            DBFunctions.loadLevelFromDB(nivel, this);
+//                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_3.png");
                             screen = Screen.LEVEL;
                                 break;

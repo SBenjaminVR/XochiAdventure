@@ -174,7 +174,7 @@ public class DBFunctions {
         game.getPlatforms().add(new Platform(posX, posY, iWidth, iHeight, game));
       }
 
-      int i = 1;
+      int i = 0;
       // comida
       while (results[4].next()) {
         posX = results[4].getInt("posX");
@@ -198,13 +198,13 @@ public class DBFunctions {
       game.setPlayer(new Player(posX, posY, iWidth, iHeight, speedX, lives, game.getPlatforms().get(0), game));
 
       // pico
-     while (results[6].next()) {
-       posX = results[6].getInt("posX");
-       posY = results[6].getInt("posY");
-       tipo =  results[6].getString("dir");
-
-       game.getPicos().add(new Pico(posX, posY, iWidth, iHeight, tipo, game));
-     }
+//     while (results[6].next()) {
+//       posX = results[6].getInt("posX");
+//       posY = results[6].getInt("posY");
+//       tipo =  results[6].getString("dir");
+//
+//       game.getPicos().add(new Pico(posX, posY, iWidth, iHeight, tipo, game));
+//     }
 
       // letreros
       while (results[6].next()) {
