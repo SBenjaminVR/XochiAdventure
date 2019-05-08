@@ -432,14 +432,14 @@ public class Game implements Runnable {
           fuente.y = 500;
           // Chiles
           
-          chiles.add(new Enemy(10,    200,  50, 50, 1,  5, 0,     500, this));
-          chiles.add(new Enemy(3040,  200,  50, 50, -1, 5, 2600,  3100, this));
-          chiles.add(new Enemy(310,   750,  50, 50, 1,  5, 300,   800, this));
-          chiles.add(new Enemy(2740,  750,  50, 50, -1, 5, 2300,  2800, this));
-          chiles.add(new Enemy(810,   1050, 50, 50, 1,  5, 800,   1300, this));
-          chiles.add(new Enemy(2240,  1050, 50, 50, -1, 5, 1800,  2300, this));
-          chiles.add(new Enemy(10,    1650, 50, 50, 1,  5, 0,     400, this));
-          chiles.add(new Enemy(3040,  1650, 50, 50, -1, 5, 2700,  3100, this));
+          chiles.add(new Enemy(10, 200, 50, 50, 1, 5, 0, 500, this));
+          chiles.add(new Enemy(3040, 200, 50, 50, -1, 5, 2600, 3100, this));
+          chiles.add(new Enemy(310, 750, 50, 50, 1, 5, 300, 800, this));
+          chiles.add(new Enemy(2740, 750, 50, 50, -1, 5, 2300, 2800, this));
+          chiles.add(new Enemy(810, 1050, 50, 50, 1, 5, 800, 1300, this));
+          chiles.add(new Enemy(2240, 1050, 50, 50, -1, 5, 1800, 2300, this));
+          chiles.add(new Enemy(10, 1650, 50, 50, 1, 5, 0, 400, this));
+          chiles.add(new Enemy(3040, 1650, 50, 50, -1, 5, 2700, 3100, this));
 
           // Plataformas
           platforms.add(new Platform(0, 250, 500, 100, this));
@@ -935,6 +935,17 @@ public class Game implements Runnable {
                       player.setWater(player.getWater() + 1);
                     }
 
+                    // checks if the player collides with a spike
+                    for (int i = 0; i < picos.size(); i++) {
+                      Pico pi = picos.get(i);
+                      if (pi.intersectaJugador(getPlayer()) && player.getContGotHit() == 0) {
+                        player.setLives(player.getLives() - 1);
+                        if (soundOn)
+                            Assets.hurtSnd.play();
+                        player.setContGotHit(60);
+                      }
+                    }
+
                     // checks if the player can shoot a bubble and if one the keyw for doing it was pressed
                     if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
           						if (soundOn) {
@@ -1289,7 +1300,6 @@ public class Game implements Runnable {
                   // dibujar los chiles
                   for (int i = 0; i < chiles.size(); i++) {
                     Enemy chile = chiles.get(i);
-                    // System.out.println("Chile" + i + " " + (rec.intersects(chile.getPerimetro())));
                     if (rec.intersects(chile.getPerimetro())) {
                       chile.render(g);
                     }
@@ -1297,7 +1307,6 @@ public class Game implements Runnable {
 
                   for (int i = 0; i < picos.size(); i++) {
                     Pico pi = picos.get(i);
-                    // System.out.println("Chile" + i + " " + (rec.intersects(chile.getPerimetro())));
                     if (rec.intersects(pi.getPerimetro())) {
                       pi.render(g);
                     }
@@ -1306,7 +1315,6 @@ public class Game implements Runnable {
                   // dibujar los powerups
                   for (int i = 0; i < powerups.size(); i++) {
                     PowerUps powerup = powerups.get(i);
-                    // System.out.println("powerup" + i + " " + (rec.intersects(powerup.getPerimetro())));
                     if (rec.intersects(powerup.getPerimetro())) {
                       powerup.render(g);
                     }
