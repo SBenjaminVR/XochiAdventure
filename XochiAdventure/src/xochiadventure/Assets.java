@@ -16,6 +16,12 @@ import java.awt.image.BufferedImage;
  *      - Benjamín Váldez Rodríguez             A00822027
  */
 public class Assets {
+    public static String[] ingrEnchiladas = new String[7];
+    public static String[] ingrQuecas = new String[6];
+    public static String[] ingrMole = new String[4];
+    public static BufferedImage recetaEnchiladas;
+    public static BufferedImage recetaQuecas;
+    public static BufferedImage recetaMole;
     // Images
     public static BufferedImage background;                 // to store background image
     public static BufferedImage player;                     // to store the player image
@@ -51,6 +57,7 @@ public class Assets {
     public static BufferedImage enchiladas;
     public static BufferedImage ingredientesEnchiladas[];
     public static BufferedImage ingredientesMole[];
+    public static BufferedImage mole;
     public static BufferedImage quecas;
     public static BufferedImage ingredientesQuecas[];
     public static BufferedImage checkmark;
@@ -58,13 +65,16 @@ public class Assets {
     public static BufferedImage brightness2;               // to store a image for brightness
     public static BufferedImage brightness4;               // to store a image for brightness
     public static BufferedImage brightness5;               // to store a image for brightness
-    public static BufferedImage opbrightness1;             //to store the image for the menu of brightness
-    public static BufferedImage opbrightness2;             //to store the image for the menu of brightness
-    public static BufferedImage opbrightness3;             //to store the image for the menu of brightness
-    public static BufferedImage opbrightness4;             //to store the image for the menu of brightness
-    public static BufferedImage opbrightness5;             //to store the image for the menu of brightness
+    public static BufferedImage opbrightness1;             // to store the image for the menu of brightness
+    public static BufferedImage opbrightness2;             // to store the image for the menu of brightness
+    public static BufferedImage opbrightness3;             // to store the image for the menu of brightness
+    public static BufferedImage opbrightness4;             // to store the image for the menu of brightness
+    public static BufferedImage opbrightness5;             // to store the image for the menu of brightness
     public static BufferedImage pauseMenu;
-    
+    public static BufferedImage pasarPag;
+    public static BufferedImage pasarPagReves;
+    public static BufferedImage ganado;
+    public static BufferedImage perdido;
 
     // Power-Ups
     public static BufferedImage atole;                      // to store the atole image
@@ -102,7 +112,6 @@ public class Assets {
         // Loading of images of menu screens
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
         menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
-        pause = ImageLoader.loadImage("/images/pantallas/pausa.png");
         options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
         select = ImageLoader.loadImage("/images/select.png");
@@ -126,6 +135,11 @@ public class Assets {
         fuente = ImageLoader.loadImage("/images/fountain_beta.png");
         heart = ImageLoader.loadImage("/images/tacoHeart.png");
         shot = ImageLoader.loadImage("/images/bubble.png");
+
+        // loading of winning, loosing, and pause screens
+        ganado = ImageLoader.loadImage("/images/pantallas/victoryRoyale.png");
+        perdido = ImageLoader.loadImage("/images/pantallas/derrota.png");
+        pause = ImageLoader.loadImage("/images/pantallas/pausa.png");
         
         //Loading images of brightness
         brightness1 = ImageLoader.loadImage("/images/pantallas/brillo1.png");
@@ -138,6 +152,9 @@ public class Assets {
         opbrightness4 = ImageLoader.loadImage("/images/pantallas/opb4.png");
         opbrightness5 = ImageLoader.loadImage("/images/pantallas/opb5.png");
         
+        //UI
+        pasarPag = ImageLoader.loadImage("/images/PasarPag.png");
+        pasarPagReves = ImageLoader.loadImage("/images/PasarPagReves.png");
         
         // Loading of images of ingredients for the enchiladas
         enchiladas = ImageLoader.loadImage("/images/comida/enchiladas/EnchiladaPotosina.png");
@@ -149,21 +166,44 @@ public class Assets {
         ingredientesEnchiladas[4] = ImageLoader.loadImage("/images/comida/enchiladas/crema.png");
         ingredientesEnchiladas[5] = ImageLoader.loadImage("/images/comida/enchiladas/oil.png");
         ingredientesEnchiladas[6] = ImageLoader.loadImage("/images/comida/enchiladas/CebollaBlack.png");
+        ingrEnchiladas[0] = "Tortillas Rojas";
+        ingrEnchiladas[1] = "Queso";
+        ingrEnchiladas[2] = "Chile";
+        ingrEnchiladas[3] = "Tomate";
+        ingrEnchiladas[4] = "Crema";
+        ingrEnchiladas[5] = "Aceite";
+        ingrEnchiladas[6] = "Cebolla";
+        recetaEnchiladas = ImageLoader.loadImage("/images/comida/Receta Enchiladas.png");
 
         // Loading of images of ingredients for the mole
-        ingredientesMole = new BufferedImage[1];
+        ingredientesMole = new BufferedImage[4];
+        mole = ImageLoader.loadImage("/images/comida/mole/mole.png");
         ingredientesMole[0] = ImageLoader.loadImage("/images/comida/mole/poyo.png");
+        ingredientesMole[1] = ImageLoader.loadImage("/images/comida/enchiladas/chile_collectable.png");
+        ingredientesMole[2] = ImageLoader.loadImage("/images/comida/mole/ajonjoli.png");
+        ingredientesMole[3] = ImageLoader.loadImage("/images/comida/mole/manteca.png");
+        ingrMole[0] = "Pollo";
+        ingrMole[1] = "Chile x3";
+        ingrMole[2] = "Ajonjoli";
+        ingrMole[3] = "Manteca";        
+        recetaMole = ImageLoader.loadImage("/images/comida/recetaOaxaca.png");
 
         // Loading of images of ingredients for the quesadillas
         quecas = ImageLoader.loadImage("/images/comida/quecas/Quesadilla.png");
-        ingredientesQuecas = new BufferedImage[7];
+        ingredientesQuecas = new BufferedImage[6];
         ingredientesQuecas[0] = ImageLoader.loadImage("/images/comida/quecas/Ajo.png");
         ingredientesQuecas[1] = ImageLoader.loadImage("/images/comida/quecas/CebollaBlack.png");
         ingredientesQuecas[2] = ImageLoader.loadImage("/images/comida/quecas/Champinon.png");
         ingredientesQuecas[3] = ImageLoader.loadImage("/images/comida/quecas/Cilantro.png");
-        ingredientesQuecas[4] = ImageLoader.loadImage("/images/comida/quecas/Quesadilla.png");
-        ingredientesQuecas[5] = ImageLoader.loadImage("/images/comida/quecas/tomatoB.png");
-        ingredientesQuecas[6] = ImageLoader.loadImage("/images/comida/quecas/Tortillasb.png");
+        ingredientesQuecas[4] = ImageLoader.loadImage("/images/comida/quecas/tomatoB.png");
+        ingredientesQuecas[5] = ImageLoader.loadImage("/images/comida/quecas/Tortillasb.png");
+        ingrQuecas[0] = "Ajo";
+        ingrQuecas[1] = "Cebolla";
+        ingrQuecas[2] = "Champiñon";
+        ingrQuecas[3] = "Cilantro";
+        ingrQuecas[4] = "Tomate";
+        ingrQuecas[5] = "Tortillas";
+        recetaQuecas = ImageLoader.loadImage("/images/comida/RecetaQues.png");
 
 
         // Loading of animations

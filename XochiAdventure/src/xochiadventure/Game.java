@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static xochiadventure.Assets.titleScreen;
 
+// enum to navigate all the screens that the game has
 enum Screen {
     TITLESCREEN,
     MENU,
@@ -36,6 +37,7 @@ enum Screen {
     CONTROLS
 }
 
+// enum to navigate through all the options in the Main menu
 enum MenuOpt {
     ONE,
     TWO,
@@ -45,10 +47,16 @@ enum MenuOpt {
     RECIPIES,
 }
 
+// enum to navigate through all the options in the Options menu
 enum OptOpt {
     DALTONICO,
     SONIDO,
     BRILLO
+}
+
+enum PauseMenu {
+    RESTART,
+    EXIT
 }
 
 /**
@@ -100,6 +108,7 @@ public class Game implements Runnable {
     private Screen screen;                                  // to store in which screen you are
     private MenuOpt menOpt;                                 // to store in which option in the main menu screen you are
     private OptOpt optOpt;                                  // to store in which option in the options screen you are
+    private PauseMenu pauseOpt;                             // to store in which option in the pause screen you are
     private int currentRecipePage = 1;
 
     // UI
@@ -272,44 +281,45 @@ public class Game implements Runnable {
           chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
 
           // grandes 3
-          platforms.add(new Platform(0, 250, 500, 100, this));
-          platforms.add(new Platform(1300, 250, 500, 100, this));
-          platforms.add(new Platform(2600, 250, 500, 100, this));
+          platforms.add(new Platform(0,     250, 500, 100, this));
+          platforms.add(new Platform(1300,  250, 500, 100, this));
+          platforms.add(new Platform(2600,  250, 500, 100, this));
 
           // chicas 2
-          platforms.add(new Platform(650, 500, 500, 100, this));
-          platforms.add(new Platform(1950, 500, 500, 100, this));
+          platforms.add(new Platform(650,   500, 500, 100, this));
+          platforms.add(new Platform(1950,  500, 500, 100, this));
 
           // 2500 5
-          platforms.add(new Platform(300, 800, 500, 100, this));
-          platforms.add(new Platform(800, 800, 500, 100, this));
-          platforms.add(new Platform(1300, 800, 500, 100, this));
-          platforms.add(new Platform(1800, 800, 500, 100, this));
-          platforms.add(new Platform(2300, 800, 500, 100, this));
+          platforms.add(new Platform(300,   800, 500, 100, this));
+          platforms.add(new Platform(800,   800, 500, 100, this));
+          platforms.add(new Platform(1300,  800, 500, 100, this));
+          platforms.add(new Platform(1800,  800, 500, 100, this));
+          platforms.add(new Platform(2300,  800, 500, 100, this));
 
           // chicas 3
-          platforms.add(new Platform(0, 1100, 150, 30, this));
-          platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
-          platforms.add(new Platform(2950, 1100, 150, 30, this));
+          platforms.add(new Platform(0,     1100, 150, 30, this));
+          platforms.add(new Platform(1475,  1100, 150, 30, this));
+          platforms.add(new Platform(2950,  1100, 150, 30, this));
 
           // grandes 4
-          platforms.add(new Platform(0, 1350, 500, 100, this));
-          platforms.add(new Platform(950, 1350, 500, 100, this));
-          platforms.add(new Platform(1650, 1350, 500, 100, this));
-          platforms.add(new Platform(2600, 1350, 500, 100, this));
+          platforms.add(new Platform(0,     1350, 500, 100, this));
+          platforms.add(new Platform(950,   1350, 500, 100, this));
+          platforms.add(new Platform(1650,  1350, 500, 100, this));
+          platforms.add(new Platform(2600,  1350, 500, 100, this));
 
           // chicas 2
-          platforms.add(new Platform(650, 1650, 150, 30, this));
-          platforms.add(new Platform(2300, 1650, 150, 30, this));
+          platforms.add(new Platform(650,   1650, 150, 30, this));
+          platforms.add(new Platform(2300,  1650, 150, 30, this));
 
           // grandes 5
-          platforms.add(new Platform(0, 1900, 500, 100, this));
+          platforms.add(new Platform(0,     1900, 500, 100, this));
           // platforms.add(new Platform(950, 1900, 1200, 100, this));
-          platforms.add(new Platform(950, 1900, 500, 100, this));
-          platforms.add(new Platform(1450, 1900, 500, 100, this));
-          platforms.add(new Platform(1550, 1900, 500, 100, this));
-          platforms.add(new Platform(2600, 1900, 500, 100, this));
+          platforms.add(new Platform(950,   1900, 500, 100, this));
+          platforms.add(new Platform(1450,  1900, 500, 100, this));
+          platforms.add(new Platform(1650,  1900, 500, 100, this));
+          platforms.add(new Platform(2600,  1900, 500, 100, this));
 
+          // comidas
           comidas.add(new Comida(225, 200, 50, 50, this));
           comidas.add(new Comida(1525, 200, 50, 50, this));
           comidas.add(new Comida(2925, 200, 50, 50, this));
@@ -328,12 +338,14 @@ public class Game implements Runnable {
 
         case 2:
           // Chiles
-          chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
-          chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
-          chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
-          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
-          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
-          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
+          chiles.add(new Enemy(10,    200,  50, 50, 1,  5, 0,     500, this));
+          chiles.add(new Enemy(3040,  200,  50, 50, -1, 5, 2600,  3100, this));
+          chiles.add(new Enemy(310,   750,  50, 50, 1,  5, 300,   800, this));
+          chiles.add(new Enemy(2740,  750,  50, 50, -1, 5, 2300,  2800, this));
+          chiles.add(new Enemy(810,   1050, 50, 50, 1,  5, 800,   1300, this));
+          chiles.add(new Enemy(2240,  1050, 50, 50, -1, 5, 1800,  2300, this));
+          chiles.add(new Enemy(10,    1650, 50, 50, 1,  5, 0,     400, this));
+          chiles.add(new Enemy(3040,  1650, 50, 50, -1, 5, 2700,  3100, this));
 
           // Plataformas
           platforms.add(new Platform(0, 250, 500, 100, this));
@@ -345,7 +357,10 @@ public class Game implements Runnable {
 
           platforms.add(new Platform(-400, 800, 500, 100, this));
           platforms.add(new Platform(300, 800, 500, 100, this));
-          platforms.add(new Platform(1000, 800, 1100, 100, this));
+          // platforms.add(new Platform(1000, 800, 1100, 100, this));
+          platforms.add(new Platform(1000, 800, 500, 100, this));
+          platforms.add(new Platform(1500, 800, 500, 100, this));
+          platforms.add(new Platform(1600, 800, 500, 100, this));
           platforms.add(new Platform(2300, 800, 500, 100, this));
           platforms.add(new Platform(3000, 800, 500, 100, this));
 
@@ -366,13 +381,13 @@ public class Game implements Runnable {
 
           // Comidas
 
-          comidas.add(new Comida(225, 200, 50, 50, this));
           comidas.add(new Comida(1525, 200, 50, 50, this));
-          comidas.add(new Comida(2925, 200, 50, 50, this));
-          comidas.add(new Comida(1525, 1050, 50, 50, this));
-          comidas.add(new Comida(225, 1850, 50, 50, this));
-          comidas.add(new Comida(1525, 1850, 50, 50, this));
-          comidas.add(new Comida(2925, 1850, 50, 50, this));
+          comidas.add(new Comida(2900, 200, 50, 50, this));
+          comidas.add(new Comida(200, 825, 50, 50, this));
+          comidas.add(new Comida(2900, 825, 50, 50, this));
+          comidas.add(new Comida(1525, 1100, 50, 50, this));
+          comidas.add(new Comida(50, 1650, 50, 50, this));
+          comidas.add(new Comida(1525, 1650, 50, 50, this));
 
           player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7),  this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
@@ -690,8 +705,10 @@ public class Game implements Runnable {
                     if (currentRecipePage < 3) {
                         currentRecipePage++;
                     }
-                    else {
-                        currentRecipePage = 1;
+                }
+                if (keyManager.left) {
+                    if (currentRecipePage > 1) {
+                        currentRecipePage--;
                     }
                 }
                
@@ -711,6 +728,7 @@ public class Game implements Runnable {
                 // checks if the escape key was pressed to pause or unpause the game
                 if (keyManager.pause && !endGame) {
                   pauseGame = !pauseGame;
+                  pauseOpt = PauseMenu.RESTART;
                 }
 
                 // checks if the backspace key was pressed to return to the main menu
@@ -897,6 +915,31 @@ public class Game implements Runnable {
                       }
 
                   } else {
+                    if (pauseGame) {
+                      if (getKeyManager().up || getKeyManager().down) {
+                        switch(pauseOpt) {
+                          case RESTART:
+                            pauseOpt = PauseMenu.EXIT;
+                            break;
+                          case EXIT:
+                            pauseOpt = PauseMenu.RESTART;
+                        }
+                      }
+                      if (keyManager.enter) {
+                        
+                        switch(pauseOpt) {
+                          case RESTART:
+                              pauseGame = false;
+                            break;
+                            
+                          case EXIT:
+                            unloadLevel();
+                            screen = Screen.MENU;
+                            break;
+                        }
+                      }
+                    }
+
                     if (endGame) {
                       if (keyManager.enter) {
                         unloadLevel();
@@ -924,6 +967,7 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.setFont(texto);
+            g.setColor(Color.WHITE);
             // Checks which screen to render
             switch(screen) {
                 case TITLESCREEN:
@@ -1004,7 +1048,6 @@ public class Game implements Runnable {
                     break;
                 case RECIPIES:
                   g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
-                  
                   if (currentRecipePage == 1) {
                     g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
                     for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
@@ -1026,6 +1069,42 @@ public class Game implements Runnable {
                   else if (currentRecipePage == 3) {
                       
                   }
+                    g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);                  
+                    switch (currentRecipePage) {
+                        case 1:
+                            g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
+                            g.drawString("Enchiladas Potosinas", 270, 125);
+                            g.drawImage(Assets.recetaEnchiladas, 725, 70, 420, 543, null);
+                            for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
+                                g.drawImage(Assets.ingredientesEnchiladas[i], 100, 200 + i*50, 50, 50, null);
+                                g.drawString(Assets.ingrEnchiladas[i], 200, 240 + i * 50);
+                            }
+                            g.drawImage(Assets.pasarPag, getWidth()-200, getHeight()-100, 100, 100, null);
+                            break;
+                        case 2:
+                            g.drawImage(Assets.quecas, 140, 65, 100, 100, null);
+                            g.drawString("Quesadillas", 270, 125);
+                            g.drawImage(Assets.recetaQuecas, 725, 70, 420, 543, null);
+                            for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
+                                g.drawImage(Assets.ingredientesQuecas[i], 100, 200 + i*50, 50, 50, null);
+                                g.drawString(Assets.ingrQuecas[i], 200, 240 + i * 50);
+                            }                           
+                            g.drawImage(Assets.pasarPag, getWidth()-200, getHeight()-100, 100, 100, null);
+                            g.drawImage(Assets.pasarPagReves, getWidth()-300, getHeight()-100, 100, 100, null);
+                            break;
+                        case 3:
+                            g.drawImage(Assets.mole, 130, 65, 100, 100, null);
+                            g.drawString("Mole Oaxaqueño", 270, 125);
+                            g.drawImage(Assets.recetaMole, 725, 70, 420, 543, null);
+                            for (int i = 0; i < Assets.ingredientesMole.length; i++) {
+                                g.drawImage(Assets.ingredientesMole[i], 100, 200 + i*50, 50, 50, null);
+                                g.drawString(Assets.ingrMole[i], 200, 240 + i * 50);
+                            }                           
+                            g.drawImage(Assets.pasarPagReves, getWidth()-200, getHeight()-100, 100, 100, null);
+                            break;
+                        default:
+                            break;
+            }
                   
                   break;
                 case CONTROLS:
@@ -1118,19 +1197,27 @@ public class Game implements Runnable {
                   // pause menu
                   if (pauseGame) {
                     g.drawImage(Assets.pause, 0, 0, getWidth(), getHeight(), null);
+                    g.drawString("Continuar jugando", getWidth() / 2 - 100, getHeight() / 2 + 50);
+                    g.drawString("Regresar al menu principal", getWidth() / 2 - 165, getHeight() / 2 + 120);
+                    switch(pauseOpt) {
+                      case RESTART:
+                        g.drawImage(Assets.select, getWidth() / 2 - 200, getHeight() / 2 - 10, 100, 100, null);
+                        break;
+                      case EXIT:
+                        g.drawImage(Assets.select, getWidth() / 2 - 265, getHeight() / 2 + 60, 100, 100, null);
+                        break;
+                    }
                   }
 
                   if (endGame) {
                     // g.setFont(texto);
                     if (comidas.isEmpty()) {
                       // you won
-                      g.drawString("GANASTE", getWidth()/2 - 100, getHeight()/2 - 10);
+                      g.drawImage(Assets.ganado, 0, 0, getWidth(), getHeight(), null);
                     } else if (player.getLives() == 0) {
                       // you lost
-                      g.drawString("PERDISTE", getWidth()/2 - 100, getHeight()/2 - 10);
+                      g.drawImage(Assets.perdido, 0, 0, getWidth(), getHeight(), null);
                     }
-                    g.drawString("Presiona Enter para reiniciar el nivel", getWidth()/2 - 300, getHeight()/2 + 15);
-                    g.drawString("Presiona Backspace para regresar al menu principal", getWidth()/2 - 400, getHeight()/2 + 40);
                   }
 
                   break;
