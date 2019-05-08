@@ -333,8 +333,28 @@ public class Game implements Runnable {
         this.levelHeight = levelHeight;
     }
 
+    /**
+     * 
+     * @param player 
+     */
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    /**
+     * 
+     * @param playerX 
+     */
+    public void setPlayerX(int playerX) {
+        this.playerX = playerX;
+    }
+
+    /**
+     * 
+     * @param playerY 
+     */
+    public void setPlayerY(int playerY) {
+        this.playerY = playerY;
     }
 
     // FUNCTIONS ------------------------------------------------------------------------------------------------------------------------------------

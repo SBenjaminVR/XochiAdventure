@@ -197,14 +197,14 @@ public class DBFunctions {
 
       game.setPlayer(new Player(posX, posY, iWidth, iHeight, speedX, lives, game.getPlatforms().get(0), game));
 
-//      // pico
-//      while (results[6].next()) {
-//        posX = results[6].getInt("posX");
-//        posY = results[6].getInt("posY");
-//        tipo =  results[6].getString("dir");
-//
-//        game.getPicos().add(new Pico(posX, posY, iWidth, iHeight, tipo, game));
-//      }
+      // pico
+     while (results[6].next()) {
+       posX = results[6].getInt("posX");
+       posY = results[6].getInt("posY");
+       tipo =  results[6].getString("dir");
+
+       game.getPicos().add(new Pico(posX, posY, iWidth, iHeight, tipo, game));
+     }
 
       // letreros
       while (results[6].next()) {
@@ -213,7 +213,11 @@ public class DBFunctions {
         lives = results[6].getInt("tipo");
 
         game.getLetreros().add(new Letrero(posX, posY, iWidth, iHeight, (lives == 1), game));
+
       }
+
+        game.setPlayerX(game.getWidth() / 2 - game.getPlayer().getWidth() / 2);
+        game.setPlayerY(game.getHeight() / 2 - game.getPlayer().getHeight() / 2);
 
 
         } catch (Exception exc) {

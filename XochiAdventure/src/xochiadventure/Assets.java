@@ -28,7 +28,7 @@ public class Assets {
     // Images
     public static BufferedImage background;                 // to store background image
     public static BufferedImage player;                     // to store the player image
-    public static BufferedImage pause;                     // to store the pause image
+    public static BufferedImage pause;                      // to store the pause image
     public static BufferedImage shot;                       // to store flask color
     public static BufferedImage heart;                      // to store the taco heart image
 
