@@ -70,6 +70,7 @@ public class Game implements Runnable {
     private int height;                                     // height of the window
     private Thread thread;                                  // thread to create the game
     private boolean running;                                // to set the game
+    private int brightness;                                 // to set the brightness of the game
 
     // Game logic variables
     private Player player;                                  // to use a player
@@ -140,6 +141,9 @@ public class Game implements Runnable {
         limitX = new int[2];
         fuente = new Rectangle(0, 0, 300, 300);
         hasPlayedWinSnd = false;
+
+        brightness = 3; 
+
         loadedFromDB = false;
     }
 
@@ -648,8 +652,14 @@ public class Game implements Runnable {
                 if (optOpt == OptOpt.BRILLO) {
                     if (keyManager.left) {
                         // disminuye el brillo
+                        if (brightness > 1) {
+                            brightness--;
+                        }
                     } else if (keyManager.right) {
                         // aumenta el brillo
+                        if (brightness < 5) {
+                            brightness++;
+                        }
                     }
                 }
 
@@ -946,6 +956,23 @@ public class Game implements Runnable {
                           g.drawImage(Assets.select, 190, 370, 100, 100, null);
                           break;
                   }
+                  switch (brightness) {
+                      case 1:
+                           g.drawImage(Assets.opbrightness1, 600 , 380, 360 , 70, null);
+                           break;
+                      case 2:
+                           g.drawImage(Assets.opbrightness2, 600 , 380, 360 , 70, null);
+                           break;
+                      case 3:
+                          g.drawImage(Assets.opbrightness3, 600 , 380, 360 , 70, null);
+                          break;
+                      case 4:
+                           g.drawImage(Assets.opbrightness4, 600 , 380, 360 , 70, null);
+                           break;
+                      case 5:
+                           g.drawImage(Assets.opbrightness5, 600 , 380, 360 , 70, null);
+                           break;
+                  }
                     break;
                 case RECIPIES:
                   g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
@@ -1051,6 +1078,20 @@ public class Game implements Runnable {
                   }
 
                   break;
+            }
+            switch(brightness) {
+                case 1:
+                    g.drawImage(Assets.brightness1, 0 , 0, getWidth() , getHeight(), null);
+                    break;
+                case 2:
+                    g.drawImage(Assets.brightness2, 0 , 0, getWidth() , getHeight(), null);
+                    break;
+                case 4:
+                    g.drawImage(Assets.brightness4, 0 , 0, getWidth() , getHeight(), null);
+                    break;
+                case 5:
+                    g.drawImage(Assets.brightness5, 0 , 0, getWidth() , getHeight(), null);
+                    break;
             }
 
             bs.show();
