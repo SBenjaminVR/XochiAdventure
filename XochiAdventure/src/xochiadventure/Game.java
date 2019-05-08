@@ -27,6 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static xochiadventure.Assets.titleScreen;
 
+// enum to navigate all the screens that the game has
 enum Screen {
     TITLESCREEN,
     MENU,
@@ -36,6 +37,7 @@ enum Screen {
     CONTROLS
 }
 
+// enum to navigate through all the options in the Main menu
 enum MenuOpt {
     ONE,
     TWO,
@@ -45,10 +47,16 @@ enum MenuOpt {
     RECIPIES,
 }
 
+// enum to navigate through all the options in the Options menu
 enum OptOpt {
     DALTONICO,
     SONIDO,
     BRILLO
+}
+
+enum PauseMenu {
+    RESTART,
+    EXIT
 }
 
 /**
@@ -100,6 +108,7 @@ public class Game implements Runnable {
     private Screen screen;                                  // to store in which screen you are
     private MenuOpt menOpt;                                 // to store in which option in the main menu screen you are
     private OptOpt optOpt;                                  // to store in which option in the options screen you are
+    private PauseMenu pauseOpt;                             // to store in which option in the pause screen you are
     private int currentRecipePage = 1;
 
     // UI
@@ -717,6 +726,7 @@ public class Game implements Runnable {
                 // checks if the escape key was pressed to pause or unpause the game
                 if (keyManager.pause && !endGame) {
                   pauseGame = !pauseGame;
+                  pauseOpt = PauseMenu.RESTART;
                 }
 
                 // checks if the backspace key was pressed to return to the main menu
@@ -903,10 +913,31 @@ public class Game implements Runnable {
                       }
 
                   } else {
-                    if (endGame) {
+                    if (endGame || pauseGame) {
+                      if (getKeyManager().up || getKeyManager().down) {
+                        switch(pauseOpt) {
+                          case RESTART:
+                            pauseOpt = PauseMenu.EXIT;
+                            break;
+                          case EXIT:
+                            pauseOpt = PauseMenu.RESTART;
+                        }
+                      }
                       if (keyManager.enter) {
                         unloadLevel();
-                        loadLevel();
+                        switch(pauseOpt) {
+                          case RESTART:
+                            break;
+                            if (pauseGame) {
+                              pauseGame = false;
+                            } else {
+                              loadLevel();
+                            }
+                          case EXIT:
+                            screen = Screen.MENU;
+                            break;
+                        }
+                        
                       }
                     }
                   }
