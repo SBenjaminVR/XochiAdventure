@@ -63,7 +63,7 @@ public class Comida extends Item{
             case 1:
                 g.drawImage(Assets.ingredientesEnchiladas[ingredient], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
-            case 2:
+            case 3:
                 if (ingredient > 1 && ingredient < 4) {
                     g.drawImage(Assets.ingredientesMole[1], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 } else if (ingredient >= 4) {
@@ -73,7 +73,7 @@ public class Comida extends Item{
                 }
                 
                 break;
-            case 3:
+            case 2:
                 g.drawImage(Assets.ingredientesQuecas[ingredient], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
         }
@@ -89,7 +89,7 @@ public class Comida extends Item{
             case 1:
                 g.drawImage(Assets.ingredientesEnchiladas[ingredient], x, y, getWidth(), getHeight(), null);
                 break;
-            case 2:
+            case 3:
                 if (ingredient > 1 && ingredient < 4) {
                     g.drawImage(Assets.ingredientesMole[1], x, y, getWidth(), getHeight(), null);
 
@@ -100,7 +100,7 @@ public class Comida extends Item{
                 }
                 
                 break;
-            case 3:
+            case 2:
                 g.drawImage(Assets.ingredientesQuecas[ingredient], x, y, getWidth(), getHeight(), null);
                 break;
         }
