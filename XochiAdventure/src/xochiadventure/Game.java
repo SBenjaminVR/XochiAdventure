@@ -250,6 +250,62 @@ public class Game implements Runnable {
         return nivel;
     }
 
+    /**
+     * 
+     * @return 
+     */
+    public Rectangle getFuente() {
+        return fuente;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Comida> getComidas() {
+        return comidas;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Letrero> getLetreros() {
+        return letreros;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Pico> getPicos() {
+        return picos;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Platform> getPlatforms() {
+        return platforms;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<PowerUps> getPowerups() {
+        return powerups;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Shot> getDisparos() {
+        return disparos;
+    }
+
     // SETS ------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -259,6 +315,22 @@ public class Game implements Runnable {
      */
     public void setEndGame(boolean endGame) {
         this.endGame = endGame;
+    }
+
+    /**
+     * 
+     * @param levelWidth 
+     */
+    public void setLevelWidth(int levelWidth) {
+        this.levelWidth = levelWidth;
+    }
+
+    /**
+     * 
+     * @param levelHeight 
+     */
+    public void setLevelHeight(int levelHeight) {
+        this.levelHeight = levelHeight;
     }
 
     // FUNCTIONS ------------------------------------------------------------------------------------------------------------------------------------
@@ -581,6 +653,7 @@ public class Game implements Runnable {
           comidas.add(new Comida(2950, 750, 50, 50, 2, this));
           comidas.add(new Comida(500, 1950, 50, 50, 3, this));
           comidas.add(new Comida(2800, 1950, 50, 50, 4, this));
+
           comidas.add(new Comida(1625, 1950, 50, 50, 5, this));
 
           // letreros
