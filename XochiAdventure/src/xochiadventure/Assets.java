@@ -78,6 +78,10 @@ public class Assets {
     public static BufferedImage pasarPagReves;
     public static BufferedImage ganado;
     public static BufferedImage perdido;
+
+    // letreros
+    public static BufferedImage peligro;
+    public static BufferedImage aviso;
     
     // spikes
     public static BufferedImage picoArriba;
@@ -135,6 +139,10 @@ public class Assets {
         crab = ImageLoader.loadImage("/images/pantallas/crab.png");
         
         checkmark = ImageLoader.loadImage("/images/flechaVerde.png");
+
+        // Loading of images of letreros
+        peligro = ImageLoader.loadImage("/images/peligro.png");
+        aviso = ImageLoader.loadImage("/images/Aviso.png");
 
         // Loading of images of game objects
         chile = ImageLoader.loadImage("/images/chile.png");

@@ -103,6 +103,7 @@ public class Game implements Runnable {
     private LinkedList<Comida> recolectado;                 // to store the recolected food
     private LinkedList<Shot> disparos;                      // to store all the shot bubbles
     private LinkedList<Pico> picos;                         // to store all the spikes
+    private LinkedList<Letrero> letreros;                   // to store all letreros
 
     // Menu navigation variables
     private Screen screen;                                  // to store in which screen you are
@@ -145,6 +146,7 @@ public class Game implements Runnable {
         recolectado = new LinkedList<Comida>();
         disparos = new LinkedList<Shot>();
         picos = new LinkedList<Pico>();
+        letreros = new LinkedList<Letrero>();
 
         rec = new Rectangle(0, 0, getWidth(), getHeight());
         fuente = new Rectangle(0, 0, 300, 300);
@@ -501,6 +503,8 @@ public class Game implements Runnable {
         comidas.clear();
         powerups.clear();
         recolectado.clear();
+        disparos.clear();
+        letreros.clear();
     }
 
     // tick and render ------------------------------------------------------------------------------------------------------------------------------------
