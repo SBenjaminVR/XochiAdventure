@@ -19,6 +19,7 @@ public class Assets {
     // Images
     public static BufferedImage background;                 // to store background image
     public static BufferedImage player;                     // to store the player image
+    public static BufferedImage pause;                     // to store the pause image
     public static BufferedImage shot;                       // to store flask color
     public static BufferedImage heart;                      // to store the taco heart image
 
@@ -95,6 +96,7 @@ public class Assets {
         // Loading of images of menu screens
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
         menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
+        pause = ImageLoader.loadImage("/images/pantallas/pause.jpg");
         options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
         select = ImageLoader.loadImage("/images/select.png");
