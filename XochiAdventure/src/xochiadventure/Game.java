@@ -107,10 +107,6 @@ public class Game implements Runnable {
     private int playerY;                                    // to store the position in which the player will be drawn
     private int limitX[];
 
-
-
-    private MouseManager mouseManager;                      // to manage the mouse
-
     private SoundClip confirmSound;
     private boolean hasPlayedWinSnd;
 
@@ -132,7 +128,6 @@ public class Game implements Runnable {
         // nombreArchivo = "src/space/inavders/archivo.sf";
         texto = new Font("Font", 2, 32);
         screen = Screen.TITLESCREEN;
-        mouseManager = new MouseManager();
         powerups = new LinkedList<PowerUps>();
         platforms = new LinkedList<Platform>();
         comidas = new LinkedList<Comida>();
@@ -142,8 +137,8 @@ public class Game implements Runnable {
         limitX = new int[2];
         fuente = new Rectangle(0, 0, 300, 300);
         hasPlayedWinSnd = false;
-
         brightness = 3; 
+
 
         menuMusicPlaying = false;
     }
@@ -383,7 +378,7 @@ public class Game implements Runnable {
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
           levelWidth = 3100;
-          levelHeight = 1950;
+          levelHeight = 1900;
           break;
 
         case 3:
@@ -691,7 +686,7 @@ public class Game implements Runnable {
                 hasPlayedWinSnd = false;
 
                 // checks if the escape key was pressed to pause or unpause the game
-                if (keyManager.pause) {
+                if (keyManager.pause && !endGame) {
                   pauseGame = !pauseGame;
                 }
 
@@ -723,16 +718,17 @@ public class Game implements Runnable {
                       rec.setRect(player.getX() - playerX, player.getY() - playerY, getWidth(), getHeight());
                     }
 
-                    // checar si el jugador está en la fuente
+                    // checks if the player is in the fountain so it can regain water
                     if (fuente.intersects(player.getPerimetro()) && player.getWater() < 100) {
                       player.setWater(player.getWater() + 1);
                     }
 
+                    // checks if the player can shoot a bubble and if one the keyw for doing it was pressed
                     if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
           						if (soundOn) {
           							Assets.shootSnd.play();
           						}
-                      //attack
+                      // checks in which direction the player is moving to know in which direction shoot the bubble
                       if (player.getDirection() == 1) {
                         // attack to the right
                         disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 8, 1, this));
@@ -743,7 +739,7 @@ public class Game implements Runnable {
                       player.setWater(getPlayer().getWater() - 10);
                     }
 
-                    // se tickea a los disparos
+                    // bubbles are ticked
                     for (int j = 0; j < disparos.size(); j++) {
                       Shot disp = disparos.get(j);
                       disp.tick();
@@ -753,7 +749,7 @@ public class Game implements Runnable {
                     }
 
 
-                    // se tickea a los chiles
+                    // chiles are ticke
                     for (int i  = 0; i < chiles.size(); i++) {
                       Enemy chile = chiles.get(i);
                       chile.tick();
@@ -823,23 +819,24 @@ public class Game implements Runnable {
                       }
                     }
 
-                      // se checa si el jugador está en el aire. si sí lo está se checa si ha colisionado con alguna plataforma
-                      if (player.isInTheAir()) {
-                        for (int i  = 0; i < platforms.size(); i++) {
-                            Platform platf = platforms.get(i);
-                            // platf.tick();
-                            if (platf.intersectaJugador(player)) {
-                              if (player.getSpeedY() <= 0) {
-                                player.setInTheAir(false);
-                                player.setSpeedY(0);
-                                player.setPlat(platf);
-                              } else {
-                                player.setSpeedY(0);
-                                player.setY(platf.getY() + platf.getHeight() + 1);
-                              }
+                    // se checa si el jugador está en el aire. si sí lo está se checa si ha colisionado con alguna plataforma
+                    if (player.isInTheAir()) {
+                      for (int i  = 0; i < platforms.size(); i++) {
+                          Platform platf = platforms.get(i);
+                          // platf.tick();
+                          if (platf.intersectaJugador(player)) {
+                            if (player.getSpeedY() <= 0) {
+                              player.setInTheAir(false);
+                              player.setSpeedY(0);
+                              player.setPlat(platf);
+                              getPlayer().setY(getPlayer().getPlat().getY() - getPlayer().getHeight());
+                            } else {
+                              player.setSpeedY(0);
+                              player.setY(platf.getY() + platf.getHeight() + 1);
                             }
-                        }
+                          }
                       }
+                    }
 
                       // se tickea a los ingredientes
                       for (int i = 0; i < comidas.size(); i++) {
@@ -908,6 +905,10 @@ public class Game implements Runnable {
                     break;
                 case MENU:                    
                   g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
+                  //Elementos decorativos en el mapa
+                  g.drawImage(Assets.cactus, 478, 220, Assets.cactus.getWidth(), Assets.cactus.getHeight(), null);
+                  g.drawImage(Assets.pyramid, 990, 420, Assets.pyramid.getWidth(), Assets.pyramid.getHeight(), null);
+                  g.drawImage(Assets.crab, 730, 460, Assets.crab.getWidth(), Assets.crab.getHeight(), null);
                   g.drawString("" + nivel, 50, 480);
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
                   switch(menOpt) {
@@ -929,6 +930,7 @@ public class Game implements Runnable {
                       g.drawImage(Assets.select, 620, 380, 100, 100, null);
                       break;
                     case TWO:
+                      g.drawImage(Assets.miniLevel2, 40, 420, 400, 230, null);
                       g.drawImage(Assets.select, 590, 450, 100, 100, null);
                       break;
                     case THREE:
@@ -1066,6 +1068,11 @@ public class Game implements Runnable {
                     Comida recol = recolectado.get(i);
                     recol.renderUI(g, iPosX, iPosY);
                     iPosX -= 55;
+                  }
+
+                  // pause menu
+                  if (pauseGame) {
+                    g.drawImage(Assets.pause, 0, 0, getWidth(), getHeight(), null);
                   }
 
                   if (endGame) {
