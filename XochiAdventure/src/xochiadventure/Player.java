@@ -171,7 +171,7 @@ public class Player extends Item{
 			setX(getX() - getSpeedX());
             setDirection(-1);
 		}
-		if (getX() < 3000 && (game.getKeyManager().lastRight || game.getKeyManager().d)) {
+		if (getX() < game.getLevelWidth() - 100 && (game.getKeyManager().lastRight || game.getKeyManager().d)) {
 			setX(getX() + getSpeedX());
             setDirection(1);
 		}
@@ -228,17 +228,17 @@ public class Player extends Item{
 		}
 		if (drawPlayer) {
 			if (moving) {
-                            if (getDirection() == 1)
-				g.drawImage(xochiAnim.getCurrentFrame(), getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                            else
-                                g.drawImage(xochiAnimLeft.getCurrentFrame(), getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                        }
-                        else {
-                            if (getDirection() == 1)
-				g.drawImage(Assets.xochiIdle, getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                            else
-                                g.drawImage(Assets.xochiIdleLeft, getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                        }
+                if (getDirection() == 1)
+				    g.drawImage(xochiAnim.getCurrentFrame(), getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                else
+                    g.drawImage(xochiAnimLeft.getCurrentFrame(), getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+            }
+            else {
+                if (getDirection() == 1)
+				    g.drawImage(Assets.xochiIdle, getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                else
+                    g.drawImage(Assets.xochiIdleLeft, getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+            }
 		}
     }
 }

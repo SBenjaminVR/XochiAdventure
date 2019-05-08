@@ -85,15 +85,14 @@ public class Game implements Runnable {
     private KeyManager keyManager;                          // to manage the keyboard
     private boolean endGame;                                // to know when to end the game
     private boolean pauseGame;                              // flag to know if the game is paused
-   // private String nombreArchivo;                         // to store the name of the file
     private Font texto;                                     // to change the font of string drawn in the screen
     private Shot shot;                                      // to have a missile to shoot
     private Rectangle rec;                                  // to store the rectangle that checks which sprites are going to be drawn
     private Rectangle fuente;                               // to store the position of the fuente
     private boolean soundOn;
-    private int nivel;
-    private int levelWidth;
-    private int levelHeight;
+    private int nivel;                                      // to store in which level you are
+    private int levelWidth;                                 // to store the width of the level
+    private int levelHeight;                                // to store the height of the level
     private boolean menuMusicPlaying;
 
     // Linked lists
@@ -101,8 +100,9 @@ public class Game implements Runnable {
     private LinkedList<Enemy> chiles;                       // to store all the enemies
     private LinkedList<PowerUps> powerups;                  // to store all the powerups
     private LinkedList<Comida> comidas;                     // to store all the food
-    private LinkedList<Comida> recolectado;
-    private LinkedList<Shot> disparos;
+    private LinkedList<Comida> recolectado;                 // to store the recolected food
+    private LinkedList<Shot> disparos;                      // to store all the shot bubbles
+    private LinkedList<Pico> picos;                         // to store all the spikes
 
     // Menu navigation variables
     private Screen screen;                                  // to store in which screen you are
@@ -114,7 +114,6 @@ public class Game implements Runnable {
     // UI
     private int playerX;                                    // to store the position in which the player will be drawn
     private int playerY;                                    // to store the position in which the player will be drawn
-    private int limitX[];
 
     private SoundClip confirmSound;
     private boolean hasPlayedWinSnd;
@@ -131,24 +130,26 @@ public class Game implements Runnable {
         this.title = title;
         this.width = width;
         this.height = height;
+
         running = false;
         keyManager = new KeyManager();
-        chiles = new LinkedList<Enemy>();
-        // nombreArchivo = "src/space/inavders/archivo.sf";
+        
         texto = new Font("Font", 2, 32);
         screen = Screen.TITLESCREEN;
+
+        // Initialization on linked lists
+        chiles = new LinkedList<Enemy>();
         powerups = new LinkedList<PowerUps>();
         platforms = new LinkedList<Platform>();
         comidas = new LinkedList<Comida>();
         recolectado = new LinkedList<Comida>();
         disparos = new LinkedList<Shot>();
+        picos = new LinkedList<Pico>();
+
         rec = new Rectangle(0, 0, getWidth(), getHeight());
-        limitX = new int[2];
         fuente = new Rectangle(0, 0, 300, 300);
         hasPlayedWinSnd = false;
-        brightness = 3; 
-
-
+        brightness = 3;
         menuMusicPlaying = false;
     }
 
@@ -229,6 +230,14 @@ public class Game implements Runnable {
      */
     public KeyManager getKeyManager() {
         return keyManager;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public int getLevelWidth() {
+        return levelWidth;
     }
 
     // SETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -389,6 +398,8 @@ public class Game implements Runnable {
           comidas.add(new Comida(50, 1650, 50, 50, this));
           comidas.add(new Comida(1525, 1650, 50, 50, this));
 
+          // picos
+
           player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7),  this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
@@ -397,51 +408,54 @@ public class Game implements Runnable {
           break;
 
         case 3:
+          // 3300
+
           // chiles
-          chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
-          chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
-          chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
-          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
-          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
-          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
-          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
-          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
-          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
+          chiles.add(new Enemy(240, 200, 50, 50, 1, 5, 225, 825, this));
+          chiles.add(new Enemy(1410, 200, 50, 50, -1, 5, 825, 1425, this));
+          chiles.add(new Enemy(1890, 200, 50, 50, 1, 5, 1875, 2475, this));
+          chiles.add(new Enemy(3060, 200, 50, 50, -1, 5, 2475, 3075, this));
+          chiles.add(new Enemy(460, 850, 50, 50, 1, 5, 450, 950, this));
+          chiles.add(new Enemy(2790, 850, 50, 50, -1, 5, 2350, 2850, this));
+          chiles.add(new Enemy(1975, 1400, 50, 50, -1, 5, 1975, 2775, this));
+          chiles.add(new Enemy(0, 1950, 50, 50, 1, 5, 0, 1000, this));
+          chiles.add(new Enemy(3250, 1950, 50, 50, -1, 5, 2300, 3300, this));
 
           // plataformas
-          platforms.add(new Platform(0, 250, 500, 100, this));
-          platforms.add(new Platform(1300, 250, 500, 100, this));
+          platforms.add(new Platform(225, 250, 1200, 100, this));
+          platforms.add(new Platform(1875, 250, 1200, 100, this));
 
-          platforms.add(new Platform(2600, 250, 500, 100, this));
+          platforms.add(new Platform(1575, 500, 150, 30, this));
 
-          platforms.add(new Platform(650, 500, 500, 100, this));
-          platforms.add(new Platform(1950, 500, 500, 100, this));
+          platforms.add(new Platform(1300, 700, 150, 30, this));
+          platforms.add(new Platform(1850, 700, 150, 30, this));
 
           
-          platforms.add(new Platform(300, 800, 500, 100, this));
-          platforms.add(new Platform(800, 800, 500, 100, this));
-          platforms.add(new Platform(1300, 800, 500, 100, this));
-          platforms.add(new Platform(1800, 800, 500, 100, this));
-          platforms.add(new Platform(2300, 800, 500, 100, this));
-          platforms.add(new Platform(0, 1100, 150, 30, this));
-          platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
+          platforms.add(new Platform(300, 900, 50, 50, this));
+          platforms.add(new Platform(450, 900, 500, 100, this));
+          platforms.add(new Platform(1150, 900, 50, 50, this));
+          platforms.add(new Platform(1400, 900, 500, 100, this));
+          platforms.add(new Platform(2100, 900, 50, 50, this));
+          platforms.add(new Platform(2350, 900, 500, 100, this));
+          platforms.add(new Platform(2950, 900, 50, 50, this));
 
-          platforms.add(new Platform(2950, 1100, 150, 30, this));
-          platforms.add(new Platform(0, 1350, 500, 100, this));
+          platforms.add(new Platform(1100, 1150, 150, 30, this));
+          platforms.add(new Platform(2050, 1150, 150, 30, this));
 
-          platforms.add(new Platform(950, 1350, 500, 100, this));
-          platforms.add(new Platform(1650, 1350, 500, 100, this));
-          platforms.add(new Platform(2600, 1350, 500, 100, this));
-          platforms.add(new Platform(650, 1650, 150, 30, this));
-          platforms.add(new Platform(2300, 1650, 150, 30, this));
+          platforms.add(new Platform(50, 1450, 50, 50, this));
+          platforms.add(new Platform(400, 1450, 50, 50, this));
+          platforms.add(new Platform(575, 1450, 800, 100, this));
+          platforms.add(new Platform(1975, 1450, 800, 100, this));
+          platforms.add(new Platform(2850, 1450, 50, 50, this));
+          platforms.add(new Platform(3200, 1450, 50, 50, this));
 
-          // grandes 5
-          platforms.add(new Platform(0, 1900, 500, 100, this));
-          // platforms.add(new Platform(950, 1900, 1200, 100, this));
-          platforms.add(new Platform(950, 1900, 500, 100, this));
-          platforms.add(new Platform(1450, 1900, 500, 100, this));
-          platforms.add(new Platform(1550, 1900, 500, 100, this));
-          platforms.add(new Platform(2600, 1900, 500, 100, this));
+          platforms.add(new Platform(1575, 1650, 150, 30, this));
+
+          platforms.add(new Platform(0, 2000, 1000, 100, this));
+          platforms.add(new Platform(1250, 2000, 50, 50, this));
+          platforms.add(new Platform(1600, 2000, 100, 100, this));
+          platforms.add(new Platform(2000, 2000, 50, 50, this));
+          platforms.add(new Platform(2300, 2000, 1000, 100, this));          
 
           // comidas
           comidas.add(new Comida(225, 200, 50, 50, this));
@@ -456,9 +470,13 @@ public class Game implements Runnable {
           comidas.add(new Comida(1525, 1850, 50, 50, this));
           comidas.add(new Comida(2925, 1850, 50, 50, this));
 
+          // picos
+
           player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
+          levelWidth = 3300;
+          levelHeight = 2200;
           break;
       }
       
@@ -1051,32 +1069,6 @@ public class Game implements Runnable {
                   }
                     break;
                 case RECIPIES:
-//<<<<<<< HEAD
-//                    
-//=======
-//                  g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
-//                  if (currentRecipePage == 1) {
-//                    g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
-//                    for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
-//                          g.drawImage(Assets.ingredientesEnchiladas[i], 100, 200 + i*50, 50, 50, null);
-//                    }
-//                    for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
-//                          g.drawString("nombre", 200, 240 + i * 50);
-//                    }
-//                  }
-//                  else if (currentRecipePage == 2) {
-//                    g.drawImage(Assets.quecas, 70, 10, 200, 200, null);
-//                    for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
-//                          g.drawImage(Assets.ingredientesQuecas[i], 100, 200 + i*50, 50, 50, null);
-//                    }
-//                    for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
-//                          g.drawString("nombre", 200, 240 + i * 50);
-//                    }
-//                  }
-//                  else if (currentRecipePage == 3) {
-//                      
-//                  }
-//>>>>>>> ceedf006ababa363f45c43783f955f3e1d8f580e
                     g.setColor(Color.BLACK);
                     g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);                  
                     switch (currentRecipePage) {

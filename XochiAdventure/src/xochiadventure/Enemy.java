@@ -119,10 +119,7 @@ public class Enemy extends Item {
        * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
        * En este caso los chiles se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
        */
-      if (game.getPlayer().getX() < game.getPlayerX()) {
-        g.drawImage(Assets.chile, x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-      } else {
-        g.drawImage(Assets.chile, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-      }
+      g.drawImage(Assets.chile, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+      
     }
 }

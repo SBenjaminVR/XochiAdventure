@@ -16,12 +16,15 @@ import java.awt.image.BufferedImage;
  *      - Benjamín Váldez Rodríguez             A00822027
  */
 public class Assets {
+
+    // ingredients
     public static String[] ingrEnchiladas = new String[7];
     public static String[] ingrQuecas = new String[6];
     public static String[] ingrMole = new String[4];
     public static BufferedImage recetaEnchiladas;
     public static BufferedImage recetaQuecas;
     public static BufferedImage recetaMole;
+
     // Images
     public static BufferedImage background;                 // to store background image
     public static BufferedImage player;                     // to store the player image
@@ -75,6 +78,12 @@ public class Assets {
     public static BufferedImage pasarPagReves;
     public static BufferedImage ganado;
     public static BufferedImage perdido;
+    
+    // spikes
+    public static BufferedImage picoArriba;
+    public static BufferedImage picoAbajo;
+    public static BufferedImage picoDerecha;
+    public static BufferedImage picoIzquierda;
 
     // Power-Ups
     public static BufferedImage atole;                      // to store the atole image
@@ -135,6 +144,12 @@ public class Assets {
         fuente = ImageLoader.loadImage("/images/fountain_beta.png");
         heart = ImageLoader.loadImage("/images/tacoHeart.png");
         shot = ImageLoader.loadImage("/images/bubble.png");
+
+        // Loading of images of the spikes
+        picoArriba = ImageLoader.loadImage("/images/picos/pico2.png");
+        picoAbajo = ImageLoader.loadImage("/images/picos/pico1.png");
+        picoDerecha = ImageLoader.loadImage("/images/picos/pico4.png");
+        picoIzquierda = ImageLoader.loadImage("/images/picos/pico3.png");
 
         // loading of winning, loosing, and pause screens
         ganado = ImageLoader.loadImage("/images/pantallas/victoryRoyale.png");
