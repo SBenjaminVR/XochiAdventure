@@ -25,7 +25,7 @@ public class Comida extends Item{
      */
     public Comida(int x, int y, int width, int height, int i, Game game) {
         super(x, y, width, height, 0, game);
-        this.ingredient = i;
+        this.ingredient = i-1;
     }
 
     // GETS ------------------------------------------------------------------
