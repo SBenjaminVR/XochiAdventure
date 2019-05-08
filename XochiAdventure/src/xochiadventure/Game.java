@@ -86,7 +86,7 @@ public class Game implements Runnable {
     private int nivel;
     private int levelWidth;
     private int levelHeight;
-    private boolean loadedFromDB;
+    private boolean menuMusicPlaying;
 
     // Linked lists
     private LinkedList<Platform> platforms;                 // to store all the platforms
@@ -100,6 +100,7 @@ public class Game implements Runnable {
     private Screen screen;                                  // to store in which screen you are
     private MenuOpt menOpt;                                 // to store in which option in the main menu screen you are
     private OptOpt optOpt;                                  // to store in which option in the options screen you are
+    private int currentRecipePage = 1;
 
     // UI
     private int playerX;                                    // to store the position in which the player will be drawn
@@ -144,7 +145,7 @@ public class Game implements Runnable {
 
         brightness = 3; 
 
-        loadedFromDB = false;
+        menuMusicPlaying = false;
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -482,7 +483,10 @@ public class Game implements Runnable {
 
             // Main menu screen ------------------------------------------------------------------
             case MENU:
-
+                if (!menuMusicPlaying) {
+                    Assets.mainMenu.play();
+                    menuMusicPlaying = true;
+                }
                 // checks if the down arrow key is pressed
                 if (keyManager.down) {
                     // checks to where you are navigating in the menu
@@ -559,10 +563,13 @@ public class Game implements Runnable {
 
                 // Checks to which screen you are moving to
                 if (keyManager.enter) {
-					if (soundOn) {
-						Assets.selectSnd.play();
-					}
-                    // confirmSound.play();
+                    if (soundOn) {
+                            Assets.selectSnd.play();
+                    }
+                    if (menuMusicPlaying) {
+                        Assets.mainMenu.stop();
+                        menuMusicPlaying = false;
+                    }
                     switch(menOpt) {
                         case OPTIONS:
                             screen = Screen.OPTIONS;
@@ -665,19 +672,11 @@ public class Game implements Runnable {
 
             // Recipies screen ------------------------------------------------------------------
             case RECIPIES:
+                
                 if (keyManager.back) {
                     screen = Screen.MENU;
-                    loadedFromDB = false;
                 }
-                if (!loadedFromDB){
-                    System.out.println(recetarioDB.getFood(1));
-                    LinkedList<String> myIngredients = new LinkedList<String>();
-                    recetarioDB.getIngredients(3, myIngredients);
-                    for (int i = 0; i < myIngredients.size(); i++) {                        
-                        System.out.println(myIngredients.get(i));
-                    }
-                    loadedFromDB = true;
-                }
+               
                 break;
 
             // Controls screen ------------------------------------------------------------------
@@ -907,8 +906,7 @@ public class Game implements Runnable {
                 case TITLESCREEN:
                     g.drawImage(Assets.titleScreen, 0, 0, getWidth(), getHeight(), null);
                     break;
-                case MENU:
-
+                case MENU:                    
                   g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
                   g.drawString("" + nivel, 50, 480);
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
@@ -974,6 +972,14 @@ public class Game implements Runnable {
                     break;
                 case RECIPIES:
                   g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
+                  g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
+                  for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
+                        g.drawImage(Assets.ingredientesEnchiladas[i], 100, 200 + i*50, 50, 50, null);
+                  }
+                  for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
+                        g.drawString("nombre", 200, 240 + i * 50);
+                  }
+                  
                   break;
                 case CONTROLS:
                   g.drawImage(Assets.controls, 0, 0, getWidth(), getHeight(), null);

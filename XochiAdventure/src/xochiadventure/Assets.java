@@ -40,6 +40,7 @@ public class Assets {
     public static BufferedImage xochiLeft;
     public static BufferedImage xochiAnim[];                // to store the frames for xochi animation
     public static BufferedImage xochiAnimLeft[];
+    public static BufferedImage enchiladas;
     public static BufferedImage ingredientesEnchiladas[];
     public static BufferedImage ingredientesMole[];
     public static BufferedImage ingredientesQuecas[];
@@ -120,6 +121,7 @@ public class Assets {
         
         
         // Loading of images of ingredients for the enchiladas
+        enchiladas = ImageLoader.loadImage("/images/comida/enchiladas/EnchiladaPotosina.png");
         ingredientesEnchiladas = new BufferedImage[7];
         ingredientesEnchiladas[0] = ImageLoader.loadImage("/images/comida/enchiladas/Tortillas.png");
         ingredientesEnchiladas[1] = ImageLoader.loadImage("/images/comida/enchiladas/biggieCheese.png");
