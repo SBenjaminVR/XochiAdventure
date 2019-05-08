@@ -58,6 +58,7 @@ public class Assets {
     public static BufferedImage opbrightness3;             //to store the image for the menu of brightness
     public static BufferedImage opbrightness4;             //to store the image for the menu of brightness
     public static BufferedImage opbrightness5;             //to store the image for the menu of brightness
+    public static BufferedImage pauseMenu;
     
 
     // Power-Ups

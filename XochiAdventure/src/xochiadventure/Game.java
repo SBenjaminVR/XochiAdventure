@@ -106,10 +106,6 @@ public class Game implements Runnable {
     private int playerY;                                    // to store the position in which the player will be drawn
     private int limitX[];
 
-
-
-    private MouseManager mouseManager;                      // to manage the mouse
-
     private SoundClip confirmSound;
     private boolean hasPlayedWinSnd;
 
@@ -131,7 +127,6 @@ public class Game implements Runnable {
         // nombreArchivo = "src/space/inavders/archivo.sf";
         texto = new Font("Font", 2, 32);
         screen = Screen.TITLESCREEN;
-        mouseManager = new MouseManager();
         powerups = new LinkedList<PowerUps>();
         platforms = new LinkedList<Platform>();
         comidas = new LinkedList<Comida>();
@@ -690,7 +685,7 @@ public class Game implements Runnable {
                 hasPlayedWinSnd = false;
 
                 // checks if the escape key was pressed to pause or unpause the game
-                if (keyManager.pause) {
+                if (keyManager.pause && !endGame) {
                   pauseGame = !pauseGame;
                 }
 
@@ -1064,6 +1059,11 @@ public class Game implements Runnable {
                     Comida recol = recolectado.get(i);
                     recol.renderUI(g, iPosX, iPosY);
                     iPosX -= 55;
+                  }
+
+                  // pause menu
+                  if (pauseGame) {
+                    g.drawImage(Assets.pause, 0, 0, getWidth(), getHeight(), null);
                   }
 
                   if (endGame) {
