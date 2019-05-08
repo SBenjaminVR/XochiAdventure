@@ -260,7 +260,7 @@ public class Game implements Runnable {
      * @param txt to know which level to load
      */
     private void loadLevel() throws SQLException{
-    
+      /*
       // lee txt
       ResultSet results[];
               
@@ -350,7 +350,7 @@ public class Game implements Runnable {
 
         letreros.add(new Letrero(posX, posY, iWidth, iHeight, (lives == 1), this));
       }
-      
+      */
       switch(nivel){
         case 1:
           fuente.x = 1400;
@@ -409,6 +409,14 @@ public class Game implements Runnable {
           comidas.add(new Comida(225, 1850, 50, 50, this));
           comidas.add(new Comida(1525, 1850, 50, 50, this));
           comidas.add(new Comida(2925, 1850, 50, 50, this));
+
+          // letreros
+          letreros.add(new Letrero(300, 730, 70, 70, false, this));
+          letreros.add(new Letrero(2730, 730, 70, 70, false, this));
+          letreros.add(new Letrero(430, 1830, 70, 70, true, this));
+          letreros.add(new Letrero(950, 1830, 70, 70, true, this));
+          letreros.add(new Letrero(2080, 1830, 70, 70, true, this));
+          letreros.add(new Letrero(2600, 1830, 70, 70, true, this));
 
           player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(0), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
@@ -475,7 +483,16 @@ public class Game implements Runnable {
           comidas.add(new Comida(50, 1650, 50, 50, this));
           comidas.add(new Comida(1525, 1650, 50, 50, this));
 
+          // letreros
+          letreros.add(new Letrero(30, 730, 70, 70, false, this));
+          letreros.add(new Letrero(3000, 730, 70, 70, false, this));
+          letreros.add(new Letrero(330, 1630, 70, 70, true, this));
+          letreros.add(new Letrero(1280, 1630, 70, 70, true, this));
+          letreros.add(new Letrero(1750, 1630, 70, 70, true, this));
+          letreros.add(new Letrero(2700, 1630, 70, 70, true, this));
+
           // picos
+          // picos.add(new Pico());
 
           player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(0),  this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
@@ -503,8 +520,12 @@ public class Game implements Runnable {
           chiles.add(new Enemy(3250, 1950, 50, 50, -1, 5, 2300, 3300, this));
 
           // plataformas
-          platforms.add(new Platform(225, 250, 1200, 100, this));
-          platforms.add(new Platform(1875, 250, 1200, 100, this));
+          platforms.add(new Platform(225, 250, 500, 100, this));
+          platforms.add(new Platform(725, 250, 500, 100, this));
+          platforms.add(new Platform(925, 250, 500, 100, this));
+          platforms.add(new Platform(1875, 250, 500, 100, this));
+          platforms.add(new Platform(2375, 250, 500, 100, this));
+          platforms.add(new Platform(2575, 250, 500, 100, this));
 
           platforms.add(new Platform(1575, 500, 150, 30, this));
 
@@ -525,18 +546,21 @@ public class Game implements Runnable {
 
           platforms.add(new Platform(50, 1450, 50, 50, this));
           platforms.add(new Platform(400, 1450, 50, 50, this));
-          platforms.add(new Platform(575, 1450, 800, 100, this));
+          platforms.add(new Platform(575, 1450, 500, 100, this));
+          platforms.add(new Platform(875, 1450, 500, 100, this));
           platforms.add(new Platform(1975, 1450, 800, 100, this));
           platforms.add(new Platform(2850, 1450, 50, 50, this));
           platforms.add(new Platform(3200, 1450, 50, 50, this));
 
           platforms.add(new Platform(1575, 1650, 150, 30, this));
 
-          platforms.add(new Platform(0, 2000, 1000, 100, this));
+          platforms.add(new Platform(0, 2000, 500, 100, this));
+          platforms.add(new Platform(500, 2000, 500, 100, this));
           platforms.add(new Platform(1250, 2000, 50, 50, this));
           platforms.add(new Platform(1600, 2000, 100, 100, this));
           platforms.add(new Platform(2000, 2000, 50, 50, this));
-          platforms.add(new Platform(2300, 2000, 1000, 100, this));          
+          platforms.add(new Platform(2300, 2000, 500, 100, this));
+          platforms.add(new Platform(2800, 2000, 500, 100, this));
 
           // comidas
           comidas.add(new Comida(800, 200, 50, 50, this));
@@ -549,7 +573,16 @@ public class Game implements Runnable {
 
           comidas.add(new Comida(1625, 1950, 50, 50, this));
 
+          // letreros
+          letreros.add(new Letrero(225, 180, 70, 70, false, this));
+          letreros.add(new Letrero(3005, 180, 70, 70, false, this));
+          letreros.add(new Letrero(450, 830, 70, 70, false, this));
+          letreros.add(new Letrero(2780, 830, 70, 70, false, this));
+          letreros.add(new Letrero(930, 1930, 70, 70, true, this));
+          letreros.add(new Letrero(2300, 1930, 70, 70, true, this));
+
           // picos
+          // picos.add(new Pico());
 
           player = new Player (1600, 700, 100, 100, 6, 3, platforms.get(0), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
@@ -1246,6 +1279,7 @@ public class Game implements Runnable {
                     }
                   }
 
+                  // Draw bubbles
                   for (int i = 0; i < disparos.size(); i++) {
                     Shot disp = disparos.get(i);
                     if (rec.intersects(disp.getPerimetro())) {
@@ -1253,6 +1287,15 @@ public class Game implements Runnable {
                     }
                   }
 
+                  // Draw signs
+                  for (int i = 0; i < letreros.size(); i++) {
+                    Letrero sign = letreros.get(i);
+                    if (rec.intersects(sign.getPerimetro())) {
+                      sign.render(g);
+                    }
+                  }
+
+                  // draw player
                   player.render(g);
 
                   // UI

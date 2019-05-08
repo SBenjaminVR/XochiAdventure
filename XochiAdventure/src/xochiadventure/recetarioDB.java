@@ -125,13 +125,14 @@ public class recetarioDB {
             myRs[7] = myStmt.executeQuery("select * from Letrero where levelID =" + level);
 
             return myRs;
-            
 
         } catch (Exception exc) {
             exc.printStackTrace();
         } finally {
             if (myRs != null) {
-                myRs.close();
+                for (int i = 0; i < 8; i++) {
+                    myRs[i].close();
+                }
             }
 
             if (myStmt != null) {
@@ -142,5 +143,6 @@ public class recetarioDB {
                 myConn.close();
             }
         }
+        return myRs;
     }
 }
