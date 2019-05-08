@@ -30,6 +30,7 @@ import static xochiadventure.Assets.titleScreen;
 // enum to navigate all the screens that the game has
 enum Screen {
     TITLESCREEN,
+    STORY,
     MENU,
     OPTIONS,
     RECIPIES,
@@ -55,7 +56,7 @@ enum OptOpt {
 }
 
 enum PauseMenu {
-    RESTART,
+    CONTINUE_LEVEL,
     EXIT
 }
 
@@ -237,31 +238,39 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
-     * @return 
+     * To get the width of the current level
+     * @return an <code>int</code> value with the width of the level
      */
     public int getLevelWidth() {
         return levelWidth;
     }
 
     /**
-     * 
-     * @return 
+     * To get the height of the current level
+     * @return an <code>int</code> value with the height of the level
+     */
+    public int getLevelHeight() {
+        return levelHeight;
+    }
+    
+    /**
+     * To get the current level
+     * @return an <code>int</code> value with the current level
      */
     public int getNivel() {
         return nivel;
     }
 
     /**
-     * 
-     * @return 
+     * To get the fountain
+     * @return an <code>int</code> value with the fountain
      */
     public Rectangle getFuente() {
         return fuente;
     }
 
     /**
-     * 
+     * To get the list of all
      * @return 
      */
     public LinkedList<Comida> getComidas() {
@@ -411,7 +420,6 @@ public class Game implements Runnable {
 
           // grandes 5
           platforms.add(new Platform(0,     1900, 500, 100, this));
-          // platforms.add(new Platform(950, 1900, 1200, 100, this));
           platforms.add(new Platform(950,   1900, 500, 100, this));
           platforms.add(new Platform(1450,  1900, 500, 100, this));
           platforms.add(new Platform(1650,  1900, 500, 100, this));
@@ -434,7 +442,7 @@ public class Game implements Runnable {
           letreros.add(new Letrero(2080, 1830, 70, 70, true, this));
           letreros.add(new Letrero(2600, 1830, 70, 70, true, this));
 
-          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(0), this);
+          player = new Player (1475, 650, 100, 100, 6, 4, platforms.get(0), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
           levelWidth = 3100;
@@ -514,7 +522,7 @@ public class Game implements Runnable {
           picos.add(new Pico(2225, 1660, 50, 50, "u", this));
           picos.add(new Pico(2475, 1660, 50, 50, "u", this));
 
-          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(0),  this);
+          player = new Player (1475, 650, 100, 100, 6, 4, platforms.get(0),  this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
           levelWidth = 3100;
@@ -522,8 +530,6 @@ public class Game implements Runnable {
           break;
 
         case 3:
-
-
           // 3300
           fuente.x = 1500;
           fuente.y = 600;
@@ -629,8 +635,7 @@ public class Game implements Runnable {
           picos.add(new Pico(360, 1500, 50, 50, "l", this));
           picos.add(new Pico(440, 1500, 50, 50, "r", this));
 
-
-          player = new Player (1600, 700, 100, 100, 6, 3, platforms.get(0), this);
+          player = new Player (1600, 700, 100, 100, 6, 4, platforms.get(0), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
           levelWidth = 3300;
@@ -646,15 +651,15 @@ public class Game implements Runnable {
      *  To unload a level
      */
     private void unloadLevel() {
-        player = null;
-        chiles.clear();
-        platforms.clear();
-        comidas.clear();
-        powerups.clear();
-        recolectado.clear();
-        disparos.clear();
-        picos.clear();
-        letreros.clear();
+      player = null;
+      chiles.clear();
+      platforms.clear();
+      comidas.clear();
+      powerups.clear();
+      recolectado.clear();
+      disparos.clear();
+      picos.clear();
+      letreros.clear();
     }
 
     // tick and render ------------------------------------------------------------------------------------------------------------------------------------
@@ -662,16 +667,24 @@ public class Game implements Runnable {
     private void tick() throws SQLException {
         // ticks key manager
         keyManager.tick();
-        // System.out.println("" + keyManager.left + " " + keyManager.right);
 
         // checks in which screen you are
         switch(screen) {
 
             // Tttle screen ------------------------------------------------------------------
             case TITLESCREEN:
+
+                // Checks if the user presses enter to advance to the next screen
                 if (keyManager.enter) {
-                    screen = Screen.MENU;
-                    menOpt = MenuOpt.OPTIONS;
+                    screen = Screen.STORY;
+                }
+                break;
+
+            case STORY:
+                // Checks if the user presses enter to advance to the next screen
+                if (keyManager.enter) {
+                  screen = Screen.MENU;
+                  menOpt = MenuOpt.OPTIONS;
                 }
                 break;
 
@@ -918,7 +931,7 @@ public class Game implements Runnable {
                 // checks if the escape key was pressed to pause or unpause the game
                 if (keyManager.pause && !endGame) {
                   pauseGame = !pauseGame;
-                  pauseOpt = PauseMenu.RESTART;
+                  pauseOpt = PauseMenu.CONTINUE_LEVEL;
                 }
 
                 // checks if the backspace key was pressed to return to the main menu
@@ -1031,38 +1044,30 @@ public class Game implements Runnable {
                       power.tick();
                       if (power.intersectaJugador(player)) {
                           switch (power.getType()) {
-                              case ATOLE:
-                                  // Recover all of the player hp/lives
-                                  getPlayer().setLives(getPlayer().getMaxLives());
-                                  if (effectsOn)
-                                    Assets.atoleSnd.play();
-                                  powerups.remove(i);
-                                  break;
-                              case AGUA:
-                                  // Refill a little bit the players ammo
-                                  getPlayer().setWater(getPlayer().getWater() + 25);
-                                  if (getPlayer().getWater() > 100) {
-                                    getPlayer().setWater(100);
-                                  }
-                                  powerups.remove(i);
-                                  break;
+                            case ATOLE:
+                              // Recover all of the player hp/lives
+                              getPlayer().setLives(getPlayer().getMaxLives());
+                              if (effectsOn)
+                                Assets.atoleSnd.play();
+                              powerups.remove(i);
+                              break;
+                            case AGUA:
+                              // Refill a little bit the players ammo
+                              getPlayer().setWater(getPlayer().getWater() + 25);
+                              if (getPlayer().getWater() > 100) {
+                                getPlayer().setWater(100);
+                              }
+                              powerups.remove(i);
+                              break;
 
-                              case DULCE:
-                                  // Recover 1 life
-                                  if (getPlayer().getLives() < getPlayer().getMaxLives())
-                                      getPlayer().setLives(getPlayer().getLives() + 1);
-                                  if (effectsOn)
-                                    Assets.dulceSnd.play();
-                                  powerups.remove(i);
-                                  break;
-
-                              case FRIJOL:
-                                  powerups.remove(i);
-
-                                  break;
-                              default:
-                                powerups.remove(i);
-                                break;
+                            case DULCE:
+                              // Recover 1 life
+                              if (getPlayer().getLives() < getPlayer().getMaxLives())
+                                  getPlayer().setLives(getPlayer().getLives() + 1);
+                              if (effectsOn)
+                                Assets.dulceSnd.play();
+                              powerups.remove(i);
+                              break;
                           }
                       }
                     }
@@ -1086,68 +1091,90 @@ public class Game implements Runnable {
                       }
                     }
 
-                      // se tickea a los ingredientes
-                      for (int i = 0; i < comidas.size(); i++) {
-                        Comida comi = comidas.get(i);
-                        if (comi.intersectaJugador(player)) {
-                          comidas.remove(i);
-                          // guardar de alguna manera que ya recolectamos una comida más o esa comida en especifico
-                          recolectado.add(comi);
+                    // Ingredients are ticked
+                    for (int i = 0; i < comidas.size(); i++) {
+                      Comida comi = comidas.get(i);
+                      
+                      // If the player collects an ingredient, it is removed form the 
+                      // game and added to its collection of collected ingredients
+                      if (comi.intersectaJugador(player)) {
+                        comidas.remove(i);
+                        recolectado.add(comi);
 
-                        }
                       }
+                    }
 
-                      if (player.getY() >= levelHeight) {
-                        player.setSpeedY(0);
-                        player.setInTheAir(false);
-                        if (player.getContGotHit() == 0) {
-                          player.setLives(player.getLives() - 1);
-                        }
-                        if (player.getLives() == 0) {
-                          endGame = false;
+                    // Checks if the player fell of the level
+                    if (player.getY() >= levelHeight) {
 
-                        } else {
-                          int dif = (getPlayer().getX() < getPlayer().getPlat().getX()) ? 0 : getPlayer().getPlat().getWidth() - getPlayer().getWidth();
-                          getPlayer().setX(getPlayer().getPlat().getX() + dif);
-                          getPlayer().setY(getPlayer().getPlat().getY() - getPlayer().getHeight());
-                          getPlayer().setContGotHit(60);
-                        }
+                      // Sets that the player no longer will be moving in the air
+                      player.setSpeedY(0);
+                      player.setInTheAir(false);
+
+                      // Checks if the player is in a state of vulnerability
+                      // If it is not, the player loses one life 
+                      if (player.getContGotHit() == 0) {
+                        player.setLives(player.getLives() - 1);
                       }
+                      // Resets the player's position on top of the last platform it was on
+                      int dif = (getPlayer().getX() < getPlayer().getPlat().getX()) ? 0 : getPlayer().getPlat().getWidth() - getPlayer().getWidth();
+                      getPlayer().setX(getPlayer().getPlat().getX() + dif);
+                      getPlayer().setY(getPlayer().getPlat().getY() - getPlayer().getHeight());
+                      getPlayer().setContGotHit(60);
+                      
+                    }
 
-                      if (comidas.isEmpty() || player.getLives() == 0) {
-                        endGame = true;
-                      }
+                    // Checks if the player has won or lost the game
+                    if (comidas.isEmpty() || player.getLives() == 0) {
+                      endGame = true;
+                    }
 
                   } else {
+
+                    // Opens the pause menu
                     if (pauseGame) {
+
+                      // Navigates the pause menu
                       if (getKeyManager().up || getKeyManager().down) {
                         switch(pauseOpt) {
-                          case RESTART:
-                            pauseOpt = PauseMenu.EXIT;
-                            break;
-                          case EXIT:
-                            pauseOpt = PauseMenu.RESTART;
+                            case CONTINUE_LEVEL:
+                                pauseOpt = PauseMenu.EXIT;
+                                break;
+                            case EXIT:
+                                pauseOpt = PauseMenu.CONTINUE_LEVEL;
+                                break;
                         }
                       }
+
+                      // Selects an option from the pause menun
                       if (keyManager.enter) {
                         
                         switch(pauseOpt) {
-                          case RESTART:
-                              pauseGame = false;
+
+                          // Continue playing
+                          case CONTINUE_LEVEL:
+                            pauseGame = false;
                             break;
                             
+                          // Exit level and go back to menu
                           case EXIT:
                             unloadLevel();
+                            endGame = false;
+                            pauseGame = false;
                             screen = Screen.MENU;
                             break;
                         }
                       }
                     }
 
+                    // Shows an end game screen. Changes either you won or lost
                     if (endGame) {
+                      // Restart level
                       if (keyManager.enter) {
                         unloadLevel();
                         loadLevel();
+                        endGame = false;
+                        pauseGame = false;
                       }
                     }
                   }
@@ -1174,34 +1201,40 @@ public class Game implements Runnable {
             // Checks which screen to render
             switch(screen) {
                 case TITLESCREEN:
+                    // Title screen image
                     g.drawImage(Assets.titleScreen, 0, 0, getWidth(), getHeight(), null);
                     break;
-                case MENU:                    
+
+                case STORY:
+                     g.drawImage(Assets.story, 0, 0, getWidth(), getHeight(), null);
+                    break;
+
+                case MENU:  
+                
+                  // Main menu background image
                   g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
+
                   //Elementos decorativos en el mapa
                   g.drawImage(Assets.cactus, 478, 220, Assets.cactus.getWidth(), Assets.cactus.getHeight(), null);
                   g.drawImage(Assets.pyramid, 990, 420, Assets.pyramid.getWidth(), Assets.pyramid.getHeight(), null);
                   g.drawImage(Assets.crab, 730, 460, Assets.crab.getWidth(), Assets.crab.getHeight(), null);
-                  //g.drawString("" + nivel, 50, 480);
-                  // Checks where to draw the rectangle that shows which option of the menu you are selecting
+
+                  // Checks where to draw the cursor that shows which option of the menu you are selecting
+                  // and whether to show a preview of the level you are selecting or a picture of the mian character
                   switch(menOpt) {
                     case OPTIONS:
-                      //g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
                       g.drawImage(Assets.select, 810, 70, 100, 100, null);
                       g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                       break;
                     case RECIPIES:
-                      //g.drawImage(Assets.rec, 1340, 200, 400, 100, null);
                       g.drawImage(Assets.select, 785, 125, 100, 100, null);
                       g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                       break;
                    case CONTROLS:
-                      //g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
                       g.drawImage(Assets.select, 770, 185, 100, 100, null);
                       g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                       break;
                     case ONE:
-                      //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
                       g.drawImage(Assets.miniLevel, 40, 420, 400, 230, null);
                       g.drawImage(Assets.select, 620, 380, 100, 100, null);
                       break;
@@ -1216,13 +1249,18 @@ public class Game implements Runnable {
                   }
                   break;
                 case OPTIONS:
+                  // Options menu background
                   g.drawImage(Assets.options, 0, 0, getWidth(), getHeight(), null);
+
+                  // Shows if the sound/effecstOn option is on/off
                   if (soundOn) {
                     g.drawImage(Assets.checkmark, 920, 278, 34, 34, null);
                   }
                   if (effectsOn) {
                     g.drawImage(Assets.checkmark, 920, 172, 34, 34, null);
                   }
+
+                  // Shows which option you are selecting
                   switch (optOpt) {
                       case DALTONICO:
                           g.drawImage(Assets.select, 190, 145, 100, 100, null);
@@ -1234,6 +1272,8 @@ public class Game implements Runnable {
                           g.drawImage(Assets.select, 190, 370, 100, 100, null);
                           break;
                   }
+
+                  // Shows how much brightness you are selecting
                   switch (brightness) {
                       case 1:
                            g.drawImage(Assets.opbrightness1, 600 , 380, 360 , 70, null);
@@ -1253,8 +1293,13 @@ public class Game implements Runnable {
                   }
                     break;
                 case RECIPIES:
+                    // Sets the color for the name of the ingredients
                     g.setColor(Color.BLACK);
-                    g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);                  
+
+                    // Recipies menu background image
+                    g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
+
+                    // Shows a recipie depending in which page you are
                     switch (currentRecipePage) {
                         case 1:
                             g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
@@ -1293,6 +1338,8 @@ public class Game implements Runnable {
                   
                   break;
                 case CONTROLS:
+
+                  // Controls screen image
                   g.drawImage(Assets.controls, 0, 0, getWidth(), getHeight(), null);
                   break;
                 case LEVEL:
@@ -1300,12 +1347,9 @@ public class Game implements Runnable {
                   // BACKGROUND
                   g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
 
-                  // g.drawImage(Assets.rectangle, (int)(rec.getX()), (int)(rec.getY()), (int)(rec.getWidth()), (int)(rec.getHeight()), null);
-                  // g.drawImage(Assets.rectangle, player.getX() - playerX, player.getY() - playerY, (int)(rec.getWidth()), (int)(rec.getHeight()), null);
-
                   // GAME
 
-                  // dibujar las plataformas
+                  // Draw the platforms
                   for (int i = 0; i < platforms.size(); i++) {
                     Platform platform = platforms.get(i);
                     // System.out.println("platform" + i + " " + (rec.intersects(platform.getPerimetro())));
@@ -1314,13 +1358,11 @@ public class Game implements Runnable {
                     }
                   }
 
-                  // dibujar la fuente
+                  // Draw the fountain
 
-                  if (player.getX() < playerX) {
-                    g.drawImage(Assets.fuente, fuente.x, (fuente.y - rec.y), fuente.width, fuente.height, null);
-                  } else {
-                    g.drawImage(Assets.fuente, (fuente.x - rec.x), (fuente.y - rec.y), fuente.width, fuente.height, null);
-                  }
+                  
+                  g.drawImage(Assets.fuente, (fuente.x - rec.x), (fuente.y - rec.y), fuente.width, fuente.height, null);
+                  
 
                   // dibujar los chiles
                   for (int i = 0; i < chiles.size(); i++) {
@@ -1401,7 +1443,7 @@ public class Game implements Runnable {
                     g.drawString("Continuar jugando", getWidth() / 2 - 100, getHeight() / 2 + 50);
                     g.drawString("Regresar al menu principal", getWidth() / 2 - 165, getHeight() / 2 + 120);
                     switch(pauseOpt) {
-                      case RESTART:
+                      case CONTINUE_LEVEL:
                         g.drawImage(Assets.select, getWidth() / 2 - 200, getHeight() / 2 - 10, 100, 100, null);
                         break;
                       case EXIT:

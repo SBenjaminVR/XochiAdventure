@@ -237,13 +237,13 @@ INSERT INTO Comida VALUES (20, 3, 1625, 1950, 50, 50);
 
 -- Player --------------------------------------------------------------
 -- Nivel 1
-INSERT INTO Player VALUES (1, 1, 1475, 650, 100, 100, 5, 3);
+INSERT INTO Player VALUES (1, 1, 1475, 650, 100, 100, 6, 4);
 
 -- Nivel 2
-INSERT INTO Player VALUES (2, 2, 1475, 650, 100, 100, 5, 3);
+INSERT INTO Player VALUES (2, 2, 1475, 650, 100, 100, 6, 4);
 
 -- Nivel 3
-INSERT INTO Player VALUES (3, 3, 1600, 700, 100, 100, 5, 3); -- falta el id de la plataforma
+INSERT INTO Player VALUES (3, 3, 1600, 700, 100, 100, 6, 4); -- falta el id de la plataforma
 
 -- Chiles --------------------------------------------------------------
 -- Nivel 1

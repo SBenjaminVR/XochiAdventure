@@ -38,6 +38,7 @@ public class Assets {
     public static BufferedImage miniLevel;                  // to store the level 1 image for the main menu
     public static BufferedImage miniLevel2;                 // to store the level 2 image for the main menu
     public static BufferedImage miniLevel3;                 // to store the level 3 image for the main menu
+    public static BufferedImage story;
     
     public static BufferedImage cactus;                     // to store the decorative element for the main menu
     public static BufferedImage pyramid;                    // to store the decorative element for the main menu
@@ -139,6 +140,7 @@ public class Assets {
         miniLevel2 = ImageLoader.loadImage("/images/pantallas/miniNivel2.png");
         miniLevel3 = ImageLoader.loadImage("/images/pantallas/miniNivel3.png");
         thinkingXochi = ImageLoader.loadImage("/images/pantallas/xochiT.png");
+        story = ImageLoader.loadImage("/images/pantallas/backstory.jpg");
         
         cactus = ImageLoader.loadImage("/images/pantallas/cactus.png");
         pyramid = ImageLoader.loadImage("/images/pantallas/pyramid.png");
