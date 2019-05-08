@@ -372,13 +372,13 @@ public class Game implements Runnable {
 
           // Comidas
 
-          comidas.add(new Comida(225, 200, 50, 50, this));
           comidas.add(new Comida(1525, 200, 50, 50, this));
-          comidas.add(new Comida(2925, 200, 50, 50, this));
-          comidas.add(new Comida(1525, 1050, 50, 50, this));
-          comidas.add(new Comida(225, 1850, 50, 50, this));
-          comidas.add(new Comida(1525, 1850, 50, 50, this));
-          comidas.add(new Comida(2925, 1850, 50, 50, this));
+          comidas.add(new Comida(2900, 200, 50, 50, this));
+          comidas.add(new Comida(200, 825, 50, 50, this));
+          comidas.add(new Comida(2900, 825, 50, 50, this));
+          comidas.add(new Comida(1525, 1100, 50, 50, this));
+          comidas.add(new Comida(50, 1650, 50, 50, this));
+          comidas.add(new Comida(1525, 1650, 50, 50, this));
 
           player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7),  this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
