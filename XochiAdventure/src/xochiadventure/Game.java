@@ -833,7 +833,7 @@ public class Game implements Runnable {
                               player.setInTheAir(false);
                               player.setSpeedY(0);
                               player.setPlat(platf);
-                              getPlayer().setY(getPlayer().getHeight() - getPlayer().getHeight());
+                              getPlayer().setY(getPlayer().getPlat().getY() - getPlayer().getHeight());
                             } else {
                               player.setSpeedY(0);
                               player.setY(platf.getY() + platf.getHeight() + 1);
