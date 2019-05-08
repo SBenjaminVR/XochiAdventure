@@ -246,7 +246,6 @@ public class Game implements Runnable {
     }
 
     /**
-<<<<<<< HEAD
      * To get the height of the current level
      * @return an <code>int</code> value with the height of the level
      */
@@ -257,23 +256,14 @@ public class Game implements Runnable {
     /**
      * To get the current level
      * @return an <code>int</code> value with the current level
-=======
-     * To get the current level
-     * @return 
->>>>>>> 427efb1fd2378f5b7a78c369d5447e2e13eb1b3e
      */
     public int getNivel() {
         return nivel;
     }
 
     /**
-<<<<<<< HEAD
      * To get the fountain
      * @return an <code>int</code> value with the fountain
-=======
-     * To get the current level fountain area of effect
-     * @return 
->>>>>>> 427efb1fd2378f5b7a78c369d5447e2e13eb1b3e
      */
     public Rectangle getFuente() {
         return fuente;

@@ -1,3 +1,7 @@
+CREATE DATABASE xochidb
+
+USE xochidb
+
 Create Table Levelg (
     levelID		    int	    NOT NULL,
     width           int     NOT NULL,
@@ -222,18 +226,13 @@ INSERT INTO Comida VALUES (11, 2, 2900, 825, 50, 50);
 INSERT INTO Comida VALUES (13, 2, 50, 1650, 50, 50);
 INSERT INTO Comida VALUES (14, 2, 1525, 1650, 50, 50);
 
-
 -- Nivel 3
 INSERT INTO Comida VALUES (15, 3, 800, 200, 50, 50);
 INSERT INTO Comida VALUES (16, 3, 300, 750, 50, 50);
-
 INSERT INTO Comida VALUES (17, 3, 2950, 750, 50, 50);
 INSERT INTO Comida VALUES (18, 3, 500, 1950, 50, 50);
 INSERT INTO Comida VALUES (19, 3, 2800, 1950, 50, 50);
-
 INSERT INTO Comida VALUES (20, 3, 1625, 1950, 50, 50);
-
-
 
 -- Player --------------------------------------------------------------
 -- Nivel 1
@@ -264,6 +263,18 @@ INSERT INTO Chile VALUES (12, 2, 2240, 1050, 50, 50, 5, 1800, 2300);
 INSERT INTO Chile VALUES (13, 2, 10, 1650, 50, 50, 5, 0, 400);
 INSERT INTO Chile VALUES (14, 2, 3040, 1650, 50, 50, 5, 2700, 3100);
 
+-- Nivel 3
+INSERT INTO Chile VALUES (15, 3, 240, 200, 50, 50, 5, 225, 825);
+INSERT INTO Chile VALUES (16, 3, 1350, 200, 50, 50, 5, 825, 1425);
+INSERT INTO Chile VALUES (17, 3, 1890, 200, 50, 50, 5, 1875, 2475);
+INSERT INTO Chile VALUES (18, 3, 3060, 200, 50, 50, 5, 2475, 3075);
+INSERT INTO Chile VALUES (19, 3, 460, 850, 50, 50, 5, 450, 950);
+INSERT INTO Chile VALUES (20, 3, 2790, 850, 50, 50, 5, 2350, 2850);
+INSERT INTO Chile VALUES (21, 3, 2000, 1400, 50, 50, 5, 1975, 2775);
+INSERT INTO Chile VALUES (22, 3, 0, 1950, 50, 50, 5, 0, 1000);
+INSERT INTO Chile VALUES (23, 3, 3250, 1950, 50, 50, 5, 2300, 3300);
+
+
 -- Letrero --------------------------------------------------------------
 
 -- Nivel 1
@@ -274,6 +285,23 @@ INSERT INTO Letrero VALUES (3, 1, 1, 430, 1830);
 INSERT INTO Letrero VALUES (4, 1, 1, 950, 1830);
 INSERT INTO Letrero VALUES (5, 1, 1, 2080, 1830);
 INSERT INTO Letrero VALUES (6, 1, 1, 2600, 1830);
+
+-- Nivel 2
+
+INSERT INTO Letrero VALUES (7, 2, 0, 30, 730, 70, 70);
+INSERT INTO Letrero VALUES (8, 2, 0, 3000, 730, 70, 70);
+INSERT INTO Letrero VALUES (9, 2, 1, 330, 1630, 70, 70);
+INSERT INTO Letrero VALUES (10, 2, 1, 1280, 1630, 70, 70);
+INSERT INTO Letrero VALUES (11, 2, 1, 1750, 1630, 70, 70);
+INSERT INTO Letrero VALUES (12, 2, 1, 2700, 1630, 70, 70);
+
+-- Nivel 3
+INSERT INTO Letrero VALUES (13, 3, 0, 225, 180, 70, 70);
+INSERT INTO Letrero VALUES (14, 3, 0, 3005, 180, 70, 70);
+INSERT INTO Letrero VALUES (15, 3, 0, 450, 830, 70, 70);
+INSERT INTO Letrero VALUES (16, 3, 0, 2780, 830, 70, 70);
+INSERT INTO Letrero VALUES (17, 3, 1, 930, 1930, 70, 70);
+INSERT INTO Letrero VALUES (18, 3, 1, 2300, 1930, 70, 70);
 
 -- Pico --------------------------------------------------------------
 
@@ -287,3 +315,36 @@ INSERT INTO Pico VALUES (3, 'u', 2, 330, 1630);
 INSERT INTO Pico VALUES (4, 'u', 2, 1280, 1630);
 INSERT INTO Pico VALUES (5, 'u', 2, 1750, 1630);
 INSERT INTO Pico VALUES (6, 'u', 2, 2700, 1630);
+
+-- Nivel 3
+INSERT INTO Pico VALUES (7, 'u', 3, 300, 910);
+INSERT INTO Pico VALUES (8, 'd', 3, 300, 990);
+INSERT INTO Pico VALUES (9, 'l', 3, 260, 950);
+INSERT INTO Pico VALUES (10, 'r', 3, 340, 950);
+
+INSERT INTO Pico VALUES (11, 'u', 3, 1150, 860);
+INSERT INTO Pico VALUES (12, 'd', 3, 1150, 940);
+INSERT INTO Pico VALUES (13, 'l', 3, 1110, 900);
+INSERT INTO Pico VALUES (14, 'r', 3, 1190, 900);
+
+INSERT INTO Pico VALUES (15, 'u', 3, 2100, 860);
+INSERT INTO Pico VALUES (16, 'd', 3, 2100, 940);
+INSERT INTO Pico VALUES (17, 'l', 3, 2060, 900);
+INSERT INTO Pico VALUES (18, 'r', 3, 2140, 900);
+
+INSERT INTO Pico VALUES (19, 'u', 3, 2950, 910);
+INSERT INTO Pico VALUES (20, 'd', 3, 2950, 990);
+INSERT INTO Pico VALUES (21, 'l', 3, 2910, 950);
+INSERT INTO Pico VALUES (22, 'r', 3, 2990, 950);
+
+INSERT INTO Pico VALUES (23, 'u', 3, 50, 1460);
+INSERT INTO Pico VALUES (24, 'd', 3, 50, 1540);
+INSERT INTO Pico VALUES (25, 'l', 3, 10, 1500);
+INSERT INTO Pico VALUES (26, 'r', 3, 90, 1500);
+
+INSERT INTO Pico VALUES (27, 'u', 3, 400, 1460);
+INSERT INTO Pico VALUES (28, 'd', 3, 400, 1540);
+INSERT INTO Pico VALUES (29, 'l', 3, 360, 1500);
+INSERT INTO Pico VALUES (30, 'r', 3, 440, 1500);
+
+
