@@ -150,8 +150,11 @@ public class DBFunctions {
       results[1].next();
       game.getFuente().x = results[1].getInt("posX");
       game.getFuente().y = results[1].getInt("posY");
+      game.getFuente().width = 300;
+      game.getFuente().height = 300;
 
       // chiles
+      int j = 0;
       while (results[2].next()) {
         posX = results[2].getInt("posX");
         posY = results[2].getInt("posY");
@@ -161,7 +164,15 @@ public class DBFunctions {
         left = results[2].getInt("leftLimit");
         right = results[2].getInt("rightLimit");
 
+        if (j % 2 == 0) {
+            direction = 1;
+        } else {
+            direction = -1;
+        }
+
         game.getChiles().add(new Enemy(posX, posY, iWidth, iHeight, direction, speedX, left, right, game));
+        
+        j++;
       }
 
       // plataformas
@@ -212,7 +223,7 @@ public class DBFunctions {
         posY = results[6].getInt("posY");
         lives = results[6].getInt("tipo");
 
-        game.getLetreros().add(new Letrero(posX, posY, iWidth, iHeight, (lives == 1), game));
+        game.getLetreros().add(new Letrero(posX, posY, 70, 70, (lives == 1), game));
 
       }
 
