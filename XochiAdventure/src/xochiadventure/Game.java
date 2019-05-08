@@ -843,7 +843,7 @@ public class Game implements Runnable {
                             //carga nivel 1
                             nivel = 1;
                             loadLevel();
-                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel_1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
@@ -853,7 +853,7 @@ public class Game implements Runnable {
                             //carga nivel2
                             nivel = 2;
                             loadLevel();
-                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 2.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel_2.png");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
@@ -863,7 +863,7 @@ public class Game implements Runnable {
                             //carga nivel3
                             nivel = 3;
                             loadLevel();
-                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 3.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel_3.png");
                             screen = Screen.LEVEL;
                                 break;
                         case RECIPIES:

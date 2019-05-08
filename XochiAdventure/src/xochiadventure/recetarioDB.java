@@ -98,7 +98,7 @@ public class recetarioDB {
     public static ResultSet[] loadLevelFromDB(int level) throws SQLException {
         
         // Array of result set where it will be inserted the info of the levels
-        ResultSet myRs[];
+        ResultSet myRs[] = null;
         myRs = new ResultSet[10];
 
         // Connection to DB stuff
