@@ -1051,6 +1051,32 @@ public class Game implements Runnable {
                   }
                     break;
                 case RECIPIES:
+//<<<<<<< HEAD
+//                    
+//=======
+//                  g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
+//                  if (currentRecipePage == 1) {
+//                    g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
+//                    for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
+//                          g.drawImage(Assets.ingredientesEnchiladas[i], 100, 200 + i*50, 50, 50, null);
+//                    }
+//                    for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
+//                          g.drawString("nombre", 200, 240 + i * 50);
+//                    }
+//                  }
+//                  else if (currentRecipePage == 2) {
+//                    g.drawImage(Assets.quecas, 70, 10, 200, 200, null);
+//                    for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
+//                          g.drawImage(Assets.ingredientesQuecas[i], 100, 200 + i*50, 50, 50, null);
+//                    }
+//                    for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
+//                          g.drawString("nombre", 200, 240 + i * 50);
+//                    }
+//                  }
+//                  else if (currentRecipePage == 3) {
+//                      
+//                  }
+//>>>>>>> ceedf006ababa363f45c43783f955f3e1d8f580e
                     g.setColor(Color.BLACK);
                     g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);                  
                     switch (currentRecipePage) {
