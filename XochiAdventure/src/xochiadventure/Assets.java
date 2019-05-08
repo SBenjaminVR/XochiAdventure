@@ -30,6 +30,7 @@ public class Assets {
     
     public static BufferedImage cactus;                     // to store the decorative element for the main menu
     public static BufferedImage pyramid;                    // to store the decorative element for the main menu
+    public static BufferedImage crab;                       // to store the decorative element for the main menu
     public static BufferedImage options;                    // to store the options screen image
     public static BufferedImage controls;                   // to store the instructions screen image
     public static BufferedImage select;                     // to store the red rectangle image
@@ -107,6 +108,7 @@ public class Assets {
         
         cactus = ImageLoader.loadImage("/images/pantallas/cactus.png");
         pyramid = ImageLoader.loadImage("/images/pantallas/pyramid.png");
+        crab = ImageLoader.loadImage("/images/pantallas/crab.png");
         
         checkmark = ImageLoader.loadImage("/images/flechaVerde.png");
 
