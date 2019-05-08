@@ -713,6 +713,7 @@ public class Game implements Runnable {
 
             // Main menu screen ------------------------------------------------------------------
             case MENU:
+                // Checks if the main menu song is already playing, if it is not it plays it
                 if (!menuMusicPlaying && soundOn) {
                     Assets.mainMenu.play();
                     menuMusicPlaying = true;
@@ -794,10 +795,13 @@ public class Game implements Runnable {
                 // Checks to which screen you are moving to
                 if (keyManager.enter) {
                     
+                    // Checks if the main menu song is playing, it it is it stops it
                     if (menuMusicPlaying) {
                         Assets.mainMenu.stop();
                         menuMusicPlaying = false;
                     }
+
+                    // Checks to which screen you are changing to
                     switch(menOpt) {
                         case OPTIONS:
                             if (soundOn) {
@@ -811,49 +815,46 @@ public class Game implements Runnable {
                                 Assets.selectSnd.play();
                                 Assets.level1Music.play();
                             }
-                            //carga nivel 1
                             nivel = 1;
-//                            DBFunctions.loadLevelFromDB(nivel, this);
+                            // DBFunctions.loadLevelFromDB(nivel, this);
                             loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_1.png");
                             screen = Screen.LEVEL;
-                                break;
+                            break;
                         case TWO:
                             if (soundOn) {
                                 Assets.selectSnd.play();
                                 Assets.level2Music.play();
                             }
-                            //carga nivel2
                             nivel = 2;
-//                            DBFunctions.loadLevelFromDB(nivel, this);
+                            // DBFunctions.loadLevelFromDB(nivel, this);
                             loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_2.png");
                             screen = Screen.LEVEL;
-                                break;
+                            break;
                         case THREE:
                             if (soundOn) {
                                 Assets.selectSnd.play();
                                 Assets.level3Music.play();
                             }
-                            //carga nivel3
                             nivel = 3;
-//                            DBFunctions.loadLevelFromDB(nivel, this);
+                            // DBFunctions.loadLevelFromDB(nivel, this);
                             loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_3.png");
                             screen = Screen.LEVEL;
-                                break;
+                            break;
                         case RECIPIES:
                             if (soundOn) {
                                 Assets.selectSnd.play();
                             }
                             screen = Screen.RECIPIES;
-                                break;
+                            break;
                        case CONTROLS:
-                           if (soundOn) {
+                            if (soundOn) {
                                 Assets.selectSnd.play();
                             }
-                           screen = Screen.CONTROLS;
-                                break;
+                            screen = Screen.CONTROLS;
+                            break;
                     }
                 }
 
@@ -861,11 +862,15 @@ public class Game implements Runnable {
 
             // Options screen ------------------------------------------------------------------
             case OPTIONS:
+                
+                // Checks if the user presses the backspace button to return to the main menu
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
 
+                // Checks if the down arrow key was pressed
                 if (keyManager.down) {
+                    // Navigates the Options menu
                     switch (optOpt) {
                         case DALTONICO:
                             optOpt = OptOpt.SONIDO;
@@ -879,7 +884,9 @@ public class Game implements Runnable {
                     }
                 }
 
+                // Checks if the up arrow key was pressed
                 if (keyManager.up) {
+                    // Navigates the Options menu
                     switch (optOpt) {
                         case DALTONICO:
                             optOpt = OptOpt.BRILLO;
@@ -893,7 +900,9 @@ public class Game implements Runnable {
                     }
                 }
 
+                // Checks if the enter key was pressed
                 if (keyManager.enter) {
+                    // Toggles on and off the options
                     switch (optOpt) {
                         case DALTONICO:
                             effectsOn = !effectsOn; 
@@ -924,9 +933,12 @@ public class Game implements Runnable {
             // Recipies screen ------------------------------------------------------------------
             case RECIPIES:
                 
+                // Checks if the user presses the backspace button to return to the main menu
                 if (keyManager.back) {
                     screen = Screen.MENU;                    
                 }
+
+                // Checks if the right or left arrow keys were pressed to navigate the recipies book
                 if (keyManager.right) {
                     if (currentRecipePage < 3) {
                         currentRecipePage++;
@@ -942,6 +954,8 @@ public class Game implements Runnable {
 
             // Controls screen ------------------------------------------------------------------
             case CONTROLS:
+
+                // Checks if the user presses the backspace button to return to the main menu
                 if (keyManager.back) {
                     screen = Screen.MENU;
                 }
@@ -965,6 +979,7 @@ public class Game implements Runnable {
                   unloadLevel();
                   screen = Screen.MENU;
                 } else {
+                  // If the game is not paused or has not ended, the game continues
                   if (!pauseGame && !endGame) {
 
                     // se tickea al jugador
@@ -1095,12 +1110,17 @@ public class Game implements Runnable {
                       }
                     }
 
-                    // se checa si el jugador está en el aire. si sí lo está se checa si ha colisionado con alguna plataforma
+                    // Checks if the player is in the air
                     if (player.isInTheAir()) {
                       for (int i  = 0; i < platforms.size(); i++) {
                           Platform platf = platforms.get(i);
-                          // platf.tick();
+
+                          // Checks if the player collides with a platform
                           if (platf.intersectaJugador(player)) {
+
+                            // Checks if the player is above or under the platform
+                            // If it is above, it sets that platform as the platform the player is on top and the player stops falling
+                            // Else, the player stops going upwards
                             if (player.getSpeedY() <= 0) {
                               player.setInTheAir(false);
                               player.setSpeedY(0);
