@@ -104,6 +104,9 @@ public class Assets {
     public static SoundClip hurtSnd;
     public static SoundClip shootSnd;
     public static SoundClip winSnd;
+    public static SoundClip level1Music;
+    public static SoundClip level2Music;
+    public static SoundClip level3Music;
 //
     /**
      * initializing the images of the game
@@ -121,6 +124,9 @@ public class Assets {
         shootSnd = new SoundClip("/sounds/shoot.wav");
         winSnd = new SoundClip("/sounds/win.wav");
         mainMenu = new SoundClip("/sounds/Mexico.wav");
+        level1Music = new SoundClip("/sounds/music/Continuum.wav");
+        level2Music = new SoundClip("/sounds/music/cdmx.wav");
+        level3Music = new SoundClip("/sounds/music/oaxaxa.wav");
 
         // Loading of images of menu screens
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
