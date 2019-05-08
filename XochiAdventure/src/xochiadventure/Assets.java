@@ -31,38 +31,50 @@ public class Assets {
     public static BufferedImage pause;                      // to store the pause image
     public static BufferedImage shot;                       // to store flask color
     public static BufferedImage heart;                      // to store the taco heart image
-
-    public static BufferedImage titleScreen;                // to store the title screen
-    public static BufferedImage menu;                       // to store the menu image
-    public static BufferedImage thinkingXochi;              // to store the image of xochi for the main menu
-    public static BufferedImage miniLevel;                  // to store the level 1 image for the main menu
-    public static BufferedImage miniLevel2;                 // to store the level 2 image for the main menu
-    public static BufferedImage miniLevel3;                 // to store the level 3 image for the main menu
     
-    public static BufferedImage cactus;                     // to store the decorative element for the main menu
-    public static BufferedImage pyramid;                    // to store the decorative element for the main menu
-    public static BufferedImage crab;                       // to store the decorative element for the main menu
+        // Menu screens
+    public static BufferedImage titleScreen;                // to store the title screen
+    public static BufferedImage menu;                       // to store the menu     
     public static BufferedImage options;                    // to store the options screen image
     public static BufferedImage controls;                   // to store the instructions screen image
     public static BufferedImage select;                     // to store the red rectangle image
     public static BufferedImage recipies;                   // to store the recipies screen image
+    
+    // Main menu decorations
+    public static BufferedImage thinkingXochi;              // to store the image of xochi for the main menu
+    public static BufferedImage miniLevel;                  // to store the level 1 image for the main menu
+    public static BufferedImage miniLevel2;                 // to store the level 2 image for the main menu
+    public static BufferedImage miniLevel3;                 // to store the level 3 image for the main menu
+    public static BufferedImage cactus;                     // to store the decorative element for the main menu
+    public static BufferedImage pyramid;                    // to store the decorative element for the main menu
+    public static BufferedImage crab;                       // to store the decorative element for the main menu
+    
+    // Enemy
     public static BufferedImage chile;                      // to store the chile image
+    
+    // Level stuff
     public static BufferedImage platform;                   // to store the platform image
     public static BufferedImage powerup;                    // to store the power
     public static BufferedImage rectangle;
     public static BufferedImage fuente;
+    
+    // Player 
     public static BufferedImage xochiIdle;                  // to store the xochi image
     public static BufferedImage xochiIdleLeft;
     public static BufferedImage xochi;
     public static BufferedImage xochiLeft;
     public static BufferedImage xochiAnim[];                // to store the frames for xochi animation
     public static BufferedImage xochiAnimLeft[];
+    
+    // Food
     public static BufferedImage enchiladas;
     public static BufferedImage ingredientesEnchiladas[];
     public static BufferedImage ingredientesMole[];
     public static BufferedImage mole;
     public static BufferedImage quecas;
     public static BufferedImage ingredientesQuecas[];
+    
+    // Options menu
     public static BufferedImage checkmark;
     public static BufferedImage brightness1;               // to store a image for brightness
     public static BufferedImage brightness2;               // to store a image for brightness
@@ -73,9 +85,13 @@ public class Assets {
     public static BufferedImage opbrightness3;             // to store the image for the menu of brightness
     public static BufferedImage opbrightness4;             // to store the image for the menu of brightness
     public static BufferedImage opbrightness5;             // to store the image for the menu of brightness
+    
+    // Pause menu
     public static BufferedImage pauseMenu;
     public static BufferedImage pasarPag;
     public static BufferedImage pasarPagReves;
+    
+    // Victory/Defeat screens
     public static BufferedImage ganado;
     public static BufferedImage perdido;
 
