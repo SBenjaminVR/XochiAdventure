@@ -272,44 +272,45 @@ public class Game implements Runnable {
           chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
 
           // grandes 3
-          platforms.add(new Platform(0, 250, 500, 100, this));
-          platforms.add(new Platform(1300, 250, 500, 100, this));
-          platforms.add(new Platform(2600, 250, 500, 100, this));
+          platforms.add(new Platform(0,     250, 500, 100, this));
+          platforms.add(new Platform(1300,  250, 500, 100, this));
+          platforms.add(new Platform(2600,  250, 500, 100, this));
 
           // chicas 2
-          platforms.add(new Platform(650, 500, 500, 100, this));
-          platforms.add(new Platform(1950, 500, 500, 100, this));
+          platforms.add(new Platform(650,   500, 500, 100, this));
+          platforms.add(new Platform(1950,  500, 500, 100, this));
 
           // 2500 5
-          platforms.add(new Platform(300, 800, 500, 100, this));
-          platforms.add(new Platform(800, 800, 500, 100, this));
-          platforms.add(new Platform(1300, 800, 500, 100, this));
-          platforms.add(new Platform(1800, 800, 500, 100, this));
-          platforms.add(new Platform(2300, 800, 500, 100, this));
+          platforms.add(new Platform(300,   800, 500, 100, this));
+          platforms.add(new Platform(800,   800, 500, 100, this));
+          platforms.add(new Platform(1300,  800, 500, 100, this));
+          platforms.add(new Platform(1800,  800, 500, 100, this));
+          platforms.add(new Platform(2300,  800, 500, 100, this));
 
           // chicas 3
-          platforms.add(new Platform(0, 1100, 150, 30, this));
-          platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
-          platforms.add(new Platform(2950, 1100, 150, 30, this));
+          platforms.add(new Platform(0,     1100, 150, 30, this));
+          platforms.add(new Platform(1475,  1100, 150, 30, this));
+          platforms.add(new Platform(2950,  1100, 150, 30, this));
 
           // grandes 4
-          platforms.add(new Platform(0, 1350, 500, 100, this));
-          platforms.add(new Platform(950, 1350, 500, 100, this));
-          platforms.add(new Platform(1650, 1350, 500, 100, this));
-          platforms.add(new Platform(2600, 1350, 500, 100, this));
+          platforms.add(new Platform(0,     1350, 500, 100, this));
+          platforms.add(new Platform(950,   1350, 500, 100, this));
+          platforms.add(new Platform(1650,  1350, 500, 100, this));
+          platforms.add(new Platform(2600,  1350, 500, 100, this));
 
           // chicas 2
-          platforms.add(new Platform(650, 1650, 150, 30, this));
-          platforms.add(new Platform(2300, 1650, 150, 30, this));
+          platforms.add(new Platform(650,   1650, 150, 30, this));
+          platforms.add(new Platform(2300,  1650, 150, 30, this));
 
           // grandes 5
-          platforms.add(new Platform(0, 1900, 500, 100, this));
+          platforms.add(new Platform(0,     1900, 500, 100, this));
           // platforms.add(new Platform(950, 1900, 1200, 100, this));
-          platforms.add(new Platform(950, 1900, 500, 100, this));
-          platforms.add(new Platform(1450, 1900, 500, 100, this));
-          platforms.add(new Platform(1550, 1900, 500, 100, this));
-          platforms.add(new Platform(2600, 1900, 500, 100, this));
+          platforms.add(new Platform(950,   1900, 500, 100, this));
+          platforms.add(new Platform(1450,  1900, 500, 100, this));
+          platforms.add(new Platform(1650,  1900, 500, 100, this));
+          platforms.add(new Platform(2600,  1900, 500, 100, this));
 
+          // comidas
           comidas.add(new Comida(225, 200, 50, 50, this));
           comidas.add(new Comida(1525, 200, 50, 50, this));
           comidas.add(new Comida(2925, 200, 50, 50, this));
@@ -328,12 +329,14 @@ public class Game implements Runnable {
 
         case 2:
           // Chiles
-          chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
-          chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
-          chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
-          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
-          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
-          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
+          chiles.add(new Enemy(10,    200,  50, 50, 1,  5, 0,     500, this));
+          chiles.add(new Enemy(3040,  200,  50, 50, -1, 5, 2600,  3100, this));
+          chiles.add(new Enemy(310,   750,  50, 50, 1,  5, 300,   800, this));
+          chiles.add(new Enemy(2740,  750,  50, 50, -1, 5, 2300,  2800, this));
+          chiles.add(new Enemy(810,   1050, 50, 50, 1,  5, 800,   1300, this));
+          chiles.add(new Enemy(2240,  1050, 50, 50, -1, 5, 1800,  2300, this));
+          chiles.add(new Enemy(10,    1650, 50, 50, 1,  5, 0,     400, this));
+          chiles.add(new Enemy(3040,  1650, 50, 50, -1, 5, 2700,  3100, this));
 
           // Plataformas
           platforms.add(new Platform(0, 250, 500, 100, this));
@@ -345,7 +348,10 @@ public class Game implements Runnable {
 
           platforms.add(new Platform(-400, 800, 500, 100, this));
           platforms.add(new Platform(300, 800, 500, 100, this));
-          platforms.add(new Platform(1000, 800, 1100, 100, this));
+          // platforms.add(new Platform(1000, 800, 1100, 100, this));
+          platforms.add(new Platform(1000, 800, 500, 100, this));
+          platforms.add(new Platform(1500, 800, 500, 100, this));
+          platforms.add(new Platform(1600, 800, 500, 100, this));
           platforms.add(new Platform(2300, 800, 500, 100, this));
           platforms.add(new Platform(3000, 800, 500, 100, this));
 
@@ -935,20 +941,23 @@ public class Game implements Runnable {
                   g.drawImage(Assets.cactus, 478, 220, Assets.cactus.getWidth(), Assets.cactus.getHeight(), null);
                   g.drawImage(Assets.pyramid, 990, 420, Assets.pyramid.getWidth(), Assets.pyramid.getHeight(), null);
                   g.drawImage(Assets.crab, 730, 460, Assets.crab.getWidth(), Assets.crab.getHeight(), null);
-                  g.drawString("" + nivel, 50, 480);
+                  //g.drawString("" + nivel, 50, 480);
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
                   switch(menOpt) {
                     case OPTIONS:
                       //g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
                       g.drawImage(Assets.select, 810, 70, 100, 100, null);
+                      g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                       break;
                     case RECIPIES:
                       //g.drawImage(Assets.rec, 1340, 200, 400, 100, null);
                       g.drawImage(Assets.select, 785, 125, 100, 100, null);
+                      g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                       break;
                    case CONTROLS:
                       //g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
                       g.drawImage(Assets.select, 770, 185, 100, 100, null);
+                      g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                       break;
                     case ONE:
                       //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
@@ -960,6 +969,7 @@ public class Game implements Runnable {
                       g.drawImage(Assets.select, 590, 450, 100, 100, null);
                       break;
                     case THREE:
+                      g.drawImage(Assets.miniLevel3, 40, 420, 400, 230, null);
                       g.drawImage(Assets.select, 680, 535, 100, 100, null);
                       break;
                   }
