@@ -13,17 +13,7 @@ import java.awt.Graphics;
  */
 public class Comida extends Item{
 
-	// to know all the ingredients that exist
-    public enum Type {
-        Tortillas,
-        Queso,   	
-        Chile,  	
-        Tomate,  	
-        Crema,
-        Aceite,
-        Cebolla
-    }
-    private Type tipo;	// to store which ingredient is the item
+    private int ingredient;
 
     /**
      * to create direction, width, height, speed in the x axis, and game of the food
@@ -33,23 +23,9 @@ public class Comida extends Item{
      * @param height to set the height of the food
      * @param game to set the game of the food
      */
-    public Comida(int x, int y, int width, int height, Game game) {
+    public Comida(int x, int y, int width, int height, int i, Game game) {
         super(x, y, width, height, 0, game);
-        int max = 100;
-        int min = 0;
-        double numerito = (Math.random() * ((max - min) + 1)) + min;
-        if (numerito < 25) {
-            this.tipo = Type.Tortillas;
-        }
-        else if (numerito < 50) {
-            this.tipo  = Type.Queso;
-        }
-        else if (numerito < 75) {
-            this.tipo = Type.Chile;
-        }
-        else {
-            this.tipo = Type.Tomate;
-        }
+        this.ingredient = i;
     }
 
     // GETS ------------------------------------------------------------------
@@ -79,18 +55,15 @@ public class Comida extends Item{
          * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
          * En este caso los powerups se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
          */
-        switch (tipo) {
-            case Tortillas:
-                g.drawImage(Assets.ingredientesEnchiladas[0], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        switch (game.getNivel()) {
+            case 1:
+                g.drawImage(Assets.ingredientesEnchiladas[ingredient], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
-            case Queso:
-                g.drawImage(Assets.ingredientesEnchiladas[1], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+            case 2:
+                g.drawImage(Assets.ingredientesMole[ingredient], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
-            case Chile:
-                g.drawImage(Assets.ingredientesEnchiladas[2], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-                break;
-            case Tomate:
-                g.drawImage(Assets.ingredientesEnchiladas[3], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+            case 3:
+                g.drawImage(Assets.ingredientesQuecas[ingredient], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
         }
     }
@@ -101,18 +74,15 @@ public class Comida extends Item{
          * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
          * En este caso los powerups se dibujaran en su respectiva 'x' y 'y' (dependiendo del caso)
          */
-        switch (tipo) {
-            case Tortillas:
-                g.drawImage(Assets.ingredientesEnchiladas[0], x, y, getWidth(), getHeight(), null);
+        switch (game.getNivel()) {
+            case 1:
+                g.drawImage(Assets.ingredientesEnchiladas[ingredient], x, y, getWidth(), getHeight(), null);
                 break;
-            case Queso:
-                g.drawImage(Assets.ingredientesEnchiladas[1], x, y, getWidth(), getHeight(), null);
+            case 2:
+                g.drawImage(Assets.ingredientesMole[ingredient], x, y, getWidth(), getHeight(), null);
                 break;
-            case Chile:
-                g.drawImage(Assets.ingredientesEnchiladas[2], x, y, getWidth(), getHeight(), null);
-                break;
-            case Tomate:
-                g.drawImage(Assets.ingredientesEnchiladas[3], x, y, getWidth(), getHeight(), null);
+            case 3:
+                g.drawImage(Assets.ingredientesQuecas[ingredient], x, y, getWidth(), getHeight(), null);
                 break;
         }
 

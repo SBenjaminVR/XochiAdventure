@@ -242,6 +242,14 @@ public class Game implements Runnable {
         return levelWidth;
     }
 
+    /**
+     * 
+     * @return 
+     */
+    public int getNivel() {
+        return nivel;
+    }
+
     // SETS ------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -312,6 +320,7 @@ public class Game implements Runnable {
         platforms.add(new Platform(posX, posY, iWidth, iHeight, this));
       }
 
+      int i = 1;
       // comida
       while (results[4].next()) {
         posX = results[4].getInt("posX");
@@ -319,7 +328,8 @@ public class Game implements Runnable {
         iWidth = results[4].getInt("width");
         iHeight = results[4].getInt("height");
 
-        comidas.add(new Comida(posX, posY, iWidth, iHeight, this));
+        comidas.add(new Comida(posX, posY, iWidth, iHeight, i, this));
+        i++;
       }
 
       // player
@@ -402,13 +412,13 @@ public class Game implements Runnable {
           platforms.add(new Platform(2600,  1900, 500, 100, this));
 
           // comidas
-          comidas.add(new Comida(225, 200, 50, 50, this));
-          comidas.add(new Comida(1525, 200, 50, 50, this));
-          comidas.add(new Comida(2925, 200, 50, 50, this));
-          comidas.add(new Comida(1525, 1050, 50, 50, this));
-          comidas.add(new Comida(225, 1850, 50, 50, this));
-          comidas.add(new Comida(1525, 1850, 50, 50, this));
-          comidas.add(new Comida(2925, 1850, 50, 50, this));
+          comidas.add(new Comida(225, 200, 50, 50, 1, this));
+          comidas.add(new Comida(1525, 200, 50, 50, 2, this));
+          comidas.add(new Comida(2925, 200, 50, 50, 3, this));
+          comidas.add(new Comida(1525, 1050, 50, 50, 4, this));
+          comidas.add(new Comida(225, 1850, 50, 50, 5, this));
+          comidas.add(new Comida(1525, 1850, 50, 50, 6, this));
+          comidas.add(new Comida(2925, 1850, 50, 50, 7, this));
 
           // letreros
           letreros.add(new Letrero(300, 730, 70, 70, false, this));
@@ -475,13 +485,12 @@ public class Game implements Runnable {
 
           // Comidas
 
-          comidas.add(new Comida(1525, 200, 50, 50, this));
-          comidas.add(new Comida(2900, 200, 50, 50, this));
-          comidas.add(new Comida(200, 825, 50, 50, this));
-          comidas.add(new Comida(2900, 825, 50, 50, this));
-          comidas.add(new Comida(1525, 1100, 50, 50, this));
-          comidas.add(new Comida(50, 1650, 50, 50, this));
-          comidas.add(new Comida(1525, 1650, 50, 50, this));
+          comidas.add(new Comida(1525, 200, 50, 50, 1, this));
+          comidas.add(new Comida(2900, 200, 50, 50, 2, this));
+          comidas.add(new Comida(200, 825, 50, 50, 3, this));
+          comidas.add(new Comida(2900, 825, 50, 50, 4, this));
+          comidas.add(new Comida(50, 1650, 50, 50,  6, this));
+          comidas.add(new Comida(1525, 1650, 50, 50, 7, this));
 
           // letreros
           letreros.add(new Letrero(30, 730, 70, 70, false, this));
@@ -567,15 +576,14 @@ public class Game implements Runnable {
           platforms.add(new Platform(2800, 2000, 500, 100, this));
 
           // comidas
-          comidas.add(new Comida(800, 200, 50, 50, this));
-          comidas.add(new Comida(2450, 200, 50, 50, this));
-          comidas.add(new Comida(300, 750, 50, 50, this));
+          comidas.add(new Comida(800, 200, 50, 50, 1, this));
+          comidas.add(new Comida(300, 750, 50, 50, 3, this));
 
-          comidas.add(new Comida(2950, 750, 50, 50, this));
-          comidas.add(new Comida(500, 1950, 50, 50, this));
-          comidas.add(new Comida(2800, 1950, 50, 50, this));
+          comidas.add(new Comida(2950, 750, 50, 50, 4, this));
+          comidas.add(new Comida(500, 1950, 50, 50, 5, this));
+          comidas.add(new Comida(2800, 1950, 50, 50, 6, this));
 
-          comidas.add(new Comida(1625, 1950, 50, 50, this));
+          comidas.add(new Comida(1625, 1950, 50, 50, 7, this));
 
           // letreros
           letreros.add(new Letrero(225, 180, 70, 70, false, this));
