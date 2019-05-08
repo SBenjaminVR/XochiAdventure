@@ -15,6 +15,15 @@ public class Letrero extends Item{
 
     private boolean type;
 
+    /**
+     * 
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param type
+     * @param game 
+     */
     public Letrero (int x, int y, int width, int height, boolean type, Game game) {
         super (x, y, width, height, 0, game);
         this.type = type;

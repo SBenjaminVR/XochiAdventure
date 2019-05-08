@@ -11,8 +11,6 @@ CREATE TABLE Fountain (
     levelID         int     NOT NULL,
     posX            int     NOT NULL,
     posY            int     NOT NULL,
-    width           int     NOT NULL,
-    height          int     NOT NULL,
     PRIMARY KEY (fountainID)
 );
 
@@ -25,7 +23,7 @@ CREATE TABLE Player (
 	height			int		NOT NULL,
     speedX          int     NOT NULL,
     lives           int     NOT NULL,
-	PRIMARY KEY (platformID)
+	PRIMARY KEY (playerID)
 );
 
 CREATE TABLE Platform (
@@ -63,7 +61,16 @@ CREATE TABLE Comida (
 
 CREATE TABLE Letrero (
     letreroID       int     NOT NULL,
-    tipo            CHAR(7) NOT NULL,
+    tipo            int     NOT NULL,
+    nivel           INT     NOT NULL,
+    posX            int     NOT NULL,
+    posY            int     NOT NULL,
+    PRIMARY KEY (letreroID)
+);
+
+CREATE TABLE Pico (
+    letreroID       int     NOT NULL,
+    dir             CHAR(1) NOT NULL,
     nivel           INT     NOT NULL,
     posX            int     NOT NULL,
     posY            int     NOT NULL,
@@ -82,13 +89,13 @@ INSERT INTO LevelG VALUES (3, 0, 0);
 
 -- Fuente --------------------------------------------------------------
 -- Nivel 1
-INSERT INTO Fountain VALUES (1, 1, 1400, 500, 300, 300);
+INSERT INTO Fountain VALUES (1, 1, 1500, 600);
 
 -- Nivel 2
-INSERT INTO Fountain VALUES (2, 2, 1400, 500, 300, 300);
+INSERT INTO Fountain VALUES (2, 2, 1400, 500);
 
 -- Nivel 3
-INSERT INTO Fountain VALUES (3, 3, 1400, 500, 300, 300);
+INSERT INTO Fountain VALUES (3, 3, 1400, 500);
 
 -- Plataformas --------------------------------------------------------------
 -- Nivel 1
@@ -223,3 +230,16 @@ INSERT INTO Letrero VALUES (6, 'peligro', 1, 2600, 1850);
 INSERT INTO Letrero VALUES (7, 'peligro', 2, 2600, 1850);
 
 -- Nivel 3
+
+INSERT INTO Letrero VALUES (18, 'peligro', 3, 2600, 1850);
+
+-- Pico --------------------------------------------------------------
+
+-- Nivel 1
+-- no hay picos
+
+-- Nivel 2
+INSERT INTO Pico VALUES (1, '', 2, 650, 450);
+
+-- Nivel 1
+INSERT INTO Pico VALUES (1, '', 3, 650, 450);

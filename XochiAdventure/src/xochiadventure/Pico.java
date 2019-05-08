@@ -31,19 +31,19 @@ public class Pico extends Item{
      * @param dir
      * @param game 
      */
-    public Pico(int x, int y, int width, int height, char dir, Game game) {
+    public Pico(int x, int y, int width, int height, String dir, Game game) {
         super (x, y, width, height, 0, game);
         switch(dir) {
-            case 'u':
+            case "u":
                 this.dir = Direction.UP;
                 break;
-            case'd':
+            case "d":
                 this.dir = Direction.DOWN;
                 break;
-            case 'l':
+            case  "l":
                 this.dir = Direction.LEFT;
                 break;
-            case 'r':
+            case "r":
                 this.dir = Direction.RIGHT;
                 break;
         }

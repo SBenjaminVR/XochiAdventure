@@ -93,5 +93,54 @@ public class recetarioDB {
                 myConn.close();
             }
         }
-    }    
+    }   
+    
+    public static ResultSet[] loadLevelFromDB(int level) throws SQLException {
+        
+        // Array of result set where it will be inserted the info of the levels
+        ResultSet myRs[];
+        myRs = new ResultSet[10];
+
+        // Connection to DB stuff
+        Connection myConn = null;
+        Statement myStmt = null;
+
+        String user = "root";
+
+        try {
+            // 1. Get a connection to database
+            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/xochidb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, "");
+
+            // 2. Create a statement
+            myStmt = myConn.createStatement();
+
+            // 3. Execute SQL query
+            myRs[0] = myStmt.executeQuery("select * from LevelF where levelID =" + level);
+            myRs[1] = myStmt.executeQuery("select * from Fountain where levelID =" + level);
+            myRs[2] = myStmt.executeQuery("select * from Chile where levelID =" + level);
+            myRs[3] = myStmt.executeQuery("select * from Platform where levelID =" + level);
+            myRs[4] = myStmt.executeQuery("select * from Comida where levelID =" + level);
+            myRs[5] = myStmt.executeQuery("select * from Player where levelID =" + level);
+            myRs[6] = myStmt.executeQuery("select * from Pico where levelID =" + level);
+            myRs[7] = myStmt.executeQuery("select * from Letrero where levelID =" + level);
+
+            return myRs;
+            
+
+        } catch (Exception exc) {
+            exc.printStackTrace();
+        } finally {
+            if (myRs != null) {
+                myRs.close();
+            }
+
+            if (myStmt != null) {
+                myStmt.close();
+            }
+
+            if (myConn != null) {
+                myConn.close();
+            }
+        }
+    }
 }
