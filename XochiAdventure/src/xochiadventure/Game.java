@@ -237,7 +237,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level width
      * @return 
      */
     public int getLevelWidth() {
@@ -245,7 +245,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level
      * @return 
      */
     public int getNivel() {
@@ -253,7 +253,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level fountain area of effect
      * @return 
      */
     public Rectangle getFuente() {
@@ -261,7 +261,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the food of the current level
      * @return 
      */
     public LinkedList<Comida> getComidas() {
@@ -269,7 +269,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the signs of the current level
      * @return 
      */
     public LinkedList<Letrero> getLetreros() {
@@ -277,7 +277,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level's spikes
      * @return 
      */
     public LinkedList<Pico> getPicos() {
@@ -285,7 +285,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level's platforms
      * @return 
      */
     public LinkedList<Platform> getPlatforms() {
@@ -293,7 +293,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level's powerups
      * @return 
      */
     public LinkedList<PowerUps> getPowerups() {
@@ -301,7 +301,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level's shots
      * @return 
      */
     public LinkedList<Shot> getDisparos() {
@@ -320,7 +320,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the current level width
      * @param levelWidth 
      */
     public void setLevelWidth(int levelWidth) {
@@ -328,7 +328,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the current level height
      * @param levelHeight 
      */
     public void setLevelHeight(int levelHeight) {
@@ -336,7 +336,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the player object
      * @param player 
      */
     public void setPlayer(Player player) {
@@ -344,7 +344,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the player's x position
      * @param playerX 
      */
     public void setPlayerX(int playerX) {
@@ -352,7 +352,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the player's y position
      * @param playerY 
      */
     public void setPlayerY(int playerY) {
@@ -658,7 +658,11 @@ public class Game implements Runnable {
     }
 
     // tick and render ------------------------------------------------------------------------------------------------------------------------------------
-
+    /**
+     * Tick
+     * Function that is run every frame where game functionality is performed
+     * @throws SQLException 
+     */
     private void tick() throws SQLException {
         // ticks key manager
         keyManager.tick();
@@ -1156,7 +1160,9 @@ public class Game implements Runnable {
                 break;
         }
     }
-
+/**
+ * Render function that displays the assets on screen
+ */
     private void render() {
         // get the buffer strategy from the display
         bs = display.getCanvas().getBufferStrategy();
