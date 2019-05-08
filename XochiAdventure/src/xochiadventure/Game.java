@@ -549,8 +549,8 @@ public class Game implements Runnable {
           platforms.add(new Platform(1100, 1150, 150, 30, this));
           platforms.add(new Platform(2050, 1150, 150, 30, this));
 
-          platforms.add(new Platform(50, 1450, 50, 50, this));
-          platforms.add(new Platform(400, 1450, 50, 50, this));
+          platforms.add(new Platform(50, 1500, 50, 50, this));
+          platforms.add(new Platform(400, 1500, 50, 50, this));
           platforms.add(new Platform(575, 1450, 500, 100, this));
           platforms.add(new Platform(875, 1450, 500, 100, this));
           platforms.add(new Platform(1975, 1450, 800, 100, this));
@@ -586,7 +586,36 @@ public class Game implements Runnable {
           letreros.add(new Letrero(2300, 1930, 70, 70, true, this));
 
           // picos
-          // picos.add(new Pico());
+          picos.add(new Pico(300, 910, 50, 50, "u", this));
+          picos.add(new Pico(300, 990, 50, 50, "d", this));
+          picos.add(new Pico(260, 950, 50, 50, "l", this));
+          picos.add(new Pico(340, 950, 50, 50, "r", this));
+
+          picos.add(new Pico(1150, 860, 50, 50, "u", this));
+          picos.add(new Pico(1150, 940, 50, 50, "d", this));
+          picos.add(new Pico(1110, 900, 50, 50, "l", this));
+          picos.add(new Pico(1190, 900, 50, 50, "r", this));
+
+          picos.add(new Pico(2100, 860, 50, 50, "u", this));
+          picos.add(new Pico(2100, 940, 50, 50, "d", this));
+          picos.add(new Pico(2060, 900, 50, 50, "l", this));
+          picos.add(new Pico(2140, 900, 50, 50, "r", this));
+
+          picos.add(new Pico(2950, 910, 50, 50, "u", this));
+          picos.add(new Pico(2950, 990, 50, 50, "d", this));
+          picos.add(new Pico(2910, 950, 50, 50, "l", this));
+          picos.add(new Pico(2990, 950, 50, 50, "r", this));
+
+          picos.add(new Pico(50, 1460, 50, 50, "u", this));
+          picos.add(new Pico(50, 1540, 50, 50, "d", this));
+          picos.add(new Pico(10, 1500, 50, 50, "l", this));
+          picos.add(new Pico(90, 1500, 50, 50, "r", this));
+
+          picos.add(new Pico(400, 1460, 50, 50, "u", this));
+          picos.add(new Pico(400, 1540, 50, 50, "d", this));
+          picos.add(new Pico(360, 1500, 50, 50, "l", this));
+          picos.add(new Pico(440, 1500, 50, 50, "r", this));
+
 
           player = new Player (1600, 700, 100, 100, 6, 3, platforms.get(0), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
