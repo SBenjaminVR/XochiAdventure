@@ -1063,7 +1063,7 @@ public class Game implements Runnable {
 
                   // pause menu
                   if (pauseGame) {
-
+                    g.drawImage(Assets.pause, 0, 0, getWidth(), getHeight(), null);
                   }
 
                   if (endGame) {

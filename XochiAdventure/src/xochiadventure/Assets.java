@@ -58,6 +58,7 @@ public class Assets {
     public static BufferedImage opbrightness3;             //to store the image for the menu of brightness
     public static BufferedImage opbrightness4;             //to store the image for the menu of brightness
     public static BufferedImage opbrightness5;             //to store the image for the menu of brightness
+    public static BufferedImage pauseMenu;
     
 
     // Power-Ups
@@ -96,7 +97,7 @@ public class Assets {
         // Loading of images of menu screens
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
         menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
-        pause = ImageLoader.loadImage("/images/pantallas/pause.jpg");
+        pause = ImageLoader.loadImage("/images/pantallas/pausa.png");
         options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
         select = ImageLoader.loadImage("/images/select.png");
