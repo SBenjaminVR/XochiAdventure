@@ -266,10 +266,6 @@ INSERT INTO Chile VALUES (12, 2, 2240, 1050, 50, 50, 5, 1800, 2300);
 INSERT INTO Chile VALUES (13, 2, 10, 1650, 50, 50, 5, 0, 400);
 INSERT INTO Chile VALUES (14, 2, 3040, 1650, 50, 50, -1, 5, 2700, 3100);
 
-
--- Nivel 3
-INSERT INTO Chile VALUES (15, 3);
-
 -- Letrero --------------------------------------------------------------
 
 -- Nivel 1
@@ -280,22 +276,3 @@ INSERT INTO Letrero VALUES (3, 'peligro', 1, 450, 1850);
 INSERT INTO Letrero VALUES (4, 'peligro', 1, 950, 1850);
 INSERT INTO Letrero VALUES (5, 'peligro', 1, 2150, 1850);
 INSERT INTO Letrero VALUES (6, 'peligro', 1, 2600, 1850);
-
--- Nivel 2
-
-INSERT INTO Letrero VALUES (7, 'peligro', 2, 2600, 1850);
-
--- Nivel 3
-
-INSERT INTO Letrero VALUES (18, 'peligro', 3, 2600, 1850);
-
--- Pico --------------------------------------------------------------
-
--- Nivel 1
--- no hay picos
-
--- Nivel 2
-INSERT INTO Pico VALUES (1, '', 2, 650, 450);
-
--- Nivel 1
-INSERT INTO Pico VALUES (1, '', 3, 650, 450);
