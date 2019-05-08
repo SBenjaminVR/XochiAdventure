@@ -13,8 +13,7 @@ CREATE TABLE Fountain (
     posY            int     NOT NULL,
     width           int     NOT NULL,
     height          int     NOT NULL,
-    PRIMARY KEY (fountainID),
-    FOREIGN KEY (levelID) REFERENCES LevelG (levelID)
+    PRIMARY KEY (fountainID)
 );
 
 CREATE TABLE Player (
@@ -27,9 +26,7 @@ CREATE TABLE Player (
     speedX          int     NOT NULL,
     lives           int     NOT NULL,
     platformID      int     NOT NULL,     
-	PRIMARY KEY (platformID),
-    FOREIGN KEY (levelID) REFERENCES LevelG (levelID),
-    FOREIGN KEY (platformID) REFERENCES Platform (platformID)
+	PRIMARY KEY (platformID)
 );
 
 CREATE TABLE Platform (
@@ -39,8 +36,7 @@ CREATE TABLE Platform (
 	posY			int		NOT NULL,
 	width			int		NOT NULL,
 	height			int		NOT NULL,
-	PRIMARY KEY (platformID),
-    FOREIGN KEY (levelID) REFERENCES LevelG (levelID)
+	PRIMARY KEY (platformID)
 );
 
 CREATE TABLE Chile (
@@ -53,8 +49,7 @@ CREATE TABLE Chile (
     speedX          int     NOT NULL,
     leftLimit       INT     NOT NULL,
     rightLimit      INT     NOT NULL,  
-	PRIMARY KEY (enemyID),
-    FOREIGN KEY (levelID) REFERENCES LevelG (levelID)
+	PRIMARY KEY (enemyID)
 );
 
 CREATE TABLE Comida (
@@ -64,8 +59,16 @@ CREATE TABLE Comida (
 	posY			int		NOT NULL,
 	width			int		NOT NULL,
 	height			int		NOT NULL,
-	PRIMARY KEY (comidaID),
-    FOREIGN KEY (levelID) REFERENCES LevelG (levelID)
+	PRIMARY KEY (comidaID)
+);
+
+CREATE TABLE Letrero (
+    letreroID       int     NOT NULL,
+    tipo            CHAR(7) NOT NULL,
+    nivel           INT     NOT NULL,
+    posX            int     NOT NULL,
+    posY            int     NOT NULL,
+    PRIMARY KEY (letreroID)
 );
 
 -- Level --------------------------------------------------------------
@@ -119,14 +122,42 @@ INSERT INTO Platform VALUES (20, 1, 0, 1900, 500, 100);
 INSERT INTO Platform VALUES (21, 1, 950, 1900, 500, 100);
 
 INSERT INTO Platform VALUES (22, 1, 1450, 1900, 500, 100);
-INSERT INTO Platform VALUES (23, 1, 1550, 1900, 500, 100);
+INSERT INTO Platform VALUES (23, 1, 1650, 1900, 500, 100);
 INSERT INTO Platform VALUES (24, 1, 2600, 1900, 500, 100);
 
 -- Nivel 2
-INSERT INTO Platform VALUES (2, 2);
+INSERT INTO Platform VALUES (25, 2, 0, 250, 500, 100);
+INSERT INTO Platform VALUES (26, 2, 1300, 250, 500, 100);
+INSERT INTO Platform VALUES (27, 2, 2600, 250, 500, 100);
+
+INSERT INTO Platform VALUES (28, 2, 650, 500, 500, 100);
+INSERT INTO Platform VALUES (29, 2, 1950, 500, 500, 100);
+
+INSERT INTO Platform VALUES (30, 2, -400, 800, 500, 100);
+INSERT INTO Platform VALUES (31, 2, 300, 800, 500, 100);
+INSERT INTO Platform VALUES (32, 2, 1000, 800, 500, 100);
+INSERT INTO Platform VALUES (33, 2, 1500, 800, 500, 100);
+INSERT INTO Platform VALUES (34, 2, 1600, 800, 500, 100);
+INSERT INTO Platform VALUES (35, 2, 2300, 800, 500, 100);
+INSERT INTO Platform VALUES (36, 2, 3000, 800, 500, 100);
+
+INSERT INTO Platform VALUES (36, 2, 800, 1100, 500, 100);
+INSERT INTO Platform VALUES (37, 2, 1800, 1100, 500, 100);
+
+INSERT INTO Platform VALUES (38, 2, 550, 1400, 150, 30);
+INSERT INTO Platform VALUES (39, 2, 1475, 1400, 150, 30);
+INSERT INTO Platform VALUES (40, 2, 2400, 1400, 150, 30);
+
+INSERT INTO Platform VALUES (41, 2, 0, 1700, 400, 100);
+INSERT INTO Platform VALUES (42, 2, 575, 1700, 300, 100);
+INSERT INTO Platform VALUES (43, 2, 1050, 1700, 300, 100);
+INSERT INTO Platform VALUES (44, 2, 1500, 1700, 100, 20);
+INSERT INTO Platform VALUES (45, 2, 1750, 1700, 300, 100);
+INSERT INTO Platform VALUES (46, 2, 2225, 1700, 300, 100);
+INSERT INTO Platform VALUES (47, 2, 2700, 1700, 400, 100);
 
 -- Nivel 3
-INSERT INTO Platform VALUES (3, 3);
+INSERT INTO Platform VALUES (40, 3);
 
 -- Comida --------------------------------------------------------------
 -- Nivel 1
@@ -140,19 +171,27 @@ INSERT INTO Comida VALUES (7, 1, 2925, 1850, 50, 50);
 
 -- Nivel 2
 INSERT INTO Comida VALUES (8, 2);
+INSERT INTO Comida VALUES (9, 2);
+INSERT INTO Comida VALUES (10, 2);
+INSERT INTO Comida VALUES (11, 2);
+INSERT INTO Comida VALUES (12, 2);
+INSERT INTO Comida VALUES (13, 2);
+INSERT INTO Comida VALUES (14, 2);
+INSERT INTO Comida VALUES (15, 2);
+
 
 -- Nivel 3
-INSERT INTO Comida VALUES (18, 3);
+INSERT INTO Comida VALUES (16, 3);
 
 -- Player --------------------------------------------------------------
 -- Nivel 1
 INSERT INTO Player VALUES (1, 1, 1475, 650, 100, 100, 5, 3, 8);
 
 -- Nivel 2
-INSERT INTO Player VALUES (2, 2);
+INSERT INTO Player VALUES (2, 2, 1475, 650, 100, 100, 5, 3, 8);
 
 -- Nivel 3
-INSERT INTO Player VALUES (3, 3);
+INSERT INTO Player VALUES (3, 3, 1475, 650, 100, 100, 5, 3, ); -- falta el id de la plataforma
 
 -- Chiles --------------------------------------------------------------
 -- Nivel 1
@@ -168,3 +207,20 @@ INSERT INTO Chile VALUES (7, 2);
 
 -- Nivel 3
 INSERT INTO Chile VALUES (15, 3);
+
+-- Letrero --------------------------------------------------------------
+
+-- Nivel 1
+
+INSERT INTO Letrero VALUES (1, 'aviso', 1, 650, 450);
+INSERT INTO Letrero VALUES (2, 'aviso', 1, 2200, 450);
+INSERT INTO Letrero VALUES (3, 'peligro', 1, 450, 1850);
+INSERT INTO Letrero VALUES (4, 'peligro', 1, 950, 1850);
+INSERT INTO Letrero VALUES (5, 'peligro', 1, 2150, 1850);
+INSERT INTO Letrero VALUES (6, 'peligro', 1, 2600, 1850);
+
+-- Nivel 2
+
+INSERT INTO Letrero VALUES (7, 'peligro', 2, 2600, 1850);
+
+-- Nivel 3
