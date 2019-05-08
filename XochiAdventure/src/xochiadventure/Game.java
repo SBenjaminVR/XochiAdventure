@@ -915,7 +915,7 @@ public class Game implements Runnable {
                       }
 
                   } else {
-                    if (endGame || pauseGame) {
+                    if (pauseGame) {
                       if (getKeyManager().up || getKeyManager().down) {
                         switch(pauseOpt) {
                           case RESTART:
@@ -929,12 +929,7 @@ public class Game implements Runnable {
                         
                         switch(pauseOpt) {
                           case RESTART:
-                            if (pauseGame) {
                               pauseGame = false;
-                            } else {
-                              unloadLevel();
-                              loadLevel();
-                            }
                             break;
                             
                           case EXIT:
@@ -942,8 +937,13 @@ public class Game implements Runnable {
                             screen = Screen.MENU;
                             break;
                         }
-                        
-                        
+                      }
+                    }
+
+                    if (endGame) {
+                      if (keyManager.enter) {
+                        unloadLevel();
+                        loadLevel();
                       }
                     }
                   }
@@ -1175,14 +1175,14 @@ public class Game implements Runnable {
                   // pause menu
                   if (pauseGame) {
                     g.drawImage(Assets.pause, 0, 0, getWidth(), getHeight(), null);
-                    g.drawString("Continuar jugando", getWidth()/2 - 100, getHeight()/2 + 50);
-                    g.drawString("Regresar al menu principal", getWidth()/2 - 150, getHeight()/2 + 200);
+                    g.drawString("Continuar jugando", getWidth() / 2 - 100, getHeight() / 2 + 50);
+                    g.drawString("Regresar al menu principal", getWidth() / 2 - 165, getHeight() / 2 + 120);
                     switch(pauseOpt) {
                       case RESTART:
-                        g.drawImage(Assets.select, getWidth() / 2 - 200, getHeight() / 2 , 100, 100, null);
+                        g.drawImage(Assets.select, getWidth() / 2 - 200, getHeight() / 2 - 10, 100, 100, null);
                         break;
                       case EXIT:
-                        g.drawImage(Assets.select, getWidth() / 2 - 300, getHeight() / 2 + 100, 100, 100, null);
+                        g.drawImage(Assets.select, getWidth() / 2 - 265, getHeight() / 2 + 60, 100, 100, null);
                         break;
                     }
                   }
@@ -1191,13 +1191,11 @@ public class Game implements Runnable {
                     // g.setFont(texto);
                     if (comidas.isEmpty()) {
                       // you won
-                      g.drawString("GANASTE", getWidth()/2 - 100, getHeight()/2 - 10);
+                      g.drawImage(Assets.ganado, 0, 0, getWidth(), getHeight(), null);
                     } else if (player.getLives() == 0) {
                       // you lost
-                      g.drawString("PERDISTE", getWidth()/2 - 100, getHeight()/2 - 10);
+                      g.drawImage(Assets.perdido, 0, 0, getWidth(), getHeight(), null);
                     }
-                    g.drawString("Presiona Enter para reiniciar el nivel", getWidth()/2 - 300, getHeight()/2 + 15);
-                    g.drawString("Presiona Backspace para regresar al menu principal", getWidth()/2 - 400, getHeight()/2 + 40);
                   }
 
                   break;

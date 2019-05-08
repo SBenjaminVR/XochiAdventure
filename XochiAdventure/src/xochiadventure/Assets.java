@@ -65,14 +65,16 @@ public class Assets {
     public static BufferedImage brightness2;               // to store a image for brightness
     public static BufferedImage brightness4;               // to store a image for brightness
     public static BufferedImage brightness5;               // to store a image for brightness
-    public static BufferedImage opbrightness1;             //to store the image for the menu of brightness
-    public static BufferedImage opbrightness2;             //to store the image for the menu of brightness
-    public static BufferedImage opbrightness3;             //to store the image for the menu of brightness
-    public static BufferedImage opbrightness4;             //to store the image for the menu of brightness
-    public static BufferedImage opbrightness5;             //to store the image for the menu of brightness
+    public static BufferedImage opbrightness1;             // to store the image for the menu of brightness
+    public static BufferedImage opbrightness2;             // to store the image for the menu of brightness
+    public static BufferedImage opbrightness3;             // to store the image for the menu of brightness
+    public static BufferedImage opbrightness4;             // to store the image for the menu of brightness
+    public static BufferedImage opbrightness5;             // to store the image for the menu of brightness
     public static BufferedImage pauseMenu;
     public static BufferedImage pasarPag;
     public static BufferedImage pasarPagReves;
+    public static BufferedImage ganado;
+    public static BufferedImage perdido;
 
     // Power-Ups
     public static BufferedImage atole;                      // to store the atole image
@@ -110,7 +112,6 @@ public class Assets {
         // Loading of images of menu screens
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
         menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
-        pause = ImageLoader.loadImage("/images/pantallas/pausa.png");
         options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
         select = ImageLoader.loadImage("/images/select.png");
@@ -134,6 +135,11 @@ public class Assets {
         fuente = ImageLoader.loadImage("/images/fountain_beta.png");
         heart = ImageLoader.loadImage("/images/tacoHeart.png");
         shot = ImageLoader.loadImage("/images/bubble.png");
+
+        // loading of winning, loosing, and pause screens
+        ganado = ImageLoader.loadImage("/images/pantallas/victoryRoyale.png");
+        perdido = ImageLoader.loadImage("/images/pantallas/derrota.png");
+        pause = ImageLoader.loadImage("/images/pantallas/pausa.png");
         
         //Loading images of brightness
         brightness1 = ImageLoader.loadImage("/images/pantallas/brillo1.png");
