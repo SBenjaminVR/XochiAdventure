@@ -238,14 +238,20 @@ public class Game implements Runnable {
     }
 
     /**
+<<<<<<< HEAD
      * To get the width of the current level
      * @return an <code>int</code> value with the width of the level
+=======
+     * To get the current level width
+     * @return 
+>>>>>>> 427efb1fd2378f5b7a78c369d5447e2e13eb1b3e
      */
     public int getLevelWidth() {
         return levelWidth;
     }
 
     /**
+<<<<<<< HEAD
      * To get the height of the current level
      * @return an <code>int</code> value with the height of the level
      */
@@ -256,21 +262,34 @@ public class Game implements Runnable {
     /**
      * To get the current level
      * @return an <code>int</code> value with the current level
+=======
+     * To get the current level
+     * @return 
+>>>>>>> 427efb1fd2378f5b7a78c369d5447e2e13eb1b3e
      */
     public int getNivel() {
         return nivel;
     }
 
     /**
+<<<<<<< HEAD
      * To get the fountain
      * @return an <code>int</code> value with the fountain
+=======
+     * To get the current level fountain area of effect
+     * @return 
+>>>>>>> 427efb1fd2378f5b7a78c369d5447e2e13eb1b3e
      */
     public Rectangle getFuente() {
         return fuente;
     }
 
     /**
+<<<<<<< HEAD
      * To get the list of all
+=======
+     * To get the food of the current level
+>>>>>>> 427efb1fd2378f5b7a78c369d5447e2e13eb1b3e
      * @return 
      */
     public LinkedList<Comida> getComidas() {
@@ -278,7 +297,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the signs of the current level
      * @return 
      */
     public LinkedList<Letrero> getLetreros() {
@@ -286,7 +305,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level's spikes
      * @return 
      */
     public LinkedList<Pico> getPicos() {
@@ -294,7 +313,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level's platforms
      * @return 
      */
     public LinkedList<Platform> getPlatforms() {
@@ -302,7 +321,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level's powerups
      * @return 
      */
     public LinkedList<PowerUps> getPowerups() {
@@ -310,7 +329,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To get the current level's shots
      * @return 
      */
     public LinkedList<Shot> getDisparos() {
@@ -329,7 +348,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the current level width
      * @param levelWidth 
      */
     public void setLevelWidth(int levelWidth) {
@@ -337,7 +356,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the current level height
      * @param levelHeight 
      */
     public void setLevelHeight(int levelHeight) {
@@ -345,7 +364,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the player object
      * @param player 
      */
     public void setPlayer(Player player) {
@@ -353,7 +372,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the player's x position
      * @param playerX 
      */
     public void setPlayerX(int playerX) {
@@ -361,7 +380,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * 
+     * To set the player's y position
      * @param playerY 
      */
     public void setPlayerY(int playerY) {
@@ -663,7 +682,11 @@ public class Game implements Runnable {
     }
 
     // tick and render ------------------------------------------------------------------------------------------------------------------------------------
-
+    /**
+     * Tick
+     * Function that is run every frame where game functionality is performed
+     * @throws SQLException 
+     */
     private void tick() throws SQLException {
         // ticks key manager
         keyManager.tick();
@@ -790,8 +813,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel 1
                             nivel = 1;
-                            DBFunctions.loadLevelFromDB(nivel, this);
-//                            loadLevel();
+//                            DBFunctions.loadLevelFromDB(nivel, this);
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_1.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -802,8 +825,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel2
                             nivel = 2;
-                            DBFunctions.loadLevelFromDB(nivel, this);
-//                            loadLevel();
+//                            DBFunctions.loadLevelFromDB(nivel, this);
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_2.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -814,8 +837,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel3
                             nivel = 3;
-                            DBFunctions.loadLevelFromDB(nivel, this);
-//                            loadLevel();
+//                            DBFunctions.loadLevelFromDB(nivel, this);
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_3.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -1023,7 +1046,7 @@ public class Game implements Runnable {
                           int max = 100;
                           int min = 0;
                           double numerito = (Math.random() * ((max - min) + 1)) + min;
-                          if (numerito < 25) {
+                          if (numerito < 50) {
                             powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, this));
                           }
                         }
@@ -1183,7 +1206,9 @@ public class Game implements Runnable {
                 break;
         }
     }
-
+/**
+ * Render function that displays the assets on screen
+ */
     private void render() {
         // get the buffer strategy from the display
         bs = display.getCanvas().getBufferStrategy();

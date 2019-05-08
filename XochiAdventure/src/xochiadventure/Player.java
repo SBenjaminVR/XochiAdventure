@@ -104,7 +104,7 @@ public class Player extends Item{
     }
 
     /**
-     * 
+     * To know on which platform the player is currently standing
      * @return 
      */
     public Platform getPlat() {
@@ -155,7 +155,7 @@ public class Player extends Item{
     }
 
     /**
-     * 
+     * To set the platform the player is currently standing on
      * @param plat 
      */
     public void setPlat(Platform plat) {
