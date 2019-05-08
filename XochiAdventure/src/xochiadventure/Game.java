@@ -932,15 +932,17 @@ public class Game implements Runnable {
                             if (pauseGame) {
                               pauseGame = false;
                             } else {
+                              unloadLevel();
                               loadLevel();
                             }
                             break;
                             
                           case EXIT:
+                            unloadLevel();
                             screen = Screen.MENU;
                             break;
                         }
-                        unloadLevel();
+                        
                         
                       }
                     }
@@ -965,6 +967,7 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.setFont(texto);
+            g.setColor(Color.WHITE);
             // Checks which screen to render
             switch(screen) {
                 case TITLESCREEN:
