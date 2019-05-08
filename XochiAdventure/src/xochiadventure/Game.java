@@ -924,19 +924,21 @@ public class Game implements Runnable {
                         }
                       }
                       if (keyManager.enter) {
-                        unloadLevel();
+                        
                         switch(pauseOpt) {
                           case RESTART:
-                            break;
                             if (pauseGame) {
                               pauseGame = false;
                             } else {
                               loadLevel();
                             }
+                            break;
+                            
                           case EXIT:
                             screen = Screen.MENU;
                             break;
                         }
+                        unloadLevel();
                         
                       }
                     }
@@ -1165,6 +1167,16 @@ public class Game implements Runnable {
                   // pause menu
                   if (pauseGame) {
                     g.drawImage(Assets.pause, 0, 0, getWidth(), getHeight(), null);
+                    g.drawString("Continuar jugando", getWidth()/2 - 100, getHeight()/2 + 50);
+                    g.drawString("Regresar al menu principal", getWidth()/2 - 150, getHeight()/2 + 200);
+                    switch(pauseOpt) {
+                      case RESTART:
+                        g.drawImage(Assets.select, getWidth() / 2 - 200, getHeight() / 2 , 100, 100, null);
+                        break;
+                      case EXIT:
+                        g.drawImage(Assets.select, getWidth() / 2 - 300, getHeight() / 2 + 100, 100, 100, null);
+                        break;
+                    }
                   }
 
                   if (endGame) {
