@@ -777,8 +777,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel 1
                             nivel = 1;
-                            DBFunctions.loadLevelFromDB(nivel, this);
-//                            loadLevel();
+//                            DBFunctions.loadLevelFromDB(nivel, this);
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_1.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -789,8 +789,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel2
                             nivel = 2;
-                            DBFunctions.loadLevelFromDB(nivel, this);
-//                            loadLevel();
+//                            DBFunctions.loadLevelFromDB(nivel, this);
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_2.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -801,8 +801,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel3
                             nivel = 3;
-                            DBFunctions.loadLevelFromDB(nivel, this);
-//                            loadLevel();
+//                            DBFunctions.loadLevelFromDB(nivel, this);
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel_3.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -1010,7 +1010,7 @@ public class Game implements Runnable {
                           int max = 100;
                           int min = 0;
                           double numerito = (Math.random() * ((max - min) + 1)) + min;
-                          if (numerito < 25) {
+                          if (numerito < 50) {
                             powerups.add(new PowerUps(chile.getX(), chile.getY(), 50, 50, this));
                           }
                         }
