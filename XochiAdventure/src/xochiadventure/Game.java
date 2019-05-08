@@ -504,6 +504,7 @@ public class Game implements Runnable {
         powerups.clear();
         recolectado.clear();
         disparos.clear();
+        picos.clear();
         letreros.clear();
     }
 
