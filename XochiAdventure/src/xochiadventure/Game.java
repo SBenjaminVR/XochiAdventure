@@ -705,8 +705,10 @@ public class Game implements Runnable {
                     if (currentRecipePage < 3) {
                         currentRecipePage++;
                     }
-                    else {
-                        currentRecipePage = 1;
+                }
+                if (keyManager.left) {
+                    if (currentRecipePage > 1) {
+                        currentRecipePage--;
                     }
                 }
                
@@ -1047,6 +1049,7 @@ public class Game implements Runnable {
                         case 1:
                             g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
                             g.drawString("Enchiladas Potosinas", 270, 125);
+                            g.drawImage(Assets.recetaEnchiladas, 725, 70, 420, 543, null);
                             for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
                                 g.drawImage(Assets.ingredientesEnchiladas[i], 100, 200 + i*50, 50, 50, null);
                                 g.drawString(Assets.ingrEnchiladas[i], 200, 240 + i * 50);
@@ -1056,6 +1059,7 @@ public class Game implements Runnable {
                         case 2:
                             g.drawImage(Assets.quecas, 140, 65, 100, 100, null);
                             g.drawString("Quesadillas", 270, 125);
+                            g.drawImage(Assets.recetaQuecas, 725, 70, 420, 543, null);
                             for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
                                 g.drawImage(Assets.ingredientesQuecas[i], 100, 200 + i*50, 50, 50, null);
                                 g.drawString(Assets.ingrQuecas[i], 200, 240 + i * 50);
@@ -1066,6 +1070,7 @@ public class Game implements Runnable {
                         case 3:
                             g.drawImage(Assets.mole, 130, 65, 100, 100, null);
                             g.drawString("Mole Oaxaqueño", 270, 125);
+                            g.drawImage(Assets.recetaMole, 725, 70, 420, 543, null);
                             for (int i = 0; i < Assets.ingredientesMole.length; i++) {
                                 g.drawImage(Assets.ingredientesMole[i], 100, 200 + i*50, 50, 50, null);
                                 g.drawString(Assets.ingrMole[i], 200, 240 + i * 50);
