@@ -25,7 +25,7 @@ public class Comida extends Item{
      */
     public Comida(int x, int y, int width, int height, int i, Game game) {
         super(x, y, width, height, 0, game);
-        this.ingredient = i-1;
+        this.ingredient = i;
     }
 
     // GETS ------------------------------------------------------------------
@@ -60,7 +60,14 @@ public class Comida extends Item{
                 g.drawImage(Assets.ingredientesEnchiladas[ingredient], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
                 break;
             case 2:
-                g.drawImage(Assets.ingredientesMole[ingredient], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                if (ingredient > 1 && ingredient < 4) {
+                    g.drawImage(Assets.ingredientesMole[1], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                } else if (ingredient >= 4) {
+                    g.drawImage(Assets.ingredientesMole[ingredient - 2], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                } else {
+                    g.drawImage(Assets.ingredientesMole[0], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                }
+                
                 break;
             case 3:
                 g.drawImage(Assets.ingredientesQuecas[ingredient], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
@@ -79,7 +86,15 @@ public class Comida extends Item{
                 g.drawImage(Assets.ingredientesEnchiladas[ingredient], x, y, getWidth(), getHeight(), null);
                 break;
             case 2:
-                g.drawImage(Assets.ingredientesMole[ingredient], x, y, getWidth(), getHeight(), null);
+                if (ingredient > 1 && ingredient < 4) {
+                    g.drawImage(Assets.ingredientesMole[1], x, y, getWidth(), getHeight(), null);
+
+                } else if (ingredient >= 4) {
+                    g.drawImage(Assets.ingredientesMole[ingredient - 2], x, y, getWidth(), getHeight(), null);
+                } else {
+                    g.drawImage(Assets.ingredientesMole[0], x, y, getWidth(), getHeight(), null);
+                }
+                
                 break;
             case 3:
                 g.drawImage(Assets.ingredientesQuecas[ingredient], x, y, getWidth(), getHeight(), null);
