@@ -763,6 +763,7 @@ public class Game implements Runnable {
                         case TWO:
                             if (soundOn) {
                                 Assets.selectSnd.play();
+                                Assets.level2Music.play();
                             }
                             //carga nivel2
                             nivel = 2;
@@ -774,6 +775,7 @@ public class Game implements Runnable {
                         case THREE:
                             if (soundOn) {
                                 Assets.selectSnd.play();
+                                Assets.level3Music.play();
                             }
                             //carga nivel3
                             nivel = 3;

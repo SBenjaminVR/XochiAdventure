@@ -125,8 +125,8 @@ public class Assets {
         winSnd = new SoundClip("/sounds/win.wav");
         mainMenu = new SoundClip("/sounds/Mexico.wav");
         level1Music = new SoundClip("/sounds/music/Continuum.wav");
-        level2Music = new SoundClip("/sounds/music/Continuum.wav");
-        level3Music = new SoundClip("/sounds/music/Continuum.wav");
+        level2Music = new SoundClip("/sounds/music/cdmx.wav");
+        level3Music = new SoundClip("/sounds/music/oaxaxa.wav");
 
         // Loading of images of menu screens
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
