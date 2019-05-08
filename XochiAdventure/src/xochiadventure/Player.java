@@ -24,6 +24,7 @@ public class Player extends Item{
     private boolean drawPlayer;			// to know if the player should be drawn
     private Platform plat;              // to store the last platform the player was on to know when it is going to fall
     private Animation xochiAnim;		// to animate the player
+    private Animation xochiAnimLeft;		// to animate the player
     private boolean moving;				// to know if the player is moving int the x axis
 
     /**
@@ -49,6 +50,7 @@ public class Player extends Item{
         this.plat = plat;
         moving = false;
         xochiAnim = new Animation(Assets.xochiAnim, 150);
+        xochiAnimLeft = new Animation(Assets.xochiAnimLeft, 150);
     }
 
     // GETS ------------------------------------------------------------------
@@ -202,7 +204,13 @@ public class Player extends Item{
 	
 		// checks if the player is moving to animate its walking
         if (moving)
-           xochiAnim.tick();
+            if (getDirection() == 1) {
+                xochiAnim.tick();
+            }
+            else {
+                xochiAnimLeft.tick();
+            }
+                
     }
 
     @Override
@@ -219,10 +227,18 @@ public class Player extends Item{
 			}
 		}
 		if (drawPlayer) {
-			if (moving)
+			if (moving) {
+                            if (getDirection() == 1)
 				g.drawImage(xochiAnim.getCurrentFrame(), getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
-			else
+                            else
+                                g.drawImage(xochiAnimLeft.getCurrentFrame(), getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                        }
+                        else {
+                            if (getDirection() == 1)
 				g.drawImage(Assets.xochiIdle, getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                            else
+                                g.drawImage(Assets.xochiIdleLeft, getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+                        }
 		}
     }
 }
