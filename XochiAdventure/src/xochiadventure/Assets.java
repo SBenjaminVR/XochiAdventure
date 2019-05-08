@@ -96,7 +96,7 @@ public class Assets {
         // Loading of images of menu screens
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
         menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
-        pause = ImageLoader.loadImage("/images/pantallas/pause.jpg");
+        pause = ImageLoader.loadImage("/images/pantallas/pausa.png");
         options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
         controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
         select = ImageLoader.loadImage("/images/select.png");
