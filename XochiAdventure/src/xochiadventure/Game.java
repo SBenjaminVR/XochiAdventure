@@ -397,41 +397,41 @@ public class Game implements Runnable {
           break;
 
         case 3:
+          // chiles
           chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
           chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
           chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
           chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
           chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
           chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
+          chiles.add(new Enemy(2100, 1300, 50, 50, -1, 5, 1650, 2150, this));
+          chiles.add(new Enemy(955, 1850, 50, 50, 1, 5, 950, 1550, this));
+          chiles.add(new Enemy(2100, 1850, 50, 50, -1, 5, 1550, 2150, this));
 
-          // grandes 3
+          // plataformas
           platforms.add(new Platform(0, 250, 500, 100, this));
           platforms.add(new Platform(1300, 250, 500, 100, this));
+
           platforms.add(new Platform(2600, 250, 500, 100, this));
 
-          // chicas 2
           platforms.add(new Platform(650, 500, 500, 100, this));
           platforms.add(new Platform(1950, 500, 500, 100, this));
 
-          // 2500 5
+          
           platforms.add(new Platform(300, 800, 500, 100, this));
           platforms.add(new Platform(800, 800, 500, 100, this));
           platforms.add(new Platform(1300, 800, 500, 100, this));
           platforms.add(new Platform(1800, 800, 500, 100, this));
           platforms.add(new Platform(2300, 800, 500, 100, this));
-
-          // chicas 3
           platforms.add(new Platform(0, 1100, 150, 30, this));
           platforms.add(new Platform(1550 - 75, 1100, 150, 30, this));
-          platforms.add(new Platform(2950, 1100, 150, 30, this));
 
-          // grandes 4
+          platforms.add(new Platform(2950, 1100, 150, 30, this));
           platforms.add(new Platform(0, 1350, 500, 100, this));
+
           platforms.add(new Platform(950, 1350, 500, 100, this));
           platforms.add(new Platform(1650, 1350, 500, 100, this));
           platforms.add(new Platform(2600, 1350, 500, 100, this));
-
-          // chicas 2
           platforms.add(new Platform(650, 1650, 150, 30, this));
           platforms.add(new Platform(2300, 1650, 150, 30, this));
 
@@ -443,11 +443,16 @@ public class Game implements Runnable {
           platforms.add(new Platform(1550, 1900, 500, 100, this));
           platforms.add(new Platform(2600, 1900, 500, 100, this));
 
+          // comidas
           comidas.add(new Comida(225, 200, 50, 50, this));
           comidas.add(new Comida(1525, 200, 50, 50, this));
           comidas.add(new Comida(2925, 200, 50, 50, this));
+
           comidas.add(new Comida(1525, 1050, 50, 50, this));
           comidas.add(new Comida(225, 1850, 50, 50, this));
+          comidas.add(new Comida(1525, 1850, 50, 50, this));
+
+          comidas.add(new Comida(2925, 1850, 50, 50, this));
           comidas.add(new Comida(1525, 1850, 50, 50, this));
           comidas.add(new Comida(2925, 1850, 50, 50, this));
 
@@ -967,7 +972,6 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.setFont(texto);
-            g.setColor(Color.WHITE);
             // Checks which screen to render
             switch(screen) {
                 case TITLESCREEN:
@@ -1047,6 +1051,7 @@ public class Game implements Runnable {
                   }
                     break;
                 case RECIPIES:
+                    g.setColor(Color.BLACK);
                     g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);                  
                     switch (currentRecipePage) {
                         case 1:
@@ -1174,6 +1179,7 @@ public class Game implements Runnable {
 
                   // pause menu
                   if (pauseGame) {
+                    g.setColor(Color.WHITE);
                     g.drawImage(Assets.pause, 0, 0, getWidth(), getHeight(), null);
                     g.drawString("Continuar jugando", getWidth() / 2 - 100, getHeight() / 2 + 50);
                     g.drawString("Regresar al menu principal", getWidth() / 2 - 165, getHeight() / 2 + 120);
