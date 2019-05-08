@@ -9,8 +9,11 @@ import java.awt.image.BufferedImage;
 
 /**
  *
- * @author Alberto García Viegas A00822649 | Melba Geraldine Consuelos Fernández A01410921
- * Esta clase nos permite animar los flasks que ocupamos como power ups 
+ * @author
+ *      - Alberto García Viegas                 A00822649
+ *      - Melba Geraldine Consuelos Fernández   A01410921
+ *      - Humberto González Sánchez             A00822594
+ *      - Benjamín Váldez Rodríguez             A00822027
  */
 public class Animation {
     private int speed;

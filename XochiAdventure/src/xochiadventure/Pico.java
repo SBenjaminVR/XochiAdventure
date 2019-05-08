@@ -16,7 +16,11 @@ enum Direction {
 
 /**
  *
- * @author betin
+ * @author
+ *      - Alberto García Viegas                 A00822649
+ *      - Melba Geraldine Consuelos Fernández   A01410921
+ *      - Humberto González Sánchez             A00822594
+ *      - Benjamín Váldez Rodríguez             A00822027
  */
 public class Pico extends Item{
     

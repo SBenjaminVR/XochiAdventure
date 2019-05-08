@@ -238,13 +238,8 @@ public class Game implements Runnable {
     }
 
     /**
-<<<<<<< HEAD
      * To get the width of the current level
      * @return an <code>int</code> value with the width of the level
-=======
-     * To get the current level width
-     * @return 
->>>>>>> 427efb1fd2378f5b7a78c369d5447e2e13eb1b3e
      */
     public int getLevelWidth() {
         return levelWidth;
@@ -285,11 +280,7 @@ public class Game implements Runnable {
     }
 
     /**
-<<<<<<< HEAD
-     * To get the list of all
-=======
      * To get the food of the current level
->>>>>>> 427efb1fd2378f5b7a78c369d5447e2e13eb1b3e
      * @return 
      */
     public LinkedList<Comida> getComidas() {
