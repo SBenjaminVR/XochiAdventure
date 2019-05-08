@@ -10,8 +10,8 @@ myRs = myStmt.executeQuery("select width, height
                             where levelID =" + level);
 
 while (myRs.next()) {
-    width = myRs.getInt("width");
-    height = myRs.getInt("height");
+    iWidth = myRs.getInt("width");
+    iHeight = myRs.getInt("height");
 
     // add
 } 
@@ -25,8 +25,8 @@ myRs = myStmt.executeQuery("select *
 
 posX = myRs.getInt("posX");
 posY = myRs.getInt("posY");
-width = myRs.getInt("width");
-height = myRs.getInt("height");
+iWidth = myRs.getInt("width");
+iHeight = myRs.getInt("height");
 //add
 
 // Player -----------------------------------------------
@@ -37,20 +37,20 @@ myRs = myStmt.executeQuery("select *
 
 posX = myRs.getInt("posX");
 posY = myRs.getInt("posY");
-width = myRs.getInt("width");
-height = myRs.getInt("height");
+iWidth = myRs.getInt("width");
+iHeight = myRs.getInt("height");
 speedX = myRs.getInt("speedX");
 lives = myRs.getInt("lives");
-left = myRs.getInt("leftLimit");
-right = myRs.getInt("rightLimit");
+playerPlat = myRs.getInt("platformID");
+
 
 // Platform -----------------------------------------------
 
 while (myRs.next()) {
     posX = myRs.getInt("posX");
     posY = myRs.getInt("posY");
-    width = myRs.getInt("width");
-    height = myRs.getInt("height");
+    iWidth = myRs.getInt("width");
+    iHeight = myRs.getInt("height");
 
     // add
 } 
@@ -60,8 +60,8 @@ while (myRs.next()) {
 while (myRs.next()) {
     posX = myRs.getInt("posX");
     posY = myRs.getInt("posY");
-    width = myRs.getInt("width");
-    height = myRs.getInt("height");
+    iWidth = myRs.getInt("width");
+    iHeight = myRs.getInt("height");
     speedX = myRs.getInt("speedX");
     left = myRs.getInt("leftLimit");
     right = myRs.getInt("rightLimit");
@@ -74,8 +74,8 @@ while (myRs.next()) {
 while (myRs.next()) {
     posX = myRs.getInt("posX");
     posY = myRs.getInt("posY");
-    width = myRs.getInt("width");
-    height = myRs.getInt("height");
+    iWidth = myRs.getInt("width");
+    iHeight = myRs.getInt("height");
 
     // add
 } 

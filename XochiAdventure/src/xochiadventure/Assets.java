@@ -35,7 +35,11 @@ public class Assets {
     public static BufferedImage rectangle;
     public static BufferedImage fuente;
     public static BufferedImage xochiIdle;                  // to store the xochi image
+    public static BufferedImage xochiIdleLeft;
+    public static BufferedImage xochi;
+    public static BufferedImage xochiLeft;
     public static BufferedImage xochiAnim[];                // to store the frames for xochi animation
+    public static BufferedImage xochiAnimLeft[];
     public static BufferedImage ingredientesEnchiladas[];
     public static BufferedImage ingredientesMole[];
     public static BufferedImage ingredientesQuecas[];
@@ -147,13 +151,21 @@ public class Assets {
 
         dulce = ImageLoader.loadImage("/images/dulce.png");
 
-        xochiIdle = ImageLoader.loadImage("/images/Xochi/AxolotlIdle.png");
-        xochiAnim = new BufferedImage[4];
-        xochiAnim[0] = ImageLoader.loadImage("/images/Xochi/Axolotl1.png");
-        xochiAnim[1] = ImageLoader.loadImage("/images/Xochi/Axolotl2.png");
-        xochiAnim[2] = ImageLoader.loadImage("/images/Xochi/Axolotl3.png");
-        xochiAnim[3] = ImageLoader.loadImage("/images/Xochi/Axolotl4.png");
-
+        xochi = ImageLoader.loadImage("/images/Xochi.png");
+        xochiLeft = ImageLoader.loadImage("/images/xochi_left.png");
+        SpreadSheet xochiSpriteSheet = new SpreadSheet(xochi);
+        SpreadSheet xochiLeftSpriteSheet = new SpreadSheet(xochiLeft);
+        xochiAnim = new BufferedImage[5];
+        xochiAnimLeft = new BufferedImage[5];
+        // cropping the pictures from the xochi sheet into the array
+        for (int i = 0; i < 5; i++) {
+            xochiAnim[i] = xochiSpriteSheet.crop(i * 100, 0, 100, 90);
+        }
+        xochiIdle = xochiAnim[0];
+        for (int i = 0; i < 5; i++) {
+            xochiAnimLeft[i] = xochiLeftSpriteSheet.crop(i * 100, 0, 100, 90);
+        }
+        xochiIdleLeft = xochiAnimLeft[0];
 
         // cropping the pictures from the atole sheet into the array
         for (int i = 0; i < 3; i++) {
