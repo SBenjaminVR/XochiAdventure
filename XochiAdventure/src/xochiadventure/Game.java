@@ -268,99 +268,99 @@ public class Game implements Runnable {
      * @param txt to know which level to load
      */
     private void loadLevel() throws SQLException{
+      
+//      // lee txt
+//      ResultSet results[] = new ResultSet[10];
+//              
+//      DBFunctions.loadLevelFromDB(nivel, results);
+//      
+//      int posX;
+//      int posY;
+//      int iWidth;
+//      int iHeight;
+//      int speedX;
+//      int playerPlat;
+//      int lives;
+//      int left;
+//      int right;
+//      int direction;
+//      String tipo;
+//      // poner donde va a estar la fuente
+//      
+//      direction = 0;
+//      
+//      results[0].next();
+//      levelWidth = results[0].getInt("width");
+//      levelHeight = results[0].getInt("height");
+//
+//      results[1].next();
+//      fuente.x = results[1].getInt("posX");
+//      fuente.y = results[1].getInt("posY");
+//
+//      // chiles
+//      while (results[2].next()) {
+//        posX = results[2].getInt("posX");
+//        posY = results[2].getInt("posY");
+//        iWidth = results[2].getInt("width");
+//        iHeight = results[2].getInt("height");
+//        speedX = results[2].getInt("speedX");
+//        left = results[2].getInt("leftLimit");
+//        right = results[2].getInt("rightLimit");
+//
+//        chiles.add(new Enemy(posX, posY, iWidth, iHeight, direction, speedX, left, right, this));
+//      }
+//
+//      // plataformas
+//      while (results[3].next()) {
+//        posX = results[3].getInt("posX");
+//        posY = results[3].getInt("posY");
+//        iWidth = results[3].getInt("width");
+//        iHeight = results[3].getInt("height");
+//
+//        platforms.add(new Platform(posX, posY, iWidth, iHeight, this));
+//      }
+//
+//      int i = 1;
+//      // comida
+//      while (results[4].next()) {
+//        posX = results[4].getInt("posX");
+//        posY = results[4].getInt("posY");
+//        iWidth = results[4].getInt("width");
+//        iHeight = results[4].getInt("height");
+//
+//        comidas.add(new Comida(posX, posY, iWidth, iHeight, i, this));
+//        i++;
+//      }
+//
+//      // player
+//      results[5].next();
+//      posX = results[5].getInt("posX");
+//      posY = results[5].getInt("posY");
+//      iWidth = results[5].getInt("width");
+//      iHeight = results[5].getInt("height");
+//      speedX = results[5].getInt("speedX");
+//      lives = results[5].getInt("lives");
+//
+//      player = new Player(posX, posY, iWidth, iHeight, speedX, lives, platforms.get(0), this);
+//
+//      // pico
+//      while (results[6].next()) {
+//        posX = results[6].getInt("posX");
+//        posY = results[6].getInt("posY");
+//        tipo =  results[6].getString("dir");
+//
+//        picos.add(new Pico(posX, posY, iWidth, iHeight, tipo, this));
+//      }
+//
+//      // letreros
+//      while (results[7].next()) {
+//        posX = results[7].getInt("posX");
+//        posY = results[7].getInt("posY");
+//        lives = results[7].getInt("tipo");
+//
+//        letreros.add(new Letrero(posX, posY, iWidth, iHeight, (lives == 1), this));
+//      }
       /*
-      // lee txt
-      ResultSet results[];
-              
-      results =  recetarioDB.loadLevelFromDB(nivel);
-      
-      int posX;
-      int posY;
-      int iWidth;
-      int iHeight;
-      int speedX;
-      int playerPlat;
-      int lives;
-      int left;
-      int right;
-      int direction;
-      String tipo;
-      // poner donde va a estar la fuente
-      
-      direction = 0;
-      
-      results[0].next();
-      levelWidth = results[0].getInt("width");
-      levelHeight = results[0].getInt("height");
-
-      results[1].next();
-      fuente.x = results[1].getInt("posX");
-      fuente.y = results[1].getInt("posY");
-
-      // chiles
-      while (results[2].next()) {
-        posX = results[2].getInt("posX");
-        posY = results[2].getInt("posY");
-        iWidth = results[2].getInt("width");
-        iHeight = results[2].getInt("height");
-        speedX = results[2].getInt("speedX");
-        left = results[2].getInt("leftLimit");
-        right = results[2].getInt("rightLimit");
-
-        chiles.add(new Enemy(posX, posY, iWidth, iHeight, direction, speedX, left, right, this));
-      }
-
-      // plataformas
-      while (results[3].next()) {
-        posX = results[3].getInt("posX");
-        posY = results[3].getInt("posY");
-        iWidth = results[3].getInt("width");
-        iHeight = results[3].getInt("height");
-
-        platforms.add(new Platform(posX, posY, iWidth, iHeight, this));
-      }
-
-      int i = 1;
-      // comida
-      while (results[4].next()) {
-        posX = results[4].getInt("posX");
-        posY = results[4].getInt("posY");
-        iWidth = results[4].getInt("width");
-        iHeight = results[4].getInt("height");
-
-        comidas.add(new Comida(posX, posY, iWidth, iHeight, i, this));
-        i++;
-      }
-
-      // player
-      results[5].next();
-      posX = results[5].getInt("posX");
-      posY = results[5].getInt("posY");
-      iWidth = results[5].getInt("width");
-      iHeight = results[5].getInt("height");
-      speedX = results[5].getInt("speedX");
-      lives = results[5].getInt("lives");
-
-      player = new Player(posX, posY, iWidth, iHeight, speedX, lives, platforms.get(0), this);
-
-      // pico
-      while (results[6].next()) {
-        posX = results[6].getInt("posX");
-        posY = results[6].getInt("posY");
-        tipo =  results[6].getString("dir");
-
-        picos.add(new Pico(posX, posY, iWidth, iHeight, tipo, this));
-      }
-
-      // letreros
-      while (results[7].next()) {
-        posX = results[7].getInt("posX");
-        posY = results[7].getInt("posY");
-        lives = results[7].getInt("tipo");
-
-        letreros.add(new Letrero(posX, posY, iWidth, iHeight, (lives == 1), this));
-      }
-      */
       switch(nivel){
         case 1:
           fuente.x = 1400;
@@ -631,7 +631,7 @@ public class Game implements Runnable {
           levelWidth = 3300;
           levelHeight = 2200;
           break;
-      }
+      }*/
       
       endGame = false;
       pauseGame = false;
@@ -768,10 +768,11 @@ public class Game implements Runnable {
                         case ONE:
                             if (soundOn) {
                                 Assets.selectSnd.play();
+                                Assets.level1Music.play();
                             }
                             //carga nivel 1
                             nivel = 1;
-                            loadLevel();
+                            DBFunctions.loadLevelFromDB(nivel, this);
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -912,6 +913,9 @@ public class Game implements Runnable {
 
                 // checks if the backspace key was pressed to return to the main menu
                 if (keyManager.back) {
+                    Assets.level1Music.stop();
+                    Assets.level2Music.stop();
+                    Assets.level3Music.stop();
                   unloadLevel();
                   screen = Screen.MENU;
                 } else {
