@@ -24,7 +24,7 @@ public class Player extends Item{
     private boolean drawPlayer;			// to know if the player should be drawn
     private Platform plat;              // to store the last platform the player was on to know when it is going to fall
     private Animation xochiAnim;		// to animate the player
-    private Animation xochiAnimLeft;		// to animate the player
+    private Animation xochiAnimLeft;	// to animate the player
     private boolean moving;				// to know if the player is moving int the x axis
 
     /**
@@ -80,7 +80,7 @@ public class Player extends Item{
     }
 
      /**
-     * To get how many more ticks will the player will be in a state of invunerability
+     * To get how many more ticks will the player will be in a state of invunerability because they been hit
      * @return an <code>int</code> value with the remaining ticks
      */
     public int getContGotHit() {
@@ -220,13 +220,20 @@ public class Player extends Item{
 		 * pero vamos a tener un caso en el que no va a pasar esto: cuando el jugador esté cerca de las orillas del nivel
 		 * En este caso el jugador se dibujara en su respectiva 'x' y 'y' (dependiendo del caso)
 		 */
+
+        // Checks if the player is in an state of invunerability
+        // It makes the player flicker when it gets hit or falls of the level
 		if (contGotHit > 0) {
 			contGotHit -= 1;
 			if (contGotHit % 5 == 0) {
 				drawPlayer = !drawPlayer;
 			}
-		}
+        }
+        
+        // Checks if the player needs to be drawn
 		if (drawPlayer) {
+
+            // Checks if the player if moving and in which direction it is facing to know which image to draw/animate
 			if (moving) {
                 if (getDirection() == 1)
 				    g.drawImage(xochiAnim.getCurrentFrame(), getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
