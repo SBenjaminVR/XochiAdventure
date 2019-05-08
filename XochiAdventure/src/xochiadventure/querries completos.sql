@@ -85,7 +85,7 @@ INSERT INTO LevelG VALUES (1, 3100, 2100);
 INSERT INTO LevelG VALUES (2, 3100, 2000);
 
 -- Nivel 3
-INSERT INTO LevelG VALUES (3, 0, 0);
+INSERT INTO LevelG VALUES (3, 3300, 2200);
 
 -- Fuente --------------------------------------------------------------
 -- Nivel 1
@@ -225,13 +225,13 @@ INSERT INTO Comida VALUES (14, 2, 1525, 1650, 50, 50);
 
 -- Nivel 3
 INSERT INTO Comida VALUES (15, 3, 800, 200, 50, 50);
-INSERT INTO Comida VALUES (17, 3, 300, 750, 50, 50);
+INSERT INTO Comida VALUES (16, 3, 300, 750, 50, 50);
 
-INSERT INTO Comida VALUES (18, 3, 2950, 750, 50, 50);
-INSERT INTO Comida VALUES (19, 3, 500, 1950, 50, 50);
-INSERT INTO Comida VALUES (20, 3, 2800, 1950, 50, 50);
+INSERT INTO Comida VALUES (17, 3, 2950, 750, 50, 50);
+INSERT INTO Comida VALUES (18, 3, 500, 1950, 50, 50);
+INSERT INTO Comida VALUES (19, 3, 2800, 1950, 50, 50);
 
-INSERT INTO Comida VALUES (21, 3, 1625, 1950, 50, 50);
+INSERT INTO Comida VALUES (20, 3, 1625, 1950, 50, 50);
 
 
 
@@ -274,3 +274,16 @@ INSERT INTO Letrero VALUES (3, 1, 1, 430, 1830);
 INSERT INTO Letrero VALUES (4, 1, 1, 950, 1830);
 INSERT INTO Letrero VALUES (5, 1, 1, 2080, 1830);
 INSERT INTO Letrero VALUES (6, 1, 1, 2600, 1830);
+
+-- Pico --------------------------------------------------------------
+
+-- Nivel 1
+-- no hay picos
+
+-- Nivel 2
+INSERT INTO Pico VALUES (1, 'u', 2, 30, 730);
+INSERT INTO Pico VALUES (2, 'u', 2, 3000, 730);
+INSERT INTO Pico VALUES (3, 'u', 2, 330, 1630);
+INSERT INTO Pico VALUES (4, 'u', 2, 1280, 1630);
+INSERT INTO Pico VALUES (5, 'u', 2, 1750, 1630);
+INSERT INTO Pico VALUES (6, 'u', 2, 2700, 1630);

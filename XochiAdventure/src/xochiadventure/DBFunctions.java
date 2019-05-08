@@ -171,6 +171,8 @@ public class DBFunctions {
         }
 
         game.getChiles().add(new Enemy(posX, posY, iWidth, iHeight, direction, speedX, left, right, game));
+        
+        j++;
       }
 
       // plataformas
