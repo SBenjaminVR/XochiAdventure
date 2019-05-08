@@ -1004,6 +1004,7 @@ public class Game implements Runnable {
                     break;
                 case RECIPIES:
                   g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
+                  
                   if (currentRecipePage == 1) {
                     g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
                     for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
