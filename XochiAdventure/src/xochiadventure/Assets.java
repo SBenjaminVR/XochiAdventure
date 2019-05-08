@@ -28,6 +28,7 @@ public class Assets {
     public static BufferedImage miniLevel2;                 // to store the level 2 image for the main menu
     
     public static BufferedImage cactus;                     // to store the decorative element for the main menu
+    public static BufferedImage pyramid;                    // to store the decorative element for the main menu
     public static BufferedImage options;                    // to store the options screen image
     public static BufferedImage controls;                   // to store the instructions screen image
     public static BufferedImage select;                     // to store the red rectangle image
@@ -102,6 +103,8 @@ public class Assets {
         miniLevel2 = ImageLoader.loadImage("/images/pantallas/miniNivel2.png");
         
         cactus = ImageLoader.loadImage("/images/pantallas/cactus.png");
+        pyramid = ImageLoader.loadImage("/images/pantallas/pyramid.png");
+        
         checkmark = ImageLoader.loadImage("/images/flechaVerde.png");
 
         // Loading of images of game objects
