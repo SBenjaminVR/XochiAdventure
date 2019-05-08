@@ -25,7 +25,6 @@ CREATE TABLE Player (
 	height			int		NOT NULL,
     speedX          int     NOT NULL,
     lives           int     NOT NULL,
-    platformID      int     NOT NULL,     
 	PRIMARY KEY (platformID)
 );
 
@@ -185,13 +184,13 @@ INSERT INTO Comida VALUES (16, 3);
 
 -- Player --------------------------------------------------------------
 -- Nivel 1
-INSERT INTO Player VALUES (1, 1, 1475, 650, 100, 100, 5, 3, 8);
+INSERT INTO Player VALUES (1, 1, 1475, 650, 100, 100, 5, 3);
 
 -- Nivel 2
-INSERT INTO Player VALUES (2, 2, 1475, 650, 100, 100, 5, 3, 8);
+INSERT INTO Player VALUES (2, 2, 1475, 650, 100, 100, 5, 3);
 
 -- Nivel 3
-INSERT INTO Player VALUES (3, 3, 1475, 650, 100, 100, 5, 3, ); -- falta el id de la plataforma
+INSERT INTO Player VALUES (3, 3, 1600, 700, 100, 100, 5, 3); -- falta el id de la plataforma
 
 -- Chiles --------------------------------------------------------------
 -- Nivel 1

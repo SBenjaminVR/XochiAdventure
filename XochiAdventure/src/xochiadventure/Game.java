@@ -276,12 +276,13 @@ public class Game implements Runnable {
       // int iPosY = 10;
 
       // poner donde va a estar la fuente
-      fuente.x = 1400;
-      fuente.y = 500;
+      
 
       
       switch(nivel){
         case 1:
+          fuente.x = 1400;
+          fuente.y = 500;
           chiles.add(new Enemy(1350, 200, 50, 50, 1, 5, 1300, 1550, this));
           chiles.add(new Enemy(1750, 200, 50, 50, -1, 5, 1550, 1800, this));
           chiles.add(new Enemy(955, 1300, 50, 50, 1, 5, 950, 1450, this));
@@ -337,7 +338,7 @@ public class Game implements Runnable {
           comidas.add(new Comida(1525, 1850, 50, 50, this));
           comidas.add(new Comida(2925, 1850, 50, 50, this));
 
-          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7), this);
+          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(0), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
           levelWidth = 3100;
@@ -346,7 +347,11 @@ public class Game implements Runnable {
           break;
 
         case 2:
+
+          fuente.x = 1400;
+          fuente.y = 500;
           // Chiles
+          
           chiles.add(new Enemy(10,    200,  50, 50, 1,  5, 0,     500, this));
           chiles.add(new Enemy(3040,  200,  50, 50, -1, 5, 2600,  3100, this));
           chiles.add(new Enemy(310,   750,  50, 50, 1,  5, 300,   800, this));
@@ -400,7 +405,7 @@ public class Game implements Runnable {
 
           // picos
 
-          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7),  this);
+          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(0),  this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
           levelWidth = 3100;
@@ -408,7 +413,11 @@ public class Game implements Runnable {
           break;
 
         case 3:
+
+
           // 3300
+          fuente.x = 1500;
+          fuente.y = 600;
 
           // chiles
           chiles.add(new Enemy(240, 200, 50, 50, 1, 5, 225, 825, this));
@@ -458,21 +467,19 @@ public class Game implements Runnable {
           platforms.add(new Platform(2300, 2000, 1000, 100, this));          
 
           // comidas
-          comidas.add(new Comida(225, 200, 50, 50, this));
-          comidas.add(new Comida(1525, 200, 50, 50, this));
-          comidas.add(new Comida(2925, 200, 50, 50, this));
+          comidas.add(new Comida(800, 200, 50, 50, this));
+          comidas.add(new Comida(2450, 200, 50, 50, this));
+          comidas.add(new Comida(300, 750, 50, 50, this));
 
-          comidas.add(new Comida(1525, 1050, 50, 50, this));
-          comidas.add(new Comida(225, 1850, 50, 50, this));
-          comidas.add(new Comida(1525, 1850, 50, 50, this));
+          comidas.add(new Comida(2950, 750, 50, 50, this));
+          comidas.add(new Comida(500, 1950, 50, 50, this));
+          comidas.add(new Comida(2800, 1950, 50, 50, this));
 
-          comidas.add(new Comida(2925, 1850, 50, 50, this));
-          comidas.add(new Comida(1525, 1850, 50, 50, this));
-          comidas.add(new Comida(2925, 1850, 50, 50, this));
+          comidas.add(new Comida(1625, 1950, 50, 50, this));
 
           // picos
 
-          player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(7), this);
+          player = new Player (1600, 700, 100, 100, 6, 3, platforms.get(0), this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
           playerY = getHeight() / 2 - player.getHeight() / 2;
           levelWidth = 3300;
