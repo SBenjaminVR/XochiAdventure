@@ -905,6 +905,9 @@ public class Game implements Runnable {
                 case MENU:
 
                   g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
+                  //Elementos decorativos en el mapa
+                  g.drawImage(Assets.cactus, 478, 220, Assets.cactus.getWidth(), Assets.cactus.getHeight(), null);
+                  g.drawImage(Assets.pyramid, 990, 420, Assets.pyramid.getWidth(), Assets.pyramid.getHeight(), null);
                   g.drawString("" + nivel, 50, 480);
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
                   switch(menOpt) {
