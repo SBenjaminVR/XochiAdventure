@@ -141,11 +141,8 @@ public class Game implements Runnable {
         limitX = new int[2];
         fuente = new Rectangle(0, 0, 300, 300);
         hasPlayedWinSnd = false;
-<<<<<<< HEAD
         brightness = 3; 
-=======
         loadedFromDB = false;
->>>>>>> 65007d3e75215a0c8a896fdeb0232c0adfda334a
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -932,6 +929,7 @@ public class Game implements Runnable {
                       g.drawImage(Assets.select, 620, 380, 100, 100, null);
                       break;
                     case TWO:
+                      g.drawImage(Assets.miniLevel2, 40, 420, 400, 230, null);
                       g.drawImage(Assets.select, 590, 450, 100, 100, null);
                       break;
                     case THREE:

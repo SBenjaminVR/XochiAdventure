@@ -25,6 +25,7 @@ public class Assets {
     public static BufferedImage titleScreen;                // to store the title screen
     public static BufferedImage menu;                       // to store the menu image
     public static BufferedImage miniLevel;                  // to store the level 1 image for the main menu
+    public static BufferedImage miniLevel2;                 // to store the level 2 image for the main menu
     public static BufferedImage options;                    // to store the options screen image
     public static BufferedImage controls;                   // to store the instructions screen image
     public static BufferedImage select;                     // to store the red rectangle image
@@ -96,6 +97,7 @@ public class Assets {
         select = ImageLoader.loadImage("/images/select.png");
         recipies = ImageLoader.loadImage("/images/pantallas/Recetario.png");
         miniLevel = ImageLoader.loadImage("/images/pantallas/miniNivel1.png");
+        miniLevel2 = ImageLoader.loadImage("/images/pantallas/miniNivel2.png");
         checkmark = ImageLoader.loadImage("/images/flechaVerde.png");
 
         // Loading of images of game objects
