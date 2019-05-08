@@ -909,20 +909,23 @@ public class Game implements Runnable {
                   g.drawImage(Assets.cactus, 478, 220, Assets.cactus.getWidth(), Assets.cactus.getHeight(), null);
                   g.drawImage(Assets.pyramid, 990, 420, Assets.pyramid.getWidth(), Assets.pyramid.getHeight(), null);
                   g.drawImage(Assets.crab, 730, 460, Assets.crab.getWidth(), Assets.crab.getHeight(), null);
-                  g.drawString("" + nivel, 50, 480);
+                  //g.drawString("" + nivel, 50, 480);
                   // Checks where to draw the rectangle that shows which option of the menu you are selecting
                   switch(menOpt) {
                     case OPTIONS:
                       //g.drawImage(Assets.rec, 1340, 125, 400, 100, null);
                       g.drawImage(Assets.select, 810, 70, 100, 100, null);
+                      g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                       break;
                     case RECIPIES:
                       //g.drawImage(Assets.rec, 1340, 200, 400, 100, null);
                       g.drawImage(Assets.select, 785, 125, 100, 100, null);
+                      g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                       break;
                    case CONTROLS:
                       //g.drawImage(Assets.rec, 1340, 280, 400, 100, null);
                       g.drawImage(Assets.select, 770, 185, 100, 100, null);
+                      g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                       break;
                     case ONE:
                       //g.drawImage(Assets.rec, 1200, 125, 400, 100, null);
@@ -934,6 +937,7 @@ public class Game implements Runnable {
                       g.drawImage(Assets.select, 590, 450, 100, 100, null);
                       break;
                     case THREE:
+                      g.drawImage(Assets.miniLevel3, 40, 420, 400, 230, null);
                       g.drawImage(Assets.select, 680, 535, 100, 100, null);
                       break;
                   }
