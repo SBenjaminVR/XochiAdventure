@@ -19,6 +19,9 @@ public class Assets {
     public static String[] ingrEnchiladas = new String[7];
     public static String[] ingrQuecas = new String[6];
     public static String[] ingrMole = new String[4];
+    public static BufferedImage recetaEnchiladas;
+    public static BufferedImage recetaQuecas;
+    public static BufferedImage recetaMole;
     // Images
     public static BufferedImage background;                 // to store background image
     public static BufferedImage player;                     // to store the player image
@@ -164,6 +167,7 @@ public class Assets {
         ingrEnchiladas[4] = "Crema";
         ingrEnchiladas[5] = "Aceite";
         ingrEnchiladas[6] = "Cebolla";
+        recetaEnchiladas = ImageLoader.loadImage("/images/comida/Receta Enchiladas.png");
 
         // Loading of images of ingredients for the mole
         ingredientesMole = new BufferedImage[4];
@@ -175,7 +179,8 @@ public class Assets {
         ingrMole[0] = "Pollo";
         ingrMole[1] = "Chile x3";
         ingrMole[2] = "Ajonjoli";
-        ingrMole[3] = "Manteca";
+        ingrMole[3] = "Manteca";        
+        recetaMole = ImageLoader.loadImage("/images/comida/recetaOaxaca.png");
 
         // Loading of images of ingredients for the quesadillas
         quecas = ImageLoader.loadImage("/images/comida/quecas/Quesadilla.png");
@@ -192,6 +197,7 @@ public class Assets {
         ingrQuecas[3] = "Cilantro";
         ingrQuecas[4] = "Tomate";
         ingrQuecas[5] = "Tortillas";
+        recetaQuecas = ImageLoader.loadImage("/images/comida/RecetaQues.png");
 
 
         // Loading of animations
