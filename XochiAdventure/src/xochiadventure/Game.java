@@ -250,6 +250,62 @@ public class Game implements Runnable {
         return nivel;
     }
 
+    /**
+     * 
+     * @return 
+     */
+    public Rectangle getFuente() {
+        return fuente;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Comida> getComidas() {
+        return comidas;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Letrero> getLetreros() {
+        return letreros;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Pico> getPicos() {
+        return picos;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Platform> getPlatforms() {
+        return platforms;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<PowerUps> getPowerups() {
+        return powerups;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public LinkedList<Shot> getDisparos() {
+        return disparos;
+    }
+
     // SETS ------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -261,6 +317,26 @@ public class Game implements Runnable {
         this.endGame = endGame;
     }
 
+    /**
+     * 
+     * @param levelWidth 
+     */
+    public void setLevelWidth(int levelWidth) {
+        this.levelWidth = levelWidth;
+    }
+
+    /**
+     * 
+     * @param levelHeight 
+     */
+    public void setLevelHeight(int levelHeight) {
+        this.levelHeight = levelHeight;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     // FUNCTIONS ------------------------------------------------------------------------------------------------------------------------------------
 
     /**
@@ -268,99 +344,7 @@ public class Game implements Runnable {
      * @param txt to know which level to load
      */
     private void loadLevel() throws SQLException{
-      
-//      // lee txt
-//      ResultSet results[] = new ResultSet[10];
-//              
-//      DBFunctions.loadLevelFromDB(nivel, results);
-//      
-//      int posX;
-//      int posY;
-//      int iWidth;
-//      int iHeight;
-//      int speedX;
-//      int playerPlat;
-//      int lives;
-//      int left;
-//      int right;
-//      int direction;
-//      String tipo;
-//      // poner donde va a estar la fuente
-//      
-//      direction = 0;
-//      
-//      results[0].next();
-//      levelWidth = results[0].getInt("width");
-//      levelHeight = results[0].getInt("height");
-//
-//      results[1].next();
-//      fuente.x = results[1].getInt("posX");
-//      fuente.y = results[1].getInt("posY");
-//
-//      // chiles
-//      while (results[2].next()) {
-//        posX = results[2].getInt("posX");
-//        posY = results[2].getInt("posY");
-//        iWidth = results[2].getInt("width");
-//        iHeight = results[2].getInt("height");
-//        speedX = results[2].getInt("speedX");
-//        left = results[2].getInt("leftLimit");
-//        right = results[2].getInt("rightLimit");
-//
-//        chiles.add(new Enemy(posX, posY, iWidth, iHeight, direction, speedX, left, right, this));
-//      }
-//
-//      // plataformas
-//      while (results[3].next()) {
-//        posX = results[3].getInt("posX");
-//        posY = results[3].getInt("posY");
-//        iWidth = results[3].getInt("width");
-//        iHeight = results[3].getInt("height");
-//
-//        platforms.add(new Platform(posX, posY, iWidth, iHeight, this));
-//      }
-//
-//      int i = 1;
-//      // comida
-//      while (results[4].next()) {
-//        posX = results[4].getInt("posX");
-//        posY = results[4].getInt("posY");
-//        iWidth = results[4].getInt("width");
-//        iHeight = results[4].getInt("height");
-//
-//        comidas.add(new Comida(posX, posY, iWidth, iHeight, i, this));
-//        i++;
-//      }
-//
-//      // player
-//      results[5].next();
-//      posX = results[5].getInt("posX");
-//      posY = results[5].getInt("posY");
-//      iWidth = results[5].getInt("width");
-//      iHeight = results[5].getInt("height");
-//      speedX = results[5].getInt("speedX");
-//      lives = results[5].getInt("lives");
-//
-//      player = new Player(posX, posY, iWidth, iHeight, speedX, lives, platforms.get(0), this);
-//
-//      // pico
-//      while (results[6].next()) {
-//        posX = results[6].getInt("posX");
-//        posY = results[6].getInt("posY");
-//        tipo =  results[6].getString("dir");
-//
-//        picos.add(new Pico(posX, posY, iWidth, iHeight, tipo, this));
-//      }
-//
-//      // letreros
-//      while (results[7].next()) {
-//        posX = results[7].getInt("posX");
-//        posY = results[7].getInt("posY");
-//        lives = results[7].getInt("tipo");
-//
-//        letreros.add(new Letrero(posX, posY, iWidth, iHeight, (lives == 1), this));
-//      }
-      /*
+
       switch(nivel){
         case 1:
           fuente.x = 1400;
@@ -412,13 +396,13 @@ public class Game implements Runnable {
           platforms.add(new Platform(2600,  1900, 500, 100, this));
 
           // comidas
-          comidas.add(new Comida(225, 200, 50, 50, 1, this));
-          comidas.add(new Comida(1525, 200, 50, 50, 2, this));
-          comidas.add(new Comida(2925, 200, 50, 50, 3, this));
-          comidas.add(new Comida(1525, 1050, 50, 50, 4, this));
-          comidas.add(new Comida(225, 1850, 50, 50, 5, this));
-          comidas.add(new Comida(1525, 1850, 50, 50, 6, this));
-          comidas.add(new Comida(2925, 1850, 50, 50, 7, this));
+          comidas.add(new Comida(225, 200, 50, 50, 0, this));
+          comidas.add(new Comida(1525, 200, 50, 50, 1, this));
+          comidas.add(new Comida(2925, 200, 50, 50, 2, this));
+          comidas.add(new Comida(1525, 1050, 50, 50, 3, this));
+          comidas.add(new Comida(225, 1850, 50, 50, 4, this));
+          comidas.add(new Comida(1525, 1850, 50, 50, 5, this));
+          comidas.add(new Comida(2925, 1850, 50, 50, 6, this));
 
           // letreros
           letreros.add(new Letrero(300, 730, 70, 70, false, this));
@@ -485,12 +469,12 @@ public class Game implements Runnable {
 
           // Comidas
 
-          comidas.add(new Comida(1525, 200, 50, 50, 1, this));
-          comidas.add(new Comida(2900, 200, 50, 50, 2, this));
-          comidas.add(new Comida(200, 825, 50, 50, 3, this));
-          comidas.add(new Comida(2900, 825, 50, 50, 4, this));
-          comidas.add(new Comida(50, 1650, 50, 50,  6, this));
-          comidas.add(new Comida(1525, 1650, 50, 50, 7, this));
+          comidas.add(new Comida(1525, 200, 50, 50, 0, this));
+          comidas.add(new Comida(2900, 200, 50, 50, 1, this));
+          comidas.add(new Comida(200, 825, 50, 50, 2, this));
+          comidas.add(new Comida(2900, 825, 50, 50, 3, this));
+          comidas.add(new Comida(50, 1650, 50, 50,  4, this));
+          comidas.add(new Comida(1525, 1650, 50, 50, 5, this));
 
           // letreros
           letreros.add(new Letrero(30, 730, 70, 70, false, this));
@@ -576,14 +560,13 @@ public class Game implements Runnable {
           platforms.add(new Platform(2800, 2000, 500, 100, this));
 
           // comidas
-          comidas.add(new Comida(800, 200, 50, 50, 1, this));
-          comidas.add(new Comida(300, 750, 50, 50, 3, this));
+          comidas.add(new Comida(800, 200, 50, 50, 0, this));
+          comidas.add(new Comida(300, 750, 50, 50, 1, this));
+          comidas.add(new Comida(2950, 750, 50, 50, 2, this));
+          comidas.add(new Comida(500, 1950, 50, 50, 3, this));
+          comidas.add(new Comida(2800, 1950, 50, 50, 4, this));
 
-          comidas.add(new Comida(2950, 750, 50, 50, 4, this));
-          comidas.add(new Comida(500, 1950, 50, 50, 5, this));
-          comidas.add(new Comida(2800, 1950, 50, 50, 6, this));
-
-          comidas.add(new Comida(1625, 1950, 50, 50, 7, this));
+          comidas.add(new Comida(1625, 1950, 50, 50, 5, this));
 
           // letreros
           letreros.add(new Letrero(225, 180, 70, 70, false, this));
@@ -631,7 +614,7 @@ public class Game implements Runnable {
           levelWidth = 3300;
           levelHeight = 2200;
           break;
-      }*/
+      }
       
       endGame = false;
       pauseGame = false;
@@ -772,7 +755,8 @@ public class Game implements Runnable {
                             }
                             //carga nivel 1
                             nivel = 1;
-                            DBFunctions.loadLevelFromDB(nivel, this);
+                            //DBFunctions.loadLevelFromDB(nivel, this);
+                            loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
@@ -782,6 +766,7 @@ public class Game implements Runnable {
                             }
                             //carga nivel2
                             nivel = 2;
+                            //DBFunctions.loadLevelFromDB(nivel, this);
                             loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 2.png");
                             screen = Screen.LEVEL;
@@ -792,6 +777,7 @@ public class Game implements Runnable {
                             }
                             //carga nivel3
                             nivel = 3;
+                            //DBFunctions.loadLevelFromDB(nivel, this);
                             loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 3.png");
                             screen = Screen.LEVEL;

@@ -101,7 +101,7 @@ public class DBFunctions {
         ResultSet results[] = new ResultSet[10];
         // Connection to DB stuff
         Connection myConn = null;
-        Statement myStmt = null;
+        Statement[] myStmt = new Statement[10];
 
         String user = "root";
 
@@ -110,17 +110,23 @@ public class DBFunctions {
             myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/xochidb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, "");
 
             // 2. Create a statement
-            myStmt = myConn.createStatement();
+            myStmt[0] = myConn.createStatement();
 
             // 3. Execute SQL query
-            results[0] = myStmt.executeQuery("select * from Levelg where levelID =" + level);
-            results[1] = myStmt.executeQuery("select * from Fountain where levelID =" + level);
-            results[2] = myStmt.executeQuery("select * from Chile where levelID =" + level);
-            results[3] = myStmt.executeQuery("select * from Platform where levelID =" + level);
-            results[4] = myStmt.executeQuery("select * from Comida where levelID =" + level);
-            results[5] = myStmt.executeQuery("select * from Player where levelID =" + level);
+            results[0] = myStmt[0].executeQuery("select * from Levelg where levelID =" + level);
+            myStmt[1] = myConn.createStatement();
+            results[1] = myStmt[1].executeQuery("select * from Fountain where levelID =" + level);
+            myStmt[2] = myConn.createStatement();
+            results[2] = myStmt[2].executeQuery("select * from Chile where levelID =" + level);
+            myStmt[3] = myConn.createStatement();
+            results[3] = myStmt[3].executeQuery("select * from Platform where levelID =" + level);
+            myStmt[4] = myConn.createStatement();
+            results[4] = myStmt[4].executeQuery("select * from Comida where levelID =" + level);
+            myStmt[5] = myConn.createStatement();
+            results[5] = myStmt[5].executeQuery("select * from Player where levelID =" + level);
+            myStmt[6] = myConn.createStatement();
             //myRs[6] = myStmt.executeQuery("select * from Pico where levelID =" + level);
-            results[6] = myStmt.executeQuery("select * from Letrero where nivel =" + level);
+            results[6] = myStmt[6].executeQuery("select * from Letrero where nivel =" + level);
                
       int posX;
       int posY;
@@ -138,12 +144,12 @@ public class DBFunctions {
       direction = 0;
       
       results[0].next();
-      //game. = results[0].getInt("width");
-      levelHeight = results[0].getInt("height");
+      game.setLevelWidth(results[0].getInt("width"));
+      game.setLevelHeight(results[0].getInt("height"));
 
       results[1].next();
-      fuente.x = results[1].getInt("posX");
-      fuente.y = results[1].getInt("posY");
+      game.getFuente().x = results[1].getInt("posX");
+      game.getFuente().y = results[1].getInt("posY");
 
       // chiles
       while (results[2].next()) {
@@ -155,7 +161,7 @@ public class DBFunctions {
         left = results[2].getInt("leftLimit");
         right = results[2].getInt("rightLimit");
 
-        chiles.add(new Enemy(posX, posY, iWidth, iHeight, direction, speedX, left, right, this));
+        game.getChiles().add(new Enemy(posX, posY, iWidth, iHeight, direction, speedX, left, right, game));
       }
 
       // plataformas
@@ -165,7 +171,7 @@ public class DBFunctions {
         iWidth = results[3].getInt("width");
         iHeight = results[3].getInt("height");
 
-        platforms.add(new Platform(posX, posY, iWidth, iHeight, this));
+        game.getPlatforms().add(new Platform(posX, posY, iWidth, iHeight, game));
       }
 
       int i = 1;
@@ -176,7 +182,7 @@ public class DBFunctions {
         iWidth = results[4].getInt("width");
         iHeight = results[4].getInt("height");
 
-        comidas.add(new Comida(posX, posY, iWidth, iHeight, i, this));
+        game.getComidas().add(new Comida(posX, posY, iWidth, iHeight, i, game));
         i++;
       }
 
@@ -189,38 +195,40 @@ public class DBFunctions {
       speedX = results[5].getInt("speedX");
       lives = results[5].getInt("lives");
 
-      player = new Player(posX, posY, iWidth, iHeight, speedX, lives, platforms.get(0), this);
+      game.setPlayer(new Player(posX, posY, iWidth, iHeight, speedX, lives, game.getPlatforms().get(0), game));
 
-      // pico
+//      // pico
+//      while (results[6].next()) {
+//        posX = results[6].getInt("posX");
+//        posY = results[6].getInt("posY");
+//        tipo =  results[6].getString("dir");
+//
+//        game.getPicos().add(new Pico(posX, posY, iWidth, iHeight, tipo, game));
+//      }
+
+      // letreros
       while (results[6].next()) {
         posX = results[6].getInt("posX");
         posY = results[6].getInt("posY");
-        tipo =  results[6].getString("dir");
+        lives = results[6].getInt("tipo");
 
-        picos.add(new Pico(posX, posY, iWidth, iHeight, tipo, this));
-      }
-
-      // letreros
-      while (results[7].next()) {
-        posX = results[7].getInt("posX");
-        posY = results[7].getInt("posY");
-        lives = results[7].getInt("tipo");
-
-        letreros.add(new Letrero(posX, posY, iWidth, iHeight, (lives == 1), this));
+        game.getLetreros().add(new Letrero(posX, posY, iWidth, iHeight, (lives == 1), game));
       }
 
 
         } catch (Exception exc) {
             exc.printStackTrace();
         } finally {
-            if (myRs != null) {
+            if (results != null) {
                 for (int i = 0; i < 7; i++) {
-                    myRs[i].close();
+                    results[i].close();
                 }
             }
 
             if (myStmt != null) {
-                myStmt.close();
+                for (int i = 0; i < 7; i++) {
+                    myStmt[i].close();
+                }
             }
 
             if (myConn != null) {
