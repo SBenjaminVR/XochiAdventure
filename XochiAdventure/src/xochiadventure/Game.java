@@ -757,7 +757,7 @@ public class Game implements Runnable {
                             nivel = 1;
                             //DBFunctions.loadLevelFromDB(nivel, this);
                             loadLevel();
-                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel_1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
@@ -769,7 +769,7 @@ public class Game implements Runnable {
                             nivel = 2;
                             //DBFunctions.loadLevelFromDB(nivel, this);
                             loadLevel();
-                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 2.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel_2.png");
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
@@ -781,7 +781,7 @@ public class Game implements Runnable {
                             nivel = 3;
                             //DBFunctions.loadLevelFromDB(nivel, this);
                             loadLevel();
-                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel 3.png");
+                            Assets.background = ImageLoader.loadImage("/images/niveles/nivel_3.png");
                             screen = Screen.LEVEL;
                                 break;
                         case RECIPIES:
