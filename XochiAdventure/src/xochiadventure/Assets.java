@@ -51,6 +51,7 @@ public class Assets {
     public static BufferedImage enchiladas;
     public static BufferedImage ingredientesEnchiladas[];
     public static BufferedImage ingredientesMole[];
+    public static BufferedImage quecas;
     public static BufferedImage ingredientesQuecas[];
     public static BufferedImage checkmark;
     public static BufferedImage brightness1;               // to store a image for brightness
@@ -154,6 +155,7 @@ public class Assets {
         ingredientesMole[0] = ImageLoader.loadImage("/images/comida/mole/poyo.png");
 
         // Loading of images of ingredients for the quesadillas
+        quecas = ImageLoader.loadImage("/images/comida/quecas/Quesadilla.png");
         ingredientesQuecas = new BufferedImage[7];
         ingredientesQuecas[0] = ImageLoader.loadImage("/images/comida/quecas/Ajo.png");
         ingredientesQuecas[1] = ImageLoader.loadImage("/images/comida/quecas/CebollaBlack.png");

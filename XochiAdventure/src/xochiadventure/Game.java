@@ -478,7 +478,7 @@ public class Game implements Runnable {
 
             // Main menu screen ------------------------------------------------------------------
             case MENU:
-                if (!menuMusicPlaying) {
+                if (!menuMusicPlaying && soundOn) {
                     Assets.mainMenu.play();
                     menuMusicPlaying = true;
                 }
@@ -558,27 +558,33 @@ public class Game implements Runnable {
 
                 // Checks to which screen you are moving to
                 if (keyManager.enter) {
-                    if (soundOn) {
-                            Assets.selectSnd.play();
-                    }
+                    
                     if (menuMusicPlaying) {
                         Assets.mainMenu.stop();
                         menuMusicPlaying = false;
                     }
                     switch(menOpt) {
                         case OPTIONS:
+                            if (soundOn) {
+                                Assets.selectSnd.play();
+                            }
                             screen = Screen.OPTIONS;
                             optOpt = OptOpt.DALTONICO;
                             break;
                         case ONE:
+                            if (soundOn) {
+                                Assets.selectSnd.play();
+                            }
                             //carga nivel 1
-                            Assets.selectSnd.play();
                             nivel = 1;
                             loadLevel();
                             Assets.background = ImageLoader.loadImage("/images/niveles/nivel 1.png");
                             screen = Screen.LEVEL;
                                 break;
                         case TWO:
+                            if (soundOn) {
+                                Assets.selectSnd.play();
+                            }
                             //carga nivel2
                             nivel = 2;
                             loadLevel();
@@ -586,6 +592,9 @@ public class Game implements Runnable {
                             screen = Screen.LEVEL;
                                 break;
                         case THREE:
+                            if (soundOn) {
+                                Assets.selectSnd.play();
+                            }
                             //carga nivel3
                             nivel = 3;
                             loadLevel();
@@ -593,9 +602,15 @@ public class Game implements Runnable {
                             screen = Screen.LEVEL;
                                 break;
                         case RECIPIES:
+                            if (soundOn) {
+                                Assets.selectSnd.play();
+                            }
                             screen = Screen.RECIPIES;
                                 break;
                        case CONTROLS:
+                           if (soundOn) {
+                                Assets.selectSnd.play();
+                            }
                            screen = Screen.CONTROLS;
                                 break;
                     }
@@ -669,7 +684,15 @@ public class Game implements Runnable {
             case RECIPIES:
                 
                 if (keyManager.back) {
-                    screen = Screen.MENU;
+                    screen = Screen.MENU;                    
+                }
+                if (keyManager.right) {
+                    if (currentRecipePage < 3) {
+                        currentRecipePage++;
+                    }
+                    else {
+                        currentRecipePage = 1;
+                    }
                 }
                
                 break;
@@ -774,7 +797,8 @@ public class Game implements Runnable {
                       if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
                         // quitarle vida al jugador
                         player.setLives(player.getLives() - 1);
-                        Assets.hurtSnd.play();
+                        if (soundOn)
+                            Assets.hurtSnd.play();
                         player.setContGotHit(60);
                       }
                     }
@@ -788,7 +812,8 @@ public class Game implements Runnable {
                               case ATOLE:
                                   // Recover all of the player hp/lives
                                   getPlayer().setLives(getPlayer().getMaxLives());
-                                  Assets.atoleSnd.play();
+                                  if (soundOn)
+                                    Assets.atoleSnd.play();
                                   powerups.remove(i);
                                   break;
                               case AGUA:
@@ -804,7 +829,8 @@ public class Game implements Runnable {
                                   // Recover 1 life
                                   if (getPlayer().getLives() < getPlayer().getMaxLives())
                                       getPlayer().setLives(getPlayer().getLives() + 1);
-                                  Assets.dulceSnd.play();
+                                  if (soundOn)
+                                    Assets.dulceSnd.play();
                                   powerups.remove(i);
                                   break;
 
@@ -978,12 +1004,26 @@ public class Game implements Runnable {
                     break;
                 case RECIPIES:
                   g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
-                  g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
-                  for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
-                        g.drawImage(Assets.ingredientesEnchiladas[i], 100, 200 + i*50, 50, 50, null);
+                  if (currentRecipePage == 1) {
+                    g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
+                    for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
+                          g.drawImage(Assets.ingredientesEnchiladas[i], 100, 200 + i*50, 50, 50, null);
+                    }
+                    for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
+                          g.drawString("nombre", 200, 240 + i * 50);
+                    }
                   }
-                  for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
-                        g.drawString("nombre", 200, 240 + i * 50);
+                  else if (currentRecipePage == 2) {
+                    g.drawImage(Assets.quecas, 70, 10, 200, 200, null);
+                    for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
+                          g.drawImage(Assets.ingredientesQuecas[i], 100, 200 + i*50, 50, 50, null);
+                    }
+                    for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
+                          g.drawString("nombre", 200, 240 + i * 50);
+                    }
+                  }
+                  else if (currentRecipePage == 3) {
+                      
                   }
                   
                   break;
