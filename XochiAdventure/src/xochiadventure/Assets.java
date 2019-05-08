@@ -132,8 +132,8 @@ public class Assets {
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
         menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
         options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
-        controls = ImageLoader.loadImage("/images/pantallas/controles.jpg");
-        select = ImageLoader.loadImage("/images/select.png");
+        controls = ImageLoader.loadImage("/images/pantallas/Controles.jpg");
+        select = ImageLoader.loadImage("/images/Select.png");
         recipies = ImageLoader.loadImage("/images/pantallas/Recetario.png");
         miniLevel = ImageLoader.loadImage("/images/pantallas/miniNivel1.png");
         miniLevel2 = ImageLoader.loadImage("/images/pantallas/miniNivel2.png");
@@ -144,14 +144,14 @@ public class Assets {
         pyramid = ImageLoader.loadImage("/images/pantallas/pyramid.png");
         crab = ImageLoader.loadImage("/images/pantallas/crab.png");
         
-        checkmark = ImageLoader.loadImage("/images/flechaVerde.png");
+        checkmark = ImageLoader.loadImage("/images/FlechaVerde.png");
 
         // Loading of images of letreros
         peligro = ImageLoader.loadImage("/images/peligro.png");
         aviso = ImageLoader.loadImage("/images/Aviso.png");
 
         // Loading of images of game objects
-        chile = ImageLoader.loadImage("/images/chile.png");
+        chile = ImageLoader.loadImage("/images/Chile.png");
         platform = ImageLoader.loadImage("/images/brick_barro.png");
         powerup = ImageLoader.loadImage("/images/flask2.png");
         rectangle = ImageLoader.loadImage("/images/192.png");
