@@ -90,6 +90,7 @@ public class Game implements Runnable {
     private Rectangle rec;                                  // to store the rectangle that checks which sprites are going to be drawn
     private Rectangle fuente;                               // to store the position of the fuente
     private boolean soundOn;
+    private boolean effectsOn;                              //to store the effects of sound
     private int nivel;                                      // to store in which level you are
     private int levelWidth;                                 // to store the width of the level
     private int levelHeight;                                // to store the height of the level
@@ -153,6 +154,7 @@ public class Game implements Runnable {
         hasPlayedWinSnd = false;
         brightness = 3;
         menuMusicPlaying = false;
+        effectsOn = true;
     }
 
     // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -838,7 +840,7 @@ public class Game implements Runnable {
                 if (keyManager.enter) {
                     switch (optOpt) {
                         case DALTONICO:
-                            // turns on and off
+                            effectsOn = !effectsOn; 
                             break;
                         case SONIDO:
                             soundOn = !soundOn;
@@ -940,7 +942,7 @@ public class Game implements Runnable {
                       Pico pi = picos.get(i);
                       if (pi.intersectaJugador(getPlayer()) && player.getContGotHit() == 0) {
                         player.setLives(player.getLives() - 1);
-                        if (soundOn)
+                        if (effectsOn)
                             Assets.hurtSnd.play();
                         player.setContGotHit(60);
                       }
@@ -948,7 +950,7 @@ public class Game implements Runnable {
 
                     // checks if the player can shoot a bubble and if one the keyw for doing it was pressed
                     if (player.getWater() > 0 && (getKeyManager().z || getKeyManager().o)) {
-          						if (soundOn) {
+          						if (effectsOn) {
           							Assets.shootSnd.play();
           						}
                       // checks in which direction the player is moving to know in which direction shoot the bubble
@@ -997,7 +999,7 @@ public class Game implements Runnable {
                       if (chile.intersectaJugador(player) && player.getContGotHit() == 0) {
                         // quitarle vida al jugador
                         player.setLives(player.getLives() - 1);
-                        if (soundOn)
+                        if (effectsOn)
                             Assets.hurtSnd.play();
                         player.setContGotHit(60);
                       }
@@ -1012,7 +1014,7 @@ public class Game implements Runnable {
                               case ATOLE:
                                   // Recover all of the player hp/lives
                                   getPlayer().setLives(getPlayer().getMaxLives());
-                                  if (soundOn)
+                                  if (effectsOn)
                                     Assets.atoleSnd.play();
                                   powerups.remove(i);
                                   break;
@@ -1029,7 +1031,7 @@ public class Game implements Runnable {
                                   // Recover 1 life
                                   if (getPlayer().getLives() < getPlayer().getMaxLives())
                                       getPlayer().setLives(getPlayer().getLives() + 1);
-                                  if (soundOn)
+                                  if (effectsOn)
                                     Assets.dulceSnd.play();
                                   powerups.remove(i);
                                   break;
@@ -1197,6 +1199,9 @@ public class Game implements Runnable {
                   g.drawImage(Assets.options, 0, 0, getWidth(), getHeight(), null);
                   if (soundOn) {
                     g.drawImage(Assets.checkmark, 920, 278, 34, 34, null);
+                  }
+                  if (effectsOn) {
+                    g.drawImage(Assets.checkmark, 920, 172, 34, 34, null);
                   }
                   switch (optOpt) {
                       case DALTONICO:
