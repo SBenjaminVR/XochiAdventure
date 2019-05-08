@@ -492,7 +492,12 @@ public class Game implements Runnable {
           letreros.add(new Letrero(2700, 1630, 70, 70, true, this));
 
           // picos
-          // picos.add(new Pico());
+          picos.add(new Pico(575, 1660, 50, 50, "u", this));
+          picos.add(new Pico(825, 1660, 50, 50, "u", this));
+          picos.add(new Pico(1175, 1660, 50, 50, "u", this));
+          picos.add(new Pico(1875, 1660, 50, 50, "u", this));
+          picos.add(new Pico(2225, 1660, 50, 50, "u", this));
+          picos.add(new Pico(2475, 1660, 50, 50, "u", this));
 
           player = new Player (1475, 650, 100, 100, 6, 3, platforms.get(0),  this);
           playerX = getWidth() / 2 - player.getWidth() / 2;
@@ -510,12 +515,12 @@ public class Game implements Runnable {
 
           // chiles
           chiles.add(new Enemy(240, 200, 50, 50, 1, 5, 225, 825, this));
-          chiles.add(new Enemy(1410, 200, 50, 50, -1, 5, 825, 1425, this));
+          chiles.add(new Enemy(1350, 200, 50, 50, -1, 5, 825, 1425, this));
           chiles.add(new Enemy(1890, 200, 50, 50, 1, 5, 1875, 2475, this));
           chiles.add(new Enemy(3060, 200, 50, 50, -1, 5, 2475, 3075, this));
           chiles.add(new Enemy(460, 850, 50, 50, 1, 5, 450, 950, this));
           chiles.add(new Enemy(2790, 850, 50, 50, -1, 5, 2350, 2850, this));
-          chiles.add(new Enemy(1975, 1400, 50, 50, -1, 5, 1975, 2775, this));
+          chiles.add(new Enemy(2000, 1400, 50, 50, -1, 5, 1975, 2775, this));
           chiles.add(new Enemy(0, 1950, 50, 50, 1, 5, 0, 1000, this));
           chiles.add(new Enemy(3250, 1950, 50, 50, -1, 5, 2300, 3300, this));
 
@@ -533,13 +538,13 @@ public class Game implements Runnable {
           platforms.add(new Platform(1850, 700, 150, 30, this));
 
           
-          platforms.add(new Platform(300, 900, 50, 50, this));
+          platforms.add(new Platform(300, 950, 50, 50, this));
           platforms.add(new Platform(450, 900, 500, 100, this));
           platforms.add(new Platform(1150, 900, 50, 50, this));
           platforms.add(new Platform(1400, 900, 500, 100, this));
           platforms.add(new Platform(2100, 900, 50, 50, this));
           platforms.add(new Platform(2350, 900, 500, 100, this));
-          platforms.add(new Platform(2950, 900, 50, 50, this));
+          platforms.add(new Platform(2950, 950, 50, 50, this));
 
           platforms.add(new Platform(1100, 1150, 150, 30, this));
           platforms.add(new Platform(2050, 1150, 150, 30, this));
@@ -549,8 +554,7 @@ public class Game implements Runnable {
           platforms.add(new Platform(575, 1450, 500, 100, this));
           platforms.add(new Platform(875, 1450, 500, 100, this));
           platforms.add(new Platform(1975, 1450, 800, 100, this));
-          platforms.add(new Platform(2850, 1450, 50, 50, this));
-          platforms.add(new Platform(3200, 1450, 50, 50, this));
+          platforms.add(new Platform(2850, 1700, 150, 30, this));
 
           platforms.add(new Platform(1575, 1650, 150, 30, this));
 
@@ -910,10 +914,10 @@ public class Game implements Runnable {
                       // checks in which direction the player is moving to know in which direction shoot the bubble
                       if (player.getDirection() == 1) {
                         // attack to the right
-                        disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 8, 1, this));
+                        disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 12, 1, this));
                       } else {
                         // attack to the left
-                        disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 8, -1, this));
+                        disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 12, -1, this));
                       }
                       player.setWater(getPlayer().getWater() - 10);
                     }
@@ -1259,6 +1263,14 @@ public class Game implements Runnable {
                     // System.out.println("Chile" + i + " " + (rec.intersects(chile.getPerimetro())));
                     if (rec.intersects(chile.getPerimetro())) {
                       chile.render(g);
+                    }
+                  }
+
+                  for (int i = 0; i < picos.size(); i++) {
+                    Pico pi = picos.get(i);
+                    // System.out.println("Chile" + i + " " + (rec.intersects(chile.getPerimetro())));
+                    if (rec.intersects(pi.getPerimetro())) {
+                      pi.render(g);
                     }
                   }
 
