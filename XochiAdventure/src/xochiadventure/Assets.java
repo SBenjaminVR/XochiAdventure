@@ -40,6 +40,16 @@ public class Assets {
     public static BufferedImage ingredientesMole[];
     public static BufferedImage ingredientesQuecas[];
     public static BufferedImage checkmark;
+    public static BufferedImage brightness1;               // to store a image for brightness
+    public static BufferedImage brightness2;               // to store a image for brightness
+    public static BufferedImage brightness4;               // to store a image for brightness
+    public static BufferedImage brightness5;               // to store a image for brightness
+    public static BufferedImage opbrightness1;             //to store the image for the menu of brightness
+    public static BufferedImage opbrightness2;             //to store the image for the menu of brightness
+    public static BufferedImage opbrightness3;             //to store the image for the menu of brightness
+    public static BufferedImage opbrightness4;             //to store the image for the menu of brightness
+    public static BufferedImage opbrightness5;             //to store the image for the menu of brightness
+    
 
     // Power-Ups
     public static BufferedImage atole;                      // to store the atole image
@@ -47,6 +57,7 @@ public class Assets {
     public static BufferedImage dulce;                      // to store the dulce image
 
     // Sounds
+    public static SoundClip mainMenu;
     public static SoundClip laser;
     public static SoundClip selectSnd;
     public static SoundClip atoleSnd;
@@ -71,6 +82,7 @@ public class Assets {
         hurtSnd = new SoundClip("/sounds/hurt.wav");
         shootSnd = new SoundClip("/sounds/shoot.wav");
         winSnd = new SoundClip("/sounds/win.wav");
+        mainMenu = new SoundClip("/sounds/Mexico.wav");
 
         // Loading of images of menu screens
         titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
@@ -90,7 +102,19 @@ public class Assets {
         fuente = ImageLoader.loadImage("/images/fountain_beta.png");
         heart = ImageLoader.loadImage("/images/tacoHeart.png");
         shot = ImageLoader.loadImage("/images/bubble.png");
-
+        
+        //Loading images of brightness
+        brightness1 = ImageLoader.loadImage("/images/pantallas/brillo1.png");
+        brightness2 = ImageLoader.loadImage("/images/pantallas/brillo2.png");
+        brightness4 = ImageLoader.loadImage("/images/pantallas/brillo4.png");
+        brightness5 = ImageLoader.loadImage("/images/pantallas/brillo5.png");
+        opbrightness1 = ImageLoader.loadImage("/images/pantallas/opb1.png");
+        opbrightness2 = ImageLoader.loadImage("/images/pantallas/opb2.png");
+        opbrightness3 = ImageLoader.loadImage("/images/pantallas/opb3.png");
+        opbrightness4 = ImageLoader.loadImage("/images/pantallas/opb4.png");
+        opbrightness5 = ImageLoader.loadImage("/images/pantallas/opb5.png");
+        
+        
         // Loading of images of ingredients for the enchiladas
         ingredientesEnchiladas = new BufferedImage[7];
         ingredientesEnchiladas[0] = ImageLoader.loadImage("/images/comida/enchiladas/Tortillas.png");
