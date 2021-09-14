@@ -7,7 +7,6 @@ import java.awt.Graphics;
 public class GameLevel {
   // Game logic variables
   private Player player;                     // to use a player
-  private Shot shot;                         // to have a missile to shoot
   private Rectangle rec;                     // to store the rectangle that checks which sprites are going to be drawn
   private Rectangle fuente;                  // to store the position of the fuente
   private int width;                    // to store the width of the level
@@ -191,6 +190,8 @@ public class GameLevel {
             if (game.isEffectsOn())
               Assets.dulceSnd.play();
             powerups.remove(i);
+            break;
+          default:
             break;
         }
       }

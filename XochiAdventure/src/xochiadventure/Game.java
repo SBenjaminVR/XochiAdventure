@@ -5,27 +5,13 @@
  */
 package xochiadventure;
 
-import java.sql.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static xochiadventure.Assets.titleScreen;
 
 // enum to navigate all the screens that the game has
 enum Screen {
@@ -98,8 +84,6 @@ public class Game implements Runnable {
   private OptOpt optOpt;                     // to store in which option in the options screen you are
   private PauseMenu pauseOpt;                // to store in which option in the pause screen you are
   private int currentRecipePage = 1;
-
-  
 
   private SoundClip confirmSound;
   private boolean hasPlayedWinSnd;
