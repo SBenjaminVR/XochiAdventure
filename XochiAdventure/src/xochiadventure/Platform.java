@@ -6,7 +6,6 @@
 package xochiadventure;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 
 /**
  *
@@ -17,35 +16,34 @@ import java.awt.Rectangle;
  *      - Benjamín Váldez Rodríguez             A00822027
  */
 public class Platform extends Item {
-
-    /**
-     * to create direction, width, height, and game of the platform
-     * @param x to set the x of the platform
-     * @param y to set the y of the platform
-     * @param width to set the width of the platform
-     * @param height  to set the height of the platform
-     * @param game to set the game of the platform
-     */
-    public Platform (int x, int y, int width, int height, Game game) {
-        super(x, y, width, height, 0, game);
-    }
-
-   /**
-   * To know if the bomb is intersecting with the player
-   * @param obj to know if the bomb is intersecting with it
-   * @return an <code>boolean</code> value with the state of the collision
+  /**
+   * to create direction, width, height, and game of the platform
+   * @param x to set the x of the platform
+   * @param y to set the y of the platform
+   * @param width to set the width of the platform
+   * @param height  to set the height of the platform
+   * @param game to set the game of the platform
    */
-    public boolean intersectaJugador(Object obj) {
-      return ((obj instanceof Player) && (getPerimetro().intersects(((Player) obj).getPerimetro())));
-   }
+  public Platform (int x, int y, int width, int height, Game game) {
+    super(x, y, width, height, 0, game);
+  }
 
-    @Override
-    public void tick() {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  /**
+ * To know if the bomb is intersecting with the player
+ * @param obj to know if the bomb is intersecting with it
+ * @return an <code>boolean</code> value with the state of the collision
+ */
+  public boolean intersectaJugador(Object obj) {
+    return ((obj instanceof Player) && (getPerimetro().intersects(((Player) obj).getPerimetro())));
+  }
 
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.platform, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
-    }
+  @Override
+  public void tick() {
+    // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+
+  @Override
+  public void render(Graphics g) {
+    g.drawImage(Assets.platform, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+  }
 }

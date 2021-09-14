@@ -16,21 +16,20 @@ import java.awt.image.BufferedImage;
  *      - Benjamín Váldez Rodríguez             A00822027
  */
 public class SpreadSheet {
-    private BufferedImage sheet;
-    
-    /**
-     * Create a new spritesheet
-     */
-    
-    public SpreadSheet(BufferedImage sheet){
-        this.sheet = sheet;
-    }
-    
-    /**
-     * crop a sprite from the spritesheet
-     */
-    public BufferedImage crop(int x, int y, int width, int height){
-        return sheet.getSubimage(x, y, width, height);
-    }
-    
+  private BufferedImage sheet;
+  
+  /**
+   * Create a new spritesheet
+   */
+  
+  public SpreadSheet(BufferedImage sheet){
+    this.sheet = sheet;
+  }
+  
+  /**
+   * crop a sprite from the spritesheet
+   */
+  public BufferedImage crop(int x, int y, int width, int height){
+    return sheet.getSubimage(x, y, width, height);
+  }
 }
