@@ -32,7 +32,7 @@ public class Enemy extends Item {
    * @param right to set the right limit in the x axis of the enemy
    * @param game to set the game of the enemy
    */
-  public Enemy(int x, int y, int width, int height, int direction, int speedX, int left, int right, Game game) {
+  public Enemy(int x, int y, int width, int height, int direction, int speedX, int left, int right, GameLevel game) {
     super(x, y, width, height, speedX, game);
     this.direction = direction;
     this.leftLimit = left;
@@ -105,7 +105,7 @@ public class Enemy extends Item {
   // tick y render ------------------------------------------------------------------
 
   @Override
-  public void tick() {
+  public void tick(KeyManager keyManager) {
     // updates the position of the enemy
     setX(getX() + speedX * direction);
 

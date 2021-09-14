@@ -39,7 +39,7 @@ public class Player extends Item{
    * @param plat
    * @param game to set the game of the player
    */
-  public Player(int x, int y, int width, int height, int speedX, int lives, Platform plat, Game game) {
+  public Player(int x, int y, int width, int height, int speedX, int lives, Platform plat, GameLevel game) {
     super(x, y, width, height, speedX, game);
     this.maxLives = lives;
     this.lives = maxLives;
@@ -166,27 +166,27 @@ public class Player extends Item{
   // tick y render ------------------------------------------------------------------
 
   @Override
-  public void tick() {
+  public void tick(KeyManager keyManager) {
       // moving player depending on flags
-    if (getX() > 0 && (game.getKeyManager().lastLeft || game.getKeyManager().a)) {
+    if (getX() > 0 && (keyManager.lastLeft || keyManager.a)) {
       setX(getX() - getSpeedX());
       setDirection(-1);
     }
 
-    if (getX() < game.getLevelWidth() - 100 && (game.getKeyManager().lastRight || game.getKeyManager().d)) {
+    if (getX() < game.getWidth() - 100 && (keyManager.lastRight || keyManager.d)) {
       setX(getX() + getSpeedX());
       setDirection(1);
     }
     
     // checks if the player is moving
-    if ((game.getKeyManager().lastRight || game.getKeyManager().d) || (game.getKeyManager().lastLeft || game.getKeyManager().a)) {
+    if ((keyManager.lastRight || keyManager.d) || (keyManager.lastLeft || keyManager.a)) {
       moving = true;
     } else {
       moving = false;
     }
     
     // making the player jump
-    if (game.getKeyManager().lastSpace && !isInTheAir()) {
+    if (keyManager.lastSpace && !isInTheAir()) {
       setSpeedY(36);
       setInTheAir(true);
     }

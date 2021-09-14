@@ -24,7 +24,7 @@ public abstract class Item {
   protected int height;	// to store the height
   protected int speedY;	// to store the speed in the y axis
   protected int speedX; 	// to store the speed in the x axis
-  protected Game game;	// to store the game
+  protected GameLevel game;	// to store the game
   
   /**
    * Set the initial values to create the item
@@ -35,7 +35,7 @@ public abstract class Item {
    * @param speedX
    * @param game
    */
-  public Item(int x, int y, int width, int height, int speedX, Game game) {
+  public Item(int x, int y, int width, int height, int speedX, GameLevel game) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -158,7 +158,7 @@ public abstract class Item {
   /**
    * To update positions of the item for every tick
    */
-  public abstract void tick();
+  public abstract void tick(KeyManager keyManager);
   
   /**
    * To paint the item

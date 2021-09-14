@@ -26,7 +26,7 @@ public class Comida extends Item{
    * @param height to set the height of the food
    * @param game to set the game of the food
    */
-  public Comida(int x, int y, int width, int height, int i, Game game) {
+  public Comida(int x, int y, int width, int height, int i, GameLevel game) {
     super(x, y, width, height, 0, game);
     this.ingredient = i;
   }
@@ -47,7 +47,7 @@ public class Comida extends Item{
   }
 
   @Override
-  public void tick() {
+  public void tick(KeyManager keyManager) {
 
   }
 

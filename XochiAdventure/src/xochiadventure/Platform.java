@@ -24,7 +24,7 @@ public class Platform extends Item {
    * @param height  to set the height of the platform
    * @param game to set the game of the platform
    */
-  public Platform (int x, int y, int width, int height, Game game) {
+  public Platform (int x, int y, int width, int height, GameLevel game) {
     super(x, y, width, height, 0, game);
   }
 
@@ -38,7 +38,7 @@ public class Platform extends Item {
   }
 
   @Override
-  public void tick() {
+  public void tick(KeyManager keyManager) {
     // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 

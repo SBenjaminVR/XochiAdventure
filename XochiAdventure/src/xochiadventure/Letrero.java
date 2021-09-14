@@ -27,13 +27,13 @@ public class Letrero extends Item{
    * @param type
    * @param game 
    */
-  public Letrero (int x, int y, int width, int height, boolean type, Game game) {
+  public Letrero (int x, int y, int width, int height, boolean type, GameLevel game) {
     super (x, y, width, height, 0, game);
     this.type = type;
   }
 
   @Override
-  public void tick() {
+  public void tick(KeyManager keyManager) {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 

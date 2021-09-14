@@ -34,7 +34,7 @@ public class Pico extends Item{
    * @param dir
    * @param game 
    */
-  public Pico(int x, int y, int width, int height, String dir, Game game) {
+  public Pico(int x, int y, int width, int height, String dir, GameLevel game) {
       super (x, y, width, height, 0, game);
       switch(dir) {
         case "u":
@@ -62,7 +62,7 @@ public class Pico extends Item{
   }
 
   @Override
-  public void tick() {
+  public void tick(KeyManager keyManager) {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
