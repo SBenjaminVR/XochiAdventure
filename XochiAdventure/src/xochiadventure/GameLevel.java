@@ -109,14 +109,18 @@ public class GameLevel {
       if (game.isEffectsOn()) {
         Assets.shootSnd.play();
       }
+      int x, speed = 16, dir;
       // checks in which direction the player is moving to know in which direction shoot the bubble
       if (player.getDirection() == 1) {
         // attack to the right
-        disparos.add(new Shot(player.getX() + player.getWidth(), player.getY() + player.getHeight() / 2, 50, 50, 12, 1, this));
+        dir = 1;
+        x = player.getX() + player.getWidth();
       } else {
         // attack to the left
-        disparos.add(new Shot(player.getX(), player.getY() + player.getHeight() / 2, 50, 50, 12, -1, this));
+        dir = -1;
+        x = player.getX();
       }
+      disparos.add(new Shot(x, player.getY() + player.getHeight() / 2, 50, 50, speed, dir, this));
       player.setWater(player.getWater() - 10);
     }
 
@@ -128,7 +132,6 @@ public class GameLevel {
         disparos.remove(j);
       }
     }
-
 
     // chiles are ticke
     for (int i  = 0; i < chiles.size(); i++) {
@@ -199,9 +202,7 @@ public class GameLevel {
 
     // Checks if the player is in the air
     if (player.isInTheAir()) {
-      for (int i  = 0; i < platforms.size(); i++) {
-        Platform platf = platforms.get(i);
-
+      for (Platform platf : platforms) {
         // Checks if the player collides with a platform
         if (platf.intersectaJugador(player)) {
 
@@ -265,64 +266,54 @@ public class GameLevel {
     // GAME
 
     // Draw the platforms
-    for (int i = 0; i < platforms.size(); i++) {
-      Platform platform = platforms.get(i);
+    for (Platform platform : platforms) {
       // System.out.println("platform" + i + " " + (rec.intersects(platform.getPerimetro())));
       if (rec.intersects(platform.getPerimetro())) {
         platform.render(g);
       }
     }
 
-    // Draw the fountain
-
-    
+    // Draw the fountain    
     g.drawImage(Assets.fuente, (fuente.x - rec.x), (fuente.y - rec.y), fuente.width, fuente.height, null);
-    
 
-    // dibujar los chiles
-    for (int i = 0; i < chiles.size(); i++) {
-      Enemy chile = chiles.get(i);
-      if (rec.intersects(chile.getPerimetro())) {
-        chile.render(g);
+     // Draw signs
+     for (Letrero sign : letreros) {
+      if (rec.intersects(sign.getPerimetro())) {
+        sign.render(g);
       }
     }
 
-    for (int i = 0; i < picos.size(); i++) {
-      Pico pi = picos.get(i);
+    for (Pico pi : picos) {      
       if (rec.intersects(pi.getPerimetro())) {
         pi.render(g);
       }
     }
 
     // dibujar los powerups
-    for (int i = 0; i < powerups.size(); i++) {
-      PowerUps powerup = powerups.get(i);
+    for (PowerUps powerup : powerups) {
       if (rec.intersects(powerup.getPerimetro())) {
         powerup.render(g);
       }
     }
 
     // dibujar comidas
-    for (int i = 0; i < comidas.size(); i++) {
-      Comida comida = comidas.get(i);
+    for (Comida comida : comidas) {
       if (rec.intersects(comida.getPerimetro())) {
         comida.render(g);
       }
     }
 
-    // Draw bubbles
-    for (int i = 0; i < disparos.size(); i++) {
-      Shot disp = disparos.get(i);
-      if (rec.intersects(disp.getPerimetro())) {
-        disp.render(g);
+    // dibujar los chiles
+    for (Enemy chile : chiles) {
+      if (rec.intersects(chile.getPerimetro())) {
+        chile.render(g);
       }
     }
 
-    // Draw signs
-    for (int i = 0; i < letreros.size(); i++) {
-      Letrero sign = letreros.get(i);
-      if (rec.intersects(sign.getPerimetro())) {
-        sign.render(g);
+    // Draw bubbles
+    for (Shot disp : disparos) {
+      if (rec.intersects(disp.getPerimetro())) {
+        disp.render(g);
       }
     }
 
