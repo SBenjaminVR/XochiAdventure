@@ -167,7 +167,7 @@ public class Player extends Item{
 
   @Override
   public void tick(KeyManager keyManager) {
-      // moving player depending on flags
+    // moving player depending on flags
     if (getX() > 0 && (keyManager.lastLeft || keyManager.a)) {
       setX(getX() - getSpeedX());
       setDirection(-1);
@@ -208,10 +208,10 @@ public class Player extends Item{
     // checks if the player is moving to animate its walking
     if (moving) {
       if (getDirection() == 1) {
-          xochiAnim.tick();
+        xochiAnim.tick();
       }
       else {
-          xochiAnimLeft.tick();
+        xochiAnimLeft.tick();
       }
     }         
   }

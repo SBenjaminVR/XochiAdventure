@@ -133,7 +133,7 @@ public class GameLevel {
       }
     }
 
-    // chiles are ticke
+    // chiles are ticked
     for (int i  = 0; i < chiles.size(); i++) {
       Enemy chile = chiles.get(i);
       chile.tick(keyManager);
