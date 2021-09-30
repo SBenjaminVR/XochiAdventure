@@ -21,7 +21,8 @@ enum Screen {
   OPTIONS,
   RECIPIES,
   LEVEL,
-  CONTROLS
+  CONTROLS,
+  CREDITS
 }
 
 // enum to navigate through all the options in the Main menu
@@ -32,6 +33,7 @@ enum MenuOpt {
   OPTIONS,
   CONTROLS,
   RECIPIES,
+  CREDITS
 }
 
 // enum to navigate through all the options in the Options menu
@@ -90,6 +92,8 @@ public class Game implements Runnable {
 
   private GameLevel gameLevel;
 
+  private String[] credits;
+
   /**
    * to create title, width, height, keyManager, bricks,
    * nombreArchivo, and texto and set the game is still not running
@@ -113,6 +117,12 @@ public class Game implements Runnable {
     brightness = 3;
     menuMusicPlaying = false;
     effectsOn = true;
+
+    credits = new String[4];
+    credits[0] = "Alejandra García - Programadora";
+    credits[1] = "Benjamín Váldez - Programador";
+    credits[2] = "Humberto González - Programador";
+    credits[3] = "Melba Consuelos - Artista";
   }
 
   // GETS ------------------------------------------------------------------------------------------------------------------------------------
@@ -239,6 +249,9 @@ public class Game implements Runnable {
                 menOpt = MenuOpt.CONTROLS;
                 break;
               case CONTROLS:
+                menOpt = MenuOpt.CREDITS;
+                break;
+              case CREDITS:
                 menOpt = MenuOpt.OPTIONS;
                 break;
               case ONE:
@@ -257,13 +270,16 @@ public class Game implements Runnable {
             // checks to where you are navigating in the menu
             switch(menOpt){
               case OPTIONS:
-                menOpt = MenuOpt.CONTROLS;
+                menOpt = MenuOpt.CREDITS;
                 break;
               case RECIPIES:
                 menOpt = MenuOpt.OPTIONS;
                 break;
               case CONTROLS:
                 menOpt = MenuOpt.RECIPIES;
+                break;
+              case CREDITS:
+                menOpt = MenuOpt.CONTROLS;
                 break;
               case ONE:
                 menOpt = MenuOpt.THREE;
@@ -290,6 +306,9 @@ public class Game implements Runnable {
               case CONTROLS:
                 menOpt = MenuOpt.THREE;
                 break;
+              case CREDITS:
+                menOpt = MenuOpt.THREE;
+                break;
               case ONE:
                 menOpt = MenuOpt.OPTIONS;
                 break;
@@ -310,18 +329,18 @@ public class Game implements Runnable {
               menuMusicPlaying = false;
             }
 
+            if (soundOn) {
+              Assets.selectSnd.play();
+            }
+
             // Checks to which screen you are changing to
             switch(menOpt) {
               case OPTIONS:
-                if (soundOn) {
-                  Assets.selectSnd.play();
-                }
                 screen = Screen.OPTIONS;
                 optOpt = OptOpt.DALTONICO;
                 break;
               case ONE:
                 if (soundOn) {
-                  Assets.selectSnd.play();
                   Assets.level1Music.play();
                 }
                 nivel = 1;
@@ -332,7 +351,6 @@ public class Game implements Runnable {
                 break;
               case TWO:
                 if (soundOn) {
-                  Assets.selectSnd.play();
                   Assets.level2Music.play();
                 }
                 nivel = 2;
@@ -343,7 +361,6 @@ public class Game implements Runnable {
                 break;
               case THREE:
                 if (soundOn) {
-                  Assets.selectSnd.play();
                   Assets.level3Music.play();
                 }
                 nivel = 3;
@@ -353,16 +370,13 @@ public class Game implements Runnable {
                 screen = Screen.LEVEL;
                 break;
               case RECIPIES:
-                if (soundOn) {
-                  Assets.selectSnd.play();
-                }
                 screen = Screen.RECIPIES;
                 break;
               case CONTROLS:
-                if (soundOn) {
-                  Assets.selectSnd.play();
-                }
                 screen = Screen.CONTROLS;
+                break;
+              case CREDITS:
+                screen = Screen.CREDITS;
                 break;
             }
           }
@@ -544,6 +558,13 @@ public class Game implements Runnable {
           }
 
           break;
+        case CREDITS:
+          // Checks if the user presses enter to advance to the next screen
+          if (keyManager.back) {
+            screen = Screen.MENU;
+            menOpt = MenuOpt.CREDITS;
+          }
+          break;
     }
   }
 /**
@@ -563,6 +584,8 @@ public class Game implements Runnable {
     } else {
       g = bs.getDrawGraphics();
       g.setFont(texto);
+
+      g.drawImage(Assets.blueBackground, 0, 0, getWidth(), getHeight(), null);
       // Checks which screen to render
       switch(screen) {
           case TITLESCREEN:
@@ -597,6 +620,10 @@ public class Game implements Runnable {
                 break;
               case CONTROLS:
                 g.drawImage(Assets.select, 770, 185, 100, 100, null);
+                g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
+                break;
+              case CREDITS:
+                g.drawImage(Assets.select, 805, 240, 100, 100, null);
                 g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
                 break;
               case ONE:
@@ -727,8 +754,16 @@ public class Game implements Runnable {
               }
             }
 
-            
-
+            break;
+          case CREDITS:
+            int i = 0;
+            int x = getWidth() / 2, y = getHeight() / 2 - (credits.length / 2 * 40);
+            g.drawImage(Assets.credits, x - 190, 100, 380, 82, null);
+            for (String credit : credits) {
+              g.drawString(credit, x - (credit.length() / 2 * 16) , y + 35 * i);
+              i++;
+            }
+            g.drawString("Presione backspace para regresar al menu principal", x - 385 , getHeight() - 100);
             break;
       }
       switch(brightness) {

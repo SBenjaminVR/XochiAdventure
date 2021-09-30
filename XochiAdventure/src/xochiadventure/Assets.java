@@ -32,7 +32,7 @@ public class Assets {
   public static BufferedImage shot;                       // to store flask color
   public static BufferedImage heart;                      // to store the taco heart image
   
-      // Menu screens
+  // Menu screens
   public static BufferedImage titleScreen;                // to store the title screen
   public static BufferedImage menu;                       // to store the menu     
   public static BufferedImage options;                    // to store the options screen image
@@ -40,6 +40,8 @@ public class Assets {
   public static BufferedImage select;                     // to store the red rectangle image
   public static BufferedImage recipies;                   // to store the recipies screen 
   public static BufferedImage story;
+  public static BufferedImage blueBackground;             // to store blue background
+  public static BufferedImage credits;                    // to store the credits text
   
   // Main menu decorations
   public static BufferedImage thinkingXochi;              // to store the image of xochi for the main menu
@@ -157,6 +159,8 @@ public class Assets {
     miniLevel3 = ImageLoader.loadImage("/images/pantallas/miniNivel3.png");
     thinkingXochi = ImageLoader.loadImage("/images/pantallas/xochiT.png");
     story = ImageLoader.loadImage("/images/pantallas/backstory.jpg");
+    blueBackground = ImageLoader.loadImage("/images/pantallas/fondo.png");
+    credits = ImageLoader.loadImage("/images/pantallas/creditos.png");
     
     cactus = ImageLoader.loadImage("/images/pantallas/cactus.png");
     pyramid = ImageLoader.loadImage("/images/pantallas/pyramid.png");
