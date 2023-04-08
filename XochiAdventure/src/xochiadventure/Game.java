@@ -1208,6 +1208,325 @@ public class Game implements Runnable {
           break;
     }
   }
+
+  private void renderScreen() {
+	  switch(screen) {
+	      case TITLESCREEN:
+	        // Title screen image
+	        g.drawImage(Assets.menuScreens[Assets.Screen.TITLESCREEN.ordinal()], 0, 0, getWidth(), getHeight(), null);
+	        break;
+	
+	      case STORY:
+	        g.drawImage(Assets.menuScreens[Assets.Screen.STORY.ordinal()], 0, 0, getWidth(), getHeight(), null);
+	        break;
+	
+	      case MENU:
+	      
+	        // Main menu background image
+	        g.drawImage(Assets.menuScreens[Assets.Screen.MENU.ordinal()], 0, 0, getWidth(), getHeight(), null);
+	
+	        //Elementos decorativos en el mapa
+	        g.drawImage(Assets.mainMenu[Assets.MainMenu.CACTUS.ordinal()], 478, 220, Assets.mainMenu[Assets.MainMenu.CACTUS.ordinal()].getWidth(), Assets.mainMenu[Assets.MainMenu.CACTUS.ordinal()].getHeight(), null);
+	        g.drawImage(Assets.mainMenu[Assets.MainMenu.PIRAMIDE.ordinal()], 990, 420, Assets.mainMenu[Assets.MainMenu.PIRAMIDE.ordinal()].getWidth(), Assets.mainMenu[Assets.MainMenu.PIRAMIDE.ordinal()].getHeight(), null);
+	        g.drawImage(Assets.mainMenu[Assets.MainMenu.CRAB.ordinal()], 730, 460, Assets.mainMenu[Assets.MainMenu.CRAB.ordinal()].getWidth(), Assets.mainMenu[Assets.MainMenu.CRAB.ordinal()].getHeight(), null);
+	
+	        // Checks where to draw the cursor that shows which option of the menu you are selecting
+	        // and whether to show a preview of the level you are selecting or a picture of the mian character
+	        BufferedImage idk = Assets.mainMenu[Assets.MainMenu.XOCHI.ordinal()];
+	        
+	        if (menOpt == MenuOpt.OPTIONS || menOpt == MenuOpt.RECIPIES || menOpt == MenuOpt.CONTROLS) {
+	        	menuOptionValues[0] = 20;
+	        	menuOptionValues[1] = 520;
+	        	menuOptionValues[2] = 400;
+	        	menuOptionValues[3] = 225;
+	        	idk = Assets.mainMenu[Assets.MainMenu.XOCHI.ordinal()];
+	        	switch(menOpt) {
+	            case OPTIONS:
+	              	selectValues[0] = 810;
+	              	selectValues[1] = 70;
+	              break;
+	            case RECIPIES:
+	          	  	selectValues[0] = 810;
+	            	selectValues[1] = 125;
+	              break;
+	            case CONTROLS:
+	          	  	selectValues[0] = 770;
+	            	selectValues[1] = 185;
+	              break;
+	          }
+	        } else {
+	        	menuOptionValues[0] = 40;
+	        	menuOptionValues[1] = 420;
+	        	menuOptionValues[2] = 400;
+	        	menuOptionValues[3] = 230;
+	        	switch(menOpt) {
+	            case ONE:
+	            	selectValues[0] = 620;
+	            	selectValues[1] = 380;
+	            	idk = Assets.mainMenu[Assets.MainMenu.LEVEL_1.ordinal()];
+	              break;
+	            case TWO:
+	          	  	selectValues[0] = 590;
+	            	selectValues[1] = 450;
+	            	idk = Assets.mainMenu[Assets.MainMenu.LEVEL_2.ordinal()];
+	              break;
+	            case THREE:
+	          	  	selectValues[0] = 680;
+	            	selectValues[1] = 535;
+	            	idk = Assets.mainMenu[Assets.MainMenu.LEVEL_3.ordinal()];
+	              break;
+	          }
+	        }
+	
+	        g.drawImage(selectImage, selectValues[0], selectValues[1], selectValues[2], selectValues[3], null);
+	        g.drawImage(idk, menuOptionValues[0], menuOptionValues[1], menuOptionValues[2], menuOptionValues[3], null);
+	        break;
+	      case OPTIONS:
+	        // Options menu background
+	        g.drawImage(Assets.menuScreens[Assets.Screen.OPTIONS.ordinal()], 0, 0, getWidth(), getHeight(), null);
+	
+	        // Shows if the sound/effecstOn option is on/off
+	        if (soundOn) {
+	          g.drawImage(Assets.menuIcons[Assets.MenuIcons.FLECHITA.ordinal()], 920, 278, 34, 34, null);
+	        }
+	        if (effectsOn) {
+	          g.drawImage(Assets.menuIcons[Assets.MenuIcons.FLECHITA.ordinal()], 920, 172, 34, 34, null);
+	        }
+	
+	        // Shows which option you are selecting
+	        switch (optOpt) {
+	          case DALTONICO:
+	            g.drawImage(selectImage, 190, 145, 100, 100, null);
+	            break;
+	          case SONIDO:
+	            g.drawImage(selectImage, 190, 255, 100, 100, null);
+	            break;
+	          case BRILLO:
+	            g.drawImage(selectImage, 190, 370, 100, 100, null);
+	            break;
+	        }
+	        
+	        BufferedImage brightnessOption = Assets.opbrightness3;;
+	
+	        // Shows how much brightness you are selecting
+	        switch (brightness) {
+	          case 1:
+	        	  brightnessOption = Assets.opbrightness1;
+	            break;
+	          case 2:
+	        	  brightnessOption = Assets.opbrightness2;
+	            break;
+	          case 3:
+	        	  brightnessOption = Assets.opbrightness3;
+	            break;
+	          case 4:
+	        	  brightnessOption = Assets.opbrightness4;
+	            break;
+	          case 5:
+	        	  brightnessOption = Assets.opbrightness5;
+	            break;
+	        }
+	        g.drawImage(brightnessOption, 600 , 380, 360 , 70, null);
+	        break;
+	      case RECIPIES:
+	          // Sets the color for the name of the ingredients
+	          g.setColor(Color.BLACK);
+	
+	          // Recipies menu background image
+	          g.drawImage(Assets.menuScreens[Assets.Screen.RECIPIES.ordinal()], 0, 0, getWidth(), getHeight(), null);
+	
+	          // Shows a recipie depending in which page you are
+	          switch (currentRecipePage) {
+	            case 1:
+	              g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
+	              g.drawString("Enchiladas Potosinas", 270, 125);
+	              g.drawImage(Assets.recetaEnchiladas, 725, 70, 420, 543, null);
+	              for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
+	                g.drawImage(Assets.ingredientesEnchiladas[i], 100, 200 + i*50, 50, 50, null);
+	                g.drawString(Assets.ingrEnchiladas[i], 200, 240 + i * 50);
+	              }
+	              g.drawImage(Assets.pasarPag, getWidth()-200, getHeight()-100, 100, 100, null);
+	              break;
+	            case 2:
+	              g.drawImage(Assets.quecas, 140, 65, 100, 100, null);
+	              g.drawString("Quesadillas", 270, 125);
+	              g.drawImage(Assets.recetaQuecas, 725, 70, 420, 543, null);
+	              for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
+	                g.drawImage(Assets.ingredientesQuecas[i], 100, 200 + i*50, 50, 50, null);
+	                g.drawString(Assets.ingrQuecas[i], 200, 240 + i * 50);
+	              }                           
+	              g.drawImage(Assets.pasarPag, getWidth()-200, getHeight()-100, 100, 100, null);
+	              g.drawImage(Assets.pasarPagReves, getWidth()-300, getHeight()-100, 100, 100, null);
+	              break;
+	            case 3:
+	              g.drawImage(Assets.mole, 130, 65, 100, 100, null);
+	              g.drawString("Mole Oaxaqueño", 270, 125);
+	              g.drawImage(Assets.recetaMole, 725, 70, 420, 543, null);
+	              for (int i = 0; i < Assets.ingredientesMole.length; i++) {
+	                g.drawImage(Assets.ingredientesMole[i], 100, 200 + i*50, 50, 50, null);
+	                g.drawString(Assets.ingrMole[i], 200, 240 + i * 50);
+	              }                           
+	              g.drawImage(Assets.pasarPagReves, getWidth()-200, getHeight()-100, 100, 100, null);
+	              break;
+	            default:
+	              break;
+	          }
+	        
+	        break;
+	      case CONTROLS:
+	
+	        // Controls screen image
+	        g.drawImage(Assets.menuScreens[Assets.Screen.CONTROLS.ordinal()], 0, 0, getWidth(), getHeight(), null);
+	        break;
+	      case LEVEL:
+	
+	        // BACKGROUND
+	        g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
+	
+	        // GAME
+	
+	        // Draw the platforms
+	        for (int i = 0; i < platforms.size(); i++) {
+	          Platform platform = platforms.get(i);
+	          // System.out.println("platform" + i + " " + (rec.intersects(platform.getPerimetro())));
+	          if (rec.intersects(platform.getPerimetro())) {
+	            platform.render(g);
+	          }
+	        }
+	
+	        // Draw the fountain
+	
+	        
+	        g.drawImage(Assets.fuente, (fuente.x - rec.x), (fuente.y - rec.y), fuente.width, fuente.height, null);
+	        
+	
+	        // dibujar los chiles
+	        for (int i = 0; i < chiles.size(); i++) {
+	          Enemy chile = chiles.get(i);
+	          if (rec.intersects(chile.getPerimetro())) {
+	            chile.render(g);
+	          }
+	        }
+	
+	        for (int i = 0; i < picos.size(); i++) {
+	          Pico pi = picos.get(i);
+	          if (rec.intersects(pi.getPerimetro())) {
+	            pi.render(g);
+	          }
+	        }
+	
+	        // dibujar los powerups
+	        for (int i = 0; i < powerups.size(); i++) {
+	          PowerUps powerup = powerups.get(i);
+	          if (rec.intersects(powerup.getPerimetro())) {
+	            powerup.render(g);
+	          }
+	        }
+	
+	        // dibujar comidas
+	        for (int i = 0; i < comidas.size(); i++) {
+	          Comida comida = comidas.get(i);
+	          if (rec.intersects(comida.getPerimetro())) {
+	            comida.render(g);
+	          }
+	        }
+	
+	        // Draw bubbles
+	        for (int i = 0; i < disparos.size(); i++) {
+	          Shot disp = disparos.get(i);
+	          if (rec.intersects(disp.getPerimetro())) {
+	            disp.render(g);
+	          }
+	        }
+	
+	        // Draw signs
+	        for (int i = 0; i < letreros.size(); i++) {
+	          Letrero sign = letreros.get(i);
+	          if (rec.intersects(sign.getPerimetro())) {
+	            sign.render(g);
+	          }
+	        }
+	
+	        // draw player
+	        player.render(g);
+	
+	        // UI
+	
+	        // lives
+	        for (int i = 0; i < player.getLives(); i++) {
+	          g.drawImage(Assets.heart, 0 + i * 60, 0, 50 , 50, null); // PLACEHOLDER
+	        }
+	
+	        // bubbles
+	        for (int i = 0; i < 100 - (100 - player.getWater()); i+=10) {
+	          g.drawImage(Assets.shot, 0 + i * 6, 60, 50 , 50, null); // PLACEHOLDER
+	        }
+	
+	        int iPosX = getWidth() - 55;
+	        int iPosY = 20;
+	
+	        // dibujar ingredientes recolectados
+	        for (int i = 0; i < recolectado.size(); i++) {
+	          Comida recol = recolectado.get(i);
+	          recol.renderUI(g, iPosX, iPosY);
+	          iPosX -= 55;
+	        }
+	
+	        // pause menu
+	        if (pauseGame) {
+	          g.setColor(Color.WHITE);
+	          g.drawImage(Assets.pause, 0, 0, getWidth(), getHeight(), null);
+	          g.drawString("Continuar jugando", getWidth() / 2 - 100, getHeight() / 2 + 50);
+	          g.drawString("Regresar al menu principal", getWidth() / 2 - 165, getHeight() / 2 + 120);
+	          switch(pauseOpt) {
+	            case CONTINUE_LEVEL:
+	              g.drawImage(selectImage, getWidth() / 2 - 200, getHeight() / 2 - 10, 100, 100, null);
+	              break;
+	            case EXIT:
+	              g.drawImage(selectImage, getWidth() / 2 - 265, getHeight() / 2 + 60, 100, 100, null);
+	              break;
+	          }
+	        }
+	
+	        if (endGame) {
+	          // g.setFont(texto);
+	          if (comidas.isEmpty()) {
+	            // you won
+	            g.drawImage(Assets.ganado, 0, 0, getWidth(), getHeight(), null);
+	          } else if (player.getLives() == 0) {
+	            // you lost
+	            g.drawImage(Assets.perdido, 0, 0, getWidth(), getHeight(), null);
+	          }
+	        }
+	
+	        break;
+	  }
+  }
+
+  private void renderBrightness() {
+	  BufferedImage brightnessImage;
+      switch(brightness) {
+        case 1:
+        	brightnessImage = Assets.brightness1;
+          break;
+        case 2:
+        	brightnessImage = Assets.brightness2;
+          break;
+        case 4:
+        	brightnessImage = Assets.brightness4;
+          break;
+        case 5:
+        	brightnessImage = Assets.brightness5;
+          break;
+        default:
+        	brightnessImage = null;
+        	break;
+      }
+      if (brightnessImage != null) {    	  
+    	  g.drawImage(brightnessImage, 0 , 0, getWidth() , getHeight(), null);
+      }
+  }
+  
 /**
  * Render function that displays the assets on screen
  */
@@ -1226,308 +1545,8 @@ public class Game implements Runnable {
       g = bs.getDrawGraphics();
       g.setFont(texto);
       // Checks which screen to render
-      switch(screen) {
-          case TITLESCREEN:
-            // Title screen image
-            g.drawImage(Assets.menuScreens[Assets.Screen.TITLESCREEN.ordinal()], 0, 0, getWidth(), getHeight(), null);
-            break;
-
-          case STORY:
-            g.drawImage(Assets.menuScreens[Assets.Screen.STORY.ordinal()], 0, 0, getWidth(), getHeight(), null);
-            break;
-
-          case MENU:
-          
-            // Main menu background image
-            g.drawImage(Assets.menuScreens[Assets.Screen.MENU.ordinal()], 0, 0, getWidth(), getHeight(), null);
-
-            //Elementos decorativos en el mapa
-            g.drawImage(Assets.mainMenu[Assets.MainMenu.CACTUS.ordinal()], 478, 220, Assets.mainMenu[Assets.MainMenu.CACTUS.ordinal()].getWidth(), Assets.mainMenu[Assets.MainMenu.CACTUS.ordinal()].getHeight(), null);
-            g.drawImage(Assets.mainMenu[Assets.MainMenu.PIRAMIDE.ordinal()], 990, 420, Assets.mainMenu[Assets.MainMenu.PIRAMIDE.ordinal()].getWidth(), Assets.mainMenu[Assets.MainMenu.PIRAMIDE.ordinal()].getHeight(), null);
-            g.drawImage(Assets.mainMenu[Assets.MainMenu.CRAB.ordinal()], 730, 460, Assets.mainMenu[Assets.MainMenu.CRAB.ordinal()].getWidth(), Assets.mainMenu[Assets.MainMenu.CRAB.ordinal()].getHeight(), null);
-
-            // Checks where to draw the cursor that shows which option of the menu you are selecting
-            // and whether to show a preview of the level you are selecting or a picture of the mian character
-            BufferedImage idk = Assets.mainMenu[Assets.MainMenu.XOCHI.ordinal()];
-            
-            if (menOpt == MenuOpt.OPTIONS || menOpt == MenuOpt.RECIPIES || menOpt == MenuOpt.CONTROLS) {
-            	menuOptionValues[0] = 20;
-            	menuOptionValues[1] = 520;
-            	menuOptionValues[2] = 400;
-            	menuOptionValues[3] = 225;
-            	idk = Assets.mainMenu[Assets.MainMenu.XOCHI.ordinal()];
-            	switch(menOpt) {
-                case OPTIONS:
-	              	selectValues[0] = 810;
-	              	selectValues[1] = 70;
-                  break;
-                case RECIPIES:
-              	  	selectValues[0] = 810;
-                	selectValues[1] = 125;
-                  break;
-                case CONTROLS:
-              	  	selectValues[0] = 770;
-                	selectValues[1] = 185;
-                  break;
-              }
-            } else {
-            	menuOptionValues[0] = 40;
-            	menuOptionValues[1] = 420;
-            	menuOptionValues[2] = 400;
-            	menuOptionValues[3] = 230;
-            	switch(menOpt) {
-                case ONE:
-                	selectValues[0] = 620;
-                	selectValues[1] = 380;
-                	idk = Assets.mainMenu[Assets.MainMenu.LEVEL_1.ordinal()];
-                  break;
-                case TWO:
-              	  	selectValues[0] = 590;
-                	selectValues[1] = 450;
-                	idk = Assets.mainMenu[Assets.MainMenu.LEVEL_2.ordinal()];
-                  break;
-                case THREE:
-              	  	selectValues[0] = 680;
-                	selectValues[1] = 535;
-                	idk = Assets.mainMenu[Assets.MainMenu.LEVEL_3.ordinal()];
-                  break;
-              }
-            }
-
-            g.drawImage(selectImage, selectValues[0], selectValues[1], selectValues[2], selectValues[3], null);
-            g.drawImage(idk, menuOptionValues[0], menuOptionValues[1], menuOptionValues[2], menuOptionValues[3], null);
-            break;
-          case OPTIONS:
-            // Options menu background
-            g.drawImage(Assets.menuScreens[Assets.Screen.MENU.ordinal()], 0, 0, getWidth(), getHeight(), null);
-
-            // Shows if the sound/effecstOn option is on/off
-            if (soundOn) {
-              g.drawImage(Assets.checkmark, 920, 278, 34, 34, null);
-            }
-            if (effectsOn) {
-              g.drawImage(Assets.checkmark, 920, 172, 34, 34, null);
-            }
-
-            // Shows which option you are selecting
-            switch (optOpt) {
-              case DALTONICO:
-                g.drawImage(selectImage, 190, 145, 100, 100, null);
-                break;
-              case SONIDO:
-                g.drawImage(selectImage, 190, 255, 100, 100, null);
-                break;
-              case BRILLO:
-                g.drawImage(selectImage, 190, 370, 100, 100, null);
-                break;
-            }
-
-            // Shows how much brightness you are selecting
-            switch (brightness) {
-              case 1:
-                g.drawImage(Assets.opbrightness1, 600 , 380, 360 , 70, null);
-                break;
-              case 2:
-                g.drawImage(Assets.opbrightness2, 600 , 380, 360 , 70, null);
-                break;
-              case 3:
-                g.drawImage(Assets.opbrightness3, 600 , 380, 360 , 70, null);
-                break;
-              case 4:
-                g.drawImage(Assets.opbrightness4, 600 , 380, 360 , 70, null);
-                break;
-              case 5:
-                g.drawImage(Assets.opbrightness5, 600 , 380, 360 , 70, null);
-                break;
-            }
-            break;
-          case RECIPIES:
-              // Sets the color for the name of the ingredients
-              g.setColor(Color.BLACK);
-
-              // Recipies menu background image
-              g.drawImage(Assets.menuScreens[Assets.Screen.RECIPIES.ordinal()], 0, 0, getWidth(), getHeight(), null);
-
-              // Shows a recipie depending in which page you are
-              switch (currentRecipePage) {
-                case 1:
-                  g.drawImage(Assets.enchiladas, 70, 10, 200, 200, null);
-                  g.drawString("Enchiladas Potosinas", 270, 125);
-                  g.drawImage(Assets.recetaEnchiladas, 725, 70, 420, 543, null);
-                  for (int i = 0; i < Assets.ingredientesEnchiladas.length; i++) {
-                    g.drawImage(Assets.ingredientesEnchiladas[i], 100, 200 + i*50, 50, 50, null);
-                    g.drawString(Assets.ingrEnchiladas[i], 200, 240 + i * 50);
-                  }
-                  g.drawImage(Assets.pasarPag, getWidth()-200, getHeight()-100, 100, 100, null);
-                  break;
-                case 2:
-                  g.drawImage(Assets.quecas, 140, 65, 100, 100, null);
-                  g.drawString("Quesadillas", 270, 125);
-                  g.drawImage(Assets.recetaQuecas, 725, 70, 420, 543, null);
-                  for (int i = 0; i < Assets.ingredientesQuecas.length; i++) {
-                    g.drawImage(Assets.ingredientesQuecas[i], 100, 200 + i*50, 50, 50, null);
-                    g.drawString(Assets.ingrQuecas[i], 200, 240 + i * 50);
-                  }                           
-                  g.drawImage(Assets.pasarPag, getWidth()-200, getHeight()-100, 100, 100, null);
-                  g.drawImage(Assets.pasarPagReves, getWidth()-300, getHeight()-100, 100, 100, null);
-                  break;
-                case 3:
-                  g.drawImage(Assets.mole, 130, 65, 100, 100, null);
-                  g.drawString("Mole Oaxaqueño", 270, 125);
-                  g.drawImage(Assets.recetaMole, 725, 70, 420, 543, null);
-                  for (int i = 0; i < Assets.ingredientesMole.length; i++) {
-                    g.drawImage(Assets.ingredientesMole[i], 100, 200 + i*50, 50, 50, null);
-                    g.drawString(Assets.ingrMole[i], 200, 240 + i * 50);
-                  }                           
-                  g.drawImage(Assets.pasarPagReves, getWidth()-200, getHeight()-100, 100, 100, null);
-                  break;
-                default:
-                  break;
-              }
-            
-            break;
-          case CONTROLS:
-
-            // Controls screen image
-            g.drawImage(Assets.menuScreens[Assets.Screen.CONTROLS.ordinal()], 0, 0, getWidth(), getHeight(), null);
-            break;
-          case LEVEL:
-
-            // BACKGROUND
-            g.drawImage(Assets.background, 0, 0, getWidth(), getHeight(), null);
-
-            // GAME
-
-            // Draw the platforms
-            for (int i = 0; i < platforms.size(); i++) {
-              Platform platform = platforms.get(i);
-              // System.out.println("platform" + i + " " + (rec.intersects(platform.getPerimetro())));
-              if (rec.intersects(platform.getPerimetro())) {
-                platform.render(g);
-              }
-            }
-
-            // Draw the fountain
-
-            
-            g.drawImage(Assets.fuente, (fuente.x - rec.x), (fuente.y - rec.y), fuente.width, fuente.height, null);
-            
-
-            // dibujar los chiles
-            for (int i = 0; i < chiles.size(); i++) {
-              Enemy chile = chiles.get(i);
-              if (rec.intersects(chile.getPerimetro())) {
-                chile.render(g);
-              }
-            }
-
-            for (int i = 0; i < picos.size(); i++) {
-              Pico pi = picos.get(i);
-              if (rec.intersects(pi.getPerimetro())) {
-                pi.render(g);
-              }
-            }
-
-            // dibujar los powerups
-            for (int i = 0; i < powerups.size(); i++) {
-              PowerUps powerup = powerups.get(i);
-              if (rec.intersects(powerup.getPerimetro())) {
-                powerup.render(g);
-              }
-            }
-
-            // dibujar comidas
-            for (int i = 0; i < comidas.size(); i++) {
-              Comida comida = comidas.get(i);
-              if (rec.intersects(comida.getPerimetro())) {
-                comida.render(g);
-              }
-            }
-
-            // Draw bubbles
-            for (int i = 0; i < disparos.size(); i++) {
-              Shot disp = disparos.get(i);
-              if (rec.intersects(disp.getPerimetro())) {
-                disp.render(g);
-              }
-            }
-
-            // Draw signs
-            for (int i = 0; i < letreros.size(); i++) {
-              Letrero sign = letreros.get(i);
-              if (rec.intersects(sign.getPerimetro())) {
-                sign.render(g);
-              }
-            }
-
-            // draw player
-            player.render(g);
-
-            // UI
-
-            // lives
-            for (int i = 0; i < player.getLives(); i++) {
-              g.drawImage(Assets.heart, 0 + i * 60, 0, 50 , 50, null); // PLACEHOLDER
-            }
-
-            // bubbles
-            for (int i = 0; i < 100 - (100 - player.getWater()); i+=10) {
-              g.drawImage(Assets.shot, 0 + i * 6, 60, 50 , 50, null); // PLACEHOLDER
-            }
-
-            int iPosX = getWidth() - 55;
-            int iPosY = 20;
-
-            // dibujar ingredientes recolectados
-            for (int i = 0; i < recolectado.size(); i++) {
-              Comida recol = recolectado.get(i);
-              recol.renderUI(g, iPosX, iPosY);
-              iPosX -= 55;
-            }
-
-            // pause menu
-            if (pauseGame) {
-              g.setColor(Color.WHITE);
-              g.drawImage(Assets.pause, 0, 0, getWidth(), getHeight(), null);
-              g.drawString("Continuar jugando", getWidth() / 2 - 100, getHeight() / 2 + 50);
-              g.drawString("Regresar al menu principal", getWidth() / 2 - 165, getHeight() / 2 + 120);
-              switch(pauseOpt) {
-                case CONTINUE_LEVEL:
-                  g.drawImage(selectImage, getWidth() / 2 - 200, getHeight() / 2 - 10, 100, 100, null);
-                  break;
-                case EXIT:
-                  g.drawImage(selectImage, getWidth() / 2 - 265, getHeight() / 2 + 60, 100, 100, null);
-                  break;
-              }
-            }
-
-            if (endGame) {
-              // g.setFont(texto);
-              if (comidas.isEmpty()) {
-                // you won
-                g.drawImage(Assets.ganado, 0, 0, getWidth(), getHeight(), null);
-              } else if (player.getLives() == 0) {
-                // you lost
-                g.drawImage(Assets.perdido, 0, 0, getWidth(), getHeight(), null);
-              }
-            }
-
-            break;
-      }
-      switch(brightness) {
-        case 1:
-          g.drawImage(Assets.brightness1, 0 , 0, getWidth() , getHeight(), null);
-          break;
-        case 2:
-          g.drawImage(Assets.brightness2, 0 , 0, getWidth() , getHeight(), null);
-          break;
-        case 4:
-          g.drawImage(Assets.brightness4, 0 , 0, getWidth() , getHeight(), null);
-          break;
-        case 5:
-          g.drawImage(Assets.brightness5, 0 , 0, getWidth() , getHeight(), null);
-          break;
-      }
+      renderScreen();
+      renderBrightness();
 
       bs.show();
       g.dispose();

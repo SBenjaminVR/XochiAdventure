@@ -96,7 +96,6 @@ public class Assets {
   public static BufferedImage ingredientesQuecas[];
   
   // Options menu
-  public static BufferedImage checkmark;
   public static BufferedImage brightness1;               // to store a image for brightness
   public static BufferedImage brightness2;               // to store a image for brightness
   public static BufferedImage brightness4;               // to store a image for brightness
