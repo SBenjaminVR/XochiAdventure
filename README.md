@@ -1,5 +1,9 @@
 # Xochi's Adventure
 
+Game made for Videogame development class, for more information please visit:
+
+[Itch.io](https://alegayndra.itch.io/xochis-adventure?secret=nzaTvPPG9L7VdF0BlHGhVlY541c)
+
 ## Description
 2D platformer developed in Java where the player has to collect ingredients from different mexican dishes, while avoiding dangers, such as the evil chiles and spikes.
 
