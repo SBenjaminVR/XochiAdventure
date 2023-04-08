@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xochiadventure;
 
 /**
@@ -14,6 +9,7 @@ package xochiadventure;
  *      - Benjamín Váldez Rodríguez             A00822027
  */
 public class XochiAdventure {
+
   /**
    * @param args the command line arguments
    */
