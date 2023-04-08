@@ -244,9 +244,9 @@ public class Player extends Item{
         }
       } else {
         if (getDirection() == 1) {
-          g.drawImage(Assets.xochiIdle, getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+          g.drawImage(Assets.playerAssets[Assets.PlayerAssets.IDLE_RIGHT.ordinal()], getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
         } else {
-          g.drawImage(Assets.xochiIdleLeft, getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
+          g.drawImage(Assets.playerAssets[Assets.PlayerAssets.IDLE_LEFT.ordinal()], getX() - game.getRec().x, (getY() - game.getRec().y), getWidth(), getHeight(), null);
         }
       }
     }

@@ -274,7 +274,7 @@ public class GameLevel {
     }
 
     // Draw the fountain    
-    g.drawImage(Assets.fuente, (fuente.x - rec.x), (fuente.y - rec.y), fuente.width, fuente.height, null);
+    g.drawImage(Assets.levelAssets[Assets.LevelAssets.FUENTE.ordinal()], (fuente.x - rec.x), (fuente.y - rec.y), fuente.width, fuente.height, null);
 
      // Draw signs
      for (Letrero sign : letreros) {

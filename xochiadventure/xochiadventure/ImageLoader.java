@@ -30,6 +30,9 @@ public class ImageLoader {
     } catch (IOException ioe) {
       System.out.println("Error loading image " + path + ioe.toString());
       System.exit(1);
+    } catch (Exception ex ) {
+    	System.out.println("Error loading image " + path + " " + ex.toString());
+    	ex.printStackTrace();
     }
     return bi;
   }

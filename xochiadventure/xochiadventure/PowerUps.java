@@ -136,7 +136,7 @@ public class PowerUps extends Item{
         g.drawImage(Assets.dulce, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
         break;
       default:
-        g.drawImage(Assets.powerup, (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
+        g.drawImage(Assets.levelAssets[Assets.LevelAssets.POWERUP.ordinal()], (getX() - game.getRec().x), (getY() - game.getRec().y), getWidth(), getHeight(), null);
         break;
     }
   }
