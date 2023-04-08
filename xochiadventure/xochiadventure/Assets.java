@@ -22,7 +22,6 @@ public class Assets {
         MOLE
     }
 
-
     // ingredients
     public static String[] ingrEnchiladas = new String[7];
     public static String[] ingrQuecas = new String[6];
@@ -154,6 +153,7 @@ public class Assets {
     public static SoundClip level3Music;
     
     static String soundsFolder =  "/sounds";
+    static String musicFolderPath =  soundsFolder + "/music";
     static String imageFolder =  "/images";
     static String pantallasFolder =  imageFolder + "/pantallas";
     static String picosFolder =  imageFolder + "/picos";
@@ -164,21 +164,21 @@ public class Assets {
      * initializing the images of the game
      */
     public static void init() {
-        //selectSnd = new SoundClip("/sounds/Retro_8-Bit_Game-Powerup_Achievement_05.wav");
+        //selectSnd = new SoundClip(soundsFolder + "/Retro_8-Bit_Game-Powerup_Achievement_05.wav");
 
         // Loading of sounds
-        selectSnd = new SoundClip("/sounds/selectSound.wav");
-        // selectSnd = new SoundClip("/sounds/select.wav"); OTRA OPCION NO SE CUAL ES MEJOR LOS TKM
-        atoleSnd = new SoundClip("/sounds/powerUp.wav");
-        dulceSnd = new SoundClip("/sounds/powerUp1.wav");
-        loseSnd = new SoundClip("/sounds/lose.wav");
-        hurtSnd = new SoundClip("/sounds/hurt.wav");
-        shootSnd = new SoundClip("/sounds/shoot.wav");
-        winSnd = new SoundClip("/sounds/win.wav");
-        mainMenuMusic = new SoundClip("/sounds/Mexico.wav");
-        level1Music = new SoundClip("/sounds/music/Continuum.wav");
-        level2Music = new SoundClip("/sounds/music/cdmx.wav");
-        level3Music = new SoundClip("/sounds/music/oaxaxa.wav");
+        selectSnd = new SoundClip(soundsFolder + "/select_sound.wav");
+        // selectSnd = new SoundClip(soundsFolder + "/select.wav"); OTRA OPCION NO SE CUAL ES MEJOR LOS TKM
+        atoleSnd = new SoundClip(soundsFolder + "/power_up.wav");
+        dulceSnd = new SoundClip(soundsFolder + "/power_up_1.wav");
+        loseSnd = new SoundClip(soundsFolder + "/lose.wav");
+        hurtSnd = new SoundClip(soundsFolder + "/hurt.wav");
+        shootSnd = new SoundClip(soundsFolder + "/shoot.wav");
+        winSnd = new SoundClip(soundsFolder + "/win.wav");
+        mainMenuMusic = new SoundClip(soundsFolder + "/mexico.wav");
+        level1Music = new SoundClip(musicFolderPath + "/potosi.wav");
+        level2Music = new SoundClip(musicFolderPath + "/cdmx.wav");
+        level3Music = new SoundClip(musicFolderPath + "/oaxaca.wav");
 
         // Loading of images of menu screens
         menuScreens[Screen.TITLESCREEN.ordinal()] = ImageLoader.loadImage(pantallasFolder + "/titlescreen.png");
@@ -307,17 +307,17 @@ public class Assets {
         xochiAnimLeft = new BufferedImage[5];
         // cropping the pictures from the xochi sheet into the array
         for (int i = 0; i < 5; i++) {
-        xochiAnim[i] = xochiSpriteSheet.crop(i * 100, 0, 100, 90);
+        	xochiAnim[i] = xochiSpriteSheet.crop(i * 100, 0, 100, 90);
         }
         playerAssets[PlayerAssets.IDLE_RIGHT.ordinal()] = xochiAnim[0];
         for (int i = 0; i < 5; i++) {
-        xochiAnimLeft[i] = xochiLeftSpriteSheet.crop(i * 100, 0, 100, 90);
+        	xochiAnimLeft[i] = xochiLeftSpriteSheet.crop(i * 100, 0, 100, 90);
         }
         playerAssets[PlayerAssets.IDLE_LEFT.ordinal()] = xochiAnimLeft[0];
 
         // cropping the pictures from the atole sheet into the array
         for (int i = 0; i < 3; i++) {
-        atoleAnim[i] = atoleSpriteSheet.crop(i * 200, 0, 200, 200);
+        	atoleAnim[i] = atoleSpriteSheet.crop(i * 200, 0, 200, 200);
         }
     }
 }
