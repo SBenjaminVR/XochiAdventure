@@ -24,12 +24,17 @@ public class ImageLoader {
    * @return the <bold>BufferedImage</bold> object
    */
   public static BufferedImage loadImage(String path) {
+//	  System.out.println(path);
     BufferedImage bi = null;
     try {
+//    	System.out.println(ImageLoader.class.getResource(path));
       bi = ImageIO.read(ImageLoader.class.getResource(path));
     } catch (IOException ioe) {
-      System.out.println("Error loading image " + path + ioe.toString());
+      System.out.println("IOException Error loading image " + path + ioe.toString());
       System.exit(1);
+    } catch (Exception ex ) {
+    	System.out.println("Error loading image " + path + " " + ex.toString());
+    	ex.printStackTrace();
     }
     return bi;
   }

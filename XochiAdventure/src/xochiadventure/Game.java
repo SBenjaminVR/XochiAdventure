@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,7 +26,7 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static xochiadventure.Assets.titleScreen;
+import xochiadventure.Assets;
 
 // enum to navigate all the screens that the game has
 enum Screen {
@@ -120,6 +121,10 @@ public class Game implements Runnable {
 
   private SoundClip confirmSound;
   private boolean hasPlayedWinSnd;
+  
+  private int[] selectValues = {0, 0, 100, 100};
+  private int[] menuOptionValues = {0, 0, 0, 0};
+  private BufferedImage selectImage;
 
   /**
    * to create title, width, height, keyManager, bricks,
@@ -696,7 +701,7 @@ public class Game implements Runnable {
         case MENU:
           // Checks if the main menu song is already playing, if it is not it plays it
           if (!menuMusicPlaying && soundOn) {
-            Assets.mainMenu.play();
+            Assets.mainMenuMusic.play();
             menuMusicPlaying = true;
           }
           // checks if the down arrow key is pressed
@@ -777,7 +782,7 @@ public class Game implements Runnable {
           if (keyManager.enter) {
             // Checks if the main menu song is playing, it it is it stops it
             if (menuMusicPlaying) {
-              Assets.mainMenu.stop();
+              Assets.mainMenuMusic.stop();
               menuMusicPlaying = false;
             }
 
@@ -1224,55 +1229,77 @@ public class Game implements Runnable {
       switch(screen) {
           case TITLESCREEN:
             // Title screen image
-            g.drawImage(Assets.titleScreen, 0, 0, getWidth(), getHeight(), null);
+            g.drawImage(Assets.menuScreens[Assets.Screen.TITLESCREEN.ordinal()], 0, 0, getWidth(), getHeight(), null);
             break;
 
           case STORY:
-            g.drawImage(Assets.story, 0, 0, getWidth(), getHeight(), null);
+            g.drawImage(Assets.menuScreens[Assets.Screen.STORY.ordinal()], 0, 0, getWidth(), getHeight(), null);
             break;
 
           case MENU:
           
             // Main menu background image
-            g.drawImage(Assets.menu, 0, 0, getWidth(), getHeight(), null);
+            g.drawImage(Assets.menuScreens[Assets.Screen.MENU.ordinal()], 0, 0, getWidth(), getHeight(), null);
 
             //Elementos decorativos en el mapa
-            g.drawImage(Assets.cactus, 478, 220, Assets.cactus.getWidth(), Assets.cactus.getHeight(), null);
-            g.drawImage(Assets.pyramid, 990, 420, Assets.pyramid.getWidth(), Assets.pyramid.getHeight(), null);
-            g.drawImage(Assets.crab, 730, 460, Assets.crab.getWidth(), Assets.crab.getHeight(), null);
+            g.drawImage(Assets.mainMenu[Assets.MainMenu.CACTUS.ordinal()], 478, 220, Assets.mainMenu[Assets.MainMenu.CACTUS.ordinal()].getWidth(), Assets.mainMenu[Assets.MainMenu.CACTUS.ordinal()].getHeight(), null);
+            g.drawImage(Assets.mainMenu[Assets.MainMenu.PIRAMIDE.ordinal()], 990, 420, Assets.mainMenu[Assets.MainMenu.PIRAMIDE.ordinal()].getWidth(), Assets.mainMenu[Assets.MainMenu.PIRAMIDE.ordinal()].getHeight(), null);
+            g.drawImage(Assets.mainMenu[Assets.MainMenu.CRAB.ordinal()], 730, 460, Assets.mainMenu[Assets.MainMenu.CRAB.ordinal()].getWidth(), Assets.mainMenu[Assets.MainMenu.CRAB.ordinal()].getHeight(), null);
 
             // Checks where to draw the cursor that shows which option of the menu you are selecting
             // and whether to show a preview of the level you are selecting or a picture of the mian character
-            switch(menOpt) {
-              case OPTIONS:
-                g.drawImage(Assets.select, 810, 70, 100, 100, null);
-                g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
-                break;
-              case RECIPIES:
-                g.drawImage(Assets.select, 785, 125, 100, 100, null);
-                g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
-                break;
-              case CONTROLS:
-                g.drawImage(Assets.select, 770, 185, 100, 100, null);
-                g.drawImage(Assets.thinkingXochi, 20, 520, 400, 225, null);
-                break;
-              case ONE:
-                g.drawImage(Assets.miniLevel, 40, 420, 400, 230, null);
-                g.drawImage(Assets.select, 620, 380, 100, 100, null);
-                break;
-              case TWO:
-                g.drawImage(Assets.miniLevel2, 40, 420, 400, 230, null);
-                g.drawImage(Assets.select, 590, 450, 100, 100, null);
-                break;
-              case THREE:
-                g.drawImage(Assets.miniLevel3, 40, 420, 400, 230, null);
-                g.drawImage(Assets.select, 680, 535, 100, 100, null);
-                break;
+            BufferedImage idk = Assets.mainMenu[Assets.MainMenu.XOCHI.ordinal()];
+            
+            if (menOpt == MenuOpt.OPTIONS || menOpt == MenuOpt.RECIPIES || menOpt == MenuOpt.CONTROLS) {
+            	menuOptionValues[0] = 20;
+            	menuOptionValues[1] = 520;
+            	menuOptionValues[2] = 400;
+            	menuOptionValues[3] = 225;
+            	idk = Assets.mainMenu[Assets.MainMenu.XOCHI.ordinal()];
+            	switch(menOpt) {
+                case OPTIONS:
+	              	selectValues[0] = 810;
+	              	selectValues[1] = 70;
+                  break;
+                case RECIPIES:
+              	  	selectValues[0] = 810;
+                	selectValues[1] = 125;
+                  break;
+                case CONTROLS:
+              	  	selectValues[0] = 770;
+                	selectValues[1] = 185;
+                  break;
+              }
+            } else {
+            	menuOptionValues[0] = 40;
+            	menuOptionValues[1] = 420;
+            	menuOptionValues[2] = 400;
+            	menuOptionValues[3] = 230;
+            	switch(menOpt) {
+                case ONE:
+                	selectValues[0] = 620;
+                	selectValues[1] = 380;
+                	idk = Assets.mainMenu[Assets.MainMenu.LEVEL_1.ordinal()];
+                  break;
+                case TWO:
+              	  	selectValues[0] = 590;
+                	selectValues[1] = 450;
+                	idk = Assets.mainMenu[Assets.MainMenu.LEVEL_2.ordinal()];
+                  break;
+                case THREE:
+              	  	selectValues[0] = 680;
+                	selectValues[1] = 535;
+                	idk = Assets.mainMenu[Assets.MainMenu.LEVEL_3.ordinal()];
+                  break;
+              }
             }
+
+            g.drawImage(selectImage, selectValues[0], selectValues[1], selectValues[2], selectValues[3], null);
+            g.drawImage(idk, menuOptionValues[0], menuOptionValues[1], menuOptionValues[2], menuOptionValues[3], null);
             break;
           case OPTIONS:
             // Options menu background
-            g.drawImage(Assets.options, 0, 0, getWidth(), getHeight(), null);
+            g.drawImage(Assets.menuScreens[Assets.Screen.MENU.ordinal()], 0, 0, getWidth(), getHeight(), null);
 
             // Shows if the sound/effecstOn option is on/off
             if (soundOn) {
@@ -1285,13 +1312,13 @@ public class Game implements Runnable {
             // Shows which option you are selecting
             switch (optOpt) {
               case DALTONICO:
-                g.drawImage(Assets.select, 190, 145, 100, 100, null);
+                g.drawImage(selectImage, 190, 145, 100, 100, null);
                 break;
               case SONIDO:
-                g.drawImage(Assets.select, 190, 255, 100, 100, null);
+                g.drawImage(selectImage, 190, 255, 100, 100, null);
                 break;
               case BRILLO:
-                g.drawImage(Assets.select, 190, 370, 100, 100, null);
+                g.drawImage(selectImage, 190, 370, 100, 100, null);
                 break;
             }
 
@@ -1319,7 +1346,7 @@ public class Game implements Runnable {
               g.setColor(Color.BLACK);
 
               // Recipies menu background image
-              g.drawImage(Assets.recipies, 0, 0, getWidth(), getHeight(), null);
+              g.drawImage(Assets.menuScreens[Assets.Screen.RECIPIES.ordinal()], 0, 0, getWidth(), getHeight(), null);
 
               // Shows a recipie depending in which page you are
               switch (currentRecipePage) {
@@ -1362,7 +1389,7 @@ public class Game implements Runnable {
           case CONTROLS:
 
             // Controls screen image
-            g.drawImage(Assets.controls, 0, 0, getWidth(), getHeight(), null);
+            g.drawImage(Assets.menuScreens[Assets.Screen.CONTROLS.ordinal()], 0, 0, getWidth(), getHeight(), null);
             break;
           case LEVEL:
 
@@ -1466,10 +1493,10 @@ public class Game implements Runnable {
               g.drawString("Regresar al menu principal", getWidth() / 2 - 165, getHeight() / 2 + 120);
               switch(pauseOpt) {
                 case CONTINUE_LEVEL:
-                  g.drawImage(Assets.select, getWidth() / 2 - 200, getHeight() / 2 - 10, 100, 100, null);
+                  g.drawImage(selectImage, getWidth() / 2 - 200, getHeight() / 2 - 10, 100, 100, null);
                   break;
                 case EXIT:
-                  g.drawImage(Assets.select, getWidth() / 2 - 265, getHeight() / 2 + 60, 100, 100, null);
+                  g.drawImage(selectImage, getWidth() / 2 - 265, getHeight() / 2 + 60, 100, 100, null);
                   break;
               }
             }
@@ -1515,6 +1542,7 @@ public class Game implements Runnable {
   private void init() {
     display = new Display(title, getWidth(), getHeight());
     Assets.init();
+    selectImage = Assets.menuIcons[Assets.MenuIcons.SELECT.ordinal()];
 
     // se inicializan las variables
     endGame = false;
