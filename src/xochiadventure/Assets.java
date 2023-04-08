@@ -69,6 +69,24 @@ public class Assets {
   // Main menu decorations
   public static BufferedImage[] mainMenu = new BufferedImage[10];
   public static BufferedImage[] menuIcons = new BufferedImage[10];
+  public static BufferedImage titleScreen;                // to store the title screen
+  public static BufferedImage menu;                       // to store the menu     
+  public static BufferedImage options;                    // to store the options screen image
+  public static BufferedImage controls;                   // to store the instructions screen image
+  public static BufferedImage select;                     // to store the red rectangle image
+  public static BufferedImage recipies;                   // to store the recipies screen 
+  public static BufferedImage story;
+  public static BufferedImage blueBackground;             // to store blue background
+  public static BufferedImage credits;                    // to store the credits text
+  
+  // Main menu decorations
+  public static BufferedImage thinkingXochi;              // to store the image of xochi for the main menu
+  public static BufferedImage miniLevel;                  // to store the level 1 image for the main menu
+  public static BufferedImage miniLevel2;                 // to store the level 2 image for the main menu
+  public static BufferedImage miniLevel3;                 // to store the level 3 image for the main menu
+  public static BufferedImage cactus;                     // to store the decorative element for the main menu
+  public static BufferedImage pyramid;                    // to store the decorative element for the main menu
+  public static BufferedImage crab;                       // to store the decorative element for the main menu
   
   // Enemy
   public static BufferedImage chile;                      // to store the chile image
@@ -96,6 +114,7 @@ public class Assets {
   public static BufferedImage ingredientesQuecas[];
   
   // Options menu
+  public static BufferedImage checkmark;
   public static BufferedImage brightness1;               // to store a image for brightness
   public static BufferedImage brightness2;               // to store a image for brightness
   public static BufferedImage brightness4;               // to store a image for brightness
@@ -239,6 +258,92 @@ public class Assets {
     ingredientesEnchiladas[4] = ImageLoader.loadImage(comidaFolder + comidasFolders[0] + "/crema.png");
     ingredientesEnchiladas[5] = ImageLoader.loadImage(comidaFolder + comidasFolders[0] + "/oil.png");
     ingredientesEnchiladas[6] = ImageLoader.loadImage(comidaFolder + comidasFolders[0] + "/cebolla.png");
+    //selectSnd = new SoundClip("/sounds/Retro_8-Bit_Game-Powerup_Achievement_05.wav");
+
+    // Loading of sounds
+    selectSnd = new SoundClip("/sounds/selectSound.wav");
+    // selectSnd = new SoundClip("/sounds/select.wav"); OTRA OPCION NO SE CUAL ES MEJOR LOS TKM
+    atoleSnd = new SoundClip("/sounds/powerUp.wav");
+    dulceSnd = new SoundClip("/sounds/powerUp1.wav");
+    loseSnd = new SoundClip("/sounds/lose.wav");
+    hurtSnd = new SoundClip("/sounds/hurt.wav");
+    shootSnd = new SoundClip("/sounds/shoot.wav");
+    winSnd = new SoundClip("/sounds/win.wav");
+    mainMenu = new SoundClip("/sounds/Mexico.wav");
+    level1Music = new SoundClip("/sounds/music/Continuum.wav");
+    level2Music = new SoundClip("/sounds/music/cdmx.wav");
+    level3Music = new SoundClip("/sounds/music/oaxaxa.wav");
+
+    // Loading of images of menu screens
+    titleScreen = ImageLoader.loadImage("/images/pantallas/titlescreen.png");
+    menu = ImageLoader.loadImage("/images/pantallas/mainMenu.jpg");
+    options = ImageLoader.loadImage("/images/pantallas/MenuOpciones.jpg");
+    controls = ImageLoader.loadImage("/images/pantallas/Controles.jpg");
+    select = ImageLoader.loadImage("/images/Select.png");
+    recipies = ImageLoader.loadImage("/images/pantallas/Recetario.png");
+    miniLevel = ImageLoader.loadImage("/images/pantallas/miniNivel1.png");
+    miniLevel2 = ImageLoader.loadImage("/images/pantallas/miniNivel2.png");
+    miniLevel3 = ImageLoader.loadImage("/images/pantallas/miniNivel3.png");
+    thinkingXochi = ImageLoader.loadImage("/images/pantallas/xochiT.png");
+    story = ImageLoader.loadImage("/images/pantallas/backstory.jpg");
+    blueBackground = ImageLoader.loadImage("/images/pantallas/fondo.png");
+    credits = ImageLoader.loadImage("/images/pantallas/creditos.png");
+    
+    cactus = ImageLoader.loadImage("/images/pantallas/cactus.png");
+    pyramid = ImageLoader.loadImage("/images/pantallas/pyramid.png");
+    crab = ImageLoader.loadImage("/images/pantallas/crab.png");
+    
+    checkmark = ImageLoader.loadImage("/images/FlechaVerde.png");
+
+    // Loading of images of letreros
+    peligro = ImageLoader.loadImage("/images/peligro.png");
+    aviso = ImageLoader.loadImage("/images/Aviso.png");
+
+    // Loading of images of game objects
+    chile = ImageLoader.loadImage("/images/Chile.png");
+    platform = ImageLoader.loadImage("/images/brick_barro.png");
+    powerup = ImageLoader.loadImage("/images/flask2.png");
+    rectangle = ImageLoader.loadImage("/images/192.png");
+    fuente = ImageLoader.loadImage("/images/fountain_beta.png");
+    heart = ImageLoader.loadImage("/images/tacoHeart.png");
+    shot = ImageLoader.loadImage("/images/bubble.png");
+
+    // Loading of images of the spikes
+    picoArriba = ImageLoader.loadImage("/images/picos/pico2.png");
+    picoAbajo = ImageLoader.loadImage("/images/picos/pico1.png");
+    picoDerecha = ImageLoader.loadImage("/images/picos/pico4.png");
+    picoIzquierda = ImageLoader.loadImage("/images/picos/pico3.png");
+
+    // loading of winning, loosing, and pause screens
+    ganado = ImageLoader.loadImage("/images/pantallas/victoryRoyale.png");
+    perdido = ImageLoader.loadImage("/images/pantallas/derrota.png");
+    pause = ImageLoader.loadImage("/images/pantallas/pausa.png");
+    
+    //Loading images of brightness
+    brightness1 = ImageLoader.loadImage("/images/pantallas/brillo1.png");
+    brightness2 = ImageLoader.loadImage("/images/pantallas/brillo2.png");
+    brightness4 = ImageLoader.loadImage("/images/pantallas/brillo4.png");
+    brightness5 = ImageLoader.loadImage("/images/pantallas/brillo5.png");
+    opbrightness1 = ImageLoader.loadImage("/images/pantallas/opb1.png");
+    opbrightness2 = ImageLoader.loadImage("/images/pantallas/opb2.png");
+    opbrightness3 = ImageLoader.loadImage("/images/pantallas/opb3.png");
+    opbrightness4 = ImageLoader.loadImage("/images/pantallas/opb4.png");
+    opbrightness5 = ImageLoader.loadImage("/images/pantallas/opb5.png");
+    
+    //UI
+    pasarPag = ImageLoader.loadImage("/images/PasarPag.png");
+    pasarPagReves = ImageLoader.loadImage("/images/PasarPagReves.png");
+    
+    // Loading of images of ingredients for the enchiladas
+    enchiladas = ImageLoader.loadImage("/images/comida/enchiladas/EnchiladaPotosina.png");
+    ingredientesEnchiladas = new BufferedImage[7];
+    ingredientesEnchiladas[0] = ImageLoader.loadImage("/images/comida/enchiladas/Tortillas.png");
+    ingredientesEnchiladas[1] = ImageLoader.loadImage("/images/comida/enchiladas/biggieCheese.png");
+    ingredientesEnchiladas[2] = ImageLoader.loadImage("/images/comida/enchiladas/chile_collectable.png");
+    ingredientesEnchiladas[3] = ImageLoader.loadImage("/images/comida/enchiladas/tomatoB.png");
+    ingredientesEnchiladas[4] = ImageLoader.loadImage("/images/comida/enchiladas/crema.png");
+    ingredientesEnchiladas[5] = ImageLoader.loadImage("/images/comida/enchiladas/oil.png");
+    ingredientesEnchiladas[6] = ImageLoader.loadImage("/images/comida/enchiladas/CebollaBlack.png");
     ingrEnchiladas[0] = "Tortillas Rojas";
     ingrEnchiladas[1] = "Queso";
     ingrEnchiladas[2] = "Chile";
@@ -255,6 +360,15 @@ public class Assets {
     ingredientesMole[1] = ImageLoader.loadImage(comidaFolder + comidasFolders[0] + "/chile_collectable.png");
     ingredientesMole[2] = ImageLoader.loadImage(comidaFolder + comidasFolders[2] + "/ajonjoli.png");
     ingredientesMole[3] = ImageLoader.loadImage(comidaFolder + comidasFolders[2] + "/manteca.png");
+    recetaEnchiladas = ImageLoader.loadImage("/images/comida/Receta Enchiladas.png");
+
+    // Loading of images of ingredients for the mole
+    ingredientesMole = new BufferedImage[4];
+    mole = ImageLoader.loadImage("/images/comida/mole/mole.png");
+    ingredientesMole[0] = ImageLoader.loadImage("/images/comida/mole/poyo.png");
+    ingredientesMole[1] = ImageLoader.loadImage("/images/comida/enchiladas/chile_collectable.png");
+    ingredientesMole[2] = ImageLoader.loadImage("/images/comida/mole/ajonjoli.png");
+    ingredientesMole[3] = ImageLoader.loadImage("/images/comida/mole/manteca.png");
     ingrMole[0] = "Pollo";
     ingrMole[1] = "Chile x3";
     ingrMole[2] = "Ajonjoli";
@@ -270,6 +384,17 @@ public class Assets {
     ingredientesQuecas[3] = ImageLoader.loadImage(comidaFolder + comidasFolders[1] + "/Cilantro.png");
     ingredientesQuecas[4] = ImageLoader.loadImage(comidaFolder + comidasFolders[1] + "/tomatoB.png");
     ingredientesQuecas[5] = ImageLoader.loadImage(comidaFolder + comidasFolders[1] + "/Tortillasb.png");
+    recetaMole = ImageLoader.loadImage("/images/comida/recetaOaxaca.png");
+
+    // Loading of images of ingredients for the quesadillas
+    quecas = ImageLoader.loadImage("/images/comida/quecas/Quesadilla.png");
+    ingredientesQuecas = new BufferedImage[6];
+    ingredientesQuecas[0] = ImageLoader.loadImage("/images/comida/quecas/Ajo.png");
+    ingredientesQuecas[1] = ImageLoader.loadImage("/images/comida/quecas/CebollaBlack.png");
+    ingredientesQuecas[2] = ImageLoader.loadImage("/images/comida/quecas/Champinon.png");
+    ingredientesQuecas[3] = ImageLoader.loadImage("/images/comida/quecas/Cilantro.png");
+    ingredientesQuecas[4] = ImageLoader.loadImage("/images/comida/quecas/tomatoB.png");
+    ingredientesQuecas[5] = ImageLoader.loadImage("/images/comida/quecas/Tortillasb.png");
     ingrQuecas[0] = "Ajo";
     ingrQuecas[1] = "Cebolla";
     ingrQuecas[2] = "Champiñon";
@@ -288,6 +413,18 @@ public class Assets {
 
     xochi = ImageLoader.loadImage(imageFolder + "/xochi_right.png");
     xochiLeft = ImageLoader.loadImage(imageFolder + "/xochi_left.png");
+    recetaQuecas = ImageLoader.loadImage("/images/comida/RecetaQues.png");
+
+
+    // Loading of animations
+    atole = ImageLoader.loadImage("/images/atole.png");
+    SpreadSheet atoleSpriteSheet = new SpreadSheet(atole);         // spritesheet of the atole
+    atoleAnim = new BufferedImage[3];                              // the sprites of the atole animation
+
+    dulce = ImageLoader.loadImage("/images/dulce.png");
+
+    xochi = ImageLoader.loadImage("/images/Xochi.png");
+    xochiLeft = ImageLoader.loadImage("/images/xochi_left.png");
     SpreadSheet xochiSpriteSheet = new SpreadSheet(xochi);
     SpreadSheet xochiLeftSpriteSheet = new SpreadSheet(xochiLeft);
     xochiAnim = new BufferedImage[5];

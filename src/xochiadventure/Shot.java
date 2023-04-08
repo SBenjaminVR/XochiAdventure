@@ -27,7 +27,7 @@ public class Shot extends Item {
    * @param speedX to set the speed in the x axis of the shot
    * @param game to ser the game of the shot
    */
-  public Shot (int x, int y, int width, int height, int speedX, int directionX, Game game) {
+  public Shot (int x, int y, int width, int height, int speedX, int directionX, GameLevel game) {
     super(x, y, width, height, speedX, game);
     this.directionX = directionX;
   }
@@ -64,7 +64,7 @@ public class Shot extends Item {
   }
   
   @Override
-  public void tick() {
+  public void tick(KeyManager keyManager) {
     // updates the position of the shot
     setX(getX() + getSpeedX() * getDirectionX());
   }

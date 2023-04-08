@@ -36,7 +36,7 @@ public class PowerUps extends Item{
    * @param height to set the height of the power up
    * @param game to ser the game of the power up
    */
-  public PowerUps (int x, int y, int width, int height, Game game) {
+  public PowerUps (int x, int y, int width, int height, GameLevel game) {
     super(x, y, width, height, 0, game);
     this.direction = 1;
   
@@ -108,7 +108,7 @@ public class PowerUps extends Item{
   }
 
   @Override
-  public void tick() {
+  public void tick(KeyManager keyManager) {
 
   // to make the animation work
     switch (tipo) {
